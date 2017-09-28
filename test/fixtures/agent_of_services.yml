@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agent: one
+  service: one
+  description: MyString
+
+two:
+  agent: two
+  service: two
+  description: MyString

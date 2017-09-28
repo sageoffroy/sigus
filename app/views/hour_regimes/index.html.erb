@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Hour Regimes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Hours</th>
+      <th>With guard</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hour_regimes.each do |hour_regime| %>
+      <tr>
+        <td><%= hour_regime.hours %></td>
+        <td><%= hour_regime.with_guard %></td>
+        <td><%= hour_regime.description %></td>
+        <td><%= link_to 'Show', hour_regime %></td>
+        <td><%= link_to 'Edit', edit_hour_regime_path(hour_regime) %></td>
+        <td><%= link_to 'Destroy', hour_regime, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hour Regime', new_hour_regime_path %>

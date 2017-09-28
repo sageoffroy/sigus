@@ -1,0 +1,77 @@
+<%= form_with(model: agent, local: true) do |form| %>
+  <% if agent.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(agent.errors.count, "error") %> prohibited this agent from being saved:</h2>
+
+      <ul>
+      <% agent.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :dni %>
+    <%= form.number_field :dni, id: :agent_dni %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fullname %>
+    <%= form.text_field :fullname, id: :agent_fullname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sex %>
+    <%= form.text_field :sex, id: :agent_sex %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthdate %>
+    <%= form.date_select :birthdate, id: :agent_birthdate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :marital_status %>
+    <%= form.text_field :marital_status, id: :agent_marital_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :license_pending %>
+    <%= form.number_field :license_pending, id: :agent_license_pending %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nationality_id %>
+    <%= form.text_field :nationality_id, id: :agent_nationality_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :agent_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cell_phone %>
+    <%= form.text_field :cell_phone, id: :agent_cell_phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :position_id %>
+    <%= form.text_field :position_id, id: :agent_position_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hour_regime_id %>
+    <%= form.text_field :hour_regime_id, id: :agent_hour_regime_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :study %>
+    <%= form.text_field :study, id: :agent_study %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

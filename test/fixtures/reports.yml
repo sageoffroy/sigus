@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  year: 1
+  month: 1
+  service_of_dependence: one
+  user: one
+
+two:
+  year: 1
+  month: 1
+  service_of_dependence: two
+  user: two

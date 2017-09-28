@@ -1,0 +1,33 @@
+<h1>Dependencias</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nombre</th>
+      <th>Complejidad</th>
+      <th>Abreviación</th>
+      <th>Administración</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @dependences.each do |dependence| %>
+      <tr>
+        <td><%= dependence.code %></td>
+        <td><%= dependence.name %></td>
+        <td><%= dependence.complexity %></td>
+        <td><%= dependence.abbreviation %></td>
+        <td>
+          <%= link_to((fa_icon "eye"), dependence) %>
+          <%= link_to((fa_icon "pencil"), edit_dependence_path(dependence)) %>
+          <%= link_to((fa_icon "trash-o"), dependence, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar?' }) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Dependence', new_dependence_path %>

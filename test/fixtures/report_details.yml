@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  report: one
+  belong_service: false
+  observation: one
+  total_hours: 1
+  tr: MyString
+  fm: MyString
+  tnf: MyString
+  tt: MyString
+  hours_to_add: 1
+  hours_to_remove: 1
+  total_office_hours: 1
+
+two:
+  report: two
+  belong_service: false
+  observation: two
+  total_hours: 1
+  tr: MyString
+  fm: MyString
+  tnf: MyString
+  tt: MyString
+  hours_to_add: 1
+  hours_to_remove: 1
+  total_office_hours: 1

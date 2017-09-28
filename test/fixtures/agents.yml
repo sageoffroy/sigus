@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dni: 1
+  fullname: MyString
+  sex: MyString
+  birthdate: 2017-08-24
+  marital_status: MyString
+  license_pending: 1
+  nationality: one
+  email: MyString
+  cell_phone: MyString
+  position: one
+  hour_regime: one
+  study: 
+
+two:
+  dni: 1
+  fullname: MyString
+  sex: MyString
+  birthdate: 2017-08-24
+  marital_status: MyString
+  license_pending: 1
+  nationality: two
+  email: MyString
+  cell_phone: MyString
+  position: two
+  hour_regime: two
+  study: 

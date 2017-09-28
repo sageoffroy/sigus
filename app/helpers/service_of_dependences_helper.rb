@@ -1,0 +1,2 @@
+module ServiceOfDependencesHelper
+end

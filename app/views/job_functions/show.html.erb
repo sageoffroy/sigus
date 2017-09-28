@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @job_function.name %>
+</p>
+
+<p>
+  <strong>Observation:</strong>
+  <%= @job_function.observation %>
+</p>
+
+<%= link_to 'Edit', edit_job_function_path(@job_function) %> |
+<%= link_to 'Back', job_functions_path %>

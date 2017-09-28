@@ -1,0 +1,123 @@
+moment.locale('es')
+
+check_day_of_month = ->
+  
+  year = parseInt($('#report_year').val())
+  month = parseInt($('#report_month').val())
+
+  #console.log daysInMonth(month, year)
+  	
+  switch daysInMonth(month, year)
+    when 28
+      $('.day29').prop 'disabled', true
+      $('.day29').val("")
+      $('.day30').prop 'disabled', true
+      $('.day30').val("")
+      $('.day31').prop 'disabled', true
+      $('.day31').val("")
+    when 29
+      $('.day29').prop 'disabled', false
+      $('.day30').prop 'disabled', true
+      $('.day30').val("")
+      $('.day31').prop 'disabled', true
+      $('.day31').val("")
+    when 30
+      $('.day29').prop 'disabled', false
+      $('.day30').prop 'disabled', false
+      $('.day31').prop 'disabled', true
+      $('.day31').val("")
+    when 31
+      $('.day29').prop 'disabled', false
+      $('.day30').prop 'disabled', false      
+      $('.day31').prop 'disabled', false
+
+set_weekend = (report_year, report_month) ->
+  if (report_year.val() != "") && (report_month.val() != "")
+    $('.field-hours-th').css('background-color', 'transparent');
+    days = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo']
+    day = moment(report_month.val() + '/1/' + report_year.val()).format('dddd')
+    number_day = 1
+    index = $.inArray(day, days)
+
+    while number_day <= 31
+      if index == 5
+        $('.day'+number_day+'-th').css('background-color', 'rgba(255, 252, 0, 0.4)');
+      else if index == 6
+        $('.day'+number_day+'-th').css('background-color', 'rgba(255, 0, 0, 0.4)');
+      
+      number_day++
+      index++
+      if index == 7
+        index = 0
+
+set_free_days = (report_year, report_month) ->
+  if (report_year.val() != "") && (report_month.val() != "")
+    r_year = report_year.val()
+    r_month = report_month.val()
+    url = '/get_free_days/'+r_year+'/' +r_month
+    $.ajax(
+      url: url
+      type: 'POST').done (data) ->
+        if data != null
+          for d in data.free_days
+            $('.day'+d+'-th').css('background-color', 'rgba(0, 252, 252, 0.4)');
+            #console.log d
+
+
+check_general_data = (report_year, report_month, report_service, complement)->
+  if (report_year.val() != "") && (report_month.val() != "") && (report_service.val() != "")
+    #console.log "todo en orden"
+    complement.removeClass 'disabled'
+  else
+    #console.log "falta algo"
+    complement.addClass 'disabled'
+
+
+set_ids_to_child = ->
+  $('.nested-fields').each (index, value) ->
+    $(this).attr('id', 'nested-fields_' + index );
+
+
+$(document).on 'cocoon:after-insert', (e) ->
+  $('.select2').select2({theme: "bootstrap"})
+  add_report_detail = $('#add_report_details')
+  report_year = $('#report_year')
+  report_month = $('#report_month')
+  report_service = $('#report_service')
+  #console.log "Cambiando el Año"
+  check_general_data(report_year, report_month, report_service, add_report_detail)
+  check_day_of_month()
+  set_weekend(report_year, report_month)
+  set_free_days(report_year, report_month)
+  set_ids_to_child()
+  
+  
+
+$(document).on 'turbolinks:load', ->
+  add_report_detail = $('#add_report_details')
+  report_year = $('#report_year')
+  report_month = $('#report_month')
+  report_service = $('#report_service')
+  
+  check_general_data(report_year, report_month, report_service, add_report_detail)
+  check_day_of_month()
+  set_weekend(report_year, report_month)
+  set_free_days(report_year, report_month)
+
+  report_year.on 'select2:select', (e) ->
+    console.log "Cambiando el Año"
+    check_general_data(report_year, report_month, report_service, add_report_detail)
+    check_day_of_month()
+    set_free_days(report_year, report_month)
+
+  report_month.on 'select2:select', (e) ->
+    console.log "Cambiando el Mes"
+    check_general_data(report_year, report_month, report_service, add_report_detail)
+    check_day_of_month()
+    set_weekend(report_year, report_month)
+    set_free_days(report_year, report_month)
+
+  report_service.on 'select2:select', (e) ->
+    console.log "Cambiando el Servicio"
+    check_general_data(report_year, report_month, report_service, add_report_detail)
+    check_day_of_month()

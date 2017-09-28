@@ -1,0 +1,46 @@
+<%= form_for(report) do |f| %>
+  <h5>Datos Generales</h5>
+  <% if report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(report.errors.count, "error") %> prohibited this report from being saved:</h2>
+
+      <ul>
+      <% report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :user_id, :value => @user.id %>
+  <div class="form-group row">
+    <div class="input-group col-sm-2">
+      <%= f.select :year, (2017)..(Time.zone.now.year), {prompt: "Año"}, {class: "select2"}%>
+    </div>
+    <div class="input-group col-sm-2">
+      <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
+    </div>
+    <div class="input-group col-sm-8">
+      <%= f.collection_select :service_of_dependence_id, ServiceOfDependence.where(dependence: Dependence.where(code:106)), :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
+    </div>
+  </div>
+  <h5>Agentes</h5>
+
+  <div class="agents-box">
+    <h6><span>*Ingrese los datos generales antes de agregar agentes</span></h6>
+    <%= f.fields_for :report_details do |report_detail| %>
+      <%= render 'report_detail_fields', :f => report_detail %>
+    <% end %>
+  </div>
+    
+  <center>
+    <%= link_to_add_association 'Agregar Agente', f, :report_details, id: 'add_report_details', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.agents-box', association_insertion_method: :append } %>
+  </center>
+
+  <div class="form-actions">
+    <%= link_to 'Atrás', reports_path, class: 'btn btn-danger' %>
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+
+<% end %>
+
+

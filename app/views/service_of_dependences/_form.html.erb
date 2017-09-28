@@ -1,0 +1,30 @@
+<%= form_with(model: service_of_dependence, local: true) do |form| %>
+  <% if service_of_dependence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(service_of_dependence.errors.count, "error") %> prohibited this service_of_dependence from being saved:</h2>
+
+      <ul>
+      <% service_of_dependence.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.collection_select :service_id, Service.all, :id, :to_s, {prompt: "Seleccionar Servicio"}, {class: "select2"} %>
+  </div>
+
+  <div class="field">
+    <%= form.collection_select :dependence_id, Dependence.all, :id, :to_s, {prompt: "Seleccionar Dependencia"}, {class: "select2"} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :service_of_dependence_description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

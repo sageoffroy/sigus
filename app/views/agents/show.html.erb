@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dni:</strong>
+  <%= @agent.dni %>
+</p>
+
+<p>
+  <strong>Fullname:</strong>
+  <%= @agent.fullname %>
+</p>
+
+<p>
+  <strong>Sex:</strong>
+  <%= @agent.sex %>
+</p>
+
+<p>
+  <strong>Birthdate:</strong>
+  <%= @agent.birthdate %>
+</p>
+
+<p>
+  <strong>Marital status:</strong>
+  <%= @agent.marital_status %>
+</p>
+
+<p>
+  <strong>License pending:</strong>
+  <%= @agent.license_pending %>
+</p>
+
+<p>
+  <strong>Nationality:</strong>
+  <%= @agent.nationality %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @agent.email %>
+</p>
+
+<p>
+  <strong>Cell phone:</strong>
+  <%= @agent.cell_phone %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @agent.position %>
+</p>
+
+<p>
+  <strong>Hour regime:</strong>
+  <%= @agent.hour_regime %>
+</p>
+
+<p>
+  <strong>Study:</strong>
+  <%= @agent.study %>
+</p>
+
+<%= link_to 'Edit', edit_agent_path(@agent) %> |
+<%= link_to 'Back', agents_path %>

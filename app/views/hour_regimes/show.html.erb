@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @hour_regime.hours %>
+</p>
+
+<p>
+  <strong>With guard:</strong>
+  <%= @hour_regime.with_guard %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @hour_regime.description %>
+</p>
+
+<%= link_to 'Edit', edit_hour_regime_path(@hour_regime) %> |
+<%= link_to 'Back', hour_regimes_path %>

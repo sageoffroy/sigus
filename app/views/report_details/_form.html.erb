@@ -1,0 +1,248 @@
+<%= form_with(model: report_detail, local: true) do |f| %>
+  <% if report_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(report_detail.errors.count, "error") %> prohibited this report_detail from being saved:</h2>
+
+      <ul>
+      <% report_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-md-4">
+    <div class="field">
+      <%= f.collection_select :agent_id, Agent.all, :id, :to_s, {prompt: "Agente"}, {class: "select2 select-field"} %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="field">
+      <%= f.collection_select :observation_id, Observation.all, :id, :to_s, {prompt: "Observación"}, {class: "select2 select-field"} %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <%= link_to_remove_association((fa_icon "window-close", style: "color:#990000;"), f, { wrapper_class: 'row' })%>
+  </div>
+  <div class="col-md-12">
+    <table class='table table-hours'>
+      <thead>
+        <tr>
+          <th colspan="31" class="field-hours-th">Cantidad de hs. Guardia por día</th>
+        </tr>
+        <tr>
+          <th class="field-hours-th">1</th>
+          <th class="field-hours-th">2</th>
+          <th class="field-hours-th">3</th>
+          <th class="field-hours-th">4</th>
+          <th class="field-hours-th">5</th>
+          <th class="field-hours-th">6</th>
+          <th class="field-hours-th">7</th>
+          <th class="field-hours-th">8</th>
+          <th class="field-hours-th">9</th>
+          <th class="field-hours-th">10</th>
+          <th class="field-hours-th">11</th>
+          <th class="field-hours-th">12</th>
+          <th class="field-hours-th">13</th>
+          <th class="field-hours-th">14</th>
+          <th class="field-hours-th">15</th>
+          <th class="field-hours-th">16</th>
+          <th class="field-hours-th">17</th>
+          <th class="field-hours-th">18</th>
+          <th class="field-hours-th">19</th>
+          <th class="field-hours-th">20</th>
+          <th class="field-hours-th">21</th>
+          <th class="field-hours-th">22</th>
+          <th class="field-hours-th">23</th>
+          <th class="field-hours-th">24</th>
+          <th class="field-hours-th">25</th>
+          <th class="field-hours-th">26</th>
+          <th class="field-hours-th">27</th>
+          <th class="field-hours-th">28</th>
+          <th class="field-hours-th">29</th>
+          <th class="field-hours-th">30</th>
+          <th class="field-hours-th">31</th>
+
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field field-hours">
+            <%= f.number_field :day1, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day2, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day3, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day4, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day5, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day6, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day7, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day8, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day9, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day10, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day11, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day12, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day13, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day14, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day15, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day16, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day17, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day18, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day19, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day20, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day21, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day22, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day23, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day24, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day25, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day26, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day27, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day28, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day29, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day30, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :day31, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <table class='table'>
+      <thead>
+        <tr>
+          <th colspan="4" class="field-hours-th">Adicionales</th>
+        </tr>
+        <tr>
+          <th class="field-hours-th">TR</th>
+          <th class="field-hours-th">FM</th>
+          <th class="field-hours-th">TNF</th>
+          <th class="field-hours-th">TT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field field-hours">
+            <%= f.number_field :tr, id: :report_detail_tr, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :fm, id: :report_detail_fm, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :tnf, id: :report_detail_tnf, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :tt, id: :report_detail_tt, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col-md-4">
+    <table class='table'>
+      <thead>
+        <tr>
+          <th colspan="4" class="field-hours-th">Novedades</th>
+        </tr>
+        <tr>
+          <th class="field-hours-th">Abonar</th>
+          <th class="field-hours-th">Descontar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field field-hours">
+            <%= f.number_field :hours_to_add, id: :report_detail_hours_to_add, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+          <td class="field field-hours">
+            <%= f.number_field :hours_to_remove, id: :report_detail_hours_to_remove, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <table class='table'>
+      <thead>
+        <tr>
+          <th colspan="4" class="field-hours-th">Consultorio</th>
+        </tr>
+        <tr>
+          <th class="field-hours-th-description"><span>Total de horas que el agente realiza en el consultorio</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="field field-hours">
+            <%= f.number_field :total_office_hours, id: :report_detail_total_office_hours, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

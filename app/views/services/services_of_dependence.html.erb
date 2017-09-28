@@ -1,0 +1,42 @@
+<h1>Servicios del Hospital</h1>
+
+<div class="row">
+  <div class="col-md-5">
+    <div class="outline">
+      <h5>Servicios Adheridos</h5>
+      <% @services_of_dependence.each do |s_o_d| %>
+        <div class="service-list-element"><%= s_o_d.service.name %><%= link_to (fa_icon "arrow-right"), s_o_d.service, class: 'btn service-list-btn btn-right' %></div>
+      <% end %>
+    </div>
+  </div>  
+  <div class="col-md-2">
+
+  </div>
+
+  <div class="col-md-5">
+    <div class="outline">
+      <h5>Servicios Disponibles</h5>
+      <% @other_services.each do |o_s| %>
+        <div class="service-list-element"><%= o_s.name %><%= link_to (fa_icon "arrow-left"), o_s, class: 'btn service-list-btn btn-left' %></div>
+      <% end %>
+    </div>
+  </div>    
+</div>
+
+
+
+
+
+<script type="text/javascript">
+  function load_agents(){
+    $('#navbar-search').focus();
+    $.ajax({
+      url: '/agents_load',
+      type: 'POST',
+    }).done(function(data) {
+      $('body').addClass('loaded');
+    }).fail(function(xhr, status, error) {
+      
+    });
+  }
+</script>

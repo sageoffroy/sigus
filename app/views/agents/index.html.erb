@@ -1,0 +1,33 @@
+<h2>Listado de Agentes</h2>
+
+<table class="table datatable">
+  <thead>
+    <tr>
+      <th>Dni</th>
+      <th>Fullname</th>
+      <th>Sex</th>
+      <th>Birthdate</th>
+      <th>Marital status</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @agents.each do |agent| %>
+      <tr>
+        <td><%= agent.dni %></td>
+        <td><%= agent.fullname %></td>
+        <td><%= agent.sex %></td>
+        <td><%= agent.birthdate %></td>
+        <td><%= agent.marital_status %></td>
+        <td>
+          <%= link_to((fa_icon "eye"), agent) %>
+          <%= link_to((fa_icon "pencil"), edit_agent_path(agent)) %>
+          <%= link_to((fa_icon "trash-o"), agent, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar?' }) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Crear Agente', new_agent_path, class: 'btn btn-primary btn-xs' %>

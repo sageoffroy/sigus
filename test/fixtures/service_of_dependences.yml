@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service: one
+  dependence: one
+  description: MyString
+
+two:
+  service: two
+  dependence: two
+  description: MyString

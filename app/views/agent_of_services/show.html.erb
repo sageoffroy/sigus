@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Agent:</strong>
+  <%= @agent_of_service.agent %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @agent_of_service.service_of_dependence %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @agent_of_service.description %>
+</p>
+
+<%= link_to 'Edit', edit_agent_of_service_path(@agent_of_service) %> |
+<%= link_to 'Back', agent_of_services_path %>

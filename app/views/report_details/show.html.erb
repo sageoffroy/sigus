@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Report:</strong>
+  <%= @report_detail.report %>
+</p>
+
+<p>
+  <strong>Belong service:</strong>
+  <%= @report_detail.belong_service %>
+</p>
+
+<p>
+  <strong>Observation:</strong>
+  <%= @report_detail.observation %>
+</p>
+
+<p>
+  <strong>Total hours:</strong>
+  <%= @report_detail.total_hours %>
+</p>
+
+<p>
+  <strong>Tr:</strong>
+  <%= @report_detail.tr %>
+</p>
+
+<p>
+  <strong>Fm:</strong>
+  <%= @report_detail.fm %>
+</p>
+
+<p>
+  <strong>Tnf:</strong>
+  <%= @report_detail.tnf %>
+</p>
+
+<p>
+  <strong>Tt:</strong>
+  <%= @report_detail.tt %>
+</p>
+
+<p>
+  <strong>Hours to add:</strong>
+  <%= @report_detail.hours_to_add %>
+</p>
+
+<p>
+  <strong>Hours to remove:</strong>
+  <%= @report_detail.hours_to_remove %>
+</p>
+
+<p>
+  <strong>Total office hours:</strong>
+  <%= @report_detail.total_office_hours %>
+</p>
+
+<%= link_to 'Edit', edit_report_detail_path(@report_detail) %> |
+<%= link_to 'Back', report_details_path %>

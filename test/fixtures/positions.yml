@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grouping: MyString
+  class: MyString
+  grade: MyString
+  hierarchy: MyString
+
+two:
+  grouping: MyString
+  class: MyString
+  grade: MyString
+  hierarchy: MyString

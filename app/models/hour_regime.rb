@@ -1,0 +1,2 @@
+class HourRegime < ApplicationRecord
+end

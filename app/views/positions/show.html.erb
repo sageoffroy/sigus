@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Grouping:</strong>
+  <%= @position.grouping %>
+</p>
+
+<p>
+  <strong>Class:</strong>
+  <%= @position.class %>
+</p>
+
+<p>
+  <strong>Grade:</strong>
+  <%= @position.grade %>
+</p>
+
+<p>
+  <strong>Hierarchy:</strong>
+  <%= @position.hierarchy %>
+</p>
+
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', positions_path %>

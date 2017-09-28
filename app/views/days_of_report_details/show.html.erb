@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Report details:</strong>
+  <%= @days_of_report_detail.report_details %>
+</p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @days_of_report_detail.day %>
+</p>
+
+<p>
+  <strong>Cant:</strong>
+  <%= @days_of_report_detail.cant %>
+</p>
+
+<%= link_to 'Edit', edit_days_of_report_detail_path(@days_of_report_detail) %> |
+<%= link_to 'Back', days_of_report_details_path %>

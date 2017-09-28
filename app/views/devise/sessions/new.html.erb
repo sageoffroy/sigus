@@ -1,0 +1,58 @@
+<div class="row justify-content-around">
+  <% if !user_signed_in? %>
+  <div class="col-sm-4">  
+    <div class="outline">
+      <center><h2>Autenticación</h2></center>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
+        <center><img id="profile-img" class="login-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /></center>
+        <div class="form-group">
+            <%= f.text_field :email, :placeholder => "Email", class: "form-control" %> 
+        </div>
+
+        <div class="form-group">
+          <%= f.password_field :password, :placeholder => "Password", class: "form-control"  %>
+        </div>
+        <% if devise_mapping.rememberable? -%>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label 'recordarme' %>
+          </div>
+        <% end %>
+        <%= f.submit 'Entrar', class: "btn btn-primary btn-block btn-login" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <center><h2>Sistema de Guardias del Ministerio de Salud</h2></center>
+    <p>Bienvenido/a al Sistema de guardias para los agentes del Ministerio de Salud de la Provincia del Chubut, para poder acceder a las distintas funciones, debe ingresar su email y contraseña en el cuadro de Login. en caso de necesitar registrarse, contactarse con el área de Personal del Ministerio de Salud</p>
+  </div>
+  <% else %>
+    <% if @user.hospital? or @user.admin? %>
+      <div class="col-sm-6">
+        <div class="outline">
+          <center><h2><%=@user.dependence%></h2></center>
+          <div class="row">
+            <div class="col-sm-4">
+              <a href="/agents" class="btn btn-menu btn-primary">
+                <i class="fa fa-user-md"></i><br/>
+                Personal
+              </a> 
+            </div>
+            <div class="col-sm-4">
+              <a href="/agents_of_dependence/<%=@user.dependence.code%>" class="btn btn-menu btn-primary">
+                <i class="fa fa-stethoscope"></i><br/>
+                Servicios
+              </a>
+            </div>
+            <div class="col-sm-4">
+              <a href="/reports" class="btn btn-menu btn-primary">
+                <i class="fa fa-ambulance"></i><br/>
+                Reporte Guardias
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>   
+  <% end %>
+</div>

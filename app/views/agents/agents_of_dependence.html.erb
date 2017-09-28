@@ -1,0 +1,54 @@
+<h1>Agentes del Hospital</h1>
+
+<div class="col-md-12">
+  <div class="outline">
+    <table id="agents-of-dependence-table" class="hover">
+      <thead>
+        <tr>
+          <td>D.N.I.</td>
+          <td>Nombre Completo</td>
+          <td>Sexo</td>
+          <td>Nacimiento</td>
+          <td>Estado Civil</td>
+          <td>
+            Opciones
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @agents_of_dependence.each do |a_o_d| %>
+          <tr>
+            <td><%= a_o_d.agent.dni %></td>
+            <td><%= a_o_d.agent.fullname %></td>
+            <td><%= fa_icon a_o_d.agent.sex_english %></td>
+            <td><%= a_o_d.agent.birthdate_es %></td>
+            <td><%= a_o_d.agent.marital_status %></td>
+            <td>
+              <%= link_to (fa_icon "eye"), a_o_d.agent, class: 'btn btn-sm btn-success' %>
+              <%= link_to (fa_icon "pencil-square-o"), edit_agent_path(a_o_d.agent), class: 'btn btn-sm btn-warning' %>
+              <%= link_to (fa_icon "trash-o"), a_o_d.agent, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }, class: 'btn btn-sm btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+  function load_agents(){
+    $('#navbar-search').focus();
+    $.ajax({
+      url: '/agents_load',
+      type: 'POST',
+    }).done(function(data) {
+      $('body').addClass('loaded');
+    }).fail(function(xhr, status, error) {
+      
+    });
+  }
+</script>

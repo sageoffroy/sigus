@@ -1,0 +1,30 @@
+<h1>Agent Of Services</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Agent</th>
+      <th>Service</th>
+      <th>Description</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @agent_of_services.each do |agent_of_service| %>
+      <tr>
+        <td><%= agent_of_service.agent %></td>
+        <td><%= agent_of_service.service_of_dependence %></td>
+        <td><%= agent_of_service.description %></td>
+        <td><%= link_to((fa_icon "eye"), agent_of_service) %>
+            <%= link_to((fa_icon "pencil"), edit_agent_of_service_path(agent_of_service)) %>
+            <%= link_to((fa_icon "trash-o"), agent_of_service, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar?' }) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Agent Of Service', new_agent_of_service_path %>

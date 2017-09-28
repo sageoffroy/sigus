@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @dependence.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @dependence.name %>
+</p>
+
+<p>
+  <strong>Complexity:</strong>
+  <%= @dependence.complexity %>
+</p>
+
+<p>
+  <strong>Abbreviation:</strong>
+  <%= @dependence.abbreviation %>
+</p>
+
+<%= link_to 'Edit', edit_dependence_path(@dependence) %> |
+<%= link_to 'Back', dependences_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Job Functions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Observation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @job_functions.each do |job_function| %>
+      <tr>
+        <td><%= job_function.name %></td>
+        <td><%= job_function.observation %></td>
+        <td><%= link_to 'Show', job_function %></td>
+        <td><%= link_to 'Edit', edit_job_function_path(job_function) %></td>
+        <td><%= link_to 'Destroy', job_function, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Job Function', new_job_function_path %>
