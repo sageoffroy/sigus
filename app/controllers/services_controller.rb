@@ -62,10 +62,12 @@ class ServicesController < ApplicationController
   end
 
   def services_of_dependence
-    dependence = Dependence.where(code:params[:dependence]).first
-    @services_of_dependence = ServiceOfDependence.where(dependence:dependence)
+    dependence = current_user.dependence
+    #@services_of_dependence = ServiceOfDependence.where(dependence:dependence)
+    @services_of_dependence = dependence.service_of_dependences
     services = @services_of_dependence.pluck(:service_id)
     @other_services = Service.where('id NOT IN (?)',services)
+
     respond_to do |format|
       format.html
     end

@@ -1,9 +1,15 @@
 class Agent < ApplicationRecord
   belongs_to :nationality, optional:true
   belongs_to :position, optional:true
+  belongs_to :category, optional:true
   belongs_to :hour_regime, optional:true
   belongs_to :study, optional:true
   belongs_to :job_function, optional:true
+  belongs_to :agent_type, optional:true
+  has_many :agent_of_services
+  validates :dni, uniqueness: true
+  
+
 
 
   def sex_english

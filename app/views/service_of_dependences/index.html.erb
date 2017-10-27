@@ -2,13 +2,13 @@
 
 <h1>Service Of Dependences</h1>
 
-<table>
+<table class="datatable">
   <thead>
     <tr>
       <th>Service</th>
       <th>Dependence</th>
       <th>Description</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -18,9 +18,9 @@
         <td><%= service_of_dependence.service %></td>
         <td><%= service_of_dependence.dependence %></td>
         <td><%= service_of_dependence.description %></td>
-        <td><%= link_to 'Show', service_of_dependence %></td>
-        <td><%= link_to 'Edit', edit_service_of_dependence_path(service_of_dependence) %></td>
-        <td><%= link_to 'Destroy', service_of_dependence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', service_of_dependence %>
+        <%= link_to 'Edit', edit_service_of_dependence_path(service_of_dependence) %>
+        <%= link_to 'Destroy', service_of_dependence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

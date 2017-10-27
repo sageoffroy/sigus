@@ -4,10 +4,13 @@
     <title>Sigus</title>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= custom_bootstrap_flash %>
 		<%= csrf_meta_tags %>
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto+Slab"> 
+		<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet"> 
   </head>
 
-  <body style="padding-bottom: 15px;">
+  <body style="padding-bottom: 15px;" class="<%= controller_name %> <%= action_name %>">
 		<% unless flash.empty? %>
 		  <script type="text/javascript">
 		  	<% flash.each do |f| %>

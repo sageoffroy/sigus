@@ -1,9 +1,52 @@
-<div class="menu">
-	<%= link_to "Home", root_path, :class => "menu-link" %>
-  <div class="menu-right">
-    <% if user_signed_in? %>
-        <%= link_to current_user.email, edit_user_registration_path, :class => "menu-link" %>
-        <%= link_to fa_icon('sign-out'), destroy_user_session_path, :method => :delete, :class => "menu-link" %>
+<div class="menu d-flex align-items-center">
+  <% if user_signed_in? %>
+    <div class="menu-left align-middle">
+      <%= link_to fa_icon('home'), root_path, :class => "menu-link" %>
+      <% if current_user.admin?%>
+        <%= link_to fa_icon('users'), '#',:id => "charge_agents" , :class => 'menu-link', remote: true %>
+      <% end %>
+    </div>
+    <% if current_user.planification? or current_user.admin?%>
+      <%= select_tag "select_dependence", options_from_collection_for_select(Dependence.all, :id, :to_s), class: 'select-style' %>
     <% end %>
-  </div>
+    <div class="menu-right">
+      <%= link_to current_user.email, edit_user_registration_path, :class => "menu-link" %>
+      <%= link_to fa_icon('sign-out'), destroy_user_session_path, :method => :delete, :class => "menu-link" %>
+    </div>
+  <% end %>
 </div>
+
+<script type="text/javascript">
+
+  $("#charge_agents").on("click", ajaxCall);
+
+  $("#select_dependence").on(
+    { "focus": function() {
+      this.selectedIndex = -1;
+    }
+  , "change": function() {
+      choice = $(this).val();
+      this.blur();
+      $.ajax({
+        url: '/set_dependence/' + choice,
+        type: 'POST'
+      }).done(function(data) {
+        console.log("Dependencia cargada");
+        location.reload();
+      }).fail(function(xhr, status, error) {
+        console.log("Fallo asignación de dependencia");
+      });  
+    }
+  });
+  
+  function ajaxCall(){
+    $.ajax({
+      url: '/charge_agents',
+      type: 'POST'
+    }).done(function(data) {
+      console.log("Cargo agentes");
+    }).fail(function(xhr, status, error) {
+      console.log("Fallo la carga");
+    });
+  }
+</script>

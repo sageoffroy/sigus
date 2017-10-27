@@ -5,33 +5,38 @@ class ReportsController < ApplicationController
   # GET /reports.json
   def index
     @reports = Report.all
-    @user = current_user
-
   end
 
   # GET /reports/1
   # GET /reports/1.json
   def show
+    @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   # GET /reports/new
   def new
     @report = Report.new
-    @user = current_user
+    @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   # GET /reports/1/edit
   def edit
-    @user = current_user
+    if current_user.dependence.nil?
+      current_user.dependence = Dependence.where(code:106).first
+    end
+    @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   # POST /reports
   # POST /reports.json
   def create
-
-    @user = current_user
     @report = Report.new(report_params)
-
     respond_to do |format|
       if @report.save
         format.html { redirect_to @report, notice: 'Report was successfully created.' }
@@ -46,7 +51,9 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1
   # PATCH/PUT /reports/1.json
   def update
-    @user = current_user
+    @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
     respond_to do |format|
       if @report.update(report_params)
         format.html { redirect_to @report, notice: 'Report was successfully updated.' }
@@ -77,6 +84,6 @@ class ReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
-      params.require(:report).permit(:year, :month, :service_of_dependence_id, :user_id, report_details_attributes: [:id, :url, :_destroy, :agent_id, :belong_service, :total_hours, :tr, :fm, :tnf, :tt, :hours_to_add, :hours_to_remove, :total_office_hours, :day1, :day2, :day3, :day4 ,:day5, :day6, :day7, :day8, :day9, :day10, :day11, :day12, :day13, :day14, :day15, :day16, :day17, :day18, :day19, :day20, :day21, :day22, :day23, :day24, :day25 ,:day26 ,:day27, :day28, :day29, :day30, :day31, :observation_id, :observation_hours])
+      params.require(:report).permit(:year, :month, :total_office_hours, :service_of_dependence_id, :user_id, report_details_attributes: [:id, :url, :_destroy, :agent_id, :belong_service, :total_hours, :tr, :fm, :tnf, :tt, :hours_to_add, :hours_to_remove, :total_office_hours, :day1, :day2, :day3, :day4 ,:day5, :day6, :day7, :day8, :day9, :day10, :day11, :day12, :day13, :day14, :day15, :day16, :day17, :day18, :day19, :day20, :day21, :day22, :day23, :day24, :day25 ,:day26 ,:day27, :day28, :day29, :day30, :day31, :observation_id, :observation_hours])
     end
 end

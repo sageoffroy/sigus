@@ -6,7 +6,7 @@ $white: #fff !default;
 $black: #000 !default;
 
 
-$blue: $green !default;
+$blue:rgb(33, 41, 90) !default;
 
 @import "bootstrap";
 @import "bootstrap-datepicker3";
@@ -18,8 +18,6 @@ $blue: $green !default;
 @import "select2";
 @import "select2-bootstrap";
 @import "perfect-scrollbar";
-
-
 
 
 .green{
@@ -36,7 +34,12 @@ body {
 }
 
 a:focus {
-  color:white;
+  
+}
+
+a {
+  color:$blue;
+  text-decoration: none;
 }
 
 .turbolinks-progress-bar{
@@ -45,41 +48,57 @@ a:focus {
 
 h1 {
   margin-bottom: 2rem;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-  font-size: 3 rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
   font-weight: 600;
   text-align: center;
   text-rendering: optimizeLegibility;
-  color: $green;
+  color: $blue;
   letter-spacing: .10em;
   
 }
 
 h2 {
   margin-bottom: 1rem;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
   text-rendering: optimizeLegibility;
-  color: $green;
+  color: $blue;
   letter-spacing: .12em;
   
 }
 
+h3 {
+  margin-bottom: 0.7rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  text-rendering: optimizeLegibility;
+  color: $blue;
+  letter-spacing: .12em;
+  
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
 
 h5 {
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
-  color: $green;
+  font-family: 'Poppins', sans-serif;
+  color: $blue;
   text-rendering: optimizeLegibility;
-  //text-align: center;
   text-transform: uppercase;
-  margin-top: 0.5rem;
-  margin-bottom: 0.9rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid $blue;
 }
 
 h6 {
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-family: 'Roboto Slab', serif;
   color: $green;
   text-rendering: optimizeLegibility;
   text-align: left;
@@ -127,9 +146,26 @@ input::-webkit-inner-spin-button {
   margin:0;/* <-- Apparently some margin are still there even though it's hidden */
 }
 
+input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  font-size: 1rem;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  font-size: 1rem;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+  font-size: 1rem;
+
+}
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  font-size: 1rem;
+}
+input::-ms-input-placeholder { /* Microsoft Edge */
+  font-size: 1rem;
+}
+
 .fa {
-  color: $green;
-  font-size: 1.3rem;
+  color: $blue;
+  font-size: 1.2rem;
   min-width: 30px;
   text-align: center;
 }
@@ -145,22 +181,79 @@ input::-webkit-inner-spin-button {
 .outline{
   border: 1px solid $green;
   border-radius: 5px;
-  padding: 10px;
+  padding: 15px;
   margin-bottom: 1rem;
-  min-height: 24rem;
+  min-height: 10rem;
 
 }
 
 .btn > .fa{
-  color: white;
+  color: $blue;
   vertical-align: middle;
   margin-bottom: 3px;
+  font-size: 1.8rem;
+}
+
+.btn > span {
+  display:block;
 }
 
 .btn:hover {
   cursor: pointer; 
   cursor: hand;
 }
+
+.btn-primary {
+  background-color: transparent;
+  color: $blue;
+}
+
+.btn-primary:hover {
+  background-color: #eee;
+  color: $blue;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: #ccc;
+  border-color: #7a7a7a;
+  color: black;
+}
+
+.btn-success {
+    color: #038D5C;
+    background-color: transparent;
+    border-color: #038D5C;
+}
+
+.btn-success .fa{
+    color: #038D5C;
+}
+
+.btn-warning {
+  color: #FFF200;
+  background-color: transparent;
+  border-color: #FFF200;
+}
+
+.btn-warning .fa{
+  color: #FFF200;
+}
+
+.btn-danger {
+  background-color: transparent;
+  border-color: $red;
+  color: $red;
+}
+
+.btn-danger .fa {
+  color: $red;
+}
+
+.btn-danger:hover {
+  background-color: #eee;
+  color: $red;
+}
+
 
 .btn-menu {
   width: 100%;
@@ -200,10 +293,25 @@ input::-webkit-inner-spin-button {
   width: 91%;
 }
 
+.btn-table {
+  padding: 0.1rem 0.2rem;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.btn-remove {
+  position: relative;
+  left: 8px;
+  top: -7px;
+  color: #a21010;
+  font-size: 2.2rem;
+}
+
 .agents-box{
-  border: 1px solid #ececef;
-  padding: 5px;
-  margin-bottom: 15px;
+  //border: 1px solid #ececef;
+  //padding: 5px;
+  //margin-bottom: 15px;
 }
 
 .report-detail-box{
@@ -291,6 +399,19 @@ table.dataTable tbody th, table.dataTable tbody td {
 }
 
 
+.field{
+  margin-bottom: 15px;
+}
+
+.field label{
+  font-size: 1rem;
+}
+
+.office_hours{
+  width: 100%;
+  font-size: 1rem;
+  color:#555555;
+}
 
 .login-img{
   width: 96px;
@@ -306,9 +427,28 @@ table.dataTable tbody th, table.dataTable tbody td {
   width: 100%!important;
 }
 
+.select2-selection__clear{
+  position: absolute !important;
+  right: 23px !important;
+  float: none !important;
+  margin-right: 0px !important;
+  color: #800 !important;
+}
+
+
+.select2-navbar .select2-container--bootstrap{
+  width: 300px!important; 
+}
+
 .nested-fields{
+  margin-bottom: 15px;
   
-  
+}
+
+.col-last:after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid gray;
 }
 
 .field .select2-container--bootstrap{
@@ -359,13 +499,6 @@ table.dataTable tbody th, table.dataTable tbody td {
 .select2-results__option--highlighted{ background-color: $green !important; color:white !important}
 
 
-
-
-
-
-
-
-
 .account-wall {
   margin-top: 20px;
   padding: 40px 0px 20px 0px;
@@ -403,34 +536,74 @@ table.dataTable tbody th, table.dataTable tbody td {
 
 
 .menu {
-  background-color: RGBA(71, 48, 88, 0.25);
-  border: 1px solid $green;
-  border-radius: 5px;
-  min-height: 50px;
+  background-color: RGB(0, 171, 124);
+  //border: 1px solid $green;
+  //border-radius: 5px;
+  min-height: 60px;
   margin-bottom: 25px;
-  padding: 0.95em;
-  
+  justify-content: space-between;
 }
 
 .menu-link{
-  font-size: 1rem;
-  vertical-align: middle;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.menu-link .fa{
+  color:white;
+  font-size: 1.3rem
+}
+
+
+.menu-left{
+  margin-left: 10px
 }
 
 .menu-right{
-  float: right;
+ margin-right:10px 
   
 }
 
 .menu-buttons {
-  min-height: 250px;
-  background-color: RGBA(71, 48, 88, 0.30);
+  //min-height: 250px;
+  //background-color: RGBA(71, 48, 88, 0.30);
+  display: inline-block;
+  vertical-align: top;
+}
+
+.menu-buttons a {
+  font-weight: 400;
+  text-align: center;
+  width: 190px;
+  vertical-align: top;
+}
+
+.menu-buttons a i {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background: #767676;
+    color: #fff;
+    line-height: 2.5;
+    font-size: 2em;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.menu-buttons a i.fa {
+    line-height: 2.2;
+}
+
+.menu-buttons a span {
+    font-size: 16px;
+    display: block;
+    color: #767676;
+    transition: color 0.2s;
 }
 
 
-
 /*Modal*/
-
 .modal-content{
 
 }
@@ -726,4 +899,33 @@ border-radius: 0.2rem;
   position: absolute;
   left: 0px;
   top: 0px;
+}
+
+
+
+//------------------------------
+.select-style {
+  border: 1px solid white;
+  border-radius: 3px;
+  overflow: hidden;
+  background: white;
+  padding: 5px 3px;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 130%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+
+.remove_fields dynamic .fa {
+  font-size: 1.3rem;
 }

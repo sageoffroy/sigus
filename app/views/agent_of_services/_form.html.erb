@@ -1,30 +1,32 @@
-<%= form_with(model: agent_of_service, local: true) do |form| %>
-  <% if agent_of_service.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(agent_of_service.errors.count, "error") %> prohibited this agent_of_service from being saved:</h2>
+  <%= form_with(model: agent_of_service, local: true) do |form| %>
+    <% if agent_of_service.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(agent_of_service.errors.count, "error") %> prohibited this agent_of_service from being saved:</h2>
 
-      <ul>
-      <% agent_of_service.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% agent_of_service.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Seleccionar Agente"}, {class: "select2", :disabled => true} %>
+    </div>
+
+    <div class="field">
+      <%= form.collection_select :service_of_dependence_id, ServiceOfDependence.where(dependence:@user.dependence), :id, :to_s, {prompt: "Seleccionar Servicio"}, {class: "select2"} %>
+    </div>
+
+    <div class="field">
+      <%= form.label "Descripción:" %>
+      <%= form.text_field :description, id: :agent_of_service_description%>
+    </div>
+
+    <div class="actions">
+      <center>
+        <%= form.submit :class => "btn btn-primary"%>
+        <%= link_to "Cancelar", agent_of_services_path, :class =>"btn btn-danger" %></center>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.collection_select :agent_id, Agent.all, :id, :to_s, {prompt: "Seleccionar Agente"}, {class: "select2"} %>
-  </div>
-
-  <div class="field">
-    <%= form.collection_select :service_of_dependence_id, ServiceOfDependence.all, :id, :to_s, {prompt: "Seleccionar Servicio"}, {class: "select2"} %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :agent_of_service_description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

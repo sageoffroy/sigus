@@ -59,3 +59,5 @@ $(document).on 'turbolinks:load', ->
   form = $('form')
   form.integrateDatepicker();
   form.integrateSelect2();
+
+  $(".menu").integrateSelect2();

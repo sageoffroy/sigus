@@ -21,6 +21,10 @@ class DependencesController < ApplicationController
   def edit
   end
 
+  def dependence
+    @dependence = current_user.dependence
+  end
+
   # POST /dependences
   # POST /dependences.json
   def create

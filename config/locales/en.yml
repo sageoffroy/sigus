@@ -30,12 +30,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-
+  activerecord:
+    models:
+      free_day:
+        one: Feriado
+        other: Feriados
+      position: "Posicion"
   helpers:
     select:
       prompt: Por favor seleccione
     submit:
+      free_day:
+        create: Crear Feriado
+        submit: Guardar Feriado
+        update: Actualizar Feriado
       report:
         create: Crear Reporte
         submit: Guardar Reporte

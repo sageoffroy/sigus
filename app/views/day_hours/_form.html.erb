@@ -1,0 +1,32 @@
+<%= form_with(model: day_hour, local: true) do |form| %>
+  <% if day_hour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(day_hour.errors.count, "error") %> prohibited this day_hour from being saved:</h2>
+
+      <ul>
+      <% day_hour.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :day %>
+    <%= form.date_select :day, id: :day_hour_day %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hours %>
+    <%= form.number_field :hours, id: :day_hour_hours %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_umu %>
+    <%= form.check_box :is_umu, id: :day_hour_is_umu %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

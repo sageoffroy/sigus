@@ -1,15 +1,15 @@
 <div class="nested-fields row">
 	<div style="margin-left: 10px;margin-top: 5px;">
-		<%= link_to_remove_association (fa_icon "window-close", style: "color:#990000;"), f %>
+		<%= link_to_remove_association (fa_icon "window-close", class: "btn-remove"), f %>
 	</div>
 	<div class="col-md-4 col-border-right">
 		<div class="field">
-			<%= f.collection_select :agent_id, Agent.all, :id, :to_s, {prompt: "Agente"}, {class: "select2 select-field agent"} %>
+			<%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente"}, {class: "select2 select-field agent"} %>
 		</div>
 	</div>
 	<div class="col-md-4">
 		<div class="field">
-			<%= f.collection_select :observation_id, Observation.all, :id, :to_s, {prompt: "Observación"}, {class: "select2 select-field"} %>
+			<%= f.collection_select :observation_id, Observation.all, :id, :to_s, {prompt: "Sin Observaciones"}, {:class => "select2 select-field"} %>
 		</div>
 	</div>
 	<div class="col-md-1 col-border-right">
@@ -213,7 +213,7 @@
   		</tbody>
 		</table>
 	</div>
-	<div class="col-md-4">
+	<!--div class="col-md-4">
 		<table class='table'>
   		<thead>
   			<tr>
@@ -231,53 +231,8 @@
 				</tr>
   		</tbody>
 		</table>
-		
+	</div-->
+	<div class="col-md-12 col-last">
 	</div>
 </div>
-<hr />
-<script>
 
-  $(".day_of_month").keyup(function(){ 
-    total = 0
-    $(this).closest('.nested-fields').find('.day_of_month').each(function(){
-      if ($(this).val() != ""){
-        total = total + parseInt($(this).val());
-      }
-    });
-    $(this).closest('.nested-fields').find('.total_hours').val(total);
-  });
-
-  function maxLengthCheck(object) {
-    if (object.value.length > object.maxLength)
-      object.value = object.value.slice(0, object.maxLength)
-  }
-    
-  function isNumeric (evt) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    if (key != 8 && key != 9 && key != 116){
-      key = String.fromCharCode (key);
-      var regex = /[0-9]|\./;
-      if ( !regex.test(key) ) {
-        theEvent.returnValue = false;
-        if(theEvent.preventDefault) theEvent.preventDefault();
-      }
-    } 
-  }
-
-  function calcular_total_horas() {
-
-  }
-
-  function calcular_total_horas_viejo() {
-  	console.log("Calculando Horas");
-		total = 0
-		$(".day_of_month").each(
-			function(index, value) {
-				total = total + eval($(this).val());
-			}
-		);
-		console.log(total);
-		$("#agent_total_hours").val(total);
-	}
-</script>

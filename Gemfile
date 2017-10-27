@@ -59,7 +59,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 gem 'remotipart', github: 'mshibuya/remotipart'
-gem 'rails_admin', '>= 1.0.0.rc'
+gem 'rails_admin', '~> 1.2'
 
 
 source 'https://rails-assets.org' do
@@ -96,5 +96,6 @@ gem "font-awesome-rails"
 gem 'csv-mapper'
 gem 'perfect-scrollbar-rails'
 gem 'flot-rails', :git => "https://github.com/Kjarrigan/flot-rails.git"
-# Gema para detalles
+
+# Gema para asociaciones
 gem "cocoon"

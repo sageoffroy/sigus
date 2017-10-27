@@ -1,4 +1,4 @@
-<%= form_with(model: free_day, local: true) do |form| %>
+<%= form_with(model: free_day, local: true, id: "new_free_day") do |form| %>
   <% if free_day.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(free_day.errors.count, "error") %> prohibited this free_day from being saved:</h2>
@@ -11,17 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :day %>
-    <%= form.date_select :day, id: :free_day_day %>
-  </div>
+  <div class="row">
+    <div class="input-group date datepicker col-sm-3">
+      <%= form.text_field :day, placeholder: "Día Feriado", class: "form-control" %>
+      <span class="input-group-addon">
+        <%= fa_icon "list"%>
+      </span>
+    </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :free_day_description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <div class="input-group col-sm-4">
+      <%= form.text_field :description, placeholder: "Descripción", class: "form-control" %>
+    </div>
+    <div class="input-group col-sm-3">
+      <%= form.select :scope, ["Local", "Provincial", "Nacional"], {prompt: "Tipo"}, {class: "select2"}%>
+    </div>
+    
+    <div class="input-group col-sm-2">
+      <%= form.submit class: "btn btn-outline-success btn-block", id: "btn_submit_agent"%>
+    </div>
   </div>
 <% end %>

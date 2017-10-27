@@ -1,30 +1,24 @@
-<h1>Agent Of Services</h1>
+<% if @user.admin? %>
+  <h2>Servicios del <%= current_user.dependence %></h2>
+<% else %>
+  <h2>Servicios del <%= current_user.dependence %></h2>
+<% end %>
+<div class="row">
+<% @services_of_dependences.each do |sod| %>
+  <div  class="col-sm-4">
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Agent</th>
-      <th>Service</th>
-      <th>Description</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @agent_of_services.each do |agent_of_service| %>
-      <tr>
-        <td><%= agent_of_service.agent %></td>
-        <td><%= agent_of_service.service_of_dependence %></td>
-        <td><%= agent_of_service.description %></td>
-        <td><%= link_to((fa_icon "eye"), agent_of_service) %>
-            <%= link_to((fa_icon "pencil"), edit_agent_of_service_path(agent_of_service)) %>
-            <%= link_to((fa_icon "trash-o"), agent_of_service, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar?' }) %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Agent Of Service', new_agent_of_service_path %>
+    <h5 style="text-align: center;"><%= sod.service %></h5>
+    <h6 style="text-align: center;">Total de Agentes: <%= sod.agent_of_services.length %></h6>
+    <table class="table">
+      <tbody style="display:block;height: 300px;overflow-y: auto;overflow-x: hidden;">
+        <% sod.agent_of_services.each do |aos| %>
+          <tr>
+            <td style="text-align: left;"><%= link_to((fa_icon "pencil"), edit_agent_of_service_path(aos)) %><%= aos.agent %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br><br>
+  </div>
+<% end %>
+</div>

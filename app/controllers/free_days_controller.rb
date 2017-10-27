@@ -5,6 +5,7 @@ class FreeDaysController < ApplicationController
   # GET /free_days.json
   def index
     @free_days = FreeDay.all
+    @free_day = FreeDay.new
   end
 
   # GET /free_days/1
@@ -28,12 +29,7 @@ class FreeDaysController < ApplicationController
     dt = DateTime.new(year.to_i, month.to_i)
     boy = dt.beginning_of_month
     eoy = dt.end_of_month
-
     free_days = FreeDay.where("day >= ? and day <= ?", boy, eoy).pluck(:day).map(&:day)
-    
-
-
-    
     respond_to do |format|
       format.json  { render :json => {:function => "get_free_days", :free_days => free_days}}
     end
@@ -44,14 +40,14 @@ class FreeDaysController < ApplicationController
   # POST /free_days.json
   def create
     @free_day = FreeDay.new(free_day_params)
-
     respond_to do |format|
       if @free_day.save
-        format.html { redirect_to @free_day, notice: 'Free day was successfully created.' }
+        format.html { redirect_to free_days_path, notice: 'Free day was successfully created.' }
         format.json { render :show, status: :created, location: @free_day }
       else
-        format.html { render :new }
-        format.json { render json: @free_day.errors, status: :unprocessable_entity }
+        @free_days = FreeDay.all
+        format.html { render :index }
+        format.json { render json: json_errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,7 +57,7 @@ class FreeDaysController < ApplicationController
   def update
     respond_to do |format|
       if @free_day.update(free_day_params)
-        format.html { redirect_to @free_day, notice: 'Free day was successfully updated.' }
+        format.html { redirect_to free_days_path, notice: 'Free day was successfully updated.' }
         format.json { render :show, status: :ok, location: @free_day }
       else
         format.html { render :edit }
@@ -88,7 +84,7 @@ class FreeDaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def free_day_params
-      params.require(:free_day).permit(:day, :description)
+      params.require(:free_day).permit(:day, :description, :scope)
     end
 end
 

@@ -2,14 +2,15 @@
 
 <h1>Positions</h1>
 
-<table>
+<table class="datatable">
   <thead>
     <tr>
-      <th>Grouping</th>
-      <th>Class</th>
-      <th>Grade</th>
-      <th>Hierarchy</th>
-      <th colspan="3"></th>
+      <th>Grupo</th>
+      <th>Clase</th>
+      <th>Grado</th>
+      <th>Jerarquía</th>
+      <th>Categoría</th>
+      <th>Opciones</th>
     </tr>
   </thead>
 
@@ -17,12 +18,13 @@
     <% @positions.each do |position| %>
       <tr>
         <td><%= position.grouping %></td>
-        <td><%= position.class %></td>
+        <td><%= position.clase %></td>
         <td><%= position.grade %></td>
         <td><%= position.hierarchy %></td>
-        <td><%= link_to 'Show', position %></td>
-        <td><%= link_to 'Edit', edit_position_path(position) %></td>
-        <td><%= link_to 'Destroy', position, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= position.category %></td>
+        <td><%= link_to 'Show', position %>
+        <%= link_to 'Edit', edit_position_path(position) %>
+        <%= link_to 'Destroy', position, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

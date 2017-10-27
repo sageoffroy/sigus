@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913111800) do
+ActiveRecord::Schema.define(version: 20171023150754) do
 
   create_table "agent_of_services", force: :cascade do |t|
     t.integer "agent_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20170913111800) do
   create_table "agent_types", force: :cascade do |t|
     t.integer "code"
     t.string "description"
+    t.integer "quant_hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -40,16 +41,44 @@ ActiveRecord::Schema.define(version: 20170913111800) do
     t.string "cell_phone"
     t.integer "position_id"
     t.integer "hour_regime_id"
-    t.integer "quant_hours"
     t.integer "study_id"
     t.integer "job_function_id"
+    t.integer "agent_type_id"
+    t.boolean "exclusive_dedication"
+    t.boolean "functional_dedication"
+    t.boolean "unhealthy_work"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["agent_type_id"], name: "index_agents_on_agent_type_id"
     t.index ["hour_regime_id"], name: "index_agents_on_hour_regime_id"
     t.index ["job_function_id"], name: "index_agents_on_job_function_id"
     t.index ["nationality_id"], name: "index_agents_on_nationality_id"
     t.index ["position_id"], name: "index_agents_on_position_id"
     t.index ["study_id"], name: "index_agents_on_study_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.integer "code"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.string "flag"
+    t.string "shield"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "day_hours", force: :cascade do |t|
+    t.date "day"
+    t.integer "hours"
+    t.boolean "is_umu"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "dependences", force: :cascade do |t|
@@ -64,6 +93,7 @@ ActiveRecord::Schema.define(version: 20170913111800) do
   create_table "free_days", force: :cascade do |t|
     t.date "day"
     t.string "description"
+    t.string "scope"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -95,17 +125,20 @@ ActiveRecord::Schema.define(version: 20170913111800) do
   create_table "observations", force: :cascade do |t|
     t.integer "number"
     t.string "description"
+    t.date "date_up"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "positions", force: :cascade do |t|
     t.string "grouping"
-    t.string "class"
+    t.string "clase"
     t.string "grade"
     t.string "hierarchy"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_positions_on_category_id"
   end
 
   create_table "report_details", force: :cascade do |t|
@@ -163,6 +196,7 @@ ActiveRecord::Schema.define(version: 20170913111800) do
   create_table "reports", force: :cascade do |t|
     t.integer "year"
     t.integer "month"
+    t.integer "total_office_hours"
     t.integer "service_of_dependence_id"
     t.integer "user_id"
     t.datetime "created_at", null: false

@@ -17,8 +17,15 @@ class User < ApplicationRecord
   	has_role?(:license)
 	end
 
+  def planification?
+    has_role?(:planification)
+  end
+
 	def agent_register?
   	has_role?(:agent_register)
 	end
-       
+
+  def to_s
+    email
+  end
 end

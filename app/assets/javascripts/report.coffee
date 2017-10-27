@@ -77,6 +77,56 @@ set_ids_to_child = ->
   $('.nested-fields').each (index, value) ->
     $(this).attr('id', 'nested-fields_' + index );
 
+set_selects_of_agents = (id)->
+  selects = $('.agent')
+  selects.empty()
+  $.ajax
+    type: 'POST'
+    url: '/update_agents_of_service/'+id
+    error: (jqXHR, textStatus, errorThrown) ->
+      console.log "Error"
+      return
+    success: (data) ->
+      i = 0
+      while i < data.agents.length
+        #selects.append '<option id=' + data.agents[i].id + ' value=' + '('+data.agents[i].dni+')'+' '+data.agents[i].fullname+'</option>'
+        selects.append $('<option></option>').attr('value', data.agents[i].id ).text('('+data.agents[i].dni+')'+' '+data.agents[i].fullname)
+        i++
+      selects.change()
+      return
+
+days_controls = ->
+  add_report_detail = $('#add_report_details')
+  report_year = $('#report_year')
+  report_month = $('#report_month')
+  report_service = $('#report_service')
+
+  check_general_data(report_year, report_month, report_service, add_report_detail)
+  check_day_of_month()
+  set_weekend(report_year, report_month)
+  set_free_days(report_year, report_month)
+
+  report_year.on 'select2:select', (e) ->
+    #console.log "Cambiando el Año"
+    check_general_data(report_year, report_month, report_service, add_report_detail)
+    check_day_of_month()
+    set_free_days(report_year, report_month)
+
+  report_month.on 'select2:select', (e) ->
+    #console.log "Cambiando el Mes"
+    check_general_data(report_year, report_month, report_service, add_report_detail)
+    check_day_of_month()
+    set_weekend(report_year, report_month)
+    set_free_days(report_year, report_month)
+
+  report_service.on 'select2:select', (e) ->
+    console.log "Cambiando el Servicio"
+    check_general_data(report_year, report_month, report_service, add_report_detail)
+    check_day_of_month()
+    #actualizar valores del select de agentes
+    id = report_service.val()
+    set_selects_of_agents(id)
+    
 
 $(document).on 'cocoon:after-insert', (e) ->
   $('.select2').select2({theme: "bootstrap"})
@@ -90,34 +140,14 @@ $(document).on 'cocoon:after-insert', (e) ->
   set_weekend(report_year, report_month)
   set_free_days(report_year, report_month)
   set_ids_to_child()
+  id = report_service.val()
+  set_selects_of_agents(id)
   
   
 
 $(document).on 'turbolinks:load', ->
-  add_report_detail = $('#add_report_details')
-  report_year = $('#report_year')
-  report_month = $('#report_month')
-  report_service = $('#report_service')
-  
-  check_general_data(report_year, report_month, report_service, add_report_detail)
-  check_day_of_month()
-  set_weekend(report_year, report_month)
-  set_free_days(report_year, report_month)
-
-  report_year.on 'select2:select', (e) ->
-    console.log "Cambiando el Año"
-    check_general_data(report_year, report_month, report_service, add_report_detail)
-    check_day_of_month()
-    set_free_days(report_year, report_month)
-
-  report_month.on 'select2:select', (e) ->
-    console.log "Cambiando el Mes"
-    check_general_data(report_year, report_month, report_service, add_report_detail)
-    check_day_of_month()
-    set_weekend(report_year, report_month)
-    set_free_days(report_year, report_month)
-
-  report_service.on 'select2:select', (e) ->
-    console.log "Cambiando el Servicio"
-    check_general_data(report_year, report_month, report_service, add_report_detail)
-    check_day_of_month()
+  if $('.reports.edit').length > 0
+    days_controls()
+  if $('.reports.new').length > 0
+    days_controls()
+  #$('#select_dependence option:eq('+ <%= current_user.dependence.id %>+')').prop('selected', true)

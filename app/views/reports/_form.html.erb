@@ -11,22 +11,37 @@
       </ul>
     </div>
   <% end %>
-  <%= f.hidden_field :user_id, :value => @user.id %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
   <div class="form-group row">
+    <dic class="col-sm-2">
+      <h6>Año</h6>
+    </dic>
+    <dic class="col-sm-2">
+      <h6>Mes</h6>
+    </dic>
+    <dic class="col-sm-6">
+      <h6>Servicio</h6>
+    </dic>
+    <dic class="col-sm-2">
+      <h6>Horas Consultorio</h6>
+    </dic>
     <div class="input-group col-sm-2">
       <%= f.select :year, (2017)..(Time.zone.now.year), {prompt: "Año"}, {class: "select2"}%>
     </div>
     <div class="input-group col-sm-2">
       <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
     </div>
-    <div class="input-group col-sm-8">
-      <%= f.collection_select :service_of_dependence_id, ServiceOfDependence.where(dependence: Dependence.where(code:106)), :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
+    <div class="input-group col-sm-6">
+      <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
     </div>
+    <div class="input-group col-sm-2">
+      <%= f.text_field :total_office_hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)",:placeholder => "0", :oninput => "maxLengthCheck(this)", class: "office_hours" %>
+    </div>
+
   </div>
   <h5>Agentes</h5>
 
   <div class="agents-box">
-    <h6><span>*Ingrese los datos generales antes de agregar agentes</span></h6>
     <%= f.fields_for :report_details do |report_detail| %>
       <%= render 'report_detail_fields', :f => report_detail %>
     <% end %>
@@ -44,3 +59,49 @@
 <% end %>
 
 
+<script>
+
+  $(".day_of_month .office_hours").keyup(function(){ 
+    total = 0
+    $(this).closest('.nested-fields').find('.day_of_month').each(function(){
+      if ($(this).val() != ""){
+        total = total + parseInt($(this).val());
+      }
+    });
+    $(this).closest('.nested-fields').find('.total_hours').val(total);
+  });
+
+  function maxLengthCheck(object) {
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+    
+  function isNumeric (evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    if (key != 8 && key != 9 && key != 116){
+      key = String.fromCharCode (key);
+      var regex = /[0-9]|\./;
+      if ( !regex.test(key) ) {
+        theEvent.returnValue = false;
+        if(theEvent.preventDefault) theEvent.preventDefault();
+      }
+    } 
+  }
+
+  function calcular_total_horas() {
+
+  }
+
+  function calcular_total_horas_viejo() {
+    console.log("Calculando Horas");
+    total = 0
+    $(".day_of_month").each(
+      function(index, value) {
+        total = total + eval($(this).val());
+      }
+    );
+    console.log(total);
+    $("#agent_total_hours").val(total);
+  }
+</script>

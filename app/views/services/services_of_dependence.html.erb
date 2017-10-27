@@ -1,11 +1,16 @@
-<h1>Servicios del Hospital</h1>
+<h2>Servicios del <%= current_user.dependence %></h2>
 
 <div class="row">
   <div class="col-md-5">
-    <div class="outline">
+    <div class="outline adhered-box">
       <h5>Servicios Adheridos</h5>
       <% @services_of_dependence.each do |s_o_d| %>
-        <div class="service-list-element"><%= s_o_d.service.name %><%= link_to (fa_icon "arrow-right"), s_o_d.service, class: 'btn service-list-btn btn-right' %></div>
+        <div class="service-list-element">
+          <%= s_o_d.service.name %>
+          <% if current_user.admin? or current_user.planification? %>
+            <%= link_to (fa_icon "arrow-right"), '#', class: 'btn service-list-btn btn-right', id: s_o_d.service.id, remote: true %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>  
@@ -14,29 +19,43 @@
   </div>
 
   <div class="col-md-5">
-    <div class="outline">
+    <div class="outline available-box">
       <h5>Servicios Disponibles</h5>
       <% @other_services.each do |o_s| %>
-        <div class="service-list-element"><%= o_s.name %><%= link_to (fa_icon "arrow-left"), o_s, class: 'btn service-list-btn btn-left' %></div>
+        <div class="service-list-element">
+          <%= o_s.name %>
+          <% if current_user.admin? or current_user.planification?%>
+            <%= link_to (fa_icon "arrow-left"), '#', class: 'btn service-list-btn btn-left', id: o_s.id, remote: true %>
+          <% end %>    
+        </div>
       <% end %>
     </div>
   </div>    
 </div>
 
-
-
-
-
 <script type="text/javascript">
-  function load_agents(){
-    $('#navbar-search').focus();
+  $(".service-list-btn").on("click", ajaxCall);
+  
+  function ajaxCall(){
+    var id = $(this).attr('id');
     $.ajax({
-      url: '/agents_load',
+      url: '/change_service/'+id,
       type: 'POST',
     }).done(function(data) {
-      $('body').addClass('loaded');
+      console.log(data);
+      if (data.msg === "add"){
+        $('#'+data.id).closest('.service-list-element').remove()
+        $('.adhered-box').append ('<div class="service-list-element">'+ data.name +'<a class="btn service-list-btn btn-right" id="'+data.id+'" data-remote="true" href="#"><i class="fa fa-arrow-right"></i></a></div>')
+        $('#'+data.id).on("click", ajaxCall);
+
+      }
+      else{
+        $('#'+data.id).closest('.service-list-element').remove()
+        $('.available-box').append ('<div class="service-list-element">'+ data.name +'<a class="btn service-list-btn btn-left" id="'+data.id+'" data-remote="true" href="#"><i class="fa fa-arrow-left"></i></a></div>')
+        $('#'+data.id).on("click", ajaxCall);
+      }
     }).fail(function(xhr, status, error) {
-      
+      console.log("Fallo el cambio");
     });
   }
 </script>

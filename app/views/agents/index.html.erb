@@ -1,13 +1,15 @@
-<h2>Listado de Agentes</h2>
+<h2>Listado de Agentes del <%= current_user.dependence %></h2>
+
+
+
+
 
 <table class="table datatable">
   <thead>
     <tr>
       <th>Dni</th>
       <th>Fullname</th>
-      <th>Sex</th>
-      <th>Birthdate</th>
-      <th>Marital status</th>
+      <th>Tipo</th>
       <th></th>
     </tr>
   </thead>
@@ -17,9 +19,7 @@
       <tr>
         <td><%= agent.dni %></td>
         <td><%= agent.fullname %></td>
-        <td><%= agent.sex %></td>
-        <td><%= agent.birthdate %></td>
-        <td><%= agent.marital_status %></td>
+        <td><%= agent.agent_type%></td>
         <td>
           <%= link_to((fa_icon "eye"), agent) %>
           <%= link_to((fa_icon "pencil"), edit_agent_path(agent)) %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @day_hour.day %>
+</p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @day_hour.hours %>
+</p>
+
+<p>
+  <strong>Is umu:</strong>
+  <%= @day_hour.is_umu %>
+</p>
+
+<%= link_to 'Edit', edit_day_hour_path(@day_hour) %> |
+<%= link_to 'Back', day_hours_path %>

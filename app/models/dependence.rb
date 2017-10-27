@@ -1,5 +1,7 @@
 class Dependence < ApplicationRecord
-	has_one :service_of_dependence
+	has_many :service_of_dependences
+	has_many :services, through: :service_of_dependences
+	
 
 	def to_s
 		name

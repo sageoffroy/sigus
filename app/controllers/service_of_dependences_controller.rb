@@ -61,6 +61,33 @@ class ServiceOfDependencesController < ApplicationController
     end
   end
 
+
+  def change_service
+    
+    id_service = params[:id]
+    service = Service.where(id:id_service).first
+    dependence = current_user.dependence
+    sod = ServiceOfDependence.where(service_id: service.id, dependence_id: dependence.id).first
+    msg = "none"
+    if sod.nil?
+      sod = ServiceOfDependence.new(service: service, dependence: dependence)  
+      sod.save
+      msg = "add"
+      service_id = service.id
+      service_name = service.to_s
+    else
+      service_id = sod.service.id
+      service_name = sod.service.to_s
+      sod.destroy
+      msg = "remove"
+    end
+
+    respond_to do |format|
+      format.json  { render :json => {:msg => msg, :id => service_id, :name => service_name}}
+    end
+
+  end  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_service_of_dependence

@@ -1,0 +1,9 @@
+<tr>
+  <td><%= free_day.day %></td>
+  <td><%= free_day.description %></td>
+  <td>
+  	<%= link_to (fa_icon "eye"), free_day, class: 'btn btn-table btn-success' %>
+  	<%= link_to (fa_icon "pencil-square-o"), edit_free_day_path(free_day), class: 'btn btn-table btn-warning' %>
+  	<%= link_to (fa_icon "trash-o"), free_day, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }, class: 'btn btn-table btn-danger' %>
+  </td>
+</tr>

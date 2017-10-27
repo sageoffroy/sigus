@@ -4,20 +4,11 @@ class AgentsController < ApplicationController
   # GET /agents
   # GET /agents.json
   def index
-
-    user = current_user
-
-    if user.has_role? :hospital
-      dependence = Dependence.where(code: user.dependence.code).first
-      services_of_dependence = ServiceOfDependence.where(dependence:dependence)
-      agents_of_dependence = AgentOfService.where(service_of_dependence: services_of_dependence)
-      @agents = Agent.where(id: agents_of_dependence.pluck(:id))
-    else 
-      @agents = Agent.all      
-    end
-    
-
-
+    dependence = current_user.dependence
+    sod = dependence.service_of_dependences
+    agents_of_service = AgentOfService.where(service_of_dependence: sod)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+    #@agents = Agent.all
   end
 
   # GET /agents/1
@@ -91,6 +82,6 @@ class AgentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def agent_params
-      params.require(:agent).permit(:dni, :fullname, :sex, :birthdate, :marital_status,:nationality_id, :email, :cell_phone, :position_id, :hour_regime_id, :study_id, :job_function_id)
+      params.require(:agent).permit(:dni, :fullname, :sex, :birthdate, :marital_status,:nationality_id, :email, :cell_phone, :position_id, :hour_regime_id, :study_id, :job_function_id, :exclusive_dedication, :functional_dedication, :unhealthy_work, :agent_type)
     end
 end

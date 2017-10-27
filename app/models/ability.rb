@@ -6,7 +6,7 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
     if user.admin?
-      can :manage, :all
+        can :manage, :all
     end
 
     if user.hospital?
@@ -14,6 +14,9 @@ class Ability
             doa = DependenceOfAgent.where(dependence: Dependence.where(code:user.dependence.code).first())
             doa.pluck(:law_of_agent_id).include?(a.id)
         end
+        can :manage, ServiceOfDependence
+        can :manage, Service
+        can :manage, Dependence
     end
 
     if user.license?
@@ -27,12 +30,17 @@ class Ability
         can :manage, Address
         can :manage, DependenceOfAgent
         can :manage, City
-        
+    end
+
+    if user.planification?
+        can :manage, :all
+        can :access, :rails_admin 
     end
 
     if user.agent_register?
         can :manage, Agent
     end
+    
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
