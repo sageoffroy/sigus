@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rotative_turns
   resources :day_hours
   resources :countries
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

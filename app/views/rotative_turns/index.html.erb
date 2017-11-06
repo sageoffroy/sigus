@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rotative Turns</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Days</th>
+      <th>Is complete</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rotative_turns.each do |rotative_turn| %>
+      <tr>
+        <td><%= rotative_turn.days %></td>
+        <td><%= rotative_turn.is_complete %></td>
+        <td><%= link_to 'Show', rotative_turn %></td>
+        <td><%= link_to 'Edit', edit_rotative_turn_path(rotative_turn) %></td>
+        <td><%= link_to 'Destroy', rotative_turn, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rotative Turn', new_rotative_turn_path %>

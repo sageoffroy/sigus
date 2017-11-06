@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Days:</strong>
+  <%= @rotative_turn.days %>
+</p>
+
+<p>
+  <strong>Is complete:</strong>
+  <%= @rotative_turn.is_complete %>
+</p>
+
+<%= link_to 'Edit', edit_rotative_turn_path(@rotative_turn) %> |
+<%= link_to 'Back', rotative_turns_path %>

@@ -1,0 +1,27 @@
+<%= form_with(model: rotative_turn, local: true) do |form| %>
+  <% if rotative_turn.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rotative_turn.errors.count, "error") %> prohibited this rotative_turn from being saved:</h2>
+
+      <ul>
+      <% rotative_turn.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :days %>
+    <%= form.number_field :days, id: :rotative_turn_days %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_complete %>
+    <%= form.check_box :is_complete, id: :rotative_turn_is_complete %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

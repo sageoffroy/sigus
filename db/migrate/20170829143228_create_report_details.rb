@@ -5,12 +5,11 @@ class CreateReportDetails < ActiveRecord::Migration[5.1]
       t.references :agent, foreign_key: true
       t.boolean :belong_service
       t.references :observation
-      t.integer :observation_hours
       t.integer :total_hours
-      t.string :tr
-      t.string :fm
-      t.string :tnf
-      t.string :tt
+      t.references :rotative_turn
+      t.boolean :fm
+      t.boolean :tnf
+      t.boolean :tt
       t.integer :hours_to_add
       t.integer :hours_to_remove
       t.integer :total_office_hours

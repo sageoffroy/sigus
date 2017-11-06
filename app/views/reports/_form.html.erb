@@ -60,18 +60,8 @@
 
 
 <script>
-
-  $(".day_of_month .office_hours").keyup(function(){ 
-    total = 0
-    $(this).closest('.nested-fields').find('.day_of_month').each(function(){
-      if ($(this).val() != ""){
-        total = total + parseInt($(this).val());
-      }
-    });
-    $(this).closest('.nested-fields').find('.total_hours').val(total);
-  });
-
   function maxLengthCheck(object) {
+    
     if (object.value.length > object.maxLength)
       object.value = object.value.slice(0, object.maxLength)
   }
@@ -85,20 +75,21 @@
       if ( !regex.test(key) ) {
         theEvent.returnValue = false;
         if(theEvent.preventDefault) theEvent.preventDefault();
+      }else{
+        
       }
     } 
   }
 
+  
   function calcular_total_horas() {
-
-  }
-
-  function calcular_total_horas_viejo() {
     console.log("Calculando Horas");
     total = 0
     $(".day_of_month").each(
       function(index, value) {
-        total = total + eval($(this).val());
+        if (!isNaN(eval($(this).val()))){
+          total = total + eval($(this).val());  
+        }
       }
     );
     console.log(total);

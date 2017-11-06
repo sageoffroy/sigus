@@ -1,7 +1,20 @@
 <div class="nested-fields row">
-	<div style="margin-left: 10px;margin-top: 5px;">
+	
+	<div class="col-md-4">
 		<%= link_to_remove_association (fa_icon "window-close", class: "btn-remove"), f %>
+		<h6>Agente</h6>
 	</div>
+	<div class="col-md-4">
+		<h6>Observaciones</h6>
+	</div>
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-1">
+	<h6>Total Hs.</h6>
+	</div>
+	<div class="col-md-1">
+	</div>
+
 	<div class="col-md-4 col-border-right">
 		<div class="field">
 			<%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente"}, {class: "select2 select-field agent"} %>
@@ -9,15 +22,19 @@
 	</div>
 	<div class="col-md-4">
 		<div class="field">
-			<%= f.collection_select :observation_id, Observation.all, :id, :to_s, {prompt: "Sin Observaciones"}, {:class => "select2 select-field"} %>
+	<%= f.fields_for :observation, Observation.new do |o| %>
+			<%= o.select :description, options_for_select([ "Sin Obesrvaciones", "Lic. Gremial","Lic. Largo Tratamiento","Lic. Maternidad","Lic. Política","Lic. S/G de Haberes","Tareas Pasivas","Lactancia"], "Sin Observaciones"),{}, {:class => "select2 select-field"} %>
 		</div>
 	</div>
 	<div class="col-md-1 col-border-right">
-		<%= f.number_field :observation_hours, id: :agent_observation_hours, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :placeholder => "Days"%>
+		
 	</div>
-	<div class="col-md-2">
-		<span style="float: left;margin-right: 10px;padding-top: 5px;}">Total Horas:  </span>
+	<% end %>
+	<div class="col-md-1">
 		<%= f.number_field :total_hours, id: :agent_total_hours, :onkeypress => "event.preventDefault();", :placeholder => "Horas" , :class => "total_hours" %>
+	</div>
+	<div class="col-md-1">
+		
 	</div>
 	<div class="col-md-12">
 		<table class='table table-hours'>
@@ -62,97 +79,97 @@
   		<tbody>
   			<tr>
 	  			<td class="field field-hours">
-				    <%= f.number_field :day1, id: :report_detail_tr_1, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day1, id: :report_detail_tr_1, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day2, id: :report_detail_tr_2, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day2, id: :report_detail_tr_2, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day3, id: :report_detail_tr_3, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day3, id: :report_detail_tr_3, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day4, id: :report_detail_tr_4, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month"%>
+				    <%= f.number_field :day4, id: :report_detail_tr_4, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month"%>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day5, id: :report_detail_tr_5, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day5, id: :report_detail_tr_5, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day6, id: :report_detail_tr_6, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day6, id: :report_detail_tr_6, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day7, id: :report_detail_tr_7, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day7, id: :report_detail_tr_7, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day8, id: :report_detail_tr_8, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day8, id: :report_detail_tr_8, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day9, id: :report_detail_tr_9, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day9, id: :report_detail_tr_9, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day10, id: :report_detail_tr_10, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day10, id: :report_detail_tr_10, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day11, id: :report_detail_tr_11, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day11, id: :report_detail_tr_11, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day12, id: :report_detail_tr_12, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day12, id: :report_detail_tr_12, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day13, id: :report_detail_tr_13, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day13, id: :report_detail_tr_13, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day14, id: :report_detail_tr_14, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day14, id: :report_detail_tr_14, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day15, id: :report_detail_tr_15, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day15, id: :report_detail_tr_15, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day16, id: :report_detail_tr_16, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day16, id: :report_detail_tr_16, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day17, id: :report_detail_tr_17, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day17, id: :report_detail_tr_17, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day18, id: :report_detail_tr_18, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day18, id: :report_detail_tr_18, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day19, id: :report_detail_tr_19, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day19, id: :report_detail_tr_19, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day20, id: :report_detail_tr_20, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day20, id: :report_detail_tr_20, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day21, id: :report_detail_tr_21, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day21, id: :report_detail_tr_21, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day22, id: :report_detail_tr_22, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day22, id: :report_detail_tr_22, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day23, id: :report_detail_tr_23, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day23, id: :report_detail_tr_23, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day24, id: :report_detail_tr_24, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day24, id: :report_detail_tr_24, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day25, id: :report_detail_tr_25, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day25, id: :report_detail_tr_25, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day26, id: :report_detail_tr_26, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day26, id: :report_detail_tr_26, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day27, id: :report_detail_tr_27, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day27, id: :report_detail_tr_27, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day28, id: :report_detail_tr_28, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
+				    <%= f.number_field :day28, id: :report_detail_tr_28, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day29, id: :report_detail_tr_29, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month day29"  %>
+				    <%= f.number_field :day29, id: :report_detail_tr_29, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month day29"  %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day30, id: :report_detail_tr_30, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month day30" %>
+				    <%= f.number_field :day30, id: :report_detail_tr_30, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month day30" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :day31, id: :report_detail_tr_31, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month day31" %>
+				    <%= f.number_field :day31, id: :report_detail_tr_31, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month day31" %>
 				  </td>
 				</tr>
 			</tbody>
@@ -162,28 +179,37 @@
 		<table class='table'>
   		<thead>
   			<tr>
-  				<th colspan="4" class="field-hours-th">Adicionales</th>
+  				<th colspan="5" class="field-hours-th">Adicionales</th>
   			</tr>
 	      <tr>
-	        <th class="field-hours-th">TR</th>
-	        <th class="field-hours-th">FM</th>
-	        <th class="field-hours-th">TNF</th>
-	        <th class="field-hours-th">TT</th>
+	        <th colspan="2" class="field-hours-th" style="font-size: 0.7rem;">Turno Rotativo</th>
+	        <th rowspan="2" class="field-hours-th" style="font-size: 0.7rem;">Franco Movil</th>
+	        <th rowspan="2" class="field-hours-th" style="font-size: 0.7rem;">Turno Noct. Fijo</th>
+	        <th rowspan="2" class="field-hours-th" style="font-size: 0.7rem;">Tareas en Terreno</th>
+	      </tr>
+	      <tr>
+	      	<th class="field-hours-th" style="font-size: 0.6rem;">Dias</th>
+	      	<th class="field-hours-th" style="font-size: 0.6rem;">¿Rotación Completa?</th>
 	      </tr>
   		</thead>
   		<tbody>
   			<tr>
 	  			<td class="field field-hours">
-				    <%= f.number_field :tr, id: :report_detail_tr_1, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+	  				<%= f.fields_for :rotative_turn, RotativeTurn.new do |rt| %>
+				    	<%= rt.number_field :days, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+				  </td>
+    			<td class="field field-hours">
+				    	<%= rt.check_box :is_complete%>
+				    <% end %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :fm, id: :report_detail_fm, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+				    <%= f.check_box :fm%>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :tnf, id: :report_detail_tnf, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+				    <%= f.check_box :tnf%>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :tt, id: :report_detail_tt, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+				    <%= f.check_box :tt%>
 				  </td>
 				</tr>
   		</tbody>
@@ -204,10 +230,10 @@
   		<tbody>
   			<tr>
 	  			<td class="field field-hours">
-				    <%= f.number_field :hours_to_add, id: :report_detail_hours_to_add, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+				    <%= f.number_field :hours_to_add, id: :report_detail_hours_to_add, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
 				  </td>
 				  <td class="field field-hours">
-				    <%= f.number_field :hours_to_remove, id: :report_detail_hours_to_remove, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+				    <%= f.number_field :hours_to_remove, id: :report_detail_hours_to_remove, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
 				  </td>
 				</tr>
   		</tbody>
@@ -226,7 +252,7 @@
   		<tbody>
   			<tr>
 	  			<td class="field field-hours">
-    				<%= f.number_field :total_office_hours, id: :report_detail_total_office_hours, :maxlength => "2", :min => "0", :max => "24", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
+    				<%= f.number_field :total_office_hours, id: :report_detail_total_office_hours, :maxlength => "3", :min => "0", :max => "124", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
   				</td>
 				</tr>
   		</tbody>
@@ -236,3 +262,16 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+	$(".day_of_month").keyup(function(){ 
+    total = 0
+    $(this).closest('.nested-fields').find('.day_of_month').each(function(){
+      if ($(this).val() != ""){
+        total = total + parseInt($(this).val());
+      }
+    });
+    $(this).closest('.nested-fields').find('.total_hours').val(total);
+  });
+
+
+</script>

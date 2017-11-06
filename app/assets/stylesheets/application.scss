@@ -166,7 +166,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 .fa {
   color: $blue;
   font-size: 1.2rem;
-  min-width: 30px;
+  min-width: 25px;
   text-align: center;
 }
 
@@ -302,10 +302,11 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 .btn-remove {
   position: relative;
-  left: 8px;
-  top: -7px;
+  left: -2px;
+  top: 12px;
   color: #a21010;
-  font-size: 2.2rem;
+  font-size: 1.2rem;
+  float:left;
 }
 
 .agents-box{

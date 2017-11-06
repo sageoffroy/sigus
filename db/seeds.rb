@@ -278,20 +278,20 @@ carga_horaria_list.each do |hours, with_guard|
 end
 
 
-observation_list = [
-	[0,"Sin Obesrvaciones"],
-	[1,"Lic. Gremial"],
-	[2,"Lic. Largo Tratamiento"],
-	[3,"Lic. Maternidad"],
-	[4,"Lic. Política"],
-	[5,"Lic. S/G de Haberes"],
-	[6,"Tareas Pasivas"],
-	[7,"Lactancia"]
-]
-
-observation_list.each do |num, desc|
-	Observation.find_or_create_by(number:num, description: desc)
-end
+#observation_list = [
+	#[0,"Sin Obesrvaciones"],
+	#[1,"Lic. Gremial"],
+	#[2,"Lic. Largo Tratamiento"],
+	#[3,"Lic. Maternidad"],
+	#[4,"Lic. Política"],
+	#[5,"Lic. S/G de Haberes"],
+	#[6,"Tareas Pasivas"],
+	#[7,"Lactancia"]
+#]
+#
+#observation_list.each do |num, desc|
+	#Observation.find_or_create_by(number:num, description: desc)
+#end
 
 
 job_function_list = [

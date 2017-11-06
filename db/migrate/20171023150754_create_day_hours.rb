@@ -4,7 +4,6 @@ class CreateDayHours < ActiveRecord::Migration[5.1]
       t.date :day
       t.integer :hours
       t.boolean :is_umu
-
       t.timestamps
     end
   end
