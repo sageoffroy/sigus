@@ -20,7 +20,10 @@
 			<%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente"}, {class: "select2 select-field agent"} %>
 		</div>
 	</div>
-	<%= f.fields_for :observations, @report.report_details.first.observations do |fo| %>
+	<% if f.object.observation.nil? %>
+		<% f.object.build_observation%>
+	<% end %>
+	<%= f.fields_for :observation, f.object.observation do |fo| %>
 	<div class="col-md-4">
 		<div class="field">
 			<%= fo.collection_select :observation_description_id, ObservationDescription.all,:id, :to_s ,{prompt: "Descripción"}, {class: "select2 select-field"} %>
@@ -197,7 +200,11 @@
   		<tbody>
   			<tr>
 	  			<td class="field field-hours">
-	  				<%= f.fields_for :rotative_turns, RotativeTurn.new do |rt| %>
+	  				<% byebug %>
+	  				<% if f.object.rotative_turn.nil? %>
+							<% f.object.build_rotative_turn%>
+						<% end %>
+						<%= f.fields_for :rotative_turn, f.object.rotative_turn do |rt| %>
 				    	<%= rt.number_field :days, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
 				  </td>
     			<td class="field field-hours">
