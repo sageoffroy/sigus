@@ -5,6 +5,7 @@ class ReportsController < ApplicationController
   # GET /reports.json
   def index
     @reports = Report.all
+
   end
 
   # GET /reports/1
@@ -18,6 +19,7 @@ class ReportsController < ApplicationController
   # GET /reports/new
   def new
     @report = Report.new
+    @report_details = @report.report_details.build
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
@@ -32,6 +34,9 @@ class ReportsController < ApplicationController
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+
+    @report = Report.find(params[:id])
+    @report_details = @report.report_details.first
   end
 
   # POST /reports
@@ -85,6 +90,6 @@ class ReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
-      params.require(:report).permit(:year, :month, :total_office_hours, :service_of_dependence_id, :user_id, report_details_attributes: [:id, :url, :_destroy, :agent_id, :belong_service, :total_hours, :fm, :tnf, :tt, :hours_to_add, :hours_to_remove, :total_office_hours, :day1, :day2, :day3, :day4 ,:day5, :day6, :day7, :day8, :day9, :day10, :day11, :day12, :day13, :day14, :day15, :day16, :day17, :day18, :day19, :day20, :day21, :day22, :day23, :day24, :day25 ,:day26 ,:day27, :day28, :day29, :day30, :day31, observation_id: [:description, :date_up, :days], rotative_turn: [:days, :is_complete]])
+      params.require(:report).permit(:year, :month, :total_office_hours, :service_of_dependence_id, :user_id, report_details_attributes: [:id, :url, :_destroy, :agent_id, :belong_service, :total_hours, :fm, :tnf, :tt, :hours_to_add, :hours_to_remove, :total_office_hours, :day1, :day2, :day3, :day4 ,:day5, :day6, :day7, :day8, :day9, :day10, :day11, :day12, :day13, :day14, :day15, :day16, :day17, :day18, :day19, :day20, :day21, :day22, :day23, :day24, :day25 ,:day26 ,:day27, :day28, :day29, :day30, :day31, observations_attributes: [:id, :observation_description_id, :date_up, :days], rotative_turns_attributes: [:id, :days, :is_complete]])
     end
 end

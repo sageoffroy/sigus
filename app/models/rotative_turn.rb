@@ -1,3 +1,3 @@
 class RotativeTurn < ApplicationRecord
-	has_many :report_details, dependent: :destroy
+	belongs_to :report_detail
 end

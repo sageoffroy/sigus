@@ -20,14 +20,16 @@
 			<%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente"}, {class: "select2 select-field agent"} %>
 		</div>
 	</div>
+	<%= f.fields_for :observations, @report.report_details.first.observations do |fo| %>
 	<div class="col-md-4">
 		<div class="field">
-	<%= f.fields_for :observation, Observation.new do |o| %>
-			<%= o.select :description, options_for_select([ "Sin Obesrvaciones", "Lic. Gremial","Lic. Largo Tratamiento","Lic. Maternidad","Lic. Política","Lic. S/G de Haberes","Tareas Pasivas","Lactancia"], "Sin Observaciones"),{}, {:class => "select2 select-field"} %>
+			<%= fo.collection_select :observation_description_id, ObservationDescription.all,:id, :to_s ,{prompt: "Descripción"}, {class: "select2 select-field"} %>
 		</div>
 	</div>
 	<div class="col-md-1 col-border-right">
-		
+		<div class="field">
+			<%= fo.number_field :days, :style=>"max-width:100%;", :placeholder => "Días" %>
+		</div>
 	</div>
 	<% end %>
 	<div class="col-md-1">
@@ -195,7 +197,7 @@
   		<tbody>
   			<tr>
 	  			<td class="field field-hours">
-	  				<%= f.fields_for :rotative_turn, RotativeTurn.new do |rt| %>
+	  				<%= f.fields_for :rotative_turns, RotativeTurn.new do |rt| %>
 				    	<%= rt.number_field :days, :maxlength => "3", :min => "0", :max => "148", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)" %>
 				  </td>
     			<td class="field field-hours">

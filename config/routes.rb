@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :observation_descriptions
   resources :rotative_turns
   resources :day_hours
   resources :countries

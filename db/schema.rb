@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030141454) do
+ActiveRecord::Schema.define(version: 20171106182028) do
 
   create_table "agent_of_services", force: :cascade do |t|
     t.integer "agent_id"
@@ -122,12 +122,22 @@ ActiveRecord::Schema.define(version: 20171030141454) do
     t.index ["country_id"], name: "index_nationalities_on_country_id"
   end
 
-  create_table "observations", force: :cascade do |t|
+  create_table "observation_descriptions", force: :cascade do |t|
+    t.integer "code"
     t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "observations", force: :cascade do |t|
+    t.integer "observation_description_id"
+    t.integer "report_detail_id"
     t.date "date_up"
     t.integer "days"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["observation_description_id"], name: "index_observations_on_observation_description_id"
+    t.index ["report_detail_id"], name: "index_observations_on_report_detail_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -145,9 +155,7 @@ ActiveRecord::Schema.define(version: 20171030141454) do
     t.integer "report_id"
     t.integer "agent_id"
     t.boolean "belong_service"
-    t.integer "observation_id"
     t.integer "total_hours"
-    t.integer "rotative_turn_id"
     t.boolean "fm"
     t.boolean "tnf"
     t.boolean "tt"
@@ -188,9 +196,7 @@ ActiveRecord::Schema.define(version: 20171030141454) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_report_details_on_agent_id"
-    t.index ["observation_id"], name: "index_report_details_on_observation_id"
     t.index ["report_id"], name: "index_report_details_on_report_id"
-    t.index ["rotative_turn_id"], name: "index_report_details_on_rotative_turn_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -219,8 +225,10 @@ ActiveRecord::Schema.define(version: 20171030141454) do
   create_table "rotative_turns", force: :cascade do |t|
     t.integer "days"
     t.boolean "is_complete"
+    t.integer "report_detail_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["report_detail_id"], name: "index_rotative_turns_on_report_detail_id"
   end
 
   create_table "service_of_dependences", force: :cascade do |t|

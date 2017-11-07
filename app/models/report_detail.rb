@@ -1,12 +1,12 @@
 class ReportDetail < ApplicationRecord
   belongs_to :report
-  belongs_to :agent, optional: true
-  belongs_to :observation, optional:true
-  belongs_to :rotative_turn, optional:true
+  belongs_to :agent
+  has_many :observations
+  has_many :rotative_turns
   validates :agent, uniqueness: true
 
-  accepts_nested_attributes_for :rotative_turn, allow_destroy: true
-  accepts_nested_attributes_for :observation, allow_destroy: true
+  accepts_nested_attributes_for :rotative_turns
+  accepts_nested_attributes_for :observations
   
   
 
