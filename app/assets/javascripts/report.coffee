@@ -41,9 +41,9 @@ set_weekend = (report_year, report_month) ->
 
     while number_day <= 31
       if index == 5
-        $('.day'+number_day+'-th').css('background-color', 'rgba(255, 252, 0, 0.4)');
+        $('#day'+number_day+'-th').css('background-color', 'rgba(255, 252, 0, 0.4)');
       else if index == 6
-        $('.day'+number_day+'-th').css('background-color', 'rgba(255, 0, 0, 0.4)');
+        $('#day'+number_day+'-th').css('background-color', 'rgba(255, 0, 0, 0.4)');
       
       number_day++
       index++

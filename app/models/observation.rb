@@ -1,5 +1,4 @@
 class Observation < ApplicationRecord
-	belongs_to :report_detail
-	belongs_to :observation_description
-
+	belongs_to :report_detail, optional:true
+	belongs_to :observation_description, optional:true
 end

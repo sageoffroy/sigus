@@ -4,7 +4,6 @@ class CreateReportDetails < ActiveRecord::Migration[5.1]
       t.references :report, foreign_key: true
       t.references :agent, foreign_key: true
       t.boolean :belong_service
-     
       t.integer :total_hours
       t.boolean :fm
       t.boolean :tnf
@@ -12,37 +11,37 @@ class CreateReportDetails < ActiveRecord::Migration[5.1]
       t.integer :hours_to_add
       t.integer :hours_to_remove
       t.integer :total_office_hours
-      t.integer :day1
-      t.integer :day2
-      t.integer :day3
-      t.integer :day4
-      t.integer :day5
-      t.integer :day6
-      t.integer :day7
-      t.integer :day8
-      t.integer :day9
-      t.integer :day10
-      t.integer :day11
-      t.integer :day12
-      t.integer :day13
-      t.integer :day14
-      t.integer :day15
-      t.integer :day16
-      t.integer :day17
-      t.integer :day18
-      t.integer :day19
-      t.integer :day20
-      t.integer :day21
-      t.integer :day22
-      t.integer :day23
-      t.integer :day24
-      t.integer :day25
-      t.integer :day26
-      t.integer :day27
-      t.integer :day28
-      t.integer :day29
-      t.integer :day30
-      t.integer :day31
+      t.integer :day1_id, index: true
+      t.integer :day2_id, index: true
+      t.integer :day3_id, index: true
+      t.integer :day4_id, index: true
+      t.integer :day5_id, index: true
+      t.integer :day6_id, index: true
+      t.integer :day7_id, index: true
+      t.integer :day8_id, index: true
+      t.integer :day9_id, index: true
+      t.integer :day10_id, index: true
+      t.integer :day11_id, index: true
+      t.integer :day12_id, index: true
+      t.integer :day13_id, index: true
+      t.integer :day14_id, index: true
+      t.integer :day15_id, index: true
+      t.integer :day16_id, index: true
+      t.integer :day17_id, index: true
+      t.integer :day18_id, index: true
+      t.integer :day19_id, index: true
+      t.integer :day20_id, index: true
+      t.integer :day21_id, index: true
+      t.integer :day22_id, index: true
+      t.integer :day23_id, index: true
+      t.integer :day24_id, index: true
+      t.integer :day25_id, index: true
+      t.integer :day26_id, index: true
+      t.integer :day27_id, index: true
+      t.integer :day28_id, index: true
+      t.integer :day29_id, index: true
+      t.integer :day30_id, index: true
+      t.integer :day31_id, index: true
       t.timestamps
     end
   end
