@@ -5,8 +5,8 @@ check_day_of_month = ->
   year = parseInt($('#report_year').val())
   month = parseInt($('#report_month').val())
 
-  #console.log daysInMonth(month, year)
-  	
+  console.log daysInMonth(month, year)
+
   switch daysInMonth(month, year)
     when 28
       $('.day29').prop 'disabled', true
@@ -41,9 +41,9 @@ set_weekend = (report_year, report_month) ->
 
     while number_day <= 31
       if index == 5
-        $('#day'+number_day+'-th').css('background-color', 'rgba(255, 252, 0, 0.4)');
+        $('.day'+number_day+'-th').css('background-color', 'rgba(255, 252, 0, 0.4)');
       else if index == 6
-        $('#day'+number_day+'-th').css('background-color', 'rgba(255, 0, 0, 0.4)');
+        $('.day'+number_day+'-th').css('background-color', 'rgba(255, 0, 0, 0.4)');
       
       number_day++
       index++
@@ -129,19 +129,19 @@ days_controls = ->
     
 
 $(document).on 'cocoon:after-insert', (e) ->
+  console.log "Se inserto COCOON"
   $('.select2').select2({theme: "bootstrap"})
   add_report_detail = $('#add_report_details')
   report_year = $('#report_year')
   report_month = $('#report_month')
   report_service = $('#report_service')
-  #console.log "Cambiando el Año"
   check_general_data(report_year, report_month, report_service, add_report_detail)
   check_day_of_month()
   set_weekend(report_year, report_month)
   set_free_days(report_year, report_month)
   set_ids_to_child()
   id = report_service.val()
-  set_selects_of_agents(id)
+  
   
   
 

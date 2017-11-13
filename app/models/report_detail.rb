@@ -12,7 +12,7 @@ class ReportDetail < ApplicationRecord
   belongs_to :day7, :class_name => 'DayHour', :foreign_key => 'day7_id', optional:true
   belongs_to :day8, :class_name => 'DayHour', :foreign_key => 'day8_id', optional:true
   belongs_to :day9, :class_name => 'DayHour', :foreign_key => 'day9_id', optional:true
-  belongs_to :day10, :class_name => 'DayHour', :foreign_key => 'day20_id', optional:true
+  belongs_to :day10, :class_name => 'DayHour', :foreign_key => 'day10_id', optional:true
   belongs_to :day11, :class_name => 'DayHour', :foreign_key => 'day11_id', optional:true
   belongs_to :day12, :class_name => 'DayHour', :foreign_key => 'day12_id', optional:true
   belongs_to :day13, :class_name => 'DayHour', :foreign_key => 'day13_id', optional:true

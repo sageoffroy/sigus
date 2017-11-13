@@ -132,6 +132,7 @@ form {
   font-size: 0.7rem;
   color: #444;
   padding: 0px;
+  text-align: center;
 }
 
 
@@ -473,11 +474,11 @@ table.dataTable tbody th, table.dataTable tbody td {
 }
 
 #agent_observation_hours {
-  max-width: 69.5px;
+  max-width: 100%;
 }
 
 #agent_total_hours {
-  max-width: 69.5px;
+  max-width: 100%;
 }
 
 #agent_total_hours_umu {
@@ -910,7 +911,7 @@ border-radius: 0.2rem;
   top: 0px;
 }
 
-.isUmu {
+.is-umu {
   color:red !important;
 }
 

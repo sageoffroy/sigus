@@ -1,0 +1,187 @@
+<table class="table table-hours">
+  		<thead>
+  			<tr>
+  				<th colspan="31" class="">Cantidad de hs. Guardia por día</th>
+  			</tr>
+	      <tr>
+	        <th style="background-color: transparent;" class="day1-th field-hours-th">1</th>
+	        <th style="background-color: transparent;" class="day2-th field-hours-th">2</th>
+	        <th style="background-color: transparent;" class="day3-th field-hours-th">3</th>
+	        <th style="background-color: rgba(255, 252, 0, 0.4);" class="day4-th field-hours-th">4</th>
+	        <th style="background-color: rgba(255, 0, 0, 0.4);" class="day5-th field-hours-th">5</th>
+	        <th style="background-color: transparent;" class="day6-th field-hours-th">6</th>
+	        <th style="background-color: transparent;" class="day7-th field-hours-th">7</th>
+	        <th style="background-color: transparent;" class="day8-th field-hours-th">8</th>
+	        <th style="background-color: transparent;" class="day9-th field-hours-th">9</th>
+	        <th style="background-color: transparent;" class="day10-th field-hours-th">10</th>
+	        <th style="background-color: rgba(255, 252, 0, 0.4);" class="day11-th field-hours-th">11</th>
+	        <th style="background-color: rgba(255, 0, 0, 0.4);" class="day12-th field-hours-th">12</th>
+	        <th style="background-color: transparent;" class="day13-th field-hours-th">13</th>
+	        <th style="background-color: transparent;" class="day14-th field-hours-th">14</th>
+	        <th style="background-color: transparent;" class="day15-th field-hours-th">15</th>
+	        <th style="background-color: transparent;" class="day16-th field-hours-th">16</th>
+	        <th style="background-color: transparent;" class="day17-th field-hours-th">17</th>
+	        <th style="background-color: rgba(255, 252, 0, 0.4);" class="day18-th field-hours-th">18</th>
+	        <th style="background-color: rgba(255, 0, 0, 0.4);" class="day19-th field-hours-th">19</th>
+	        <th style="background-color: transparent;" class="day20-th field-hours-th">20</th>
+	        <th style="background-color: transparent;" class="day21-th field-hours-th">21</th>
+	        <th style="background-color: transparent;" class="day22-th field-hours-th">22</th>
+	        <th style="background-color: transparent;" class="day23-th field-hours-th">23</th>
+	        <th style="background-color: transparent;" class="day24-th field-hours-th">24</th>
+	        <th style="background-color: rgba(255, 252, 0, 0.4);" class="day25-th field-hours-th">25</th>
+	        <th style="background-color: rgba(255, 0, 0, 0.4);" class="day26-th field-hours-th">26</th>
+	        <th style="background-color: transparent;" class="day27-th field-hours-th">27</th>
+	        <th style="background-color: transparent;" class="day28-th field-hours-th">28</th>
+	        <th style="background-color: transparent;" class="day29-th field-hours-th">29</th>
+	        <th style="background-color: transparent;" class="day30-th field-hours-th">30</th>
+	        <th style="background-color: transparent;" class="day31-th field-hours-th">31</th>
+	      </tr>
+  		</thead>
+  		<tbody>
+  			<tr>
+	  			<td class="field field-hours">
+							<input maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day1-hours is-umu" size="2" name="report[report_details_attributes][1510582896228][day1_attributes][hours]" id="report_report_details_attributes_1510582896228_day1_attributes_hours" type="number">
+							<input class="day1-is-umu" value="true" name="report[report_details_attributes][1510582896228][day1_attributes][is_umu]" id="report_report_details_attributes_1510582896228_day1_attributes_is_umu" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day2-hours" size="2" name="report[report_details_attributes][1510582896228][day2_attributes][hours]" id="report_report_details_attributes_1510582896228_day2_attributes_hours" type="number">
+							<input class="day2-is-umu" value="false" name="report[report_details_attributes][1510582896228][day2_attributes][is_umu]" id="report_report_details_attributes_1510582896228_day2_attributes_is_umu" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day3-hours" size="2" name="report[report_details_attributes][1510582896228][day3_attributes][hours]" id="report_report_details_attributes_1510582896228_day3_attributes_hours" type="number">
+							<input class="day3-is-umu" value="false" name="report[report_details_attributes][1510582896228][day3_attributes][is_umu]" id="report_report_details_attributes_1510582896228_day3_attributes_is_umu" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day4-hours" size="2" name="report[report_details_attributes][1510582896228][day4_attributes][hours]" id="report_report_details_attributes_1510582896228_day4_attributes_hours" type="number">
+							<input class="day4-is-umu" value="false" name="report[report_details_attributes][1510582896228][day4_attributes][is_umu]" id="report_report_details_attributes_1510582896228_day4_attributes_is_umu" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day5-hours" size="2" name="report[report_details_attributes][1510582896228][day5_attributes][hours]" id="report_report_details_attributes_1510582896228_day5_attributes_hours" type="number">
+							<input class="day5-is-umu" value="false" name="report[report_details_attributes][1510582896228][day5_attributes][is_umu]" id="report_report_details_attributes_1510582896228_day5_attributes_is_umu" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day6-hours" size="2" name="report[report_details_attributes][1510582896228][day6_attributes][hours]" id="report_report_details_attributes_1510582896228_day6_attributes_hours" type="number">
+							<input class="day6-is-umu" value="false" name="report[report_details_attributes][1510582896228][day6_attributes][is_umu]" id="report_report_details_attributes_1510582896228_day6_attributes_is_umu" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day7-hours" size="2" name="report[report_details_attributes][1510582896228][day7_attributes][hours]" id="report_report_details_attributes_1510582896228_day7_attributes_hours" type="number">
+							<input class="day7-is-umu" value="false" name="report[report_details_attributes][1510582896228][day7_attributes][is_umu]" id="report_report_details_attributes_1510582896228_day7_attributes_is_umu" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input id="day8_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day8_attributes][hours]" type="number">
+							<input id="day8_is_umu" value="false" name="report[report_details_attributes][1510582896228][day8_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input id="day9_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day9_attributes][hours]" type="number">
+							<input id="day9_is_umu" value="false" name="report[report_details_attributes][1510582896228][day9_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input id="day10_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day10_attributes][hours]" type="number">
+							<input id="day10_is_umu" value="false" name="report[report_details_attributes][1510582896228][day10_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+							<input id="day11_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day11_attributes][hours]" type="number">
+							<input id="day11_is_umu" value="false" name="report[report_details_attributes][1510582896228][day11_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day12_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day12_attributes][hours]" type="number">
+							<input id="day12_is_umu" value="false" name="report[report_details_attributes][1510582896228][day12_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day13_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day13_attributes][hours]" type="number">
+							<input id="day13_is_umu" value="false" name="report[report_details_attributes][1510582896228][day13_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day14_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day14_attributes][hours]" type="number">
+							<input id="day14_is_umu" value="false" name="report[report_details_attributes][1510582896228][day14_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day15_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day15_attributes][hours]" type="number">
+							<input id="day15_is_umu" value="false" name="report[report_details_attributes][1510582896228][day15_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day16_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day16_attributes][hours]" type="number">
+							<input id="day16_is_umu" value="false" name="report[report_details_attributes][1510582896228][day16_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day17_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day17_attributes][hours]" type="number">
+							<input id="day17_is_umu" value="false" name="report[report_details_attributes][1510582896228][day17_attributes][is_umu]" type="hidden">
+				  </td><td class="field field-hours">
+						
+							<input id="day18_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day18_attributes][hours]" type="number">
+							<input id="day18_is_umu" value="false" name="report[report_details_attributes][1510582896228][day18_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day19_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day19_attributes][hours]" type="number">
+							<input id="day19_is_umu" value="false" name="report[report_details_attributes][1510582896228][day19_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day20_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day20_attributes][hours]" type="number">
+							<input id="day20_is_umu" value="false" name="report[report_details_attributes][1510582896228][day20_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day21_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day21_attributes][hours]" type="number">
+							<input id="day21_is_umu" value="false" name="report[report_details_attributes][1510582896228][day21_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day22_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day22_attributes][hours]" type="number">
+							<input id="day22_is_umu" value="false" name="report[report_details_attributes][1510582896228][day22_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day23_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day23_attributes][hours]" type="number">
+							<input id="day23_is_umu" value="false" name="report[report_details_attributes][1510582896228][day23_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day24_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day24_attributes][hours]" type="number">
+							<input id="day24_is_umu" value="false" name="report[report_details_attributes][1510582896228][day24_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day25_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day25_attributes][hours]" type="number">
+							<input id="day25_is_umu" value="false" name="report[report_details_attributes][1510582896228][day25_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day26_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day26_attributes][hours]" type="number">
+							<input id="day26_is_umu" value="false" name="report[report_details_attributes][1510582896228][day26_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day27_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month" size="2" name="report[report_details_attributes][1510582896228][day27_attributes][hours]" type="number">
+							<input id="day27_is_umu" value="false" name="report[report_details_attributes][1510582896228][day27_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day28_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day28" size="2" name="report[report_details_attributes][1510582896228][day28_attributes][hours]" type="number">
+							<input id="day28_is_umu" value="false" name="report[report_details_attributes][1510582896228][day28_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day29_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day29" size="2" name="report[report_details_attributes][1510582896228][day29_attributes][hours]" type="number">
+							<input id="day29_is_umu" value="false" name="report[report_details_attributes][1510582896228][day29_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day30_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day30" size="2" name="report[report_details_attributes][1510582896228][day30_attributes][hours]" type="number">
+							<input id="day30_is_umu" value="false" name="report[report_details_attributes][1510582896228][day30_attributes][is_umu]" type="hidden">
+				  </td>
+				  <td class="field field-hours">
+						
+							<input id="day31_hours" maxlength="2" min="0" max="48" onkeypress="return isNumeric(event)" oninput="maxLengthCheck(this)" class="day-of-month day31" size="2" name="report[report_details_attributes][1510582896228][day31_attributes][hours]" type="number">
+							<input id="day31_is_umu" value="false" name="report[report_details_attributes][1510582896228][day31_attributes][is_umu]" type="hidden">
+				  </td>
+				</tr>
+			</tbody>
+  	</table>

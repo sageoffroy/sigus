@@ -24,6 +24,7 @@
 	<% if f.object.observation.nil? %>
 		<% f.object.build_observation%>
 	<% end %>
+
 	<%= f.fields_for :observation, f.object.observation do |fo| %>
 	<div class="col-md-4">
 		<div class="field">
@@ -40,7 +41,7 @@
 		<%= f.number_field :total_hours, id: :agent_total_hours, :onkeypress => "event.preventDefault();", :placeholder => "Horas" , :class => "total_hours" %>
 	</div>
 	<div class="col-md-1">
-		<%= f.number_field :total_hours, id: :agent_total_hours_umu, :onkeypress => "event.preventDefault();", :placeholder => "Hs. Umu" , :class => "total_hours" %>
+		<%= f.number_field :total_hours, id: :agent_total_hours_umu, :onkeypress => "event.preventDefault();", :placeholder => "Hs. Umu" , :class => "total_hours_umu" %>
 	</div>
 	<div class="col-md-12">
 		<table class='table table-hours'>
@@ -49,295 +50,473 @@
   				<th colspan="31" class="">Cantidad de hs. Guardia por día</th>
   			</tr>
 	      <tr>
-	        <th id="day1-th" class="field-hours-th">1</th>
-	        <th id="day2-th" class="field-hours-th">2</th>
-	        <th id="day3-th" class="field-hours-th">3</th>
-	        <th id="day4-th" class="field-hours-th">4</th>
-	        <th id="day5-th" class="field-hours-th">5</th>
-	        <th id="day6-th" class="field-hours-th">6</th>
-	        <th id="day7-th" class="field-hours-th">7</th>
-	        <th id="day8-th" class="field-hours-th">8</th>
-	        <th id="day9-th" class="field-hours-th">9</th>
-	        <th id="day10-th" class="field-hours-th">10</th>
-	        <th id="day11-th" class="field-hours-th">11</th>
-	        <th id="day12-th" class="field-hours-th">12</th>
-	        <th id="day13-th" class="field-hours-th">13</th>
-	        <th id="day14-th" class="field-hours-th">14</th>
-	        <th id="day15-th" class="field-hours-th">15</th>
-	        <th id="day16-th" class="field-hours-th">16</th>
-	        <th id="day17-th" class="field-hours-th">17</th>
-	        <th id="day18-th" class="field-hours-th">18</th>
-	        <th id="day19-th" class="field-hours-th">19</th>
-	        <th id="day20-th" class="field-hours-th">20</th>
-	        <th id="day21-th" class="field-hours-th">21</th>
-	        <th id="day22-th" class="field-hours-th">22</th>
-	        <th id="day23-th" class="field-hours-th">23</th>
-	        <th id="day24-th" class="field-hours-th">24</th>
-	        <th id="day25-th" class="field-hours-th">25</th>
-	        <th id="day26-th" class="field-hours-th">26</th>
-	        <th id="day27-th" class="field-hours-th">27</th>
-	        <th id="day28-th" class="field-hours-th">28</th>
-	        <th id="day29-th" class="field-hours-th">29</th>
-	        <th id="day30-th" class="field-hours-th">30</th>
-	        <th id="day31-th" class="field-hours-th">31</th>
+	        <th class="day1-th field-hours-th">1</th>
+	        <th class="day2-th field-hours-th">2</th>
+	        <th class="day3-th field-hours-th">3</th>
+	        <th class="day4-th field-hours-th">4</th>
+	        <th class="day5-th field-hours-th">5</th>
+	        <th class="day6-th field-hours-th">6</th>
+	        <th class="day7-th field-hours-th">7</th>
+	        <th class="day8-th field-hours-th">8</th>
+	        <th class="day9-th field-hours-th">9</th>
+	        <th class="day10-th field-hours-th">10</th>
+	        <th class="day11-th field-hours-th">11</th>
+	        <th class="day12-th field-hours-th">12</th>
+	        <th class="day13-th field-hours-th">13</th>
+	        <th class="day14-th field-hours-th">14</th>
+	        <th class="day15-th field-hours-th">15</th>
+	        <th class="day16-th field-hours-th">16</th>
+	        <th class="day17-th field-hours-th">17</th>
+	        <th class="day18-th field-hours-th">18</th>
+	        <th class="day19-th field-hours-th">19</th>
+	        <th class="day20-th field-hours-th">20</th>
+	        <th class="day21-th field-hours-th">21</th>
+	        <th class="day22-th field-hours-th">22</th>
+	        <th class="day23-th field-hours-th">23</th>
+	        <th class="day24-th field-hours-th">24</th>
+	        <th class="day25-th field-hours-th">25</th>
+	        <th class="day26-th field-hours-th">26</th>
+	        <th class="day27-th field-hours-th">27</th>
+	        <th class="day28-th field-hours-th">28</th>
+	        <th class="day29-th field-hours-th">29</th>
+	        <th class="day30-th field-hours-th">30</th>
+	        <th class="day31-th field-hours-th">31</th>
 	      </tr>
   		</thead>
   		<tbody>
   			<tr>
 	  			<td class="field field-hours">
-	  				<% if f.object.day1.nil? %>
+						<% if f.object.day1.nil? %>
 							<% f.object.build_day1%>
+							<% f.object.day1.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day1-hours" %>
+						<% if f.object.day1.is_umu? %>
+							<% classes = "day-of-month is-umu day1-hours" %>
 						<% end %>
 						<%= f.fields_for :day1, f.object.day1 do |d1| %>
-				    	<%= d1.number_field :hours, :id =>"day1_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    	<%= d1.hidden_field :is_umu, :value => false, :id => "day1_is_umu"%>
-				    <% end %>
+							<%= d1.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :class => classes%>
+							<%= d1.hidden_field :is_umu, :class => "day1-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
-				  	<% if f.object.day2.nil? %>
+						<% if f.object.day2.nil? %>
 							<% f.object.build_day2%>
+							<% f.object.day2.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day2-hours" %>
+						<% if f.object.day2.is_umu? %>
+							<% classes = "day-of-month is-umu day2-hours" %>
 						<% end %>
 						<%= f.fields_for :day2, f.object.day2 do |d2| %>
-				    	<%= d2.number_field :hours, :id =>"day2_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    	<%= d2.hidden_field :is_umu, :value => false, :id => "day2_is_umu"%>
-				    <% end %>
+							<%= d2.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d2.hidden_field :is_umu, :class => "day2-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				  	<% if f.object.day3.nil? %>
 							<% f.object.build_day3%>
+							<% f.object.day3.is_umu = false%>
 						<% end %>
-				  	<%= f.fields_for :day3, f.object.day3 do |d3| %>
-				    	<%= d3.number_field :hours, :id =>"day3_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    	<%= d3.hidden_field :is_umu, :value => false, :id => "day3_is_umu"%>
-				    <% end %>
+						<% classes = "day-of-month day3-hours" %>
+						<% if f.object.day3.is_umu? %>
+							<% classes = "day-of-month is-umu day3-hours" %>
+						<% end %>
+						<%= f.fields_for :day3, f.object.day3 do |d3| %>
+							<%= d3.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d3.hidden_field :is_umu, :class => "day3-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day4.nil? %>
 							<% f.object.build_day4%>
+							<% f.object.day4.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day4-hours" %>
+						<% if f.object.day4.is_umu? %>
+							<% classes = "day-of-month is-umu day4-hours" %>
 						<% end %>
 						<%= f.fields_for :day4, f.object.day4 do |d4| %>
-				    	<%= d4.number_field :hours, :id =>"day1_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    	<%= d4.hidden_field :is_umu, :value => false, :id => "day4_is_umu"%>
-				    <% end %>
+							<%= d4.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d4.hidden_field :is_umu, :class => "day4-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day5.nil? %>
 							<% f.object.build_day5%>
+							<% f.object.day5.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day5-hours" %>
+						<% if f.object.day5.is_umu? %>
+							<% classes = "day-of-month is-umu day5-hours" %>
 						<% end %>
 						<%= f.fields_for :day5, f.object.day5 do |d5| %>
-				    	<%= d5.number_field :hours, :id =>"day5_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    	<%= d5.hidden_field :is_umu, :value => false, :id => "day5_is_umu"%>
-				    <% end %>
+							<%= d5.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d5.hidden_field :is_umu, :class => "day5-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day6.nil? %>
 							<% f.object.build_day6%>
+							<% f.object.day6.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day6-hours" %>
+						<% if f.object.day6.is_umu? %>
+							<% classes = "day-of-month is-umu day6-hours" %>
 						<% end %>
 						<%= f.fields_for :day6, f.object.day6 do |d6| %>
-				    	<%= d6.number_field :hours, :id =>"day6_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    	<%= d6.hidden_field :is_umu, :value => false, :id => "day6_is_umu"%>
-				    <% end %>
+							<%= d6.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d6.hidden_field :is_umu, :class => "day6-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				   	<% if f.object.day7.nil? %>
 							<% f.object.build_day7%>
+							<% f.object.day7.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day7-hours" %>
+						<% if f.object.day7.is_umu? %>
+							<% classes = "day-of-month is-umu day7-hours" %>
 						<% end %>
 						<%= f.fields_for :day7, f.object.day7 do |d7| %>
-				    	<%= d7.number_field :hours, :id =>"day7_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    	<%= d7.hidden_field :is_umu, :value => false, :id => "day7_is_umu"%>
-				    <% end %>
+							<%= d7.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d7.hidden_field :is_umu, :class => "day7-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day8.nil? %>
 							<% f.object.build_day8%>
+							<% f.object.day8.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day8-hours" %>
+						<% if f.object.day8.is_umu? %>
+							<% classes = "day-of-month is-umu day8-hours" %>
 						<% end %>
 						<%= f.fields_for :day8, f.object.day8 do |d8| %>
-				    	<%= d8.number_field :hours, :id =>"day8_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d8.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d8.hidden_field :is_umu, :class => "day8-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 					  <% if f.object.day9.nil? %>
 							<% f.object.build_day9%>
+							<% f.object.day9.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day9-hours" %>
+						<% if f.object.day9.is_umu? %>
+							<% classes = "day-of-month is-umu day9-hours" %>
 						<% end %>
 						<%= f.fields_for :day9, f.object.day9 do |d9| %>
-				    	<%= d9.number_field :hours, :id =>"day9_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d9.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d9.hidden_field :is_umu, :class => "day9-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day10.nil? %>
 							<% f.object.build_day10%>
+							<% f.object.day10.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day10-hours" %>
+						<% if f.object.day10.is_umu? %>
+							<% classes = "day-of-month is-umu day10-hours" %>
 						<% end %>
 						<%= f.fields_for :day10, f.object.day10 do |d10| %>
-				    	<%= d10.number_field :hours, :id =>"day10_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d10.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d10.hidden_field :is_umu, :class => "day10-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
-				    <% if f.object.day11.nil? %>
+				   <% if f.object.day11.nil? %>
 							<% f.object.build_day11%>
+							<% f.object.day11.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day11-hours" %>
+						<% if f.object.day11.is_umu? %>
+							<% classes = "day-of-month is-umu day11-hours" %>
 						<% end %>
 						<%= f.fields_for :day11, f.object.day11 do |d11| %>
-				    	<%= d11.number_field :hours, :id =>"day11_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d11.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d11.hidden_field :is_umu, :class => "day11-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day12.nil? %>
 							<% f.object.build_day12%>
+							<% f.object.day12.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day12-hours" %>
+						<% if f.object.day12.is_umu? %>
+							<% classes = "day-of-month is-umu day12-hours" %>
 						<% end %>
 						<%= f.fields_for :day12, f.object.day12 do |d12| %>
-				    	<%= d12.number_field :hours, :id =>"day12_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d12.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d12.hidden_field :is_umu, :class => "day12-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day13.nil? %>
 							<% f.object.build_day13%>
+							<% f.object.day13.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day13-hours" %>
+						<% if f.object.day13.is_umu? %>
+							<% classes = "day-of-month is-umu day13-hours" %>
 						<% end %>
 						<%= f.fields_for :day13, f.object.day13 do |d13| %>
-				    	<%= d13.number_field :hours, :id =>"day13_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d13.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d13.hidden_field :is_umu, :class => "day13-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
-				    <% if f.object.day14.nil? %>
+				   <% if f.object.day14.nil? %>
 							<% f.object.build_day14%>
+							<% f.object.day14.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day14-hours" %>
+						<% if f.object.day14.is_umu? %>
+							<% classes = "day-of-month is-umu day14-hours" %>
 						<% end %>
 						<%= f.fields_for :day14, f.object.day14 do |d14| %>
-				    	<%= d14.number_field :hours, :id =>"day14_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d14.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d14.hidden_field :is_umu, :class => "day14-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day15.nil? %>
 							<% f.object.build_day15%>
+							<% f.object.day15.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day15-hours" %>
+						<% if f.object.day15.is_umu? %>
+							<% classes = "day-of-month is-umu day15-hours" %>
 						<% end %>
 						<%= f.fields_for :day15, f.object.day15 do |d15| %>
-				    	<%= d15.number_field :hours, :id =>"day15_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d15.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d15.hidden_field :is_umu, :class => "day15-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day16.nil? %>
 							<% f.object.build_day16%>
+							<% f.object.day16.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day16-hours" %>
+						<% if f.object.day16.is_umu? %>
+							<% classes = "day-of-month is-umu day16-hours" %>
 						<% end %>
 						<%= f.fields_for :day16, f.object.day16 do |d16| %>
-				    	<%= d16.number_field :hours, :id =>"day16_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d16.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d16.hidden_field :is_umu, :class => "day16-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day17.nil? %>
 							<% f.object.build_day17%>
+							<% f.object.day17.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day17-hours" %>
+						<% if f.object.day17.is_umu? %>
+							<% classes = "day-of-month is-umu day17-hours" %>
 						<% end %>
 						<%= f.fields_for :day17, f.object.day17 do |d17| %>
-				    	<%= d17.number_field :hours, :id =>"day17_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
-				  </td>
+							<%= d17.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d17.hidden_field :is_umu, :class => "day17-is-umu"%>
+						<% end %>
 				  <td class="field field-hours">
 				    <% if f.object.day18.nil? %>
 							<% f.object.build_day18%>
+							<% f.object.day18.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day18-hours" %>
+						<% if f.object.day18.is_umu? %>
+							<% classes = "day-of-month is-umu day18-hours" %>
 						<% end %>
 						<%= f.fields_for :day18, f.object.day18 do |d18| %>
-				    	<%= d18.number_field :hours, :id =>"day18_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d18.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d18.hidden_field :is_umu, :class => "day18-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day19.nil? %>
 							<% f.object.build_day19%>
+							<% f.object.day19.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day19-hours" %>
+						<% if f.object.day19.is_umu? %>
+							<% classes = "day-of-month is-umu day19-hours" %>
 						<% end %>
 						<%= f.fields_for :day19, f.object.day19 do |d19| %>
-				    	<%= d19.number_field :hours, :id =>"day19_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d19.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d19.hidden_field :is_umu, :class => "day19-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day20.nil? %>
 							<% f.object.build_day20%>
+							<% f.object.day20.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day20-hours" %>
+						<% if f.object.day20.is_umu? %>
+							<% classes = "day-of-month is-umu day20-hours" %>
 						<% end %>
 						<%= f.fields_for :day20, f.object.day20 do |d20| %>
-				    	<%= d20.number_field :hours, :id =>"day20_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d20.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d20.hidden_field :is_umu, :class => "day20-is-umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day21.nil? %>
 							<% f.object.build_day21%>
+							<% f.object.day21.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month" %>
+						<% if f.object.day21.is_umu? %>
+							<% classes = "day-of-month is-umu" %>
 						<% end %>
 						<%= f.fields_for :day21, f.object.day21 do |d21| %>
-				    	<%= d21.number_field :hours, :id =>"day21_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d21.number_field :hours, :id =>"day21_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d21.hidden_field :is_umu, :id => "day21_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day22.nil? %>
 							<% f.object.build_day22%>
+							<% f.object.day22.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month" %>
+						<% if f.object.day22.is_umu? %>
+							<% classes = "day-of-month is-umu" %>
 						<% end %>
 						<%= f.fields_for :day22, f.object.day22 do |d22| %>
-				    	<%= d22.number_field :hours, :id =>"day22_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d22.number_field :hours, :id =>"day22_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d22.hidden_field :is_umu, :id => "day22_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day23.nil? %>
 							<% f.object.build_day23%>
+							<% f.object.day23.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month" %>
+						<% if f.object.day23.is_umu? %>
+							<% classes = "day-of-month is-umu" %>
 						<% end %>
 						<%= f.fields_for :day23, f.object.day23 do |d23| %>
-				    	<%= d23.number_field :hours, :id =>"day23_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d23.number_field :hours, :id =>"day23_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d23.hidden_field :is_umu, :id => "day23_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day24.nil? %>
 							<% f.object.build_day24%>
+							<% f.object.day24.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month" %>
+						<% if f.object.day24.is_umu? %>
+							<% classes = "day-of-month is-umu" %>
 						<% end %>
 						<%= f.fields_for :day24, f.object.day24 do |d24| %>
-				    	<%= d24.number_field :hours, :id =>"day24_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d24.number_field :hours, :id =>"day24_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d24.hidden_field :is_umu, :id => "day24_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day25.nil? %>
 							<% f.object.build_day25%>
+							<% f.object.day25.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month" %>
+						<% if f.object.day25.is_umu? %>
+							<% classes = "day-of-month is-umu" %>
 						<% end %>
 						<%= f.fields_for :day25, f.object.day25 do |d25| %>
-				    	<%= d25.number_field :hours, :id =>"day25_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d25.number_field :hours, :id =>"day25_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d25.hidden_field :is_umu, :id => "day25_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day26.nil? %>
 							<% f.object.build_day26%>
+							<% f.object.day26.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month" %>
+						<% if f.object.day26.is_umu? %>
+							<% classes = "day-of-month is-umu" %>
 						<% end %>
 						<%= f.fields_for :day26, f.object.day26 do |d26| %>
-				    	<%= d26.number_field :hours, :id =>"day26_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d26.number_field :hours, :id =>"day26_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d26.hidden_field :is_umu, :id => "day26_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day27.nil? %>
 							<% f.object.build_day27%>
+							<% f.object.day27.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month" %>
+						<% if f.object.day27.is_umu? %>
+							<% classes = "day-of-month is-umu" %>
 						<% end %>
 						<%= f.fields_for :day27, f.object.day27 do |d27| %>
-				    	<%= d27.number_field :hours, :id =>"day27_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d27.number_field :hours, :id =>"day27_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d27.hidden_field :is_umu, :id => "day27_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day28.nil? %>
 							<% f.object.build_day28%>
+							<% f.object.day28.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day28" %>
+						<% if f.object.day28.is_umu? %>
+							<% classes = "day-of-month day28 is-umu" %>
 						<% end %>
 						<%= f.fields_for :day28, f.object.day28 do |d28| %>
-				    	<%= d28.number_field :hours, :id =>"day28_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month" %>
-				    <% end %>
+							<%= d28.number_field :hours, :id =>"day28_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d28.hidden_field :is_umu, :id => "day28_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day29.nil? %>
 							<% f.object.build_day29%>
+							<% f.object.day29.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day29" %>
+						<% if f.object.day29.is_umu? %>
+							<% classes = "day-of-month day29 is-umu" %>
 						<% end %>
 						<%= f.fields_for :day29, f.object.day29 do |d29| %>
-				    	<%= d29.number_field :hours, :id =>"day29_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month", :class => "day29" %>
-				    <% end %>
+							<%= d29.number_field :hours, :id =>"day29_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d29.hidden_field :is_umu, :id => "day29_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day30.nil? %>
 							<% f.object.build_day30%>
+							<% f.object.day30.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day30" %>
+						<% if f.object.day30.is_umu? %>
+							<% classes = "day-of-month is-umu day30" %>
 						<% end %>
 						<%= f.fields_for :day30, f.object.day30 do |d30| %>
-				    	<%= d30.number_field :hours, :id =>"day30_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month", :class => "day30" %>
-				    <% end %>
+							<%= d30.number_field :hours, :id =>"day30_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d30.hidden_field :is_umu, :id => "day30_is_umu"%>
+						<% end %>
 				  </td>
 				  <td class="field field-hours">
 				    <% if f.object.day31.nil? %>
 							<% f.object.build_day31%>
+							<% f.object.day31.is_umu = false%>
+						<% end %>
+						<% classes = "day-of-month day31" %>
+						<% if f.object.day31.is_umu? %>
+							<% classes = "day-of-month is-umu day31" %>
 						<% end %>
 						<%= f.fields_for :day31, f.object.day31 do |d31| %>
-				    	<%= d31.number_field :hours, :id =>"day31_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: "day_of_month", :class => "day31" %>
-				    <% end %>
+							<%= d31.number_field :hours, :id =>"day31_hours", :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
+							<%= d31.hidden_field :is_umu, :id => "day31_is_umu"%>
+						<% end %>
 				  </td>
 				</tr>
 			</tbody>
@@ -387,7 +566,7 @@
 		</table>
 
 	</div>
-	<div class="col-md-4">
+	<!--div class="col-md-4">
 		<table class='table'>
   		<thead>
   			<tr>
@@ -409,7 +588,7 @@
 				</tr>
   		</tbody>
 		</table>
-	</div>
+	</div-->
 	<!--div class="col-md-4">
 		<table class='table'>
   		<thead>
@@ -434,24 +613,55 @@
 </div>
 
 <script type="text/javascript">
-	$(".day_of_month").keyup(function(){ 
+	$(".day-of-month").keyup(function(){ 
     total = 0
-    $(this).closest('.nested-fields').find('.day_of_month').each(function(){
-      if ($(this).val() != ""){
-        total = total + parseInt($(this).val());
+    total_umu = 0
+    $(this).closest('.nested-fields').find('.day-of-month').each(function(){
+    	if ($(this).val() != ""){
+      	if ($(this).hasClass("is-umu")){
+      		total_umu = total_umu + parseInt($(this).val());	
+      	}else{
+      		total = total + parseInt($(this).val());	
+      	}
+
+        
       }
     });
     $(this).closest('.nested-fields').find('.total_hours').val(total);
+    $(this).closest('.nested-fields').find('.total_hours_umu').val(total_umu);
   });
 
   $(".field-hours-th").click(function(){
-  	var id_hours = "#day" + $(this).text() + "_hours"
-  	var id_umu = "#day" + $(this).text() + "_is_umu"
-  	$(id_umu).attr("value", true);
-  	$(id_hours).addClass("isUmu");
-    console.log(id_umu);
-    
-	});
+  	var class_hours = ".day" + $(this).text() + "-hours";
+  	var class_umu = ".day" + $(this).text() + "-is-umu";
+  	umu = $(this).closest('table').find(class_umu);
+  	hours = $(this).closest('table').find(class_hours);
+  	umu_val = umu.val();
+  	if (umu_val == 'true'){
+			umu.attr("value", false);
+			hours.removeClass("is-umu");
+		}else{
+			umu.attr("value", true);
+			hours.addClass("is-umu");
+		}
+  });
+
+  /*$(".field-hours-th").click(function(){
+  	console.log ("Click TH");
+		var class_hours = ".day" + $(this).text() + "-hours";
+		var class_umu = ".day" + $(this).text() + "-is-umu";
+		console.log (class_hours);
+		umu_val = $(class_umu).val();
+
+
+		if (umu_val == 'true'){
+			$(class_umu).attr("value", false);
+			$(class_hours).removeClass("is-umu");
+		}else{
+			$(class_umu).attr("value", true);
+			$(class_hours).addClass("is-umu");
+		}
+	});*/
 
 
 
