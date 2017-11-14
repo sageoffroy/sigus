@@ -5,6 +5,8 @@ class CreateServiceOfDependences < ActiveRecord::Migration[5.1]
       t.references :dependence, foreign_key: true
       t.string :description
 
+      
+      
       t.timestamps
     end
   end

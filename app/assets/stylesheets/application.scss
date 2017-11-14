@@ -164,6 +164,13 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   font-size: 1rem;
 }
 
+.input-transparent {
+  background: transparent none repeat scroll 0% 0%;
+  border: 0px none;
+  padding-top: 6px;
+  text-align: center;
+}
+
 .fa {
   color: $blue;
   font-size: 1.2rem;

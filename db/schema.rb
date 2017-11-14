@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20171106182028) do
     t.integer "agent_id"
     t.boolean "belong_service"
     t.integer "total_hours"
+    t.integer "total_hours_umu"
     t.boolean "fm"
     t.boolean "tnf"
     t.boolean "tt"

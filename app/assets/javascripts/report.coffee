@@ -9,27 +9,27 @@ check_day_of_month = ->
 
   switch daysInMonth(month, year)
     when 28
-      $('.day29').prop 'disabled', true
-      $('.day29').val("")
-      $('.day30').prop 'disabled', true
-      $('.day30').val("")
-      $('.day31').prop 'disabled', true
-      $('.day31').val("")
+      $('.day29-hours').prop 'disabled', true
+      $('.day29-hours').val("")
+      $('.day30-hours').prop 'disabled', true
+      $('.day30-hours').val("")
+      $('.day31-hours').prop 'disabled', true
+      $('.day31-hours').val("")
     when 29
-      $('.day29').prop 'disabled', false
-      $('.day30').prop 'disabled', true
-      $('.day30').val("")
-      $('.day31').prop 'disabled', true
-      $('.day31').val("")
+      $('.day29-hours').prop 'disabled', false
+      $('.day30-hours').prop 'disabled', true
+      $('.day30-hours').val("")
+      $('.day31-hours').prop 'disabled', true
+      $('.day31-hours').val("")
     when 30
-      $('.day29').prop 'disabled', false
-      $('.day30').prop 'disabled', false
-      $('.day31').prop 'disabled', true
-      $('.day31').val("")
+      $('.day29-hours').prop 'disabled', false
+      $('.day30-hours').prop 'disabled', false
+      $('.day31-hours').prop 'disabled', true
+      $('.day31-hours').val("")
     when 31
-      $('.day29').prop 'disabled', false
-      $('.day30').prop 'disabled', false      
-      $('.day31').prop 'disabled', false
+      $('.day29-hours').prop 'disabled', false
+      $('.day30-hours').prop 'disabled', false      
+      $('.day31-hours').prop 'disabled', false
 
 set_weekend = (report_year, report_month) ->
   if (report_year.val() != "") && (report_month.val() != "")
