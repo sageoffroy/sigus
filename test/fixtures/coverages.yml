@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_of_dependence: one
+  hs_lunes_diurnas: 
+  hs_lunes_nocturnas: 
+  hs_martes_diurnas: 
+  hs_martes_nocturnas: 
+  hs_miercoles_diurnas: 
+  hs_miercoles_nocturnas: 
+  hs_jueves_diurnas: 
+  hs_jueves_nocturnas: 
+  hs_viernes_diurnas: 
+  hs_viernes_nocturnas: 
+  hs_sabado: 
+  hs_domingo: 
+
+two:
+  service_of_dependence: two
+  hs_lunes_diurnas: 
+  hs_lunes_nocturnas: 
+  hs_martes_diurnas: 
+  hs_martes_nocturnas: 
+  hs_miercoles_diurnas: 
+  hs_miercoles_nocturnas: 
+  hs_jueves_diurnas: 
+  hs_jueves_nocturnas: 
+  hs_viernes_diurnas: 
+  hs_viernes_nocturnas: 
+  hs_sabado: 
+  hs_domingo: 

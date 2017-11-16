@@ -51,7 +51,7 @@
   <center>
     <%= link_to_add_association 'Agente del Servicio', f, :report_details, id: 'add_report_details', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.agents-box', association_insertion_method: :append }, :render_options => {:locals => {:all => false }} %>
 
-    <%= link_to_add_association 'Agente Ajeno al Servicio', f, :report_details, id: 'add_report_details', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.agents-box', association_insertion_method: :append }, :render_options => {:locals => {:all => true}} %>
+    <%= link_to_add_association 'Agente Ajeno al Servicio', f, :report_details, id: 'add_report_details_all', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.agents-box', association_insertion_method: :append }, :render_options => {:locals => {:all => true}} %>
   </center>
 
   <div class="form-actions">

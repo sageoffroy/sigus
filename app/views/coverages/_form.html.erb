@@ -1,0 +1,82 @@
+<%= form_with(model: coverage, local: true) do |form| %>
+  <% if coverage.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(coverage.errors.count, "error") %> prohibited this coverage from being saved:</h2>
+
+      <ul>
+      <% coverage.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :service_of_dependence_id %>
+    <%= form.text_field :service_of_dependence_id, id: :coverage_service_of_dependence_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_lunes_diurnas %>
+    <%= form.text_field :hs_lunes_diurnas, id: :coverage_hs_lunes_diurnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_lunes_nocturnas %>
+    <%= form.text_field :hs_lunes_nocturnas, id: :coverage_hs_lunes_nocturnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_martes_diurnas %>
+    <%= form.text_field :hs_martes_diurnas, id: :coverage_hs_martes_diurnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_martes_nocturnas %>
+    <%= form.text_field :hs_martes_nocturnas, id: :coverage_hs_martes_nocturnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_miercoles_diurnas %>
+    <%= form.text_field :hs_miercoles_diurnas, id: :coverage_hs_miercoles_diurnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_miercoles_nocturnas %>
+    <%= form.text_field :hs_miercoles_nocturnas, id: :coverage_hs_miercoles_nocturnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_jueves_diurnas %>
+    <%= form.text_field :hs_jueves_diurnas, id: :coverage_hs_jueves_diurnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_jueves_nocturnas %>
+    <%= form.text_field :hs_jueves_nocturnas, id: :coverage_hs_jueves_nocturnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_viernes_diurnas %>
+    <%= form.text_field :hs_viernes_diurnas, id: :coverage_hs_viernes_diurnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_viernes_nocturnas %>
+    <%= form.text_field :hs_viernes_nocturnas, id: :coverage_hs_viernes_nocturnas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_sabado %>
+    <%= form.text_field :hs_sabado, id: :coverage_hs_sabado %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_domingo %>
+    <%= form.text_field :hs_domingo, id: :coverage_hs_domingo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

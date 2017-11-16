@@ -59,8 +59,15 @@ set_free_days = (report_year, report_month) ->
       url: url
       type: 'POST').done (data) ->
         if data != null
+          console.log data.free_days
           for d in data.free_days
-            $('.day'+d+'-th').css('background-color', 'rgba(0, 252, 252, 0.4)');
+            day_number = parseInt(d.day.substr(d.day.length - 2));
+            console.log d.scope
+            if (d.scope == "Local") || (d.scope == "Provincial")
+              $('.day'+day_number+'-th').css('background-color', 'rgba(0, 252, 252, 0.4)');
+            else
+              $('.day'+day_number+'-th').css('background-color', 'rgba(0, 100, 152, 0.4)');
+
             #console.log d
 
 
@@ -68,10 +75,11 @@ check_general_data = (report_year, report_month, report_service, complement)->
   if (report_year.val() != "") && (report_month.val() != "") && (report_service.val() != "")
     #console.log "todo en orden"
     complement.removeClass 'disabled'
+    $('#add_report_details_all').removeClass 'disabled'
   else
     #console.log "falta algo"
     complement.addClass 'disabled'
-
+    $('#add_report_details_all').addClass 'disabled'
 
 set_ids_to_child = ->
   $('.nested-fields').each (index, value) ->

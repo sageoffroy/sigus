@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171106182028) do
+ActiveRecord::Schema.define(version: 20171115125541) do
 
   create_table "agent_of_services", force: :cascade do |t|
     t.integer "agent_id"
@@ -71,6 +71,25 @@ ActiveRecord::Schema.define(version: 20171106182028) do
     t.string "shield"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "coverages", force: :cascade do |t|
+    t.integer "service_of_dependence_id"
+    t.integer "hs_lunes_diurnas"
+    t.integer "hs_lunes_nocturnas"
+    t.integer "hs_martes_diurnas"
+    t.integer "hs_martes_nocturnas"
+    t.integer "hs_miercoles_diurnas"
+    t.integer "hs_miercoles_nocturnas"
+    t.integer "hs_jueves_diurnas"
+    t.integer "hs_jueves_nocturnas"
+    t.integer "hs_viernes_diurnas"
+    t.integer "hs_viernes_nocturnas"
+    t.integer "hs_sabado"
+    t.integer "hs_domingo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_of_dependence_id"], name: "index_coverages_on_service_of_dependence_id"
   end
 
   create_table "day_hours", force: :cascade do |t|

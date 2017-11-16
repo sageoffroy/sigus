@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Coverages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Service of dependence</th>
+      <th>Hs lunes diurnas</th>
+      <th>Hs lunes nocturnas</th>
+      <th>Hs martes diurnas</th>
+      <th>Hs martes nocturnas</th>
+      <th>Hs miercoles diurnas</th>
+      <th>Hs miercoles nocturnas</th>
+      <th>Hs jueves diurnas</th>
+      <th>Hs jueves nocturnas</th>
+      <th>Hs viernes diurnas</th>
+      <th>Hs viernes nocturnas</th>
+      <th>Hs sabado</th>
+      <th>Hs domingo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coverages.each do |coverage| %>
+      <tr>
+        <td><%= coverage.service_of_dependence %></td>
+        <td><%= coverage.hs_lunes_diurnas %></td>
+        <td><%= coverage.hs_lunes_nocturnas %></td>
+        <td><%= coverage.hs_martes_diurnas %></td>
+        <td><%= coverage.hs_martes_nocturnas %></td>
+        <td><%= coverage.hs_miercoles_diurnas %></td>
+        <td><%= coverage.hs_miercoles_nocturnas %></td>
+        <td><%= coverage.hs_jueves_diurnas %></td>
+        <td><%= coverage.hs_jueves_nocturnas %></td>
+        <td><%= coverage.hs_viernes_diurnas %></td>
+        <td><%= coverage.hs_viernes_nocturnas %></td>
+        <td><%= coverage.hs_sabado %></td>
+        <td><%= coverage.hs_domingo %></td>
+        <td><%= link_to 'Show', coverage %></td>
+        <td><%= link_to 'Edit', edit_coverage_path(coverage) %></td>
+        <td><%= link_to 'Destroy', coverage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coverage', new_coverage_path %>

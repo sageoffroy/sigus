@@ -56,11 +56,6 @@ class ReportsController < ApplicationController
 
 
 
-
-
-
-
-
     respond_to do |format|
       if @report.save
         format.html { redirect_to @report, notice: 'Report was successfully created.' }
@@ -92,7 +87,7 @@ class ReportsController < ApplicationController
     jueves = days_from_month.count("Thu")
     viernes = days_from_month.count("Fri")
     sabados = days_from_month.count("Sat")
-    domingo = days_from_month.count("Sun")
+    domingos = days_from_month.count("Sun")
 
       #Verificar feriados y convertirlos
 
@@ -103,11 +98,155 @@ class ReportsController < ApplicationController
     FreeDay.where("cast(strftime('%m', day) as int) = ?", month).each do |fd|
       if !fd.day.sunday?
         if !fd.day.saturday?
-
-      byebug
+          if fd.local? or fd.provincial?
+            sabados+=1
+            case fd.day.strftime("%A")
+            when 'Monday'
+              lunes-=1
+            when 'Tuesday'
+              martes-=1
+            when 'Wednesday'
+              miercoles-=1
+            when 'Thursday'
+              jueves-=1
+            when 'Friday'
+              viernes-=1
+            end
+          end
+        else
+          if fd.nacional?
+            domingos+=1
+            sabados-=1
+          end
+        end
+      end
     end
+
+    cant_dias_habiles = lunes + martes + miercoles + jueves + viernes
+    
+    # Obtener la cobertura del servicio
+
+    # hs_dias_semana_cobertura = hs_lunes_diurnas * lunes + .... + hs_viernes_diurnas * viernes
+    # gs_dias_semana_cobertura = hs_lunes_nocturnas * lunes  + .... + hs_viernes_noscturnes * viernes
+    # hs_sabado_cobertura = hs_sabado * sabados
+    # hs_domingo_cobertura = hs_domingo * domingo
+
+
+    # ---- Segunda Parte
+
+    # agentes = obtengo todos los agentes del servicio para el service_of_dependence del reporte
+    
+    # hs_dias_semana_servicio = 0
+    # gs_dias_semana_servicio = 0
+    # hs_sabado_servicio = 0
+    
+    # Por Agente
+      # 1, 2, 3, 4, 6:  Ignorar al agente
+      # 5: él cálculo debe hacerse y tomar luego la mitad de ese valor
+      # 7: él cálculo debe hacerse y tomar luego el porcentaje 83.33 de ese valor.
+
+      # Sacar residentes para el calculo
+      #si el servicio es radiologia (diagnostico por imagen)
+        # obtener dias_semana = 
+          # 4 * cant_dias_habiles
+      #sino
+        # forzar a los mensualizado p/guardia regimeen horario en 30hs
+        # obtener hs_dias_semana = 
+            # si el regime horario es 30
+              # 6 * cant_dias_habiles -> Hs
+            # si es 20 
+              # 4 * cant_dias_habiles -> Hs
+            # si es 36
+              # si es S/G
+                # 6 * cant_dias_habiles -> Hs 
+              # si es C/G
+                # 52 -> Hs 
+        # Ver las horas consultorio por agente (todavia no desarrollado)
+      # fin si
+      # Si tiene job_function (en este caso va a ser jefe de servicio indistinto de si cobra jerarquia)
+        # hs_dias_semana = hs_dias_semana * service_of_dependence.jefatura
+      # fin si
+      # hs_dias_semana_servicio =  hs_dias_semana_servicio + hs_dias_semana
+
+      # si el agente tiene regimen horario 36 c/g
+        # gs_dias_semana = 103
+        # Si tiene job_function (en este caso va a ser jefe de servicio indistinto de si cobra jerarquia)
+          # gs_dias_semana = gs_dias_semana * service_of_dependence.jefatura
+        # fin si
+        # gs_dias_semana_servicio =  gs_dias_semana_servicio + gs_dias_semana
+
+
+      # si el regime horario es 36
+        # hs_sabados = 6 * sabados -> Hs
+        # Si tiene job_function (en este caso va a ser jefe de servicio indistinto de si cobra jerarquia)
+          # hs_sabados = hs_sabados * service_of_dependence.jefatura
+        # fin si
+        # hs_sabado_servicio =  hs_sabado_servicio + hs_sabados
+
+      # dotacion_actual += 1
+    # fin por agente
+
+    # Si consultorio tiene un servicio y no tiene agente 
+      #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
+
+    # hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * (100 - service_of_dependence.ausentismo)
+    # gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * (100 - service_of_dependence.ausentismo)
+    # hs_sabado_servicio = hs_sabado_servicio * service_of_dependence.asistencial * (100 - service_of_dependence.ausentismo)
+      
+    
+    #-- Tercera Parte
+
+    # calcular el resto de la cobertura (ej: hs_dias_semana_cobertura) - horas disponibles (ej: hs_dias_semana_servicio)
+    # hs_dias_semana_requeridas = hs_dias_semana_cobertura - hs_dias_semana_servicio
+    # gs_dias_semana_requeridas = gs_dias_semana_cobertura - gs_dias_semana_servicio
+    # hs_sabado_requeridas = (hs_sabado_cobertura - hs_sabado_servicio) * 1.5
+    # hs_domingo_requeridas = hs_domingo_cobertura * 2
+
+
+    # si service_of_dependence.guardia 
+      #flag = 0
+      #si gs_dias_semana_requeridas < 0 y hs_dias_semana_requeridas < 0 y hs_sabado_requeridas < 0
+        # flag = 1
+      # si gs_dias_semana_requeridas < 0 y hs_dias_semana_requeridas < 0
+        # gs_dias_semana_requeridas = 0
+      # si hs_sabado_requeridas < 0 y hs_dias_semana_requeridas < 0
+        # hs_sabado_requeridas = 0
+      # si hs_dias_semana_requeridas < 0
+        # hs_dias_semana_requeridas = 0
+      # si flag = 1
+        # guardia_final = hs_domingo_requeridas
+      # sino
+        # guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
     
 
+    # sino service_of_dependence.guardia
+      # guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
+
+    # fin si
+
+    #--  Falta 4ta parte (Calculo Historico)
+
+    #-- Quinta Parte
+    
+    # acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
+
+
+    #-- Falta 6ta Parte (Ajuste por Novedades)
+
+
+    #-- Septima Parte
+
+    #Posteriormente grabar el registro en la tabla LIQUIDACIONES,
+      #liquidacion.total_hs_liquidadas
+      #liquidacion.total_hs_libres = guardia_final - total_hs_liquidadas
+      #liquidacion.dotacion = dotacion_actual
+
+    # si guardia_final >= total_hs_liquidadas
+      # MSG "Se acepta liquidacion"
+      #Si en el campo liquidacion.validado_personal
+    # sino
+      # MSG "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas xxx” (xxx es la diferencia entre total_hs_liquidadas y guardia_final.
+      # no en el campo liquidacion.validado_personal
 
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)

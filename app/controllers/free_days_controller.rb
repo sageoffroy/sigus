@@ -29,7 +29,8 @@ class FreeDaysController < ApplicationController
     dt = DateTime.new(year.to_i, month.to_i)
     boy = dt.beginning_of_month
     eoy = dt.end_of_month
-    free_days = FreeDay.where("day >= ? and day <= ?", boy, eoy).pluck(:day).map(&:day)
+    #free_days = FreeDay.where("day >= ? and day <= ?", boy, eoy).pluck(:day).map(&:day)
+    free_days = FreeDay.where("day >= ? and day <= ?", boy, eoy)
     respond_to do |format|
       format.json  { render :json => {:function => "get_free_days", :free_days => free_days}}
     end
