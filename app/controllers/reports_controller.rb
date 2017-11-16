@@ -49,13 +49,6 @@ class ReportsController < ApplicationController
     
     date_1 = Date.new year, month, day
 
-    byebug
-
-
-
-
-
-
     respond_to do |format|
       if @report.save
         format.html { redirect_to @report, notice: 'Report was successfully created.' }
