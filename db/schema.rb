@@ -288,6 +288,10 @@ ActiveRecord::Schema.define(version: 20171115125541) do
     t.integer "service_id"
     t.integer "dependence_id"
     t.string "description"
+    t.boolean "con_guardia"
+    t.float "jefatura"
+    t.float "asistencial"
+    t.float "ausentismo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dependence_id"], name: "index_service_of_dependences_on_dependence_id"
