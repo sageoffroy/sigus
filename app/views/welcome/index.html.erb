@@ -31,48 +31,68 @@
 				<h2>Panel de Funciones</h2>
 				<div class="row">
 		<% if @user.planification? or @user.admin? or @user.hospital?%>
-					<div class="col-sm-3">
+				<div class="col-sm-3">
 		    		<a href="/dependence" class="btn btn-menu btn-primary">
-		        	<i class="fa fa-hospital-o"></i>
-		          <span>Dependencia</span>
-		        </a> 
+		        		<i class="fa fa-hospital-o"></i>
+			          	<span>Dependencia</span>
+			        </a> 
 			    </div>
-					<div class="col-sm-3">
+				<div class="col-sm-3">
 		    		<a href="/agent_of_services" class="btn btn-menu btn-primary">
-		        	<i class="fa fa-stethoscope"></i>
-		          <span>Servicios</span>
-		        </a> 
+		        		<i class="fa fa-stethoscope"></i>
+		          		<span>Servicios</span>
+		        	</a> 
 			    </div>
-					<div class="col-sm-3">
+				<div class="col-sm-3">
 		    		<a href="/agents" class="btn btn-menu btn-primary">
-		        	<i class="fa fa-user-md"></i>
-		          <span>Agentes</span>
-		        </a> 
+		        		<i class="fa fa-user-md"></i>
+		          		<span>Agentes</span>
+		        	</a> 
 			    </div>
-		  		
+
 		  		<div class="col-sm-3">
+		    		<a href="/reports" class="btn btn-menu btn-primary">
+			        	<i class="fa fa-ambulance"></i>
+			          	<span>Reportes</span>
+			        </a>
+			    </div>
+			    <div class="col-sm-3">
+		    		<a href="#" class="btn btn-menu btn-primary">
+			        	<i class="fa fa-eye"></i>
+			          	<span>Observaciones</span>
+			        </a>
+			    </div>
+			    <div class="col-sm-3">
+		    		<a href="#" class="btn btn-menu btn-primary">
+			        	<i class="fa fa-refresh"></i>
+			          	<span>Novedades</span>
+			        </a>
+			    </div>
+			    <div class="col-sm-3">
+		    		<a href="#" class="btn btn-menu btn-primary">
+			        	<i class="fa fa-dollar"></i>
+			          	<span>Adicionales</span>
+			        </a>
+			    </div>
+		<% end %>
+		<% if @user.planification? or @user.admin?%>	    
+			    <div class="col-sm-3">
+		    		<a href="/free_days" class="btn btn-menu btn-primary">
+		        		<i class="fa fa-calendar-check-o"></i>
+		          		<span>Feriados</span>
+		        		</a> 
+			    </div>
+			    <div class="col-sm-3">
 		    		<a href="/services/new" class="btn btn-menu btn-primary">
-		        	<i class="fa fa-medkit"></i>
-		          <span>Crear Servicios</span>
-		        </a>
+		        		<i class="fa fa-medkit"></i>
+		          		<span>Crear Servicios</span>
+		        	</a>
 			    </div>
 			    <div class="col-sm-3">
 		    		<a href="/services_of_dependence/" class="btn btn-menu btn-primary">
-		        	<i class="fa fa-stethoscope"></i>
-		          <span>Asignar Servicios</span>
-		        </a>
-			    </div>
-				 	<div class="col-sm-3">
-		    		<a href="/free_days" class="btn btn-menu btn-primary">
-		        	<i class="fa fa-calendar-check-o"></i>
-		          <span>Feriados</span>
-		        </a> 
-			    </div>
-			    <div class="col-sm-3">
-		    		<a href="/reports" class="btn btn-menu btn-primary">
-		        	<i class="fa fa-ambulance"></i>
-		          <span>Reporte Guardias</span>
-		        </a>
+	        			<i class="fa fa-stethoscope"></i>
+		          		<span>Asignar Servicios</span>
+		        	</a>
 			    </div>
 			  </div>
 		  </div>

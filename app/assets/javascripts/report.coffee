@@ -167,12 +167,9 @@ $(document).on 'cocoon:after-insert', (e) ->
   set_weekend(report_year, report_month)
   set_free_days(report_year, report_month)
   set_ids_to_child()
-  console.log $(this)
-  console.log $(this[0])
-  console.log $(this.context)
-  console.log $(this.context.activeElement)
-  id = report_service.val()
-  set_last_select_of_agents(id)
+  if e.currentTarget.activeElement.firstChild.data == "Agente del Servicio"
+    id = report_service.val()
+    set_last_select_of_agents(id)
   
   
   
