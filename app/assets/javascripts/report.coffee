@@ -5,7 +5,7 @@ check_day_of_month = ->
   year = parseInt($('#report_year').val())
   month = parseInt($('#report_month').val())
 
-  console.log daysInMonth(month, year)
+  #console.log daysInMonth(month, year)
 
   switch daysInMonth(month, year)
     when 28
@@ -59,10 +59,10 @@ set_free_days = (report_year, report_month) ->
       url: url
       type: 'POST').done (data) ->
         if data != null
-          console.log data.free_days
+          #console.log data.free_days
           for d in data.free_days
             day_number = parseInt(d.day.substr(d.day.length - 2));
-            console.log d.scope
+            #console.log d.scope
             if (d.scope == "Local") || (d.scope == "Provincial")
               $('.day'+day_number+'-th').css('background-color', 'rgba(0, 252, 252, 0.4)');
             else
@@ -102,6 +102,25 @@ set_selects_of_agents = (id)->
         i++
       selects.change()
       return
+
+set_last_select_of_agents = (id)->
+  selects = $('.agent').last()
+  selects.empty()
+  $.ajax
+    type: 'POST'
+    url: '/update_agents_of_service/'+id
+    error: (jqXHR, textStatus, errorThrown) ->
+      console.log "Error"
+      return
+    success: (data) ->
+      i = 0
+      while i < data.agents.length
+        #selects.append '<option id=' + data.agents[i].id + ' value=' + '('+data.agents[i].dni+')'+' '+data.agents[i].fullname+'</option>'
+        selects.append $('<option></option>').attr('value', data.agents[i].id ).text('('+data.agents[i].dni+')'+' '+data.agents[i].fullname)
+        i++
+      selects.change()
+      return
+
 
 days_controls = ->
   add_report_detail = $('#add_report_details')
@@ -148,7 +167,9 @@ $(document).on 'cocoon:after-insert', (e) ->
   set_weekend(report_year, report_month)
   set_free_days(report_year, report_month)
   set_ids_to_child()
-  id = report_service.val()
+  if e.currentTarget.activeElement.firstChild.data == "Agente del Servicio"
+    id = report_service.val()
+    set_last_select_of_agents(id)
   
   
   

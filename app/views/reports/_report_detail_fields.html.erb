@@ -1,35 +1,25 @@
 <div class="nested-fields row">
 	
+		
+	
 	<div class="col-md-4">
 		<%= link_to_remove_association (fa_icon "window-close", class: "btn-remove"), f %>
-		<h6>*Agente</h6>
-	</div>
-	<div class="col-md-4">
-		<h6>Observación</h6>
-	</div>
-	<div class="col-md-1">
-	</div>
-	<div class="col-md-1">
-	<h6>Guardias</h6>
-	</div>
-	<div class="col-md-1">
-		<h6>U.M.U.</h6>
-	</div>
-	<div class="col-md-1">
-		<h6>Total Hs</h6>
-	</div>
-	<div class="col-md-4 col-border-right">
-		<div class="field">
-			<% if !defined? all %>
-				<% all = true %>
+		<div class="field" style ="margin-left: 35px;">
+			<% if !defined? all_agents %>
+				<% all_agents = true %>
 			<% end %>
-			<% if all %>
-				<%= f.collection_select :agent_id, Agent.all, :id, :to_s, {prompt: "Agregar Agente del Servicio"}, {class: "select2 select-field agent"} %>
+
+			<% if all_agents %>
+				<%= f.hidden_field :belong_service, :value => false %>
+				<%= f.collection_select :agent_id, Agent.all, :id, :to_s, {prompt: "Agente Ajeno al Servicio"}, {class: "select2 select-field all_agent"} %>
 			<% else %>
-			<%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente Ajeno al Servicio"}, {class: "select2 select-field agent"} %>
-			<% end %>
+				<%= f.hidden_field :belong_service, :value => true%>
+				<%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>
+			<% end %>			
 		</div>
 	</div>
+	
+	<!--
 	<% if f.object.observation.nil? %>
 		<% f.object.build_observation%>
 	<% end %>
@@ -46,11 +36,20 @@
 		</div>
 	</div>
 	<% end %>
-	<div class="col-md-1">
-		<%= f.number_field :total_hours, id: :agent_total_hours, :onkeypress => "event.preventDefault();", :placeholder => "Horas" , :class => "total_hours input-transparent" %>
+	-->
+
+	<div class="col-md-2">
 	</div>
-	<div class="col-md-1">
-		<%= f.number_field :total_hours_umu, id: :agent_total_hours_umu, :onkeypress => "event.preventDefault();", :placeholder => "Hs. Umu" , :class => "total_hours_umu input-transparent" %>
+	
+
+	<div class="col-md-2 ">
+		Total Guardias:	<%= f.number_field :total_hours, id: :agent_total_hours, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hours input-transparent" %>
+	</div>
+	<div class="col-md-2 ">
+		Total U.M.U.: <%= f.number_field :total_hours_umu, id: :agent_total_hours_umu, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hours_umu input-transparent" %>
+	</div>
+	<div class="col-md-2 ">
+		Total Hs: <%= f.number_field :total_hours_umu, id: :agent_total_hours_umu, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hours_umu input-transparent" %>
 	</div>
 	<div class="col-md-12">
 		<table class='table table-hours'>
@@ -174,8 +173,8 @@
 							<% classes = "day-of-month is-umu day6-hours" %>
 						<% end %>
 						<%= f.fields_for :day6, f.object.day6 do |d6| %>
-							<%= d6.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
-							<%= d6.hidden_field :is_umu, :class => "day6-is-umu"%>
+							<%= d6.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes %>
+							<%= d6.hidden_field :is_umu, :class => "day6-is-umu" %>
 						<% end %>
 				  </td>
 				  <td class="field field-hours">
@@ -188,8 +187,8 @@
 							<% classes = "day-of-month is-umu day7-hours" %>
 						<% end %>
 						<%= f.fields_for :day7, f.object.day7 do |d7| %>
-							<%= d7.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes%>
-							<%= d7.hidden_field :is_umu, :class => "day7-is-umu"%>
+							<%= d7.number_field :hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", class: classes %>
+							<%= d7.hidden_field :is_umu, :class => "day7-is-umu" %>
 						<% end %>
 				  </td>
 				  <td class="field field-hours">
@@ -531,6 +530,7 @@
 			</tbody>
   	</table>
 	</div>
+	<!--
 	<div class="col-md-4">
 		<table class='table'>
   		<thead>
