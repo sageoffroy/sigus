@@ -1,4 +1,3 @@
-<h6>Los campos con * son obligatorios</h6>
 <%= form_for(report) do |f| %>
   <h5>Datos Generales</h5>
   <% if report.errors.any? %>
@@ -14,30 +13,30 @@
   <% end %>
   <%= f.hidden_field :user_id, :value => current_user.id %>
   <div class="form-group row">
-    <dic class="col-sm-2">
-      <h6>*Año</h6>
-    </dic>
-    <dic class="col-sm-2">
-      <h6>*Mes</h6>
-    </dic>
-    <dic class="col-sm-6">
-      <h6>*Servicio</h6>
-    </dic>
-    <dic class="col-sm-2">
+    <div class="col-sm-2">
+      <h6>Año</h6>
+    </div>
+    <div class="col-sm-2">
+      <h6>Mes</h6>
+    </div>
+    <div class="col-sm-8">
+      <h6>Servicio</h6>
+    </div>
+    <!--div class="col-sm-2">
       <h6>Horas Consultorio</h6>
-    </dic>
+    </div-->
     <div class="input-group col-sm-2">
       <%= f.select :year, (2017)..(Time.zone.now.year), {prompt: "Año"}, {class: "select2"}%>
     </div>
     <div class="input-group col-sm-2">
       <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
     </div>
-    <div class="input-group col-sm-6">
+    <div class="input-group col-sm-8">
       <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
     </div>
-    <div class="input-group col-sm-2">
+    <!--div class="input-group col-sm-2">
       <%= f.text_field :total_office_hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)",:placeholder => "0", :oninput => "maxLengthCheck(this)", class: "office_hours" %>
-    </div>
+    </div-->
 
   </div>
   <h5>Agentes</h5>
@@ -49,9 +48,9 @@
   </div>
     
   <center>
-    <%= link_to_add_association 'Agente del Servicio', f, :report_details, id: 'add_report_details', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.agents-box', association_insertion_method: :append }, :render_options => {:locals => {:all => false }} %>
+    <%= link_to_add_association 'Agente del Servicio', f, :report_details, id: 'add_report_details', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.agents-box', association_insertion_method: :append }, :render_options => {:locals => {:all_agents => false }} %>
 
-    <%= link_to_add_association 'Agente Ajeno al Servicio', f, :report_details, id: 'add_report_details_all', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.agents-box', association_insertion_method: :append }, :render_options => {:locals => {:all => true}} %>
+    <%= link_to_add_association 'Agente Ajeno al Servicio', f, :report_details, id: 'add_report_details_all', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.agents-box', association_insertion_method: :append }, :render_options => {:locals => {:all_agents => true }} %>
   </center>
 
   <div class="form-actions">

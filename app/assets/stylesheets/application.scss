@@ -168,7 +168,8 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   background: transparent none repeat scroll 0% 0%;
   border: 0px none;
   padding-top: 6px;
-  text-align: center;
+  padding-left: 0px;
+  text-align: left;
 }
 
 .fa {
@@ -311,9 +312,9 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 .btn-remove {
   position: relative;
   left: -2px;
-  top: -3px;
+  top: 0px;
   color: #a21010;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   float:left;
 }
 
@@ -413,7 +414,7 @@ table.dataTable tbody th, table.dataTable tbody td {
 
 
 .field{
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .field label{
@@ -485,11 +486,11 @@ table.dataTable tbody th, table.dataTable tbody td {
 }
 
 #agent_total_hours {
-  max-width: 100%;
+  max-width: 30%;
 }
 
 #agent_total_hours_umu {
-  max-width:100%;
+  max-width:30%;
 }
 
 .has-danger .select2-selection {
