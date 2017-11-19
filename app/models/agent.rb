@@ -7,6 +7,7 @@ class Agent < ApplicationRecord
   belongs_to :job_function, optional:true
   belongs_to :agent_type, optional:true
   has_many :agent_of_services
+  validates :dni, presence: true
   validates :dni, uniqueness: true
   
 
