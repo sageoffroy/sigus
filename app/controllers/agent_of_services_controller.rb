@@ -112,9 +112,9 @@ class AgentOfServicesController < ApplicationController
           #--- Si no existe lo creo y cargo sus información
           agente = Agent.new
           agente.dni = dni
-          agente.fullname = h_agente.nombre_completo  
+          
         end
-
+        agente.fullname = h_agente.nombre_completo  
         # --- Hour Regime
         cg = false
         if h_agente.hs_c_guardia == 1
@@ -156,13 +156,16 @@ class AgentOfServicesController < ApplicationController
           agente.agent_type = AgentType.where(code: 4).first
         end
         if agente.save
-          # ---  Add to Service
-          aos = AgentOfService.new
-          sod = ServiceOfDependence.where(service: Service.first, dependence: Dependence.where(code: h_agente.oficina)).first
-          aos.agent = agente
-          aos.service_of_dependence = sod
-          aos.description = "Carga Inicial"
-          aos.save
+          # ---  Add to Service+
+          aos = AgentOfService.where(agent: agente).first
+          if aos.nil?
+            aos = AgentOfService.new
+            sod = ServiceOfDependence.where(service: Service.first, dependence: Dependence.where(code: h_agente.oficina)).first
+            aos.agent = agente
+            aos.service_of_dependence = sod
+            aos.description = "Carga Inicial"
+            aos.save
+          end
         end
       end
     end
@@ -186,7 +189,7 @@ class AgentOfServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def agent_of_service_params
-      params.require(:agent_of_service).permit(:agent_id, :service_of_dependence_id, :description)
+      params.require(:agent_of_service).permit(:agent_id, :service_of_dependence_id, :function, :description)
     end
   
 end

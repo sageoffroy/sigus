@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20171115125541) do
   create_table "agent_of_services", force: :cascade do |t|
     t.integer "agent_id"
     t.integer "service_of_dependence_id"
+    t.string "function"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
