@@ -30,4 +30,6 @@
   </tbody>
 </table>
 
-<%= link_to 'Crear Agente', new_agent_path, class: 'btn btn-primary btn-xs' %>
+<% if current_user.planification? or current_user.admin?%>
+  <%= link_to 'Crear Agente', new_agent_path, class: 'btn btn-primary btn-xs' %>
+<% end %>
