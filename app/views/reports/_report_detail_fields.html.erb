@@ -43,13 +43,13 @@
 	
 
 	<div class="col-md-2 ">
-		Total Guardias:	<%= f.number_field :total_hours, id: :agent_total_hours, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hours input-transparent" %>
+		Total Guardias:	<%= f.number_field :total_hours_gs, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hours_gs input-transparent" %>
 	</div>
 	<div class="col-md-2 ">
-		Total U.M.U.: <%= f.number_field :total_hours_umu, id: :agent_total_hours_umu, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hours_umu input-transparent" %>
+		Total U.M.U.: <%= f.number_field :total_hours_umu, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hours_umu input-transparent" %>
 	</div>
 	<div class="col-md-2 ">
-		Total Hs: <%= f.number_field :total_hours_umu, id: :agent_total_hours_umu, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hours_umu input-transparent" %>
+		Total Hs: <%= f.number_field :total_hours, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hours input-transparent" %>
 	</div>
 	<div class="col-md-12">
 		<table class='table table-hours'>
@@ -623,21 +623,23 @@
 
 <script type="text/javascript">
 	$(".day-of-month").keyup(function(){ 
-    total = 0
+    total_gs = 0
     total_umu = 0
+    
     $(this).closest('.nested-fields').find('.day-of-month').each(function(){
     	if ($(this).val() != ""){
       	if ($(this).hasClass("is-umu")){
       		total_umu = total_umu + parseInt($(this).val());	
       	}else{
-      		total = total + parseInt($(this).val());	
+      		total_gs = total_gs + parseInt($(this).val());	
       	}
 
         
       }
     });
-    $(this).closest('.nested-fields').find('.total_hours').val(total);
+    $(this).closest('.nested-fields').find('.total_hours_gs').val(total_gs);
     $(this).closest('.nested-fields').find('.total_hours_umu').val(total_umu);
+    $(this).closest('.nested-fields').find('.total_hours').val(total_gs + total_umu);
   });
 
   function calculate_totals() {
@@ -659,21 +661,23 @@
 		}
 
 
-		total = 0
+	total_gs = 0
     total_umu = 0
+    
     $(this).closest('.nested-fields').find('.day-of-month').each(function(){
     	if ($(this).val() != ""){
       	if ($(this).hasClass("is-umu")){
       		total_umu = total_umu + parseInt($(this).val());	
       	}else{
-      		total = total + parseInt($(this).val());	
+      		total_gs = total_gs + parseInt($(this).val());	
       	}
 
         
       }
     });
-    $(this).closest('.nested-fields').find('.total_hours').val(total);
+    $(this).closest('.nested-fields').find('.total_hours_gs').val(total_gs);
     $(this).closest('.nested-fields').find('.total_hours_umu').val(total_umu);
+    $(this).closest('.nested-fields').find('.total_hours').val(total_gs + total_umu);
   });
 
   /*$(".field-hours-th").click(function(){

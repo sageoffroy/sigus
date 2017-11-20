@@ -275,7 +275,7 @@ class ReportsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
       params.require(:report).permit(:year, :month, :service_of_dependence_id, :user_id,
-        report_details_attributes: [:id, :url, :_destroy, :agent_id, :belong_service, :total_hours, :total_hours_umu, :fm, :tnf, :tt, :hours_to_add, :hours_to_remove, :total_office_hours,
+        report_details_attributes: [:id, :url, :_destroy, :agent_id, :belong_service,:total_hours, :total_hours_gs, :total_hours_umu, :fm, :tnf, :tt, :hours_to_add, :hours_to_remove, :total_office_hours,
         observation_attributes: [:id, :content,:observation_description_id, :date_up, :days],
         rotative_turn_attributes: [:id, :days, :is_complete],
         day1_attributes: [:id, :hours, :is_umu],
