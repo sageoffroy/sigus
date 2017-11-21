@@ -39,15 +39,7 @@ class AgentOfServicesController < ApplicationController
 
   # GET /agent_of_services/1/edit
   def edit
-    @user = current_user
-    if @user.has_role? :hospital
-      dependence = @user.dependence
-      services_of_dependence = dependence.services
-      agents_of_service = AgentOfService.where(service_of_dependence: services_of_dependence)
-      @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
-    else
-      @agents = Agent.all
-    end     
+
   end
 
   # POST /agent_of_services
