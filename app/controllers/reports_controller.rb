@@ -6,7 +6,8 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.all
+    byebug
+    @reports = Report.where(user: current_user)
   end
 
   # GET /reports/1
