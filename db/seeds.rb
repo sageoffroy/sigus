@@ -2671,21 +2671,21 @@ user.add_role 'planification'
 user = User.new
 user.email = 'hospitalzonaltrelew@gmail.com'
 user.password = 'hospitaltw'
-user.dependence = Dependence.where(code:106).first
+user.dependence = Dependence.where(code:103).first
 user.save!
 user.add_role 'hospital'
 
 user = User.new
 user.email = 'hospitalzonalesquel@gmail.com'
 user.password = 'hospitalesq'
-user.dependence = Dependence.where(code:106).first
+user.dependence = Dependence.where(code:121).first
 user.save!
 user.add_role 'hospital'
 
 user = User.new
 user.email = 'hospitalzonalpmadryn@gmail.com'
 user.password = 'hospitalpm'
-user.dependence = Dependence.where(code:106).first
+user.dependence = Dependence.where(code:104).first
 user.save!
 user.add_role 'hospital'
 
@@ -2699,13 +2699,13 @@ user.add_role 'hospital'
 user = User.new
 user.email = 'hospitalregionalcomodororiv@gmail.com'
 user.password = 'hospitalreg'
-user.dependence = Dependence.where(code:106).first
+user.dependence = Dependence.where(code:143).first
 user.save!
 user.add_role 'hospital'
 
 user = User.new
 user.email = 'hospitalzonalalvear@gmail.com'
 user.password = 'hospitalalv'
-user.dependence = Dependence.where(code:106).first
+user.dependence = Dependence.where(code:456).first
 user.save!
 user.add_role 'hospital'
