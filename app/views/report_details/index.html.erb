@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
+<h1>Detalles de Reporte</h1>
 
-<h1>Report Details</h1>
-
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Report</th>
-      <th>Belong service</th>
-      <th>Total hours</th>
-      <th colspan="3"></th>
+      <th>Reporte</th>
+      <th>Agente</th>
+      <th>Del Servicio</th>
+      <th>Total de Horas Gs</th>
+      <th>Total de Horas UMU</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -16,11 +16,13 @@
     <% @report_details.each do |report_detail| %>
       <tr>
         <td><%= report_detail.report %></td>
+        <td><%= report_detail.agent %></td>
         <td><%= report_detail.belong_service %></td>
-        <td><%= report_detail.total_hours %></td>
-        <td><%= link_to 'Show', report_detail %></td>
-        <td><%= link_to 'Edit', edit_report_detail_path(report_detail) %></td>
-        <td><%= link_to 'Destroy', report_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= report_detail.total_hours_gs %></td>
+        <td><%= report_detail.total_hours_umu %></td>
+        <td><%= link_to 'Show', report_detail %>
+        <%= link_to 'Edit', edit_report_detail_path(report_detail) %>
+        <%= link_to 'Destroy', report_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
