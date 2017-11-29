@@ -4,8 +4,7 @@ class ReportDetailsController < ApplicationController
   # GET /report_details
   # GET /report_details.json
   def index
-    @report_details = ReportDetail.all
-
+    @report_details = ReportDetail.where(report:Report.where(user: current_user)    
   end
 
   # GET /report_details/1
