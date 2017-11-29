@@ -132,20 +132,22 @@ class AgentOfServicesController < ApplicationController
         agente.exclusive_dedication = !h_agente[titulos_a.index("1165")].nil?
         agente.unhealthy_work = !h_agente[titulos_a.index("1132")].nil?
 
-        # --- Tipo de Agente
+         # --- Tipo de Agente
         # ----- Cat 19 <=               "Mensualizado P/G"
         # ----- Concepto 1256 <=        "Operador de Apoyo"
         # ----- Concepto 1157<375 <=        "Médico Residente"
         # ----- Cualquier otro Caso <=  "Personal de Planta"
-        agente.agent_type = AgentType.where(code: 1).first
-        if (!h_agente.cat == 19)
-          agente.agent_type = AgentType.where(code: 2).first
+        agente.agent_type = AgentType.where(code: 1).first # Personal de planta
+        if (h_agente.cat == "19")
+          agente.agent_type = AgentType.where(code: 2).first # Mensualizado para guardia
         end
         if (!h_agente[titulos_a.index("1256")].nil?)
           agente.agent_type = AgentType.where(code: 3).first
         end
-        if (h_agente[titulos_a.index("1157")].to_i < 375)
-          agente.agent_type = AgentType.where(code: 4).first
+        if (!h_agente[titulos_a.index("1256")].nil?)
+          if (h_agente[titulos_a.index("1157")].to_i < 375)
+            agente.agent_type = AgentType.where(code: 4).first
+          end
         end
         if agente.save
           # ---  Add to Service+

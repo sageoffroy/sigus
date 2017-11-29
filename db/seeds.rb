@@ -2707,5 +2707,5 @@ user = User.new
 user.email = 'hospitalzonalalvear@gmail.com'
 user.password = 'hospitalalv'
 user.dependence = Dependence.where(code:456).first
-user.save!
+user.save!	
 user.add_role 'hospital'
