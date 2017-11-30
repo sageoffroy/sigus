@@ -14,7 +14,6 @@ class ReportDetailsController < ApplicationController
 
   # GET /report_details/new
   def new
-    byebug
     @report_detail = ReportDetail.new
     @report_detail.observations.build
 

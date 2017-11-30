@@ -70,7 +70,6 @@ class ReportsController < ApplicationController
 
     cobertura = Coverage.where(service_of_dependence: @report.service_of_dependence).first
 
-    byebug
     
     #Calcular cantidades de cada día
     first_day = Date.new year, month, 1

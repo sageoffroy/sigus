@@ -119,7 +119,7 @@ class AgentOfServicesController < ApplicationController
         if h_agente.jerarquia != "0"
           position_j = Position.where(grouping:h_agente.agr, clase:h_agente.clase, hierarchy:h_agente.jerarquia).first
           if position_j.nil? || position.nil?
-            byebug
+            
           end
           if position_j.category.code > position.category.code
             position = position_j
