@@ -1,0 +1,2 @@
+class NoveltyType < ApplicationRecord
+end

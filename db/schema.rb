@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115125541) do
+ActiveRecord::Schema.define(version: 20171129163340) do
 
   create_table "agent_of_services", force: :cascade do |t|
     t.integer "agent_id"
@@ -142,6 +142,26 @@ ActiveRecord::Schema.define(version: 20171115125541) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_nationalities_on_country_id"
+  end
+
+  create_table "novelties", force: :cascade do |t|
+    t.integer "agent_id"
+    t.integer "novelty_type_id"
+    t.date "date_from"
+    t.date "date_to"
+    t.string "description"
+    t.integer "hours_to_add"
+    t.integer "hours_to_remove"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_novelties_on_agent_id"
+    t.index ["novelty_type_id"], name: "index_novelties_on_novelty_type_id"
+  end
+
+  create_table "novelty_types", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "observation_descriptions", force: :cascade do |t|

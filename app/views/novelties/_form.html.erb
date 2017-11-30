@@ -1,0 +1,52 @@
+<%= form_with(model: novelty, local: true) do |form| %>
+  <% if novelty.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(novelty.errors.count, "error") %> prohibited this novelty from being saved:</h2>
+
+      <ul>
+      <% novelty.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.text_field :agent_id, id: :novelty_agent_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :novelty_type_id %>
+    <%= form.text_field :novelty_type_id, id: :novelty_novelty_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_from %>
+    <%= form.date_select :date_from, id: :novelty_date_from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_to %>
+    <%= form.date_select :date_to, id: :novelty_date_to %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :novelty_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hours_to_add %>
+    <%= form.number_field :hours_to_add, id: :novelty_hours_to_add %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hours_to_remove %>
+    <%= form.number_field :hours_to_remove, id: :novelty_hours_to_remove %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

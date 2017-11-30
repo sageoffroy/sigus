@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :novelties
+  resources :novelty_types
   resources :coverages
   resources :observation_descriptions
   resources :rotative_turns

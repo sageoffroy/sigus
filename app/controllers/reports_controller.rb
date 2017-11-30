@@ -6,7 +6,7 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.where(user: current_user)
+    @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
   end
 
   # GET /reports/1
@@ -67,8 +67,12 @@ class ReportsController < ApplicationController
     #-- Primera Parte
     year = @report.year
     month = @report.month
+
+    cobertura = Coverage.where(service_of_dependence: @report.service_of_dependence).first
+
+    byebug
     
-      #Calcular cantidades de cada día
+    #Calcular cantidades de cada día
     first_day = Date.new year, month, 1
     last_day = Date.civil year, month, -1
 
@@ -116,13 +120,14 @@ class ReportsController < ApplicationController
     end
 
     cant_dias_habiles = lunes + martes + miercoles + jueves + viernes
+
     
     # Obtener la cobertura del servicio
 
-    # hs_dias_semana_cobertura = hs_lunes_diurnas * lunes + .... + hs_viernes_diurnas * viernes
-    # gs_dias_semana_cobertura = hs_lunes_nocturnas * lunes  + .... + hs_viernes_noscturnes * viernes
-    # hs_sabado_cobertura = hs_sabado * sabados
-    # hs_domingo_cobertura = hs_domingo * domingo
+    #hs_dias_semana_cobertura = hs_lunes_diurnas * lunes + .... + hs_viernes_diurnas * viernes
+    #gs_dias_semana_cobertura = hs_lunes_nocturnas * lunes  + .... + hs_viernes_noscturnes * viernes
+    #hs_sabado_cobertura = hs_sabado * sabados
+    #hs_domingo_cobertura = hs_domingo * domingo
 
 
     # ---- Segunda Parte

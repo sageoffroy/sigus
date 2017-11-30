@@ -95,6 +95,7 @@ set_selects_of_agents = (id)->
       console.log "Error"
       return
     success: (data) ->
+      selects.append $('<option></option>').attr('value', 0).text('Agente del Servicio')
       i = 0
       while i < data.agents.length
         #selects.append '<option id=' + data.agents[i].id + ' value=' + '('+data.agents[i].dni+')'+' '+data.agents[i].fullname+'</option>'
@@ -113,6 +114,7 @@ set_last_select_of_agents = (id)->
       console.log "Error"
       return
     success: (data) ->
+      selects.append $('<option></option>').attr('value', 0).text('Agente del Servicio')
       i = 0
       while i < data.agents.length
         #selects.append '<option id=' + data.agents[i].id + ' value=' + '('+data.agents[i].dni+')'+' '+data.agents[i].fullname+'</option>'
@@ -153,7 +155,48 @@ days_controls = ->
     #actualizar valores del select de agentes
     id = report_service.val()
     set_selects_of_agents(id)
+
+set_days_event = ->
+  $('.day-of-month').keyup ->
+    total_gs = 0
+    total_umu = 0
+    $(this).closest('.nested-fields').find('.day-of-month').each ->
+      if $(this).val() != ''
+        if $(this).hasClass('is-umu')
+          total_umu = total_umu + parseInt($(this).val())
+        else
+          total_gs = total_gs + parseInt($(this).val())
+      return
+    $(this).closest('.nested-fields').find('.total_hours_gs').val total_gs
+    $(this).closest('.nested-fields').find('.total_hours_umu').val total_umu
+    $(this).closest('.nested-fields').find('.total_hours').val total_gs + total_umu
+    return
     
+  $('.field-hours-th').click ->
+    class_hours = '.day' + $(this).text() + '-hours'
+    class_umu = '.day' + $(this).text() + '-is-umu'
+    umu = $(this).closest('table').find(class_umu)
+    hours = $(this).closest('table').find(class_hours)
+    umu_val = umu.val()
+    if umu_val == 'true'
+      umu.attr 'value', false
+      hours.removeClass 'is-umu'
+    else
+      umu.attr 'value', true
+      hours.addClass 'is-umu'
+    total_gs = 0
+    total_umu = 0
+    $(this).closest('.nested-fields').find('.day-of-month').each ->
+      if $(this).val() != ''
+        if $(this).hasClass('is-umu')
+          total_umu = total_umu + parseInt($(this).val())
+        else
+          total_gs = total_gs + parseInt($(this).val())
+      return
+    $(this).closest('.nested-fields').find('.total_hours_gs').val total_gs
+    $(this).closest('.nested-fields').find('.total_hours_umu').val total_umu
+    $(this).closest('.nested-fields').find('.total_hours').val total_gs + total_umu
+    return
 
 $(document).on 'cocoon:after-insert', (e) ->
   console.log "Se inserto COCOON"
@@ -170,6 +213,7 @@ $(document).on 'cocoon:after-insert', (e) ->
   if e.currentTarget.activeElement.firstChild.data == "Agente del Servicio"
     id = report_service.val()
     set_last_select_of_agents(id)
+  set_days_event()
   
   
   

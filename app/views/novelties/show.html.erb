@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Agent:</strong>
+  <%= @novelty.agent %>
+</p>
+
+<p>
+  <strong>Novelty type:</strong>
+  <%= @novelty.novelty_type %>
+</p>
+
+<p>
+  <strong>Date from:</strong>
+  <%= @novelty.date_from %>
+</p>
+
+<p>
+  <strong>Date to:</strong>
+  <%= @novelty.date_to %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @novelty.description %>
+</p>
+
+<p>
+  <strong>Hours to add:</strong>
+  <%= @novelty.hours_to_add %>
+</p>
+
+<p>
+  <strong>Hours to remove:</strong>
+  <%= @novelty.hours_to_remove %>
+</p>
+
+<%= link_to 'Edit', edit_novelty_path(@novelty) %> |
+<%= link_to 'Back', novelties_path %>
