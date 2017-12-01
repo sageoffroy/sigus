@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :historical_guard_agents
+  resources :percentage_months
   resources :novelties
   resources :novelty_types
   resources :coverages

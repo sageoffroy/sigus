@@ -1,0 +1,27 @@
+<%= form_with(model: percentage_month, local: true) do |form| %>
+  <% if percentage_month.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(percentage_month.errors.count, "error") %> prohibited this percentage_month from being saved:</h2>
+
+      <ul>
+      <% percentage_month.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :mes %>
+    <%= form.number_field :mes, id: :percentage_month_mes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :valor %>
+    <%= form.text_field :valor, id: :percentage_month_valor %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

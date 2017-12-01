@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agent: one
+  month: 1
+  year: 1
+  concept: 
+  description: MyString
+  hs_total: 1
+
+two:
+  agent: two
+  month: 1
+  year: 1
+  concept: 
+  description: MyString
+  hs_total: 1

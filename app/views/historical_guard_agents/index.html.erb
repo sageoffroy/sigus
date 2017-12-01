@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Historical Guard Agents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Agent</th>
+      <th>Month</th>
+      <th>Year</th>
+      <th>Concept</th>
+      <th>Description</th>
+      <th>Hs total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @historical_guard_agents.each do |historical_guard_agent| %>
+      <tr>
+        <td><%= historical_guard_agent.agent %></td>
+        <td><%= historical_guard_agent.month %></td>
+        <td><%= historical_guard_agent.year %></td>
+        <td><%= historical_guard_agent.concept %></td>
+        <td><%= historical_guard_agent.description %></td>
+        <td><%= historical_guard_agent.hs_total %></td>
+        <td><%= link_to 'Show', historical_guard_agent %></td>
+        <td><%= link_to 'Edit', edit_historical_guard_agent_path(historical_guard_agent) %></td>
+        <td><%= link_to 'Destroy', historical_guard_agent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Historical Guard Agent', new_historical_guard_agent_path %>

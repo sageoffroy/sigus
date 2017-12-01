@@ -1,0 +1,2 @@
+module PercentageMonthsHelper
+end

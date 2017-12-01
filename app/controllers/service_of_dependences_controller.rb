@@ -97,6 +97,5 @@ class ServiceOfDependencesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_of_dependence_params
       params.require(:service_of_dependence).permit(:service_id, :dependence_id, :description, :con_guardia, :jefatura, :asistencial, :ausentismo)
-)
     end
 end

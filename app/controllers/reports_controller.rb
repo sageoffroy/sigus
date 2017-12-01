@@ -68,9 +68,7 @@ class ReportsController < ApplicationController
     year = @report.year
     month = @report.month
 
-    cobertura = Coverage.where(service_of_dependence: @report.service_of_dependence).first
 
-    
     #Calcular cantidades de cada día
     first_day = Date.new year, month, 1
     last_day = Date.civil year, month, -1
@@ -186,7 +184,10 @@ class ReportsController < ApplicationController
     # Si consultorio tiene un servicio y no tiene agente 
       #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
 
-    # hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * (100 - service_of_dependence.ausentismo)
+    #(PorcentajeMes.where(mes:Report.Mes).first).valor
+
+
+    # hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * (100 - (service_of_dependence.ausentismo*PorcentajeMes.valor)
     # gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * (100 - service_of_dependence.ausentismo)
     # hs_sabado_servicio = hs_sabado_servicio * service_of_dependence.asistencial * (100 - service_of_dependence.ausentismo)
       

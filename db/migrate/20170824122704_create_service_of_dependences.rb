@@ -8,6 +8,7 @@ class CreateServiceOfDependences < ActiveRecord::Migration[5.1]
       t.float :jefatura
       t.float :asistencial
       t.float :ausentismo
+      t.string :tipo_guardia_pasiva
 
       t.timestamps
     end

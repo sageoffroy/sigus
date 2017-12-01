@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129163340) do
+ActiveRecord::Schema.define(version: 20171201153115) do
 
   create_table "agent_of_services", force: :cascade do |t|
     t.integer "agent_id"
@@ -120,6 +120,21 @@ ActiveRecord::Schema.define(version: 20171129163340) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "historical_guard_agents", force: :cascade do |t|
+    t.integer "agent_id"
+    t.integer "month"
+    t.integer "year"
+    t.integer "concept_1_id"
+    t.integer "hs_total_1"
+    t.integer "concept_2_id"
+    t.integer "hs_total_2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_historical_guard_agents_on_agent_id"
+    t.index ["concept_1_id"], name: "index_historical_guard_agents_on_concept_1_id"
+    t.index ["concept_2_id"], name: "index_historical_guard_agents_on_concept_2_id"
+  end
+
   create_table "hour_regimes", force: :cascade do |t|
     t.integer "hours"
     t.boolean "with_guard"
@@ -172,14 +187,23 @@ ActiveRecord::Schema.define(version: 20171129163340) do
   end
 
   create_table "observations", force: :cascade do |t|
+    t.integer "agent_id"
     t.integer "observation_description_id"
-    t.integer "report_detail_id"
-    t.date "date_up"
-    t.integer "days"
+    t.integer "month"
+    t.integer "year"
+    t.integer "total_days"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_observations_on_agent_id"
     t.index ["observation_description_id"], name: "index_observations_on_observation_description_id"
-    t.index ["report_detail_id"], name: "index_observations_on_report_detail_id"
+  end
+
+  create_table "percentage_months", force: :cascade do |t|
+    t.integer "mes"
+    t.float "valor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "positions", force: :cascade do |t|
@@ -314,6 +338,7 @@ ActiveRecord::Schema.define(version: 20171129163340) do
     t.float "jefatura"
     t.float "asistencial"
     t.float "ausentismo"
+    t.string "tipo_guardia_pasiva"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dependence_id"], name: "index_service_of_dependences_on_dependence_id"

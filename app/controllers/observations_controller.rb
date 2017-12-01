@@ -69,6 +69,6 @@ class ObservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def observation_params
-      params.require(:observation).permit(:observation_description_id, :date_up, :days)
+      params.require(:observation).permit(:agent_id, :observation_description_id, :month, :year, :total_days, :description)
     end
 end

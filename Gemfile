@@ -98,3 +98,9 @@ gem 'flot-rails', :git => "https://github.com/Kjarrigan/flot-rails.git"
 
 # Gema para asociaciones
 gem "cocoon"
+
+# Seed Dump
+gem 'seed_dump'
+
+#Rails Admin
+gem 'rails_admin', '~> 1.2'

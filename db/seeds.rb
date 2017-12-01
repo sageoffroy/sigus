@@ -78,7 +78,7 @@ services_list = [
 	"Neurocirugía",
 	"Neurología",
 	"Neurología Infantil",
-	"Obstetricia   ",
+	"Obstetricia",
 	"Odontología",
 	"Oftalmología",
 	"Oncología",
@@ -112,7 +112,7 @@ services_list.each do |nombre|
 	Service.find_or_create_by(name:nombre)
 end
 
-dependencia_list = [
+dependence_list = [
 	["100","Casa del Chubut",10,"CDC"],
 	["101","Nivel Central", 10, "NC"],
 	["102","Medio Ambiente", 10,"NCMD"],
@@ -178,9 +178,9 @@ dependencia_list = [
 	["449","Puesto Sanitario Ricardo Rojas",0],
 	["450","Puesto Sanitario Lago Blanco",0],
 	["451","Puesto Sanitario Aldea Beleiro",0],
-	["453","Puesto Sanitario Aldea Apeleg",0]
+	["453","Puesto Sanitario Aldea Apeleg",0],
 ]
-dependencia_list.each do |codigo, nombre, complexity|
+dependence_list.each do |codigo, nombre, complexity|
 	dep = Dependence.find_or_create_by(code:codigo, name:nombre, complexity: complexity)
 	ServiceOfDependence.find_or_create_by(service_id: 1, dependence_id:dep.id, description: "Carga Inicial")	
 
@@ -373,10 +373,10 @@ service_of_dependence_list = [
 	[121,"Neurología",false,0.60,0.80,0.232],
 	[104,"Neurología",false,0.60,0.80,0.232],
 	[104,"Neurología Infantil",false,0.60,0.80,0.232],
-	[143,"Obstetricia   ",true,0.60,0.80,0.232],
-	[121,"Obstetricia   ",true,0.60,0.80,0.232],
-	[103,"Obstetricia   ",true,0.60,0.80,0.232],
-	[104,"Obstetricia   ",true,0.60,0.80,0.232],
+	[143,"Obstetricia",true,0.60,0.80,0.232],
+	[121,"Obstetricia",true,0.60,0.80,0.232],
+	[103,"Obstetricia",true,0.60,0.80,0.232],
+	[104,"Obstetricia",true,0.60,0.80,0.232],
 	[143,"Odontología",false,0.60,0.80,0.232],
 	[106,"Oftalmología",false,0.60,0.80,0.232],
 	[121,"Oftalmología",false,0.60,0.80,0.232],
@@ -1014,12 +1014,12 @@ agent_of_service_list = [
 	[27961589,"S/E","Hospital Regional Comodoro Rivadavia","Neonatología"],
 	[24865570,"S/E","Hospital Regional Comodoro Rivadavia","Neonatología"],
 	[22336206,"S/E","Hospital Regional Comodoro Rivadavia","Neonatología"],
-	[34087365,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia   "],
-	[25962297,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia   "],
-	[30955129,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia   "],
-	[28451053,"Jefe del servicio","Hospital Regional Comodoro Rivadavia","Obstetricia   "],
-	[23905232,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia   "],
-	[29585036,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia   "],
+	[34087365,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia"],
+	[25962297,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia"],
+	[30955129,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia"],
+	[28451053,"Jefe del servicio","Hospital Regional Comodoro Rivadavia","Obstetricia"],
+	[23905232,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia"],
+	[29585036,"S/E","Hospital Regional Comodoro Rivadavia","Obstetricia"],
 	[30009349,"S/E","Hospital Regional Comodoro Rivadavia","Pediatría"],
 	[17729521,"S/E","Hospital Regional Comodoro Rivadavia","Pediatría"],
 	[13564195,"S/E","Hospital Regional Comodoro Rivadavia","Pediatría"],
@@ -1458,11 +1458,11 @@ agent_of_service_list = [
 	[33323294,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
 	[34488929,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
 	[31233892,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
-	[23378551,"S/E","Hospital Zonal Esquel","Obstetricia   "],
-	[24584839,"S/E","Hospital Zonal Esquel","Obstetricia   "],
-	[20608457,"S/E","Hospital Zonal Esquel","Obstetricia   "],
-	[30563179,"S/E","Hospital Zonal Esquel","Obstetricia   "],
-	[27319946,"S/E","Hospital Zonal Esquel","Obstetricia   "],
+	[23378551,"S/E","Hospital Zonal Esquel","Obstetricia"],
+	[24584839,"S/E","Hospital Zonal Esquel","Obstetricia"],
+	[20608457,"S/E","Hospital Zonal Esquel","Obstetricia"],
+	[30563179,"S/E","Hospital Zonal Esquel","Obstetricia"],
+	[27319946,"S/E","Hospital Zonal Esquel","Obstetricia"],
 	[25652511,"S/E","Hospital Zonal Esquel","Pediatría"],
 	[28199348,"S/E","Hospital Zonal Esquel","Pediatría"],
 	[25710029,"S/E","Hospital Zonal Esquel","Pediatría"],
@@ -1748,15 +1748,15 @@ agent_of_service_list = [
 	[21556646,"S/E","Hospital Zonal Puerto Madryn","Neonatología"],
 	[23829763,"S/E","Hospital Zonal Puerto Madryn","Neonatología"],
 	[23856825,"S/E","Hospital Zonal Puerto Madryn","Neonatología"],
-	[26991587,"S/E","Hospital Zonal Puerto Madryn","Obstetricia   "],
-	[20438276,"S/E","Hospital Zonal Puerto Madryn","Obstetricia   "],
-	[26314776,"S/E","Hospital Zonal Puerto Madryn","Obstetricia   "],
-	[21923536,"S/E","Hospital Zonal Puerto Madryn","Obstetricia   "],
-	[18018946,"S/E","Hospital Zonal Puerto Madryn","Obstetricia   "],
-	[22550969,"S/E","Hospital Zonal Puerto Madryn","Obstetricia   "],
-	[32668939,"S/E","Hospital Zonal Puerto Madryn","Obstetricia   "],
-	[27199485,"S/E","Hospital Zonal Puerto Madryn","Obstetricia   "],
-	[28979345,"S/E","Hospital Zonal Puerto Madryn","Obstetricia   "],
+	[26991587,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
+	[20438276,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
+	[26314776,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
+	[21923536,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
+	[18018946,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
+	[22550969,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
+	[32668939,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
+	[27199485,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
+	[28979345,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
 	[32876917,"S/E","Hospital Zonal Puerto Madryn","Oncología"],
 	[23060819,"Jefe del servicio","Hospital Zonal Puerto Madryn","Oncología"],
 	[24649909,"S/E","Hospital Zonal Puerto Madryn","Pediatría"],
@@ -2260,14 +2260,14 @@ agent_of_service_list = [
 	[28482580,"S/E","Hospital Zonal Trelew","Neonatología"],
 	[22388334,"S/E","Hospital Zonal Trelew","Neonatología"],
 	[28678292,"S/E","Hospital Zonal Trelew","Neonatología"],
-	[21354642,"S/E","Hospital Zonal Trelew","Obstetricia   "],
-	[23201799,"S/E","Hospital Zonal Trelew","Obstetricia   "],
-	[26758184,"S/E","Hospital Zonal Trelew","Obstetricia   "],
-	[18065128,"S/E","Hospital Zonal Trelew","Obstetricia   "],
-	[23998928,"S/E","Hospital Zonal Trelew","Obstetricia   "],
-	[24041294,"S/E","Hospital Zonal Trelew","Obstetricia   "],
-	[34488787,"S/E","Hospital Zonal Trelew","Obstetricia   "],
-	[25710335,"S/E","Hospital Zonal Trelew","Obstetricia   "],
+	[21354642,"S/E","Hospital Zonal Trelew","Obstetricia"],
+	[23201799,"S/E","Hospital Zonal Trelew","Obstetricia"],
+	[26758184,"S/E","Hospital Zonal Trelew","Obstetricia"],
+	[18065128,"S/E","Hospital Zonal Trelew","Obstetricia"],
+	[23998928,"S/E","Hospital Zonal Trelew","Obstetricia"],
+	[24041294,"S/E","Hospital Zonal Trelew","Obstetricia"],
+	[34488787,"S/E","Hospital Zonal Trelew","Obstetricia"],
+	[25710335,"S/E","Hospital Zonal Trelew","Obstetricia"],
 	[30965438,"S/E","Hospital Zonal Trelew","Pediatría"],
 	[35172975,"S/E","Hospital Zonal Trelew","Pediatría"],
 	[33313172,"S/E","Hospital Zonal Trelew","Pediatría"],
@@ -2416,7 +2416,9 @@ end
 
 
 
+#Speedy Telefonica Mensaje privado
 
+#08002221222 Opc 2
 
 
 
@@ -2587,7 +2589,8 @@ carga_horaria_list = [
 	["30hs",false],
 	["32hs",true],
 	["36hs",false],
-	["36hs",true]
+	["36hs",true],
+
 ]
 
 carga_horaria_list.each do |hours, with_guard|
@@ -2653,164 +2656,174 @@ agent_type_list.each do |c,d|
 	AgentType.find_or_create_by(code:c, description:d)
 end
 
-
-
-#["Bacteriología - Bioquímicos	30",24,30,24,30,24,30,24,30,24,6,0]
-#["Bacteriología - Técnicos",36,12,36,12,36,12,36,12,36,12,0,0]
-#["UAU - Admisión",48,24,48,24,48,24,48,24,48,24,48,48]
-#["Admisión CMI",30,0,30,0,30,0,30,0,30,0,24,24]
-#["UAU - Admisión",48,0,48,0,48,0,48,0,48,0,72,72]
-#["Alimentación y Nutrición",24,0,24,0,24,0,24,0,24,0,12,12]
-#["Anatomía Patológica",30,4,30,4,30,4,30,4,30,4,6,6]
-#["Anestesiología",36,12,36,12,36,12,36,12,36,12,0,0]
-#["Archivo Central",42,42,42,42,42,42,42,42,42,42,42,42]
-#["Archivo Central",42,0,42,0,42,0,42,0,42,0,24,24]
-#["Archivo CMI",30,0,30,0,30,0,30,0,30,0,16,16]
-#["Hemoterapia y Banco de Sangre",51,0,51,0,51,0,51,0,51,0,24,24]
-#["Camilleros ",24,0,24,0,24,0,24,0,24,0,12,12]
-#["Area Externa - CAPS 30 de Octubre",46,0,46,0,46,0,46,0,46,0,15,0]
-#["Area Externa - CAPS Laprida",27,0,27,0,27,0,27,0,27,0,12,0]
-#["Area Externa - CAPS Prospero Palazzo",24,0,24,0,24,0,24,0,24,0,6,0]
-#["Area Externa - CAPS San Cayetano",36,0,36,0,36,0,36,0,36,0,12,0]
-#["Area Externa - CAPS Standard Norte",12,0,12,0,12,0,12,0,12,0,6,0]
-#["Cirugía",60,12,60,12,60,12,60,12,60,12,48,48]
-#["Clínica Médica",48,12,48,12,48,12,48,12,48,12,24,24]
-#["Clínica Médica",48,24,48,24,48,24,48,24,48,24,24,24]
-#["Clínica Médica",72,0,72,0,72,0,72,0,72,0,24,24]
-#["Clínica Médica",12,12,12,12,12,12,12,12,12,12,24,24]
-#["Clínica Médica",42,14,42,14,42,14,42,14,42,14,24,24]
-#["Clínica Médica",21,15,21,15,21,15,21,15,21,15,24,24]
-#["Transporte",102,0,102,0,102,0,102,0,102,0,72,72]
-#["Diagnóstico por Imágenes",17,0,17,0,17,0,17,0,17,0,0,0]
-#["Electromedicina",18,0,18,0,18,0,18,0,18,0,6,0]
-#["Enfermería - Clínica Médica",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - Clínica Quirúrgica",68,0,60,0,60,0,54,0,54,0,48,48]
-#["Enfermería - Neonatología",42,0,42,0,48,0,42,0,42,0,0,0]
-#["Enfermería - Oncología",12,0,12,0,12,0,12,0,12,0,0,0]
-#["Enfermería - Pediatría",48,0,48,0,48,0,48,0,48,0,48,48]
-#["Enfermería - Salud Mental",54,0,54,0,54,0,54,0,54,0,30,30]
-#["Enfermería - Tocoginecología",48,0,42,0,54,0,48,0,42,0,30,36]
-#["Enfermería - UMU",48,0,48,0,48,0,48,0,48,0,48,48]
-#["Enfermería - UTI",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - Área Externa",216,0,216,0,216,0,216,0,216,0,48,48]
-#["Enfermería - CAPS Playa Unión",54,0,54,0,54,0,54,0,54,0,30,30]
-#["Enfermería - Área Externa  - Inmunizaciones",156,0,156,0,156,0,156,0,156,0,36,18]
-#["Enfermería - Centro Obstétrico",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - Quirófano",48,0,48,0,48,0,48,0,48,0,24,24]
-#["Enfermería - Clínica Médica",66,0,66,0,66,0,66,0,66,0,48,48]
-#["Enfermería - Clínica Médica",72,0,72,0,72,0,72,0,72,0,60,60]
-#["Enfermería - Clínica Médica",78,0,78,0,78,0,78,0,78,0,72,72]
-#["Enfermería - Clínica Médica",66,0,66,0,66,0,66,0,66,0,60,60]
-#["Enfermería - Clínica Quirúrgica",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - Clínica Quirúrgica",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - Clínica Quirúrgica",48,48,48,48,48,48,48,48,48,48,48,48]
-#["Enfermería - Consultorios Externos",36,0,36,0,36,0,36,0,36,0,6,0]
-#["Enfermería - Consultorios Externos",72,0,72,0,72,0,72,0,72,0,14,14]
-#["Enfermería - Control de Infecciones",6,0,6,0,6,0,6,0,6,0,6,]
-#["Enfermería - Jefatura y Supervisión",36,0,36,0,36,0,36,0,36,0,12,12]
-#["Enfermería - Jefatura y Supervisión",20,0,20,0,20,0,20,0,20,0,0,0]
-#["Enfermería - Neonatología",54,0,78,0,66,0,72,0,60,0,60,60]
-#["Enfermería - Neonatología",66,0,66,0,66,0,66,0,66,0,60,60]
-#["Enfermería - Pediatría",36,0,36,0,36,0,36,0,36,0,24,24]
-#["Enfermería - Pediatría",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - Pediatría",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - Pediatría",48,0,48,0,48,0,48,0,48,0,48,48]
-#["Enfermería - Prevalentes / Vacunación",24,0,24,0,24,0,24,0,24,0,0,0]
-#["Enfermería - Quirófano",12,0,12,0,12,0,12,0,12,0,0,0]
-#["Enfermería - Salud Mental",36,0,36,0,36,0,36,0,36,0,0,0]
-#["Enfermería - Salud Mental",72,0,72,0,72,0,72,0,72,0,48,48]
-#["Enfermería - Salud Mental",36,0,36,0,30,0,30,0,30,0,24,24]
-#["Enfermería - Salud Mental",54,0,54,0,54,0,54,0,54,0,54,48]
-#["Enfermería - Jefatura y Supervisión",42,0,42,0,42,0,42,0,42,0,6,0]
-#["Enfermería - Jefatura y Supervisión",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - Tocoginecología",66,0,66,0,66,0,66,0,66,0,48,48]
-#["Enfermería - Tocoginecología",60,0,60,0,60,0,60,0,0,60,48,48]
-#["Enfermería - Tocoginecología",54,0,36,0,54,0,54,0,54,0,48,42]
-#["Enfermería - Tocoginecología",42,0,42,0,42,0,42,0,42,0,42,42]
-#["Enfermería - Traumatología",54,0,54,0,54,0,54,0,54,0,42,42]
-#["Enfermería - UTIP",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - UTIP",24,0,24,0,24,0,24,0,24,0,24,24]
-#["Enfermería - UTIP",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Enfermería - UMU",66,0,66,0,66,0,66,0,66,0,54,54]
-#["Enfermería - UMU",96,0,96,0,96,0,96,0,96,0,84,84]
-#["Enfermería - UMU",90,0,90,0,90,0,90,0,90,0,84,84]
-#["Enfermería - UMU",66,0,66,0,66,0,66,0,66,0,72,72]
-#["Enfermería - UCI",48,0,48,0,48,0,48,0,48,0,48,48]
-#["Enfermería - UTI",72,0,72,0,72,0,72,0,72,0,72,72]
-#["Enfermería - UTI",72,0,72,0,72,0,72,0,72,0,42,42]
-#["Enfermería - UTI",78,0,78,0,78,0,78,0,78,0,72,72]
-#["Enfermería - UTIP",54,0,54,0,54,0,54,0,54,0,54,54]
-#["Enfermería - UTI",102,0,90,0,84,0,102,0,102,0,108,96]
-#["Estadísticas",252,0,252,0,252,0,252,0,252,0,36,36]
-#["Estadísticas - CMI",34,0,34,0,34,0,34,0,34,0,34,34]
-#["Estadísticas",36,0,36,0,36,0,36,0,36,0,24,24]
-#["Estadísticas",78,0,78,0,78,0,78,0,78,0,13,13]
-#["Estadísticas",60,0,60,0,60,0,60,0,60,0,6,6]
-#["Esterilización",24,0,24,0,24,0,24,0,24,0,12,12]
-#["Esterilización",42,0,42,0,42,0,42,0,42,0,0,0]
-#["Esterilización",24,0,24,0,24,0,24,0,24,0,12,12]
-#["Farmacia",60,0,60,0,60,0,60,0,60,0,24,24]
-#["Farmacia",78,0,78,0,78,0,78,0,78,0,12,12]
-#["Farmacia",36,0,42,0,36,0,42,0,36,0,3,0]
-#["Hemoterapia y Banco de Sangre",34,0,34,0,34,0,34,0,34,0,6,6]
-#["Hemoterapia y Banco de Sangre",41,0,41,0,41,0,41,0,41,0,24,24]
-#["Hemoterapia y Banco de Sangre - CMI",55,0,55,0,55,0,55,0,55,0,30,30]
-#["Instrumentación Quirúrgica",24,0,24,0,24,0,24,0,24,0,24,24]
-#["Kinesiología",61,0,61,0,61,0,61,0,61,0,0,0]
-#["Laboratorio - Bioquímicos",40,12,40,12,40,12,40,12,40,12,24,24]
-#["Laboratorio - Técnicos",30,0,30,0,30,0,30,0,30,0,24,24]
-#["Laboratorio - Técnicos",53,0,53,0,53,0,53,0,53,0,24,24]
-#["Laboratorio - Bioquímicos",56,12,56,12,56,12,56,12,56,12,24,24]
-#["Laboratorio - Bioquímicos",44,11,44,11,44,11,44,11,44,11,24,24]
-#["Laboratorio - Bioquímicos",32,12,32,12,32,12,32,12,32,12,30,30]
-#["Laboratorio - Bioquímicos",74,20,74,20,74,20,74,20,74,20,36,36]
-#["Laboratorio - Bioquímicos",84,12,84,12,84,12,84,12,84,12,24,24]
-#["Laboratorio - Técnicos",8,0,8,0,8,0,8,0,8,0,6,6]
-#["Laboratorio - Técnicos",60,0,60,0,60,0,60,0,60,0,30,30]
-#["Laboratorio - Técnicos",36,0,36,0,36,0,36,0,36,0,22,24]
-#["Laboratorio - Técnicos",74,11,74,11,74,11,74,11,74,11,36,36]
-#["Mantenimiento",126,0,126,0,126,0,126,0,126,0,0,0]
-#["Mantenimiento",54,0,54,0,54,0,54,0,54,0,48,48]
-#["Conmutador - CMI",42,0,42,0,42,0,42,0,42,0,36,36]
-#["Neonatología",36,36,36,36,36,36,36,36,36,36,24,24]
-#["Neonatología",24,12,24,12,24,12,24,12,24,12,24,24]
-#["Neonatología",48,13,48,13,48,13,48,13,48,13,24,24]
-#["Obstetricia",12,12,12,12,12,12,12,12,12,12,24,24]
-#["Obstetricia",12,12,12,12,12,12,12,12,12,12,24,24]
-#["Oncología",12,0,12,0,12,0,12,0,12,0,0,0]
-#["Pediatría",48,12,48,12,48,12,48,12,48,12,48,48]
-#["Pediatría",24,24,24,24,24,24,24,24,24,24,48,48]
-#["Pediatría",52,36,52,36,52,36,52,36,52,36,72,72]
-#["Pediatría",12,12,12,12,12,12,12,12,12,12,24,24]
-#["Pediatría",32,24,32,24,32,24,32,24,32,24,48,48]
-#["Radiología",90,0,90,0,90,0,90,0,90,0,24,24]
-#["Radiología",42,0,42,0,42,0,42,0,42,0,24,24]
-#["Radiología",72,0,72,0,72,0,72,0,72,0,24,24]
-#["Radiología - Técnicos",92,12,92,12,92,12,92,12,92,12,48,48]
-#["Rehabilitación",10,0,10,0,10,0,10,0,10,0,6,6]
-#["Salud Mental",72,0,72,0,72,0,72,0,72,0,24,24]
-#["UTI",26,14,18,14,30,14,26,14,22,14,24,24]
-#["Tocoginecología",33,12,33,12,33,12,33,12,33,12,24,24]
-#["Tocoginecología",12,12,12,12,12,12,12,12,12,12,24,24]
-#["Tocoginecología  (C/Ecografía)",60,13,60,13,60,13,60,13,60,13,24,24]
-#["Tocoginecología",12,12,12,12,12,12,12,12,12,12,24,24]
-#["Tocoginecología",36,36,36,36,36,36,36,36,36,36,72,72]
-#["Obstetricia",24,24,24,24,24,24,24,24,24,24,48,48]
-#["Transporte",78,0,78,0,78,0,78,0,78,0,52,48]
-#["Transporte",76,0,76,0,76,0,76,0,76,0,60,60]
-#["Traumatología",35,0,35,0,35,0,35,0,35,0,24,24]
-#["UAU - Internación",48,0,48,0,48,0,48,0,48,0,18,18]
-#["UTI - UCE",32,12,32,12,32,12,32,12,32,12,24,24]
-#["UTIP",12,12,12,12,12,12,12,12,12,12,24,24]
-#["UTIP",24,12,24,12,24,12,24,12,24,12,24,24]
-#["UMU",36,24,36,24,36,24,36,24,36,24,48,48]
-#["UMU",48,48,48,48,48,48,48,48,48,48,72,48]
-#["UMU",24,24,24,24,24,24,24,24,24,24,72,72]
-#["UMU",36,36,36,36,36,36,36,36,36,36,72,72]
-#["UMU",48,48,48,48,48,48,48,48,48,48,48,48]
-#["UTI",35,12,35,12,35,12,35,12,35,12,24,24]
-#["UTI",52,24,52,24,52,24,52,24,52,24,48,48]
-#["UTIP",30,12,30,12,30,12,30,12,30,12,24,24]
+#coverage_list = [
+	#["Hospital Zonal Trelew","Bacteriología - Bioquímicos",30,24,30,24,30,24,30,24,30,24,6,0],
+	#["Hospital Zonal Trelew","Bacteriología - Técnicos",36,12,36,12,36,12,36,12,36,12,0,0],
+	#["Hospital Regional Comodoro Rivadavia","UAU - Admisión",48,24,48,24,48,24,48,24,48,24,48,48],
+	#["Hospital Zonal Trelew","Admisión CMI",30,0,30,0,30,0,30,0,30,0,24,24],
+	#["Hospital Zonal Puerto Madryn","UAU - Admisión",48,0,48,0,48,0,48,0,48,0,72,72],
+	#["Hospital Regional Comodoro Rivadavia","Alimentación y Nutrición",24,0,24,0,24,0,24,0,24,0,12,12],
+	#["Hospital Zonal Puerto Madryn","Anatomía Patológica",30,4,30,4,30,4,30,4,30,4,6,6],
+	#["Hospital Regional Comodoro Rivadavia","Anestesiología",36,12,36,12,36,12,36,12,36,12,0,0],
+	#["Hospital Zonal Puerto Madryn","Archivo Central",42,42,42,42,42,42,42,42,42,42,42,42],
+	#["Hospital Subzonal Rawson","Archivo Central",42,0,42,0,42,0,42,0,42,0,24,24],
+	#["Hospital Zonal Trelew","Archivo CMI",30,0,30,0,30,0,30,0,30,0,16,16],
+	#["Hospital Regional Comodoro Rivadavia","Hemoterapia y Banco de Sangre",51,0,51,0,51,0,51,0,51,0,24,24],
+	#["Hospital Zonal Trelew","Camilleros",24,0,24,0,24,0,24,0,24,0,12,12],
+	#["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS 30 de Octubre",46,0,46,0,46,0,46,0,46,0,15,0],
+	#["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS Laprida",27,0,27,0,27,0,27,0,27,0,12,0],
+	#["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS Prospero Palazzo",24,0,24,0,24,0,24,0,24,0,6,0],
+	#["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS San Cayetano",36,0,36,0,36,0,36,0,36,0,12,0],
+	#["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS Standard Norte",12,0,12,0,12,0,12,0,12,0,6,0],
+	#["Hospital Regional Comodoro Rivadavia","Cirugía",60,12,60,12,60,12,60,12,60,12,48,48],
+	#["Hospital Zonal Alvear","Clínica Médica",48,12,48,12,48,12,48,12,48,12,24,24],
+	#["Hospital Subzonal Rawson","Clínica Médica",48,24,48,24,48,24,48,24,48,24,24,24],
+	#["Hospital Regional Comodoro Rivadavia","Clínica Médica",72,0,72,0,72,0,72,0,72,0,24,24],
+	#["Hospital Zonal Puerto Madryn","Clínica Médica",12,12,12,12,12,12,12,12,12,12,24,24],
+	#["Hospital Zonal Esquel","Clínica Médica",42,14,42,14,42,14,42,14,42,14,24,24],
+	#["Hospital Zonal Trelew","Clínica Médica",21,15,21,15,21,15,21,15,21,15,24,24],
+	#["Hospital Zonal Trelew","Transporte",102,0,102,0,102,0,102,0,102,0,72,72],
+	#["Hospital Zonal Puerto Madryn","Diagnóstico por Imágenes",17,0,17,0,17,0,17,0,17,0,0,0],
+	#["Hospital Zonal Trelew","Electromedicina",18,0,18,0,18,0,18,0,18,0,6,0],
+	#["Hospital Zonal Esquel","Enfermería - Clínica Médica",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Zonal Esquel","Enfermería - Clínica Quirúrgica",68,0,60,0,60,0,54,0,54,0,48,48],
+	#["Hospital Zonal Esquel","Enfermería - Neonatología",42,0,42,0,48,0,42,0,42,0,0,0],
+	#["Hospital Zonal Esquel","Enfermería - Oncología",12,0,12,0,12,0,12,0,12,0,0,0],
+	#["Hospital Zonal Esquel","Enfermería - Pediatría",48,0,48,0,48,0,48,0,48,0,48,48],
+	#["Hospital Zonal Esquel","Enfermería - Salud Mental",54,0,54,0,54,0,54,0,54,0,30,30],
+	#["Hospital Zonal Esquel","Enfermería - Tocoginecología",48,0,42,0,54,0,48,0,42,0,30,36],
+	#["Hospital Zonal Esquel","Enfermería - UMU",48,0,48,0,48,0,48,0,48,0,48,48],
+	#["Hospital Zonal Esquel","Enfermería - UTI",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Zonal Trelew","Enfermería - Área Externa",216,0,216,0,216,0,216,0,216,0,48,48],
+	#["Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión",54,0,54,0,54,0,54,0,54,0,30,30],
+	#["Hospital Zonal Puerto Madryn","Enfermería - Área Externa  - Inmunizaciones",156,0,156,0,156,0,156,0,156,0,36,18],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - Centro Obstétrico",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - Quirófano",48,0,48,0,48,0,48,0,48,0,24,24],
+	#["Hospital Subzonal Rawson","Enfermería - Clínica Médica",66,0,66,0,66,0,66,0,66,0,48,48],
+	#["Hospital Zonal Trelew","Enfermería - Clínica Médica",72,0,72,0,72,0,72,0,72,0,60,60],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Médica",78,0,78,0,78,0,78,0,78,0,72,72],
+	#["Hospital Zonal Puerto Madryn","Enfermería - Clínica Médica",66,0,66,0,66,0,66,0,66,0,60,60],
+	#["Hospital Zonal Trelew","Enfermería - Clínica Quirúrgica",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Quirúrgica",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Zonal Puerto Madryn","Enfermería - Clínica Quirúrgica",48,48,48,48,48,48,48,48,48,48,48,48],
+	#["Hospital Zonal Puerto Madryn","Enfermería - Consultorios Externos",36,0,36,0,36,0,36,0,36,0,6,0],
+	#["Hospital Zonal Trelew","Enfermería - Consultorios Externos",72,0,72,0,72,0,72,0,72,0,14,14],
+	#["Hospital Zonal Puerto Madryn","Enfermería - Control de Infecciones",6,0,6,0,6,0,6,0,6,0,6,],
+	#["Hospital Zonal Puerto Madryn","Enfermería - Jefatura y Supervisión",36,0,36,0,36,0,36,0,36,0,12,12],
+	#["Hospital Subzonal Rawson","Enfermería - Jefatura y Supervisión",20,0,20,0,20,0,20,0,20,0,0,0],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - Neonatología",54,0,78,0,66,0,72,0,60,0,60,60],
+	#["Hospital Zonal Trelew","Enfermería - Neonatología",66,0,66,0,66,0,66,0,66,0,60,60],
+	#["Hospital Subzonal Rawson","Enfermería - Pediatría",36,0,36,0,36,0,36,0,36,0,24,24],
+	#["Hospital Zonal Trelew","Enfermería - Pediatría",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - Pediatría",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Zonal Puerto Madryn","Enfermería - Pediatría",48,0,48,0,48,0,48,0,48,0,48,48],
+	#["Hospital Zonal Trelew","Enfermería - Prevalentes / Vacunación",24,0,24,0,24,0,24,0,24,0,0,0],
+	#["Hospital Subzonal Rawson","Enfermería - Quirófano",12,0,12,0,12,0,12,0,12,0,0,0],
+	#["Hospital Subzonal Rawson","Enfermería - Salud Mental",36,0,36,0,36,0,36,0,36,0,0,0],
+	#["Hospital Zonal Trelew","Enfermería - Salud Mental",72,0,72,0,72,0,72,0,72,0,48,48],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - Salud Mental",36,0,36,0,30,0,30,0,30,0,24,24],
+	#["Hospital Zonal Puerto Madryn","Enfermería - Salud Mental",54,0,54,0,54,0,54,0,54,0,54,48],
+	#["Hospital Zonal Trelew","Enfermería - Jefatura y Supervisión",42,0,42,0,42,0,42,0,42,0,6,0],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - Jefatura y Supervisión",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Zonal Trelew","Enfermería - Tocoginecología",66,0,66,0,66,0,66,0,66,0,48,48],
+	#["Hospital Subzonal Rawson","Enfermería - Tocoginecología",60,0,60,0,60,0,60,0,0,60,48,48],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología",54,0,36,0,54,0,54,0,54,0,48,42],
+	#["Hospital Zonal Puerto Madryn","Enfermería - Tocoginecología",42,0,42,0,42,0,42,0,42,0,42,42],
+	#["Hospital Zonal Trelew","Enfermería - Traumatología",54,0,54,0,54,0,54,0,54,0,42,42],
+	#["Hospital Zonal Trelew","Enfermería - UTIP",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - UTIP",24,0,24,0,24,0,24,0,24,0,24,24],
+	#["Hospital Zonal Puerto Madryn","Enfermería - UTIP",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Subzonal Rawson","Enfermería - UMU",66,0,66,0,66,0,66,0,66,0,54,54],
+	#["Hospital Zonal Trelew","Enfermería - UMU",96,0,96,0,96,0,96,0,96,0,84,84],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - UMU",90,0,90,0,90,0,90,0,90,0,84,84],
+	#["Hospital Zonal Puerto Madryn","Enfermería - UMU",66,0,66,0,66,0,66,0,66,0,72,72],
+	#["Hospital Zonal Alvear","Enfermería - UCI",48,0,48,0,48,0,48,0,48,0,48,48],
+	#["Hospital Zonal Alvear","Enfermería - UTI",72,0,72,0,72,0,72,0,72,0,72,72],
+	#["Hospital Zonal Trelew","Enfermería - UTI",72,0,72,0,72,0,72,0,72,0,42,42],
+	#["Hospital Zonal Puerto Madryn","Enfermería - UTI",78,0,78,0,78,0,78,0,78,0,72,72],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - UTIP",54,0,54,0,54,0,54,0,54,0,54,54],
+	#["Hospital Regional Comodoro Rivadavia","Enfermería - UTI",102,0,90,0,84,0,102,0,102,0,108,96],
+	#["Hospital Zonal Trelew","Estadísticas",252,0,252,0,252,0,252,0,252,0,36,36],
+	#["Hospital Zonal Trelew","Estadísticas - CMI",34,0,34,0,34,0,34,0,34,0,34,34],
+	#["Hospital Subzonal Rawson","Estadísticas",36,0,36,0,36,0,36,0,36,0,24,24],
+	#["Hospital Zonal Esquel","Estadísticas",78,0,78,0,78,0,78,0,78,0,13,13],
+	#["Hospital Zonal Alvear","Estadísticas",60,0,60,0,60,0,60,0,60,0,6,6],
+	#["Hospital Zonal Esquel","Esterilización",24,0,24,0,24,0,24,0,24,0,12,12],
+	#["Hospital Zonal Trelew","Esterilización",42,0,42,0,42,0,42,0,42,0,0,0],
+	#["Hospital Zonal Puerto Madryn","Esterilización",24,0,24,0,24,0,24,0,24,0,12,12],
+	#["Hospital Zonal Trelew","Farmacia",60,0,60,0,60,0,60,0,60,0,24,24],
+	#["Hospital Regional Comodoro Rivadavia","Farmacia",78,0,78,0,78,0,78,0,78,0,12,12],
+	#["Hospital Zonal Puerto Madryn","Farmacia",36,0,42,0,36,0,42,0,36,0,3,0],
+	#["Hospital Zonal Esquel","Hemoterapia y Banco de Sangre",34,0,34,0,34,0,34,0,34,0,6,6],
+	#["Hospital Zonal Puerto Madryn","Hemoterapia y Banco de Sangre",41,0,41,0,41,0,41,0,41,0,24,24],
+	#["Hospital Zonal Trelew","Hemoterapia y Banco de Sangre" - CMI,55,0,55,0,55,0,55,0,55,0,30,30],
+	#["Hospital Zonal Esquel","Instrumentación Quirúrgica",24,0,24,0,24,0,24,0,24,0,24,24],
+	#["Hospital Zonal Trelew","Kinesiología",61,0,61,0,61,0,61,0,61,0,0,0],
+	#["Hospital Subzonal Rawson","Laboratorio - Bioquímicos",40,12,40,12,40,12,40,12,40,12,24,24],
+	#["Hospital Subzonal Rawson","Laboratorio - Técnicos",30,0,30,0,30,0,30,0,30,0,24,24],
+	#["Hospital Zonal Esquel","Laboratorio - Técnicos",53,0,53,0,53,0,53,0,53,0,24,24],
+	#["Hospital Zonal Esquel","Laboratorio - Bioquímicos",56,12,56,12,56,12,56,12,56,12,24,24],
+	#["Hospital Zonal Puerto Madryn","Laboratorio - Bioquímicos",44,11,44,11,44,11,44,11,44,11,24,24],
+	#["Hospital Zonal Alvear","Laboratorio - Bioquímicos",32,12,32,12,32,12,32,12,32,12,30,30],
+	#["Hospital Zonal Trelew","Laboratorio - Bioquímicos",74,20,74,20,74,20,74,20,74,20,36,36],
+	#["Hospital Regional Comodoro Rivadavia","Laboratorio - Bioquímicos",84,12,84,12,84,12,84,12,84,12,24,24],
+	#["Hospital Zonal Alvear","Laboratorio - Técnicos",8,0,8,0,8,0,8,0,8,0,6,6],
+	#["Hospital Zonal Trelew","Laboratorio - Técnicos",60,0,60,0,60,0,60,0,60,0,30,30],
+	#["Hospital Regional Comodoro Rivadavia","Laboratorio - Técnicos",36,0,36,0,36,0,36,0,36,0,22,24],
+	#["Hospital Zonal Puerto Madryn","Laboratorio - Técnicos",74,11,74,11,74,11,74,11,74,11,36,36],
+	#["Hospital Regional Comodoro Rivadavia","Mantenimiento",126,0,126,0,126,0,126,0,126,0,0,0],
+	#["Hospital Zonal Trelew","Mantenimiento",54,0,54,0,54,0,54,0,54,0,48,48],
+	#["Hospital Zonal Trelew","Conmutador - CMI",42,0,42,0,42,0,42,0,42,0,36,36],
+	#["Hospital Regional Comodoro Rivadavia","Neonatología",36,36,36,36,36,36,36,36,36,36,24,24],
+	#["Hospital Zonal Puerto Madryn","Neonatología",24,12,24,12,24,12,24,12,24,12,24,24],
+	#["Hospital Zonal Trelew","Neonatología",48,13,48,13,48,13,48,13,48,13,24,24],
+	#["Hospital Zonal Trelew","Obstetricia",12,12,12,12,12,12,12,12,12,12,24,24],
+	#["Hospital Zonal Puerto Madryn","Obstetricia",12,12,12,12,12,12,12,12,12,12,24,24],
+	#["Hospital Zonal Puerto Madryn","Oncología",12,0,12,0,12,0,12,0,12,0,0,0],
+	#["Hospital Zonal Esquel","Pediatría",48,12,48,12,48,12,48,12,48,12,48,48],
+	#["Hospital Zonal Trelew","Pediatría",24,24,24,24,24,24,24,24,24,24,48,48],
+	#["Hospital Regional Comodoro Rivadavia","Pediatría",52,36,52,36,52,36,52,36,52,36,72,72],
+	#["Hospital Subzonal Rawson","Pediatría",12,12,12,12,12,12,12,12,12,12,24,24],
+	#["Hospital Zonal Puerto Madryn","Pediatría",32,24,32,24,32,24,32,24,32,24,48,48],
+	#["Hospital Subzonal Rawson","Radiología",90,0,90,0,90,0,90,0,90,0,24,24],
+	#["Hospital Zonal Esquel","Radiología",42,0,42,0,42,0,42,0,42,0,24,24],
+	#["Hospital Regional Comodoro Rivadavia","Radiología",72,0,72,0,72,0,72,0,72,0,24,24],
+	#["Hospital Zonal Trelew","Radiología - Técnicos",92,12,92,12,92,12,92,12,92,12,48,48],
+	#["Hospital Zonal Puerto Madryn","Rehabilitación",10,0,10,0,10,0,10,0,10,0,6,6],
+	#["Hospital Regional Comodoro Rivadavia","Salud Mental",72,0,72,0,72,0,72,0,72,0,24,24],
+	#["Hospital Zonal Alvear","UTI",26,14,18,14,30,14,26,14,22,14,24,24],
+	#["Hospital Zonal Esquel","Tocoginecología",33,12,33,12,33,12,33,12,33,12,24,24],
+	#["Hospital Subzonal Rawson","Tocoginecología",12,12,12,12,12,12,12,12,12,12,24,24],
+	#["Hospital Zonal Trelew","Tocoginecología  (C/Ecografía)",60,13,60,13,60,13,60,13,60,13,24,24],
+	#["Hospital Zonal Puerto Madryn","Tocoginecología",12,12,12,12,12,12,12,12,12,12,24,24],
+	#["Hospital Regional Comodoro Rivadavia","Tocoginecología",36,36,36,36,36,36,36,36,36,36,72,72],
+	#["Hospital Regional Comodoro Rivadavia","Obstetricia",24,24,24,24,24,24,24,24,24,24,48,48],
+	#["Hospital Zonal Esquel","Transporte",78,0,78,0,78,0,78,0,78,0,52,48],
+	#["Hospital Zonal Puerto Madryn","Transporte",76,0,76,0,76,0,76,0,76,0,60,60],
+	#["Hospital Regional Comodoro Rivadavia","Traumatología",35,0,35,0,35,0,35,0,35,0,24,24],
+	#["Hospital Zonal Puerto Madryn","UAU - Internación",48,0,48,0,48,0,48,0,48,0,18,18],
+	#["Hospital Zonal Puerto Madryn","UTI - UCE",32,12,32,12,32,12,32,12,32,12,24,24],
+	#["Hospital Zonal Trelew","UTIP",12,12,12,12,12,12,12,12,12,12,24,24],
+	#["Hospital Zonal Puerto Madryn","UTIP",24,12,24,12,24,12,24,12,24,12,24,24],
+	#["Hospital Zonal Alvear","UMU",36,24,36,24,36,24,36,24,36,24,48,48],
+	#["Hospital Zonal Esquel","UMU",48,48,48,48,48,48,48,48,48,48,72,48],
+	#["Hospital Zonal Trelew","UMU",24,24,24,24,24,24,24,24,24,24,72,72],
+	#["Hospital Regional Comodoro Rivadavia","UMU",36,36,36,36,36,36,36,36,36,36,72,72],
+	#["Hospital Zonal Puerto Madryn","UMU",48,48,48,48,48,48,48,48,48,48,48,48],
+	#["Hospital Zonal Esquel","UTI",35,12,35,12,35,12,35,12,35,12,24,24],
+	#["Hospital Zonal Trelew","UTI",52,24,52,24,52,24,52,24,52,24,48,48],
+	#["Hospital Regional Comodoro Rivadavia","UTIP",30,12,30,12,30,12,30,12,30,12,24,24]
+#]
+#
+#coverage_list.each do |service_name,lu_d,lu_n, ma_d, ma_m, mi_d, mi_n, ju_d, ju_n, vi_d, vi_n, sa, dom|
+	#d = Dependence.wher(name: dependence_name).first
+	#s =  Service.where(name: service_name).first
+	#s_o_d = ServiceOfDependence.where(dependence: d, service: s).first
+	#if s_o_d.nil?
+		#byebug
+	#end
+	#c = Coverage.new()
+#end
 
 
 

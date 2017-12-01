@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Agent:</strong>
+  <%= @historical_guard_agent.agent %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @historical_guard_agent.month %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @historical_guard_agent.year %>
+</p>
+
+<p>
+  <strong>Concept:</strong>
+  <%= @historical_guard_agent.concept %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @historical_guard_agent.description %>
+</p>
+
+<p>
+  <strong>Hs total:</strong>
+  <%= @historical_guard_agent.hs_total %>
+</p>
+
+<%= link_to 'Edit', edit_historical_guard_agent_path(@historical_guard_agent) %> |
+<%= link_to 'Back', historical_guard_agents_path %>

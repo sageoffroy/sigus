@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Percentage Months</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mes</th>
+      <th>Valor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @percentage_months.each do |percentage_month| %>
+      <tr>
+        <td><%= percentage_month.mes %></td>
+        <td><%= percentage_month.valor %></td>
+        <td><%= link_to 'Show', percentage_month %></td>
+        <td><%= link_to 'Edit', edit_percentage_month_path(percentage_month) %></td>
+        <td><%= link_to 'Destroy', percentage_month, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Percentage Month', new_percentage_month_path %>
