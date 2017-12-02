@@ -61,3 +61,9 @@ $(document).on 'turbolinks:load', ->
   form.integrateSelect2();
 
   $(".menu").integrateSelect2();
+
+$(document).on 'turbolinks:before-cache', ->
+  dataTable =  $($.fn.dataTable.tables(true)).DataTable()
+  if (dataTable != null)
+   dataTable.destroy();
+   dataTable = null;
