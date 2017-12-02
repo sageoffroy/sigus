@@ -42,12 +42,13 @@ class ReportsController < ApplicationController
   # POST /reports.json
   def create
     @report = Report.new(report_params)
-    #-- Primera Parte
-    year = @report.year
-    month = @report.month
-    day = 1
-    
-    date_1 = Date.new year, month, day
+    @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+    #year = @report.year
+    #month = @report.month
+    #day = 1
+    #date_1 = Date.new year, month, day
 
     respond_to do |format|
       if @report.save
