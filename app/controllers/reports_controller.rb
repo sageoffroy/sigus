@@ -194,28 +194,27 @@ class ReportsController < ApplicationController
 
     
     # Obtener la cobertura del servicio
-    cobertura = Coverage.where(service_of_dependence: @report.service_of_dependence).first
+    #cobertura = Coverage.where(service_of_dependence: @report.service_of_dependence).first
 
-    hs_dias_semana_cobertura = (cobertura.hs_lunes_diurnas * lunes)+(cobertura.hs_martes_diurnas * martes) + (cobertura.hs_miercoles_diurnas * miercoles) + (cobertura.hs_jueves_diurnas * jueves) + (cobertura.hs_viernes_diurnas * viernes)
-    gs_dias_semana_cobertura = (cobertura.hs_lunes_nocturnas * lunes)+(cobertura.hs_martes_nocturnas * martes) + (cobertura.hs_miercoles_nocturnas * miercoles) + (cobertura.hs_jueves_nocturnas * jueves) + (cobertura.hs_viernes_nocturnas * viernes)
-    hs_sabado_cobertura = cobertura.hs_sabado * sabados
-    hs_domingo_cobertura = cobertura.hs_domingo * domingos
+    #hs_dias_semana_cobertura = (cobertura.hs_lunes_diurnas * lunes)+(cobertura.hs_martes_diurnas * martes) + (cobertura.hs_miercoles_diurnas * miercoles) + (cobertura.hs_jueves_diurnas * jueves) + (cobertura.hs_viernes_diurnas * viernes)
+    #gs_dias_semana_cobertura = (cobertura.hs_lunes_nocturnas * lunes)+(cobertura.hs_martes_nocturnas * martes) + (cobertura.hs_miercoles_nocturnas * miercoles) + (cobertura.hs_jueves_nocturnas * jueves) + (cobertura.hs_viernes_nocturnas * viernes)
+    #hs_sabado_cobertura = cobertura.hs_sabado * sabados
+    #hs_domingo_cobertura = cobertura.hs_domingo * domingos
     
 
 
     # ---- Segunda Parte
 
     # agentes = obtengo todos los agentes del servicio para el service_of_dependence del reporte
-    agents_of_service  = AgentOfService.where(service_of_dependence: @report.service_of_dependence)
-    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
-    byebug
+    #agents_of_service  = AgentOfService.where(service_of_dependence: @report.service_of_dependence)
+    #@agents = Agent.where(id: agents_of_service.pluck(:agent_id))
     
-    hs_dias_semana_servicio = 0
-    gs_dias_semana_servicio = 0
-    hs_sabado_servicio = 0
+    #hs_dias_semana_servicio = 0
+    #gs_dias_semana_servicio = 0
+    #hs_sabado_servicio = 0
     
     # Por Agente
-    @agents.each do |agent|
+    #@agents.each do |agent|
       # 1, 2, 3, 4, 6:  Ignorar al agente
       # 5: él cálculo debe hacerse y tomar luego la mitad de ese valor
       # 7: él cálculo debe hacerse y tomar luego el porcentaje 83.33 de ese valor.
@@ -260,7 +259,7 @@ class ReportsController < ApplicationController
 
       # dotacion_actual += 1
     # fin por agente
-    end
+    #end
 
     # Si consultorio tiene un servicio y no tiene agente 
       #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
