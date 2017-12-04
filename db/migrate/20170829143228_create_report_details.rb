@@ -7,12 +7,6 @@ class CreateReportDetails < ActiveRecord::Migration[5.1]
       t.integer :total_hours_gs
       t.integer :total_hours_umu
       t.integer :total_hours
-      t.boolean :fm
-      t.boolean :tnf
-      t.boolean :tt
-      t.integer :hours_to_add
-      t.integer :hours_to_remove
-      t.integer :total_office_hours
       t.integer :day1_id, index: true
       t.integer :day2_id, index: true
       t.integer :day3_id, index: true

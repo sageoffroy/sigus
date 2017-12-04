@@ -1,0 +1,57 @@
+<%= form_with(model: addiotional, local: true) do |form| %>
+  <% if addiotional.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(addiotional.errors.count, "error") %> prohibited this addiotional from being saved:</h2>
+
+      <ul>
+      <% addiotional.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.text_field :agent_id, id: :addiotional_agent_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :year %>
+    <%= form.number_field :year, id: :addiotional_year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :month %>
+    <%= form.number_field :month, id: :addiotional_month %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :addiotional_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fm %>
+    <%= form.check_box :fm, id: :addiotional_fm %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tnf %>
+    <%= form.check_box :tnf, id: :addiotional_tnf %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tt %>
+    <%= form.check_box :tt, id: :addiotional_tt %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rotative_turn_id %>
+    <%= form.text_field :rotative_turn_id, id: :addiotional_rotative_turn_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

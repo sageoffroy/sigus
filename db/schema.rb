@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201153115) do
+ActiveRecord::Schema.define(version: 20171204150658) do
+
+  create_table "addiotionals", force: :cascade do |t|
+    t.integer "agent_id"
+    t.integer "year"
+    t.integer "month"
+    t.string "description"
+    t.boolean "fm"
+    t.boolean "tnf"
+    t.boolean "tt"
+    t.integer "rotative_turn_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_addiotionals_on_agent_id"
+    t.index ["rotative_turn_id"], name: "index_addiotionals_on_rotative_turn_id"
+  end
 
   create_table "agent_of_services", force: :cascade do |t|
     t.integer "agent_id"
@@ -48,6 +63,7 @@ ActiveRecord::Schema.define(version: 20171201153115) do
     t.boolean "exclusive_dedication"
     t.boolean "functional_dedication"
     t.boolean "unhealthy_work"
+    t.boolean "rural_functional_dedication"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_type_id"], name: "index_agents_on_agent_type_id"
@@ -162,9 +178,10 @@ ActiveRecord::Schema.define(version: 20171201153115) do
   create_table "novelties", force: :cascade do |t|
     t.integer "agent_id"
     t.integer "novelty_type_id"
-    
-    t.date "date_from"
-    t.date "date_to"
+    t.integer "month"
+    t.integer "year"
+    t.integer "month_ref"
+    t.integer "year_ref"
     t.string "description"
     t.integer "hours_to_add"
     t.integer "hours_to_remove"
@@ -225,12 +242,6 @@ ActiveRecord::Schema.define(version: 20171201153115) do
     t.integer "total_hours_gs"
     t.integer "total_hours_umu"
     t.integer "total_hours"
-    t.boolean "fm"
-    t.boolean "tnf"
-    t.boolean "tt"
-    t.integer "hours_to_add"
-    t.integer "hours_to_remove"
-    t.integer "total_office_hours"
     t.integer "day1_id"
     t.integer "day2_id"
     t.integer "day3_id"
@@ -302,7 +313,11 @@ ActiveRecord::Schema.define(version: 20171201153115) do
   create_table "reports", force: :cascade do |t|
     t.integer "year"
     t.integer "month"
-    t.integer "total_office_hours"
+    t.integer "total_hs"
+    t.integer "total_hs_umu"
+    t.integer "total_hs_nov"
+    t.integer "total_hs_exc"
+    t.string "report_type"
     t.integer "service_of_dependence_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -325,10 +340,8 @@ ActiveRecord::Schema.define(version: 20171201153115) do
   create_table "rotative_turns", force: :cascade do |t|
     t.integer "days"
     t.boolean "is_complete"
-    t.integer "report_detail_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["report_detail_id"], name: "index_rotative_turns_on_report_detail_id"
   end
 
   create_table "service_of_dependences", force: :cascade do |t|
