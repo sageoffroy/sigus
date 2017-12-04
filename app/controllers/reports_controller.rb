@@ -6,7 +6,11 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
+    if current_user.hospital?
+      @reports = Report.where(user: current_user)
+    else
+      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
+    end
   end
 
   # GET /reports/1
@@ -35,7 +39,7 @@ class ReportsController < ApplicationController
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
 
-    @report = Report.find(params[:id])
+    @report = Report.find(params[:id]) #ver si se puede mejorar
   end
 
   # POST /reports

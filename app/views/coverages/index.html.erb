@@ -1,24 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Coverages</h1>
+<h1>Cobertura</h1>
 
-<table>
+<table class="table datatable">
   <thead>
     <tr>
-      <th>Service of dependence</th>
-      <th>Hs lunes diurnas</th>
-      <th>Hs lunes nocturnas</th>
-      <th>Hs martes diurnas</th>
-      <th>Hs martes nocturnas</th>
-      <th>Hs miercoles diurnas</th>
-      <th>Hs miercoles nocturnas</th>
-      <th>Hs jueves diurnas</th>
-      <th>Hs jueves nocturnas</th>
-      <th>Hs viernes diurnas</th>
-      <th>Hs viernes nocturnas</th>
-      <th>Hs sabado</th>
-      <th>Hs domingo</th>
-      <th colspan="3"></th>
+      <th rowspan="2" class="">(Hospital) - Servicio</th>
+      <th colspan="2" class="">Lunes</th>
+      <th colspan="2" class="">Martes</th>
+      <th colspan="2" class="">Miercoles</th>
+      <th colspan="2" class="">Jueves</th>
+      <th colspan="2" class="">Viernes</th>
+      <th class="">Sabado</th>
+      <th class="">Domingo</th>
+      <th rowspan="2">Opciones</th>
+    </tr>
+    <tr>
+      <th>hs</th>
+      <th>gs</th>
+      <th>hs</th>
+      <th>gs</th>
+      <th>hs</th>
+      <th>gs</th>
+      <th>hs</th>
+      <th>gs</th>
+      <th>hs</th>
+      <th>gs</th>
+      <th>hs</th>
+      <th>hs</th>
+      
     </tr>
   </thead>
 
@@ -38,9 +48,7 @@
         <td><%= coverage.hs_viernes_nocturnas %></td>
         <td><%= coverage.hs_sabado %></td>
         <td><%= coverage.hs_domingo %></td>
-        <td><%= link_to 'Show', coverage %></td>
-        <td><%= link_to 'Edit', edit_coverage_path(coverage) %></td>
-        <td><%= link_to 'Destroy', coverage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', coverage %><%= link_to 'Edit', edit_coverage_path(coverage) %><%= link_to 'Destroy', coverage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -48,4 +56,4 @@
 
 <br>
 
-<%= link_to 'New Coverage', new_coverage_path %>
+<%= link_to 'Agregar Cobertura', new_coverage_path, class: 'btn btn-primary' %>
