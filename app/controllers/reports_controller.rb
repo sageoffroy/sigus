@@ -103,15 +103,13 @@ class ReportsController < ApplicationController
 
     
     # Obtener la cobertura del servicio
-    cobertura = Coverage.where(service_of_dependence: @report.service_of_dependence).first
+    #cobertura = Coverage.where(service_of_dependence: @report.service_of_dependence).first
 
-    hs_dias_semana_cobertura = (cobertura.hs_lunes_diurnas * lunes)+(cobertura.hs_martes_diurnas * martes) + (cobertura.hs_miercoles_diurnas * miercoles) + (cobertura.hs_jueves_diurnas * jueves) + (cobertura.hs_viernes_diurnas * viernes)
-    gs_dias_semana_cobertura = (cobertura.hs_lunes_nocturnas * lunes)+(cobertura.hs_martes_nocturnas * martes) + (cobertura.hs_miercoles_nocturnas * miercoles) + (cobertura.hs_jueves_nocturnas * jueves) + (cobertura.hs_viernes_nocturnas * viernes)
-    hs_sabado_cobertura = cobertura.hs_sabado * sabados
-    hs_domingo_cobertura = cobertura.hs_domingo * domingos
+    #hs_dias_semana_cobertura = (cobertura.hs_lunes_diurnas * lunes)+(cobertura.hs_martes_diurnas * martes) + (cobertura.hs_miercoles_diurnas * miercoles) + (cobertura.hs_jueves_diurnas * jueves) + (cobertura.hs_viernes_diurnas * viernes)
+    #gs_dias_semana_cobertura = (cobertura.hs_lunes_nocturnas * lunes)+(cobertura.hs_martes_nocturnas * martes) + (cobertura.hs_miercoles_nocturnas * miercoles) + (cobertura.hs_jueves_nocturnas * jueves) + (cobertura.hs_viernes_nocturnas * viernes)
+    #hs_sabado_cobertura = cobertura.hs_sabado * sabados
+    #hs_domingo_cobertura = cobertura.hs_domingo * domingos
     
-
-    byebug
 
 
 

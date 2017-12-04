@@ -5,10 +5,10 @@
 <table>
   <thead>
     <tr>
-      <th>Agent</th>
-      <th>Novelty type</th>
-      <th>Date from</th>
-      <th>Date to</th>
+      <th>Agente</th>
+      <th>tipo</th>
+      <th>Mes</th>
+      <th>Año</th>
       <th>Description</th>
       <th>Hours to add</th>
       <th>Hours to remove</th>
@@ -18,22 +18,22 @@
 
   <tbody>
     <% @novelties.each do |novelty| %>
-      <tr>
-        <td><%= novelty.agent %></td>
-        <td><%= novelty.novelty_type %></td>
-        <td><%= novelty.date_from %></td>
-        <td><%= novelty.date_to %></td>
-        <td><%= novelty.description %></td>
-        <td><%= novelty.hours_to_add %></td>
-        <td><%= novelty.hours_to_remove %></td>
-        <td><%= link_to 'Show', novelty %></td>
-        <td><%= link_to 'Edit', edit_novelty_path(novelty) %></td>
-        <td><%= link_to 'Destroy', novelty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= novelty.agent %></td>
+      <td><%= novelty.novelty_type %></td>
+      <td><%= novelty.month %></td>
+      <td><%= novelty.year %></td>
+      <td><%= novelty.description %></td>
+      <td><%= novelty.hours_to_add %></td>
+      <td><%= novelty.hours_to_remove %></td>
+      <td><%= link_to 'Show', novelty %></td>
+      <td><%= link_to 'Edit', edit_novelty_path(novelty) %></td>
+      <td><%= link_to 'Destroy', novelty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Novelty', new_novelty_path %>
+<%= link_to 'Agregar Novedad', new_novelty_path %>
