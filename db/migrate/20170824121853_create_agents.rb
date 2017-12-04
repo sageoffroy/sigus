@@ -14,9 +14,10 @@ class CreateAgents < ActiveRecord::Migration[5.1]
       t.references :study
       t.references :job_function
       t.references :agent_type
-      t.boolean :exclusive_dedication     #Dedicación Exclusiva
-      t.boolean :functional_dedication    #Dedicación Funcional
-      t.boolean :unhealthy_work           #Trabajo Insalubre
+      t.boolean :exclusive_dedication       #Dedicación Exclusiva
+      t.boolean :functional_dedication      #Dedicación Funcional
+      t.boolean :unhealthy_work             #Trabajo Insalubre
+      t.boolean :rural_functional_dedication #Dedicacion Funcional Rural
 
 
       t.timestamps

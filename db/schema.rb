@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20171201153115) do
   create_table "novelties", force: :cascade do |t|
     t.integer "agent_id"
     t.integer "novelty_type_id"
+    
     t.date "date_from"
     t.date "date_to"
     t.string "description"

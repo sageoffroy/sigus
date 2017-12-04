@@ -140,16 +140,16 @@ class AgentOfServicesController < ApplicationController
         # ----- Concepto 1157<375 <=        "Médico Residente"
         # ----- Cualquier otro Caso <=  "Personal de Planta"
         agente.agent_type = AgentType.where(code: 1).first # Personal de planta
-
         if (h_agente.cat == "19")
           agente.agent_type = AgentType.where(code: 2).first # Mensualizado para guardia
         end
         if (!h_agente[titulos_a.index("1256")].nil?)
           agente.agent_type = AgentType.where(code: 3).first
         end
-        
-        if (h_agente[titulos_a.index("1157")].to_i < 375)
+        if (!h_agente[titulos_a.index("1157")].nil?)
+          if (h_agente[titulos_a.index("1157")].to_i < 375)
             agente.agent_type = AgentType.where(code: 4).first
+          end
         end
 
         if agente.save
