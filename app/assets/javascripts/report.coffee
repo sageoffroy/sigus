@@ -230,9 +230,10 @@ $(document).on 'turbolinks:load', ->
 
   if $('.reports.edit').length > 0
     days_controls()
-    report_service = $('#report_service')
-    id = report_service.val()
-    set_selects_of_agents(id)
+    set_days_event()
+
+  if $('.reports.update').length > 0
+    days_controls()
     set_days_event()
 
   if $('.reports.new_active').length > 0

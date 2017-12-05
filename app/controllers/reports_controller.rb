@@ -11,40 +11,48 @@ class ReportsController < ApplicationController
     else
       @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
     end
+
   end
 
   # GET /reports/1
   # GET /reports/1.json
   def show
     @services_of_dependence = current_user.dependence.service_of_dependences
-    
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   # GET /reports/new
   def new
     @report = Report.new
     @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+    #@agents = Agent.all
   end
 
   def new_active
     @report = Report.new
     @report.report_type = "Guardias Activas"
     @services_of_dependence = current_user.dependence.service_of_dependences
-    
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   def new_pasive
     @report = Report.new
     @report.report_type = "Guardias Pasivas"
     @services_of_dependence = current_user.dependence.service_of_dependences
-    
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   def new_extra_hours
     @report = Report.new
     @report.report_type = "Horas Extras"
     @services_of_dependence = current_user.dependence.service_of_dependences
-    
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   # GET /reports/1/edit
@@ -53,6 +61,9 @@ class ReportsController < ApplicationController
       current_user.dependence = Dependence.where(code:106).first
     end
     @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+
     @report = Report.find(params[:id]) #ver si se puede mejorar
   end
 
@@ -61,7 +72,9 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     @services_of_dependence = current_user.dependence.service_of_dependences
-    
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+  
     
 
     respond_to do |format|
@@ -88,6 +101,10 @@ class ReportsController < ApplicationController
   def update
     
     @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+    
+
     respond_to do |format|
       if @report.update(report_params)
         format.html { redirect_to @report, notice: 'Report was successfully updated.' }

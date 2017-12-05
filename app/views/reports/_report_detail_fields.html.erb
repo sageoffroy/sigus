@@ -14,7 +14,7 @@
 				<%= f.collection_select :agent_id, Agent.all, :id, :to_s, {prompt: "Agente Ajeno al Servicio"}, {class: "select2 select-field all_agent"} %>
 			<% else %>
 				<%= f.hidden_field :belong_service, :value => true%>
-				<%= f.collection_select :agent_id, Agent.where(id:1), :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>
+				<%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>
 			<% end %>			
 		</div>
 	</div>
