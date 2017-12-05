@@ -8,6 +8,7 @@
       </script>
   <% end %>
   <%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= f.hidden_field :report_type, :value => @report.report_type %>
   <div class="form-group row">
     <div class="col-sm-2">
       <h6>Año</h6>
@@ -30,9 +31,7 @@
     <div class="input-group col-sm-8">
       <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
     </div>
-    <!--div class="input-group col-sm-2">
-      <%= f.text_field :total_office_hours, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)",:placeholder => "0", :oninput => "maxLengthCheck(this)", class: "office_hours" %>
-    </div-->
+    
 
   </div>
   <h5>Agentes</h5>

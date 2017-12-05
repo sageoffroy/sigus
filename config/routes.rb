@@ -17,7 +17,12 @@ Rails.application.routes.draw do
   resources :job_functions
   resources :observations
   resources :report_details
+  get 'reports/new_active' => 'reports#new_active'
+  get 'reports/new_pasive' => 'reports#new_pasive'
+  get '/reports/new_extra_hours' => 'reports#new_extra_hours'
+  
   resources :reports
+
   resources :nationalities
   resources :hour_regimes
   resources :service_of_dependences
@@ -28,6 +33,7 @@ Rails.application.routes.draw do
   resources :services
   resources :agents
   devise_for :users
+
   root 'welcome#index'
   get 'agents_of_dependence/:dependence' => 'agents#agents_of_dependence'
   get 'services_of_dependence/' => 'services#services_of_dependence'
@@ -38,5 +44,9 @@ Rails.application.routes.draw do
   post 'update_agents_of_service/:id' => 'agent_of_services#agents_from_service_of_dependence'
   get 'dependence/' => 'dependences#dependence'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  
+  
+  
+
+  
 end

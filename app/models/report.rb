@@ -5,6 +5,7 @@ class Report < ApplicationRecord
   validates :service_of_dependence, presence: true
   validates :year, presence: true
   validates :month, presence: true
+   validates :report_type, presence: true
 
   validates_uniqueness_of :service_of_dependence, :scope => [:year, :month]
   accepts_nested_attributes_for :report_details, :reject_if => :all_blank, allow_destroy: true
