@@ -15,13 +15,12 @@ class ReportDetailsController < ApplicationController
   # GET /report_details/new
   def new
     @report_detail = ReportDetail.new
-    @report_detail.observations.build
+    
 
   end
 
   # GET /report_details/1/edit
   def edit
-
   end
 
   # POST /report_details

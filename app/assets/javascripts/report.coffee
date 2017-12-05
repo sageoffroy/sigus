@@ -125,6 +125,7 @@ set_last_select_of_agents = (id)->
 
 
 days_controls = ->
+  console.log "Days Controls"
   add_report_detail = $('#add_report_details')
   report_year = $('#report_year')
   report_month = $('#report_month')
@@ -134,7 +135,8 @@ days_controls = ->
   check_day_of_month()
   set_weekend(report_year, report_month)
   set_free_days(report_year, report_month)
-
+  
+ 
   report_year.on 'select2:select', (e) ->
     #console.log "Cambiando el Año"
     check_general_data(report_year, report_month, report_service, add_report_detail)
@@ -219,8 +221,25 @@ $(document).on 'cocoon:after-insert', (e) ->
   
 
 $(document).on 'turbolinks:load', ->
+  if $('.reports.create').length > 0
+    days_controls()
+    report_service = $('#report_service')
+    id = report_service.val()
+    set_selects_of_agents(id)
+    set_days_event()
+
   if $('.reports.edit').length > 0
     days_controls()
-  if $('.reports.new').length > 0
+    report_service = $('#report_service')
+    id = report_service.val()
+    set_selects_of_agents(id)
+    set_days_event()
+
+  if $('.reports.new_active').length > 0
     days_controls()
-  #$('#select_dependence option:eq('+ <%= current_user.dependence.id %>+')').prop('selected', true)
+
+  if $('.reports.new_pasive').length > 0
+    days_controls()
+    
+  if $('.reports.new_extra_hours').length > 0
+    days_controls()
