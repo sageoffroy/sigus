@@ -157,7 +157,7 @@ class ReportsController < ApplicationController
       sabados = days_from_month.count("Sat")
       domingos = days_from_month.count("Sun")
 
-        #Verificar feriados y convertirlos
+      #Verificar feriados y convertirlos
 
       free_days = FreeDay.where()
       # SQL       Model.where('extract(month from date_column) = ?', desired_month)

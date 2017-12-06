@@ -75,11 +75,9 @@ class ReportsController < ApplicationController
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
     
-    byebug
-
-    if (@report.report_type == "Guardias Activas")
-      calcular_cupo()
-    end
+    #if (@report.report_type == "Guardias Activas")
+      #calcular_cupo(@report)
+    #end
 
     respond_to do |format|
       if @report.save
@@ -104,9 +102,9 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1.json
   def update
     
-    if (@report.report_type == "Guardias Activas")
-      calcular_cupo()
-    end
+    #if (@report.report_type == "Guardias Activas")
+      #calcular_cupo(@report)
+    #end
 
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
@@ -137,8 +135,67 @@ class ReportsController < ApplicationController
   end
 
 
-  def calcular_cupo
-    byebug
+  def calcular_cupo (report)
+    #recuperar valores del form
+    year = report.year
+    month = report.month
+
+
+    #---- PRIMERA PARTE
+
+    #calcular cantidades de cada día
+    first_day = Date.new year, month, 1
+    last_day = Date.civil year, month, -1
+
+    days_from_month = (first_day..last_day).map{ |date| date.strftime("%a") }
+
+    lunes = days_from_month.count("Mon")
+    martes = days_from_month.count("Tue")
+    miercoles = days_from_month.count("Wed")
+    jueves = days_from_month.count("Thu")
+    viernes = days_from_month.count("Fri")
+    sabados = days_from_month.count("Sat")
+    domingos = days_from_month.count("Sun")
+
+     #Verificar feriados y convertirlos
+
+    free_days = FreeDay.where()
+    # SQL       Model.where('extract(month from date_column) = ?', desired_month)
+    # SQLite    Model.where("cast(strftime('%m', date_column) as int) = ?", desired_month)
+
+    FreeDay.where("cast(strftime('%m', day) as int) = ?", month).each do |fd|
+      if !fd.day.sunday?
+        if !fd.day.saturday?
+          if fd.local? or fd.provincial?
+            sabados+=1
+            case fd.day.strftime("%A")
+            when 'Monday'
+              lunes-=1
+            when 'Tuesday'
+              martes-=1
+            when 'Wednesday'
+              miercoles-=1
+            when 'Thursday'
+              jueves-=1
+            when 'Friday'
+              viernes-=1
+            end
+          end
+        else
+          if fd.nacional?
+            domingos+=1
+            sabados-=1
+          end
+        end
+      end
+    end
+
+    #obtener dias habiles
+    cant_dias_habiles = lunes + martes + miercoles + jueves + viernes
+
+
+    #---- SEGUNDA PARTE
+
   end
 
   private
@@ -149,7 +206,24 @@ class ReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
-      params.require(:report).permit(:year, :month, :service_of_dependence_id, :user_id,:total_hs,:total_hs_umu,:total_hs_nov,:total_hs_exc,:report_type,
+
+        #report fields
+        #t.integer :year, foreign_key: true
+        #t.integer :month, foreign_key: true
+        #t.references :service_of_dependence, foreign_key: true
+        #t.integer :total_hs
+        #t.integer :total_hs_umu
+        #t.integer :total_hs_nov
+        #t.integer :total_hs_exc
+        #t.integer :total_hs_free
+        #t.string :report_type, foreign_key: true
+        #t.integer :dotacion
+        #t.string :estado         #["Rechazado" , "Validado", "Aprob Director Hosp", "Aprob Director A/P", "Aprob Sueldos"]
+        #t.boolean :consolidado
+        #t.references :user
+
+
+      params.require(:report).permit(:year, :month, :service_of_dependence_id, :total_hs,:total_hs_umu,:total_hs_nov,:total_hs_exc,:total_hs_free,:report_type,:dotacion,:estado,:consolidado,:user_id,
         report_details_attributes: [:id, :url, :_destroy, :agent_id, :belong_service,:total_hours, :total_hours_gs, :total_hours_umu,
         day1_attributes: [:id, :hours, :is_umu],
         day2_attributes: [:id, :hours, :is_umu],
