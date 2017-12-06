@@ -35,7 +35,8 @@ class ReportDetail < ApplicationRecord
   belongs_to :day30, :class_name => 'DayHour', :foreign_key => 'day30_id', optional:true
   belongs_to :day31, :class_name => 'DayHour', :foreign_key => 'day31_id', optional:true
   
-  validates_uniqueness_of :agent, :scope => [:report]
+  #validates_uniqueness_of :agent, :scope => [:report]
+  
 
   accepts_nested_attributes_for :rotative_turn
   accepts_nested_attributes_for :observation
