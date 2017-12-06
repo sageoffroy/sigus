@@ -75,7 +75,9 @@ class ReportsController < ApplicationController
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   
-    
+    if (@report.report_type == "activas")
+      calcular_cupo()
+    end
 
     respond_to do |format|
       if @report.save
@@ -88,7 +90,7 @@ class ReportsController < ApplicationController
         elsif @report.report_type == "Guardias Pasivas"
           format.html { render 'reports/new_pasive' }
           format.json { render json: @report.errors, status: :unprocessable_entity }
-        elsif @report.report_type == "Horas Extra"
+        elsif @report.report_type == "Horas Extras"
           format.html { render '/reports/new_extra_hours' }
           format.json { render json: @report.errors, status: :unprocessable_entity }
         end
@@ -100,10 +102,15 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1.json
   def update
     
+    if (@report.report_type == "activas")
+      calcular_cupo()
+    end
+    
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
     
+
 
     respond_to do |format|
       if @report.update(report_params)
@@ -129,7 +136,7 @@ class ReportsController < ApplicationController
 
 
   def calcular_cupo
-
+    byebug
   end
 
   private

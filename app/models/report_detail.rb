@@ -34,24 +34,6 @@ class ReportDetail < ApplicationRecord
   belongs_to :day30, :class_name => 'DayHour', :foreign_key => 'day30_id', optional:true
   belongs_to :day31, :class_name => 'DayHour', :foreign_key => 'day31_id', optional:true
   
-
-  #validates_uniqueness_of :agent, :scope => [:report]
-  validate :culo
-  def culo
-    bandera_primero = true
-    anterior = self.report_details.first
-
-    self.report_details.each do |report_detail|
-      if (anterior.agent == report_detail.agent) and !bandera_primero
-        return false
-      else
-        anterior = report_detail
-      end
-      bandera_primero = false
-    end
-    return true
-  end
-
   accepts_nested_attributes_for :day1
   accepts_nested_attributes_for :day2
   accepts_nested_attributes_for :day3
