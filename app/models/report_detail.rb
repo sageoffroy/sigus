@@ -1,8 +1,7 @@
 class ReportDetail < ApplicationRecord
   belongs_to :report
   belongs_to :agent
-  has_one :observation
-  has_one :rotative_turn
+  
   belongs_to :day1, :class_name => 'DayHour', :foreign_key => 'day1_id', optional:true
   belongs_to :day2, :class_name => 'DayHour', :foreign_key => 'day2_id', optional:true
   belongs_to :day3, :class_name => 'DayHour', :foreign_key => 'day3_id', optional:true
@@ -35,10 +34,24 @@ class ReportDetail < ApplicationRecord
   belongs_to :day30, :class_name => 'DayHour', :foreign_key => 'day30_id', optional:true
   belongs_to :day31, :class_name => 'DayHour', :foreign_key => 'day31_id', optional:true
   
-  validates_uniqueness_of :agent, :scope => [:report]
 
-  accepts_nested_attributes_for :rotative_turn
-  accepts_nested_attributes_for :observation
+  #validates_uniqueness_of :agent, :scope => [:report]
+  validate :culo
+  def culo
+    bandera_primero = true
+    anterior = self.report_details.first
+
+    self.report_details.each do |report_detail|
+      if (anterior.agent == report_detail.agent) and !bandera_primero
+        return false
+      else
+        anterior = report_detail
+      end
+      bandera_primero = false
+    end
+    return true
+  end
+
   accepts_nested_attributes_for :day1
   accepts_nested_attributes_for :day2
   accepts_nested_attributes_for :day3
@@ -70,7 +83,4 @@ class ReportDetail < ApplicationRecord
   accepts_nested_attributes_for :day29
   accepts_nested_attributes_for :day30
   accepts_nested_attributes_for :day31
- 
-  
-
 end
