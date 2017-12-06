@@ -11,7 +11,6 @@ class ReportsController < ApplicationController
     else
       @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
     end
-
   end
 
   # GET /reports/1
