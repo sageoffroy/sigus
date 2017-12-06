@@ -2721,7 +2721,7 @@ coverage_list = [
 	["Hospital Zonal Trelew","Camilleros",24,0,24,0,24,0,24,0,24,0,12,12],
 	["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS 30 de Octubre",46,0,46,0,46,0,46,0,46,0,15,0],
 	["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS Laprida",27,0,27,0,27,0,27,0,27,0,12,0],
-	["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS Prospero Palazzo",24,0,24,0,24,0,24,0,24,0,6,0],
+	["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS Próspero Palazzo",24,0,24,0,24,0,24,0,24,0,6,0],
 	["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS San Cayetano",36,0,36,0,36,0,36,0,36,0,12,0],
 	["Hospital Regional Comodoro Rivadavia","Area Externa - CAPS Standard Norte",12,0,12,0,12,0,12,0,12,0,6,0],
 	["Hospital Regional Comodoro Rivadavia","Cirugía",60,12,60,12,60,12,60,12,60,12,48,48],
@@ -2873,15 +2873,16 @@ coverage_list = [
 
 ]
 
-coverage_list.each do |dependence_name, service_name,lu_d,lu_n, ma_d, ma_m, mi_d, mi_n, ju_d, ju_n, vi_d, vi_n, sa, dom|
-	d = Dependence.where(name: dependence_name).first
-	s = Service.where(name: service_name).first
-	s_o_d = ServiceOfDependence.where(dependence: d, service: s).first
+coverage_list.each do |dependence_name, service_name,lu_d,lu_n, ma_d, ma_n, mi_d, mi_n, ju_d, ju_n, vi_d, vi_n, sab, dom|
+	dep = Dependence.where(name: dependence_name).first
+	ser =  Service.where(name: service_name).first
+	s_o_d = ServiceOfDependence.where(dependence: dep, service: ser).first
 	if s_o_d.nil?
 		byebug
 	end
-	c = Coverage.new()
+	Coverage.find_or_create_by(service_of_dependence: s_o_d,hs_lunes_diurnas: lu_d,hs_lunes_nocturnas: lu_n,hs_martes_diurnas: ma_d,hs_martes_nocturnas: ma_n,hs_miercoles_diurnas: mi_d,hs_miercoles_nocturnas: mi_n,hs_jueves_diurnas: ju_d,hs_jueves_nocturnas: ju_n,hs_viernes_diurnas: vi_d,hs_viernes_nocturnas: vi_n,hs_sabado: sab,hs_domingo: dom)
 end
+
 
 
 
