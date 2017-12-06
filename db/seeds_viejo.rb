@@ -2778,7 +2778,7 @@ coverage_list = [
 	["Hospital Zonal Puerto Madryn","Pediatría",32,24,32,24,32,24,32,24,32,24,48,48],
 	["Hospital Subzonal Rawson","Radiología",90,0,90,0,90,0,90,0,90,0,24,24],
 	["Hospital Zonal Esquel","Radiología",42,0,42,0,42,0,42,0,42,0,24,24],
-	#["Hospital Regional Comodoro Rivadavia","Radiología",72,0,72,0,72,0,72,0,72,0,24,24],
+	["Hospital Regional Comodoro Rivadavia","Radiodiagnóstico",72,0,72,0,72,0,72,0,72,0,24,24],
 	["Hospital Zonal Trelew","Radiología - Técnicos",92,12,92,12,92,12,92,12,92,12,48,48],
 	["Hospital Zonal Puerto Madryn","Rehabilitación",10,0,10,0,10,0,10,0,10,0,6,6],
 	["Hospital Regional Comodoro Rivadavia","Salud Mental",72,0,72,0,72,0,72,0,72,0,24,24],
