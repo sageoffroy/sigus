@@ -176,19 +176,23 @@ ActiveRecord::Schema.define(version: 20171204150658) do
   end
 
   create_table "novelties", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
+    t.integer "service_of_dependence_id"
     t.integer "agent_id"
     t.integer "novelty_type_id"
-    t.integer "month"
-    t.integer "year"
+    t.string "report_type"
     t.integer "month_ref"
     t.integer "year_ref"
     t.string "description"
     t.integer "hours_to_add"
     t.integer "hours_to_remove"
+    t.integer "hours_agent_mpg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_novelties_on_agent_id"
     t.index ["novelty_type_id"], name: "index_novelties_on_novelty_type_id"
+    t.index ["service_of_dependence_id"], name: "index_novelties_on_service_of_dependence_id"
   end
 
   create_table "novelty_types", force: :cascade do |t|
@@ -205,16 +209,21 @@ ActiveRecord::Schema.define(version: 20171204150658) do
   end
 
   create_table "observations", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
+    t.integer "service_of_dependence_id"
     t.integer "agent_id"
     t.integer "observation_description_id"
-    t.integer "month"
-    t.integer "year"
+    t.date "date_from"
     t.integer "total_days"
     t.string "description"
+    t.integer "prop_hs"
+    t.integer "prop_hs_umu"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_observations_on_agent_id"
     t.index ["observation_description_id"], name: "index_observations_on_observation_description_id"
+    t.index ["service_of_dependence_id"], name: "index_observations_on_service_of_dependence_id"
   end
 
   create_table "percentage_months", force: :cascade do |t|
@@ -313,12 +322,16 @@ ActiveRecord::Schema.define(version: 20171204150658) do
   create_table "reports", force: :cascade do |t|
     t.integer "year"
     t.integer "month"
+    t.integer "service_of_dependence_id"
     t.integer "total_hs"
     t.integer "total_hs_umu"
     t.integer "total_hs_nov"
     t.integer "total_hs_exc"
+    t.integer "total_hs_free"
     t.string "report_type"
-    t.integer "service_of_dependence_id"
+    t.integer "dotacion"
+    t.string "estado"
+    t.boolean "consolidado"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

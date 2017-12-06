@@ -135,7 +135,9 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1
   # PATCH/PUT /reports/1.json
   def update
+    @report.estado = "Rechazado"
     if (@report.report_type == "activas")
+      
       #-- Primera Parte
       year = @report.year
       month = @report.month
@@ -155,7 +157,7 @@ class ReportsController < ApplicationController
       sabados = days_from_month.count("Sat")
       domingos = days_from_month.count("Sun")
 
-        #Verificar feriados y convertirlos
+      #Verificar feriados y convertirlos
 
       free_days = FreeDay.where()
       # SQL       Model.where('extract(month from date_column) = ?', desired_month)
@@ -340,30 +342,93 @@ class ReportsController < ApplicationController
 
       # fin si
 
-      #--  Falta 4ta parte (Calculo Historico)
+      #-- Cuarta Parte
+        # Obtener los 6 anteriores reportes del servicio al mes actual
+          #acum = 0
+          #cont = 0
+          #por cada reporte
+            # (total_service = total_hs + total_hs_umu) y dotacion
+            # razon = total_service /dotacion
+            # acum = acum + razon
+            # cont = cont + 1
+          #en for
+          #razon_final = acum / cont
+
+
+        # cupo_historico = razon_final * dotacion_actual
+        # si guardia_final > cupo_historico
+          #cupo = cupo_historico
+        # sino
+          # cupo = guardia_final
+
+
 
       #-- Quinta Parte
       
       # acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
+
       
       #-- Falta 6ta Parte (Ajuste por Novedades)
+      #obtener novedades de los agentes del servicio (no del reporte) este periodo
+
+      pv = 0
       
+      novedades = Novelties.where(month: @report.month, year: @report.year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas", order_by(year_ref, month_ref))
+
+      novedades.each do |novedad|
+        
+        if pv == 0 
+          month_ref_actual = novedad.month_ref
+          year_ref_actual = novedad.year_ref
+          valor = 0
+          pv = 1
+
+        if month_ref_actual <> novedad.month_ref
+          arreglo.add((novedad.year_ref_actual.to_s + novedad.month_ref_actual.to_s, valor))
+          valor = 0
+          month_ref_actual = novedad.month_ref
+          year_ref_actual = novedad.year_ref
+        end
+        valor = valor + novedad.hour_to_add - novedad.hour_to_remove
+      end
+      arreglo.each do |a|
+        year = String.split(a[0],0,4)
+        if a[0].size == 6
+          month = String.split(a[0],5,2)
+        else
+          month = String.split(a[0],5,1)
+        end
+
+        report_ref = Report.where(mont: month, year: year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas")
+        
+        diferencia = report_ref.total_hs_free - a[1]
+
+        if diferencia > 0 
+          report_ref.total_hs_free = diferencia
+        else
+          report_ref.total_hs_free = 0
+          total_hs_liquidadas = total_hs_liquidadas - diferencia
+        end
+
+        report_ref.save
+
+      end
 
       #-- Septima Parte
 
-      #Posteriormente grabar el registro en la tabla LIQUIDACIONES,
-        #liquidacion.total_hs_liquidadas
-        #liquidacion.total_hs_libres = guardia_final - total_hs_liquidadas
-        #liquidacion.dotacion = dotacion_actual
-
-      # si guardia_final >= total_hs_liquidadas
+      if cupo >= total_hs_liquidadas
+        @report.total_hs_free = cupo - total_hs_liquidadas
         # MSG "Se acepta liquidacion"
-        #Si en el campo liquidacion.validado_personal
-      # sino
-        # MSG "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas xxx” (xxx es la diferencia entre total_hs_liquidadas y guardia_final.
-        # no en el campo liquidacion.validado_personal
-    #end
+        @report.estado = "Validado"
+      else
+        exc = total_hs_liquidadas - cupo
+        @report.total_hs_exc = exc
+        # MSG "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas” + exc
 
+        
+    end
+
+    #Variables para los select
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))

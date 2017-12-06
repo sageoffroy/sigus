@@ -43,10 +43,4 @@ Rails.application.routes.draw do
   post 'set_dependence/:id' => 'welcome#set_dependence'
   post 'update_agents_of_service/:id' => 'agent_of_services#agents_from_service_of_dependence'
   get 'dependence/' => 'dependences#dependence'
-
-  
-  
-  
-
-  
 end

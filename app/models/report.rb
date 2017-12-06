@@ -7,10 +7,13 @@ class Report < ApplicationRecord
   validates :month, presence: true
   validates :report_type, presence: true
 
+
   validates_uniqueness_of :report_type, :scope => [:service_of_dependence, :year, :month]
+  validates_associated :report_details
   accepts_nested_attributes_for :report_details, :reject_if => :all_blank, allow_destroy: true
+
   
-    validate :validate_unique_report_detail
+  validate :validate_unique_report_detail
 
   def to_s
   	month.to_s + "/" + year.to_s + " - " + service_of_dependence.to_s
