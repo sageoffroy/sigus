@@ -74,8 +74,10 @@ class ReportsController < ApplicationController
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
-  
-    if (@report.report_type == "activas")
+    
+    byebug
+
+    if (@report.report_type == "Guardias Activas")
       calcular_cupo()
     end
 
@@ -102,10 +104,10 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1.json
   def update
     
-    if (@report.report_type == "activas")
+    if (@report.report_type == "Guardias Activas")
       calcular_cupo()
     end
-    
+
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
