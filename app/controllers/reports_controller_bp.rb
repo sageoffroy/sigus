@@ -260,6 +260,8 @@ class ReportsController < ApplicationController
               # hs_dias_semana = hs_dias_semana *0.833
             # fin si          
 
+
+
             # hs_dias_semana_servicio =  hs_dias_semana_servicio + hs_dias_semana
 
             #if agent_of_service.agent.hour_regime.hours == 36
