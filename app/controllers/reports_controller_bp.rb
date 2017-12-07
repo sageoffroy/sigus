@@ -371,62 +371,62 @@ class ReportsController < ApplicationController
       #-- Falta 6ta Parte (Ajuste por Novedades)
       #obtener novedades de los agentes del servicio (no del reporte) este periodo
 
-      pv = 0
+    #  pv = 0
       
-      novedades = Novelties.where(month: @report.month, year: @report.year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas", order_by(year_ref, month_ref))
+       #novedades = Novelties.where(month: @report.month, year: @report.year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas", order_by(year_ref, month_ref))
 
-      novedades.each do |novedad|
-        
-        if pv == 0 
-          month_ref_actual = novedad.month_ref
-          year_ref_actual = novedad.year_ref
-          valor = 0
-          pv = 1
-
-        if month_ref_actual <> novedad.month_ref
-          arreglo.add((novedad.year_ref_actual.to_s + novedad.month_ref_actual.to_s, valor))
-          valor = 0
-          month_ref_actual = novedad.month_ref
-          year_ref_actual = novedad.year_ref
-        end
-        valor = valor + novedad.hour_to_add - novedad.hour_to_remove
-      end
-      arreglo.each do |a|
-        year = String.split(a[0],0,4)
-        if a[0].size == 6
-          month = String.split(a[0],5,2)
-        else
-          month = String.split(a[0],5,1)
-        end
-
-        report_ref = Report.where(mont: month, year: year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas")
-        
-        diferencia = report_ref.total_hs_free - a[1]
-
-        if diferencia > 0 
-          report_ref.total_hs_free = diferencia
-        else
-          report_ref.total_hs_free = 0
-          total_hs_liquidadas = total_hs_liquidadas - diferencia
-        end
-
-        report_ref.save
-
-      end
+      #novedades.each do |novedad|
+#        
+        #if pv == 0 
+          #month_ref_actual = novedad.month_ref
+          #year_ref_actual = novedad.year_ref
+          #valor = 0
+          #pv = 1
+#
+        #if month_ref_actual != novedad.month_ref
+          #arreglo.add((novedad.year_ref_actual.to_s + novedad.month_ref_actual.to_s, valor))
+          #valor = 0
+          #month_ref_actual = novedad.month_ref
+          #year_ref_actual = novedad.year_ref
+        #end
+        #valor = valor + novedad.hour_to_add - novedad.hour_to_remove
+      #end
+      #arreglo.each do |a|
+        #year = String.split(a[0],0,4)
+        #if a[0].size == 6
+          #month = String.split(a[0],5,2)
+        #else
+          #month = String.split(a[0],5,1)
+        #end
+#
+        #report_ref = Report.where(mont: month, year: year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas")
+#        
+        #diferencia = report_ref.total_hs_free - a[1]
+#
+        #if diferencia > 0 
+          #report_ref.total_hs_free = diferencia
+        #else
+          #report_ref.total_hs_free = 0
+          #total_hs_liquidadas = total_hs_liquidadas - diferencia
+        #end
+#
+        #report_ref.save
+#
+      #end
 
       #-- Septima Parte
 
-      if cupo >= total_hs_liquidadas
-        @report.total_hs_free = cupo - total_hs_liquidadas
+      #if cupo >= total_hs_liquidadas
+      #  @report.total_hs_free = cupo - total_hs_liquidadas
         # MSG "Se acepta liquidacion"
-        @report.estado = "Validado"
-      else
-        exc = total_hs_liquidadas - cupo
-        @report.total_hs_exc = exc
+      #  @report.estado = "Validado"
+      #else
+      #  exc = total_hs_liquidadas - cupo
+      #  @report.total_hs_exc = exc
         # MSG "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas” + exc
 
         
-    end
+    #end
 
     #Variables para los select
     @services_of_dependence = current_user.dependence.service_of_dependences

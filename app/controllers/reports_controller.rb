@@ -74,9 +74,9 @@ class ReportsController < ApplicationController
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
     
-    #if (@report.report_type == "Guardias Activas")
-      #calcular_cupo(@report)
-    #end
+    if (@report.report_type == "Guardias Activas")
+      calcular_cupo(@report)
+    end
 
     respond_to do |format|
       if @report.save
@@ -101,9 +101,9 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1.json
   def update
     
-    #if (@report.report_type == "Guardias Activas")
-      #calcular_cupo(@report)
-    #end
+    if (@report.report_type == "Guardias Activas")
+      calcular_cupo(@report)
+    end
 
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
@@ -138,7 +138,7 @@ class ReportsController < ApplicationController
     #recuperar valores del form
     year = report.year
     month = report.month
-
+    service_of_dependence = report.service_of_dependence
 
     #---- PRIMERA PARTE
 
@@ -194,7 +194,100 @@ class ReportsController < ApplicationController
 
 
     #---- SEGUNDA PARTE
+    # Se obtienen todos los agentes del servicio
+    agents_of_service  = AgentOfService.where(service_of_dependence: service_of_dependence)
+    
+    # inicializan variable
+    hs_dias_semana_servicio = 0
+    gs_dias_semana_servicio = 0
+    hs_sabado_servicio = 0
 
+    #Se recorre cada agente del servicio y se acumulan variables
+    agents_of_service.each do |agent_of_service|
+      
+      hs_dias_semana = 0
+      gs_dias_semana = 0
+      hs_sabados = 0
+      
+      #Si no tiene Regimen Horario lo inicializo en 30hs
+      if agent_of_service.agent.hour_regime.nil?
+        agent_of_service.agent.hour_regime = HourRegime.where(id:3).first
+      end
+      hour_regime = agent_of_service.agent.hour_regime
+      
+      #Si no es médico residente
+      if !(agent_of_service.agent.agent_type.description == "Médico Residente")
+        observacion = Observation.where(agent:agent_fo_service.agent).first
+        # Si no tiene observaciones lo marco como 0, sino uso codigo del tipo de observacion
+        if observation.nil?
+          code = 0
+        else
+          code = observacion.observation_description.code
+        end
+        # Si no cuenta con observaciones o la observacion es del tipo 1,2,3,4 o 6
+        if !([1,2,3,4,5].include?(code))
+          #si el servicio es radiologia o diagnostico por imagenes
+          if ["Radiología","Diagnóstico por Imágenes"].include?(service_of_dependence.service.name)
+            hs_dias_semana = 4 * cant_dias_habiles
+          else
+            # Si es un mensualizado para guardia
+            if agent_of_service.agent.agent_type.description == "Mensualizad P/G"
+              hs_dias_semana = 6 * cant_dias_habiles
+            else
+              if hour_regime.hours == 30
+                hs_dias_semana = 6 * cant_dias_habiles
+              elsif hour_regime.hours == 20
+                hs_dias_semana = 4 * cant_dias_habiles
+              elsif hour_regime.hours == 36
+                if hour_regime.with_guard
+                  hs_dias_semana = 52
+                else
+                  hs_dias_semana = 6 * cant_dias_habiles
+                end
+              end
+            end
+          end
+
+          if code == 6
+            hs_dias_semana = hs_dias_semana *0.5
+          end
+
+          if code == 7
+            hs_dias_semana = hs_dias_semana *0.833
+          end
+
+          #Si jefe del servicio
+          if agent_of_service.function == "Jefe del servicio"
+            hs_dias_semana = hs_dias_semana * service_of_dependence.jefatura
+          end
+
+          hs_dias_semana_servicio =  hs_dias_semana_servicio + hs_dias_semana
+
+          if agent_of_service.agent.hour_regime.hours == 36
+            if agent_of_service.agent.hour_regime.with_guard 
+              gs_dias_semana = 103
+              if agent_of_service.function == "Jefe del servicio"
+               gs_dias_semana = gs_dias_semana * @report.service_of_dependence.jefatura
+              end
+
+              code == 5
+                # gs_dias_semana = gs_dias_semana *0.5
+              # fin si
+
+              # si observacion.observation_description.code == 7
+                # gs_dias_semana = gs_dias_semana *0.833
+              # fin si          
+
+              # gs_dias_semana_servicio =  gs_dias_semana_servicio + gs_dias_semana
+            end
+          end
+
+
+
+
+        end
+      end 
+    end
   end
 
   private

@@ -2,12 +2,12 @@
 
 <h1>Services</h1>
 
-<table class="datatable">
+<table class=" tabla datatable">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Abbreviation</th>
-      <th colspan="3"></th>
+      <th>Nombre</th>
+      <th>Abreviación</th>
+      <th></th>
     </tr>
   </thead>
 
@@ -16,9 +16,7 @@
       <tr>
         <td><%= service.name %></td>
         <td><%= service.abbreviation %></td>
-        <td><%= link_to 'Show', service %></td>
-        <td><%= link_to 'Edit', edit_service_path(service) %></td>
-        <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', service %><%= link_to 'Edit', edit_service_path(service) %><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +24,7 @@
 
 <br>
 
-<%= link_to 'New Service', new_service_path %>
+<% if current_user.planification? or current_user.admin?%>
+  <%= link_to 'Crear Servicio', new_service_path, class: 'btn btn-primary btn-xs' %>
+<% end %>
+
