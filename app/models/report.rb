@@ -8,7 +8,7 @@ class Report < ApplicationRecord
   validates :report_type, presence: true
 
 
-  validates_uniqueness_of :report_type, :scope => [:service_of_dependence, :year, :month]
+  validates_uniqueness_of :report_type, :scope => [:service_of_dependence, :year, :month], :message => 'El Reporte ya ha sido creado'
   validates_associated :report_details
   accepts_nested_attributes_for :report_details, :reject_if => :all_blank, allow_destroy: true
 
