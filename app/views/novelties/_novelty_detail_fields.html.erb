@@ -1,0 +1,51 @@
+<div class="nested-fields row">
+  
+    
+  
+  <div class="col-sm-4">
+    <%= link_to_remove_association (fa_icon "window-close", class: "btn-remove"), f %>
+    <div class="field" style ="margin-left: 35px;">
+      <%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>
+    </div>
+  </div>
+
+  
+  <div class="col-sm-2">
+    <div class="field">
+      <%= f.collection_select :novelty_type_id, NoveltyType.all, :id, :to_s, {prompt: "Concepto"}, {class: "select2"} %>
+    </div>
+  </div>  
+
+  <div class="col-sm-2">
+    <div class="field">
+      <%= f.select :hours_type, ["activas", "pasivas", "hs. extra", "umu"], {prompt: "Tipo de Hora"}, {class: "select2"} %>
+    </div>
+  </div>  
+  <div class="col-sm-1">
+    <div class="field">
+      <%= f.select :year_ref, (2016)..(Time.zone.now.year), {prompt: "Año"}, {class: "select2"}%>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <div class="field">
+      <%= f.select :month_ref, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <div class="field">
+      <%= f.number_field :hours_to_add, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "hs +"%>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <div class="field">
+      <%= f.number_field :hours_to_remove, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "hs -"%>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="field">
+      <%= f.text_area :description, rows: 1, :style=>"width: 100%;font-size: 0.8rem;max-height: 28px;", :placeholder => "Descripción"%>
+    </div>
+  </div>
+  <div class="col-md-12 col-last"></div>
+</div>
+  

@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Novelty:</strong>
+  <%= @novelty_detail.novelty %>
+</p>
+
+<p>
+  <strong>Agent:</strong>
+  <%= @novelty_detail.agent %>
+</p>
+
+<p>
+  <strong>Novelty type:</strong>
+  <%= @novelty_detail.novelty_type %>
+</p>
+
+<p>
+  <strong>Report type:</strong>
+  <%= @novelty_detail.report_type %>
+</p>
+
+<p>
+  <strong>,year ref:</strong>
+  <%= @novelty_detail.,year_ref %>
+</p>
+
+<p>
+  <strong>Month ref:</strong>
+  <%= @novelty_detail.month_ref %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @novelty_detail.description %>
+</p>
+
+<p>
+  <strong>Hours to add:</strong>
+  <%= @novelty_detail.hours_to_add %>
+</p>
+
+<p>
+  <strong>Hours to:</strong>
+  <%= @novelty_detail.hours_to %>
+</p>
+
+<p>
+  <strong>Remove:</strong>
+  <%= @novelty_detail.remove %>
+</p>
+
+<p>
+  <strong>Is umu:</strong>
+  <%= @novelty_detail.is_umu %>
+</p>
+
+<p>
+  <strong>Is habitual:</strong>
+  <%= @novelty_detail.is_habitual %>
+</p>
+
+<p>
+  <strong>Associated concept:</strong>
+  <%= @novelty_detail.associated_concept %>
+</p>
+
+<%= link_to 'Edit', edit_novelty_detail_path(@novelty_detail) %> |
+<%= link_to 'Back', novelty_details_path %>

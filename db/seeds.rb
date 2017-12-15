@@ -5,6 +5,18 @@
 #
 
 
+
+ 
+#The easiest and quicker way to put rails (or any service in background) assuming it to have Unix/Linux OS
+#
+#$ nohup rails server &
+#
+#This can be used for any service like this
+#
+#$ nohup <service command> &
+
+
+
 services_list = [
 	"Sin Servicio Asignado",
 	"Admisión CMI",
@@ -2943,8 +2955,10 @@ user.save!
 user.add_role 'hospital'
 
 
-#1159;Guardia Activa Profesional
-#1160	Guardia Activa Profesional Servicio de Ugencias
+#1159 Guardia Activa Profesional 																			-> Agr A
+
+#1160	Guardia Activa Profesional Servicio de Ugencias                 -> Agr A y seleccionado casilla umu
+
 #1279	Guardia Profesional UMU CR
 #1263	Guardia Pasiva Profesional Habitual
 #1264	Guardia Pasiva Profesional No Habitual
@@ -2952,8 +2966,8 @@ user.add_role 'hospital'
 #1162	Guardia Pasiva TecnicaHabitual
 #1272	Guardia Pasiva Tecnica No Habitual
 #1273	Guardia Activa Auxiliar Tecnica
-#1274	Guarcdia Pasiva Auxiliar TecnicaHabitual
-#1275	Guarcdia Pasiva Auxiliar Tecnica No Habitual
+#1274	Guardia Pasiva Auxiliar Tecnica Habitual
+#1275	Guardia Pasiva Auxiliar Tecnica No Habitual
 #1276	Guardia Activa Operativa
 #1277	Guardia Pasiva Operativa Habitual
 #1278	Guardia Pasiva Operativa No Habitual

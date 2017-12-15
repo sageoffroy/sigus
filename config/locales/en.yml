@@ -37,6 +37,8 @@ en:
         other: Feriados
       position: "Posicion"
       report: "Reporte"
+      novelty:  "Novedad"
+      agent_of_service:  "Agente del Servicio"
         
     attributes:
       report:
@@ -196,6 +198,15 @@ en:
         create: Crear Reporte
         submit: Guardar Reporte
         update: Actualizar Reporte
+      novelty:
+        create: Crear Novedad
+        submit: Guardar Novedad
+        update: Actualizar Novedad
+      agent_of_service:
+        create: Asignar agente a Servicio
+        submit: Asignar agente a Servicio
+        update: Asignar Agente al Servicio
+
   number:
     currency:
       format:

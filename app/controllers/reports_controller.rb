@@ -56,14 +56,13 @@ class ReportsController < ApplicationController
 
   # GET /reports/1/edit
   def edit
+    @report = Report.find(params[:id]) #ver si se puede mejorar
     if current_user.dependence.nil?
       current_user.dependence = Dependence.where(code:106).first
     end
     @services_of_dependence = current_user.dependence.service_of_dependences
-    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    agents_of_service  = AgentOfService.where(service_of_dependence: @report.service_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
-
-    @report = Report.find(params[:id]) #ver si se puede mejorar
   end
 
   # POST /reports
@@ -82,7 +81,7 @@ class ReportsController < ApplicationController
         format.json { render :show, status: :created, location: @report }
       else
         @services_of_dependence = current_user.dependence.service_of_dependences
-        agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+        agents_of_service  = AgentOfService.where(service_of_dependence: @report.service_of_dependence)
         @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
         if @report.report_type == "Guardias Activas"
           format.html { render 'reports/new_active' }
@@ -201,9 +200,12 @@ class ReportsController < ApplicationController
       gs_dias_semana_cobertura = (cobertura.hs_lunes_nocturnas * lunes)+(cobertura.hs_martes_nocturnas * martes) + (cobertura.hs_miercoles_nocturnas * miercoles) + (cobertura.hs_jueves_nocturnas * jueves) + (cobertura.hs_viernes_nocturnas * viernes)
       hs_sabado_cobertura = cobertura.hs_sabado * sabados
       hs_domingo_cobertura = cobertura.hs_domingo * domingos
+    else
+      hs_dias_semana_cobertura = 0
+      gs_dias_semana_cobertura = 0
+      hs_sabado_cobertura = 0
+      hs_domingo_cobertura = 0
     end
-
-
     #---- SEGUNDA PARTE
     # Se obtienen todos los agentes del servicio
     agents_of_service  = AgentOfService.where(service_of_dependence: service_of_dependence)
@@ -227,78 +229,80 @@ class ReportsController < ApplicationController
       hour_regime = agent_of_service.agent.hour_regime
       
       #Si no es médico residente
-      if !(agent_of_service.agent.agent_type.description == "Médico Residente")
-        observacion = Observation.where(agent:agent_of_service.agent).first
-        
-        # Si no tiene observaciones lo marco como 0, sino uso codigo del tipo de observacion
-        if observacion.nil?
-          code = 0
-        else
-          code = observacion.observation_description.code
-        end
-
-        # Si no cuenta con observaciones o la observacion es del tipo 1,2,3,4 o 6
-        if !([1,2,3,4,5].include?(code))
-          #si el servicio es radiologia o diagnostico por imagenes
-          if ["Radiología","Diagnóstico por Imágenes"].include?(service_of_dependence.service.name)
-            hs_dias_semana = 4 * cant_dias_habiles
+      if !(agent_of_service.agent.agent_type.nil?)
+        if !(agent_of_service.agent.agent_type.description == "Médico Residente")
+          observacion = Observation.where(agent:agent_of_service.agent).first
+          
+          # Si no tiene observaciones lo marco como 0, sino uso codigo del tipo de observacion
+          if observacion.nil?
+            code = 0
           else
-            # Si es un mensualizado para guardia
-            if agent_of_service.agent.agent_type.description == "Mensualizad P/G"
-              hs_dias_semana = 6 * cant_dias_habiles
+            code = observacion.observation_description.code
+          end
+
+          # Si no cuenta con observaciones o la observacion es del tipo 1,2,3,4 o 6
+          if !([1,2,3,4,5].include?(code))
+            #si el servicio es radiologia o diagnostico por imagenes
+            if ["Radiología","Diagnóstico por Imágenes"].include?(service_of_dependence.service.name)
+              hs_dias_semana = 4 * cant_dias_habiles
             else
-              if hour_regime.hours == 30
+              # Si es un mensualizado para guardia
+              if agent_of_service.agent.agent_type.description == "Mensualizad P/G"
                 hs_dias_semana = 6 * cant_dias_habiles
-              elsif hour_regime.hours == 20
-                hs_dias_semana = 4 * cant_dias_habiles
-              elsif hour_regime.hours == 36
-                if hour_regime.with_guard
-                  hs_dias_semana = 52
-                else
+              else
+                if hour_regime.hours == 30
                   hs_dias_semana = 6 * cant_dias_habiles
+                elsif hour_regime.hours == 20
+                  hs_dias_semana = 4 * cant_dias_habiles
+                elsif hour_regime.hours == 36
+                  if hour_regime.with_guard
+                    hs_dias_semana = 52
+                  else
+                    hs_dias_semana = 6 * cant_dias_habiles
+                  end
                 end
               end
             end
-          end
 
-          #Si jefe del servicio
-          if agent_of_service.function == "Jefe del servicio"
-            hs_dias_semana = hs_dias_semana * service_of_dependence.jefatura
-          end
-
-          if code == 6
-            hs_dias_semana = hs_dias_semana *0.5
-          end
-          if code == 7
-            hs_dias_semana = hs_dias_semana *0.833
-          end
-
-          
-
-          hs_dias_semana_servicio =  hs_dias_semana_servicio + hs_dias_semana
-
-          #Si el agente tiene un regime de 36
-          if hour_regime.hours == 36
-            if hour_regime.with_guard 
-              gs_dias_semana = 103
-              if agent_of_service.function == "Jefe del servicio"
-               gs_dias_semana = gs_dias_semana * @report.service_of_dependence.jefatura
-              end
-
-              if code == 5
-                gs_dias_semana = gs_dias_semana *0.5
-              end
-
-              if code == 7
-                gs_dias_semana = gs_dias_semana *0.833
-              end
-
-              gs_dias_semana_servicio =  gs_dias_semana_servicio + gs_dias_semana
+            #Si jefe del servicio
+            if agent_of_service.function == "Jefe del servicio"
+              hs_dias_semana = hs_dias_semana * service_of_dependence.jefatura
             end
-          end #en si regimen 36
-          dotacion_actual = dotacion_actual+1
-        end #-- end obsevacion code
-      end #-- end no medico residente
+
+            if code == 6
+              hs_dias_semana = hs_dias_semana *0.5
+            end
+            if code == 7
+              hs_dias_semana = hs_dias_semana *0.833
+            end
+
+            
+
+            hs_dias_semana_servicio =  hs_dias_semana_servicio + hs_dias_semana
+
+            #Si el agente tiene un regime de 36
+            if hour_regime.hours == 36
+              if hour_regime.with_guard 
+                gs_dias_semana = 103
+                if agent_of_service.function == "Jefe del servicio"
+                 gs_dias_semana = gs_dias_semana * @report.service_of_dependence.jefatura
+                end
+
+                if code == 5
+                  gs_dias_semana = gs_dias_semana *0.5
+                end
+
+                if code == 7
+                  gs_dias_semana = gs_dias_semana *0.833
+                end
+
+                gs_dias_semana_servicio =  gs_dias_semana_servicio + gs_dias_semana
+              end
+            end #en si regimen 36
+            dotacion_actual = dotacion_actual+1
+          end #-- end obsevacion code
+        end #-- end no medico residente
+      end
     end #-- end each agente
     
     # if consultorio tiene un servicio y no tiene agente 
@@ -352,18 +356,26 @@ class ReportsController < ApplicationController
     acum = 0
     cont = 0
     reportes.each do |r|
-      byebug
-      total_service = r.total_hs + r.total_hs_umu
-      razon = total_service /dotacion
-      acum = acum + razon
-      cont = cont + 1
+      if !r.total_hs.nil?
+        total_service = r.total_hs + r.total_hs_umu
+        razon = total_service / dotacion_actual
+        acum = acum + razon
+        cont = cont + 1
+      end
     end
-    razon_final = acum / cont
-
+    if acum != 0
+      razon_final = acum / cont
+    else
+      razon_final = 0
+    end
 
     cupo_historico = razon_final * dotacion_actual
-    if guardia_final > cupo_historico
-      cupo = cupo_historico
+    if !guardia_final.nil?
+      if guardia_final > cupo_historico
+        cupo = cupo_historico
+      else
+        cupo = guardia_final
+      end
     else
       cupo = guardia_final
     end
@@ -371,8 +383,7 @@ class ReportsController < ApplicationController
 
     #-- Quinta Parte
     # acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
-    reports_detail = ReportDetail.where(report:@report)
-    
+    #total_hs_liquidadas = @report.total_hs + @report.total_hs_umu
 
 
     #-- Falta 6ta Parte (Ajuste por Novedades)
@@ -422,15 +433,15 @@ class ReportsController < ApplicationController
 
       #-- Septima Parte
 
-      if cupo >= total_hs_liquidadas
-        @report.total_hs_free = cupo - total_hs_liquidadas
-        @msg = "Se acepta liquidacion"
-        @report.estado = "Validado"
-      else
-        exc = total_hs_liquidadas - cupo
-        @report.total_hs_exc = exc
-        @msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas" + exc
-      end
+      #if cupo >= total_hs_liquidadas
+        #@report.total_hs_free = cupo - total_hs_liquidadas
+        #@msg = "Se acepta liquidacion"
+        #@report.estado = "Validado"
+      #else
+        #exc = total_hs_liquidadas - cupo
+        #@report.total_hs_exc = exc
+        #@msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas" + exc
+      #end
       # acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
 
 

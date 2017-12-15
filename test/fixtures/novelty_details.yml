@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  novelty: one
+  agent: one
+  novelty_type: one
+  report_type: MyString
+  ,year_ref: 1
+  month_ref: 1
+  description: MyString
+  hours_to_add: MyString
+  hours_to: MyString
+  remove: MyString
+  is_umu: false
+  is_habitual: false
+  associated_concept: 1
+
+two:
+  novelty: two
+  agent: two
+  novelty_type: two
+  report_type: MyString
+  ,year_ref: 1
+  month_ref: 1
+  description: MyString
+  hours_to_add: MyString
+  hours_to: MyString
+  remove: MyString
+  is_umu: false
+  is_habitual: false
+  associated_concept: 1

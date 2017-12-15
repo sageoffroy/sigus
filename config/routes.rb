@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :novelty_details
   resources :addiotionals
   resources :historical_guard_agents
   resources :percentage_months

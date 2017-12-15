@@ -50,6 +50,8 @@ $.fn.clear_form_fields = () ->
       .removeAttr('checked')
       .removeAttr('selected')
 
+      
+
 $(document).on 'turbolinks:load', ->
 
   datatable = $('.datatable')
@@ -57,10 +59,11 @@ $(document).on 'turbolinks:load', ->
     'language': 'url': '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
 
   form = $('form')
-  form.integrateDatepicker();
-  form.integrateSelect2();
+  form.integrateDatepicker()
+  form.integrateSelect2()
 
-  $(".menu").integrateSelect2();
+  $(".menu").integrateSelect2()
+  
 
 
 $(document).on 'turbolinks:before-cache', ->

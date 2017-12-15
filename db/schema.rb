@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204150658) do
+ActiveRecord::Schema.define(version: 20171212151230) do
 
   create_table "addiotionals", force: :cascade do |t|
     t.integer "agent_id"
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 20171204150658) do
     t.boolean "rural_functional_dedication"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "hours_mg_1"
+    t.integer "hours_mg_2"
     t.index ["agent_type_id"], name: "index_agents_on_agent_type_id"
     t.index ["hour_regime_id"], name: "index_agents_on_hour_regime_id"
     t.index ["job_function_id"], name: "index_agents_on_job_function_id"
@@ -179,20 +181,28 @@ ActiveRecord::Schema.define(version: 20171204150658) do
     t.integer "year"
     t.integer "month"
     t.integer "service_of_dependence_id"
-    t.integer "agent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_of_dependence_id"], name: "index_novelties_on_service_of_dependence_id"
+  end
+
+  create_table "novelty_details", force: :cascade do |t|
+    t.integer "novelty_id"
     t.integer "novelty_type_id"
-    t.string "report_type"
+    t.integer "agent_id"
     t.integer "month_ref"
     t.integer "year_ref"
     t.string "description"
     t.integer "hours_to_add"
     t.integer "hours_to_remove"
     t.integer "hours_agent_mpg"
+    t.string "hours_type"
+    t.integer "associated_concept"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_novelties_on_agent_id"
-    t.index ["novelty_type_id"], name: "index_novelties_on_novelty_type_id"
-    t.index ["service_of_dependence_id"], name: "index_novelties_on_service_of_dependence_id"
+    t.index ["agent_id"], name: "index_novelty_details_on_agent_id"
+    t.index ["novelty_id"], name: "index_novelty_details_on_novelty_id"
+    t.index ["novelty_type_id"], name: "index_novelty_details_on_novelty_type_id"
   end
 
   create_table "novelty_types", force: :cascade do |t|

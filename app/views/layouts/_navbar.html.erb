@@ -49,4 +49,17 @@
       console.log("Fallo la carga");
     });
   }
+
+  $(document).on('turbolinks:load', function() {
+    var dependence_id;
+    <% if !current_user.nil?%>
+      dependence_id = '<%= current_user.dependence.id%>';
+    <% else %>
+      dependence_id = 0;
+    <% end %>
+    dependence_id = dependence_id -1;
+    $('#select_dependence option:eq(' + dependence_id + ')').attr('selected', true);
+  });
+
+
 </script>

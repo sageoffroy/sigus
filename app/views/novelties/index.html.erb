@@ -1,34 +1,26 @@
-<p id="notice"><%= notice %></p>
+<h1>Registro de Novedades</h1>
 
-<h1>Novedades</h1>
-
-<table>
+<table class="table datatable">
   <thead>
     <tr>
-      <th>Agente</th>
-      <th>tipo</th>
-      <th>Mes</th>
       <th>Año</th>
-      <th>Description</th>
-      <th>Hours to add</th>
-      <th>Hours to remove</th>
-      <th colspan="3"></th>
+      <th>Mes</th>
+      <th>Servicio</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @novelties.each do |novelty| %>
     <tr>
-      <td><%= novelty.agent %></td>
-      <td><%= novelty.novelty_type %></td>
-      <td><%= novelty.month %></td>
       <td><%= novelty.year %></td>
-      <td><%= novelty.description %></td>
-      <td><%= novelty.hours_to_add %></td>
-      <td><%= novelty.hours_to_remove %></td>
-      <td><%= link_to 'Show', novelty %></td>
-      <td><%= link_to 'Edit', edit_novelty_path(novelty) %></td>
-      <td><%= link_to 'Destroy', novelty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= novelty.month %></td>
+      <td><%= novelty.service_of_dependence %></td>
+      <td>
+        <%= link_to (fa_icon "eye"), novelty%>
+        <%= link_to (fa_icon "pencil-square-o"), edit_novelty_path(novelty)%>
+        <%= link_to (fa_icon "trash-o"), novelty, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }%>
+      </td>
     </tr>
     <% end %>
   </tbody>

@@ -1,0 +1,82 @@
+<%= form_with(model: novelty_detail, local: true) do |form| %>
+  <% if novelty_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(novelty_detail.errors.count, "error") %> prohibited this novelty_detail from being saved:</h2>
+
+      <ul>
+      <% novelty_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :novelty_id %>
+    <%= form.text_field :novelty_id, id: :novelty_detail_novelty_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.text_field :agent_id, id: :novelty_detail_agent_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :novelty_type_id %>
+    <%= form.text_field :novelty_type_id, id: :novelty_detail_novelty_type_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :report_type %>
+    <%= form.text_field :report_type, id: :novelty_detail_report_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :,year_ref %>
+    <%= form.number_field :,year_ref, id: :novelty_detail_,year_ref %>
+  </div>
+
+  <div class="field">
+    <%= form.label :month_ref %>
+    <%= form.number_field :month_ref, id: :novelty_detail_month_ref %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :novelty_detail_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hours_to_add %>
+    <%= form.text_field :hours_to_add, id: :novelty_detail_hours_to_add %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hours_to %>
+    <%= form.text_field :hours_to, id: :novelty_detail_hours_to %>
+  </div>
+
+  <div class="field">
+    <%= form.label :remove %>
+    <%= form.text_field :remove, id: :novelty_detail_remove %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_umu %>
+    <%= form.check_box :is_umu, id: :novelty_detail_is_umu %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_habitual %>
+    <%= form.check_box :is_habitual, id: :novelty_detail_is_habitual %>
+  </div>
+
+  <div class="field">
+    <%= form.label :associated_concept %>
+    <%= form.number_field :associated_concept, id: :novelty_detail_associated_concept %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

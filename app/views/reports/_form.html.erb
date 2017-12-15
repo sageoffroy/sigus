@@ -16,8 +16,14 @@
     <div class="col-sm-2">
       <h6>Mes</h6>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-6">
       <h6>Servicio</h6>
+    </div>
+    <div class="col-sm-1">
+      <h6>Total Gs</h6>
+    </div>
+    <div class="col-sm-1">
+      <h6>Total Umu</h6>
     </div>
     <!--div class="col-sm-2">
       <h6>Horas Consultorio</h6>
@@ -28,11 +34,15 @@
     <div class="input-group col-sm-2">
       <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
     </div>
-    <div class="input-group col-sm-8">
+    <div class="input-group col-sm-6">
       <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
     </div>
-    
-
+    <div class="col-md-1">
+      <%= f.number_field :total_hs, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hs_form input-transparent" %>
+    </div>
+    <div class="col-md-1">
+      <%= f.number_field :total_hs_umu, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hs_umu_form input-transparent", :style => 'color:red;' %>
+    </div>
   </div>
   <h5>Agentes</h5>
 

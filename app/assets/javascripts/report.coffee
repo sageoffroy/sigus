@@ -168,11 +168,21 @@ set_days_event = ->
           total_umu = total_umu + parseInt($(this).val())
         else
           total_gs = total_gs + parseInt($(this).val())
-      return
     $(this).closest('.nested-fields').find('.total_hours_gs').val total_gs
     $(this).closest('.nested-fields').find('.total_hours_umu').val total_umu
     $(this).closest('.nested-fields').find('.total_hours').val total_gs + total_umu
-    return
+    add = 0
+    $('.total_hours_gs').each ->
+      add = add + parseInt($(this).val())
+    $('#report_total_hs').val add
+
+    add_umu = 0
+    $('.total_hours_umu').each ->
+      add_umu = add_umu + parseInt($(this).val())
+    
+    $('#report_total_hs_umu').val add_umu
+
+    
     
   $('.field-hours-th').click ->
     class_hours = '.day' + $(this).text() + '-hours'
@@ -194,11 +204,20 @@ set_days_event = ->
           total_umu = total_umu + parseInt($(this).val())
         else
           total_gs = total_gs + parseInt($(this).val())
-      return
     $(this).closest('.nested-fields').find('.total_hours_gs').val total_gs
     $(this).closest('.nested-fields').find('.total_hours_umu').val total_umu
     $(this).closest('.nested-fields').find('.total_hours').val total_gs + total_umu
-    return
+
+    add = 0
+    $('.total_hours_gs').each ->
+      add = add + parseInt($(this).val())
+    $('#report_total_hs').val add
+
+    add_umu = 0
+    $('.total_hours_umu').each ->
+      add_umu = add_umu + parseInt($(this).val())
+    
+    $('#report_total_hs_umu').val add_umu
 
 $(document).on 'cocoon:after-insert', (e) ->
   console.log "Se inserto COCOON"
@@ -223,9 +242,9 @@ $(document).on 'cocoon:after-insert', (e) ->
 $(document).on 'turbolinks:load', ->
   if $('.reports.create').length > 0
     days_controls()
-    report_service = $('#report_service')
-    id = report_service.val()
-    set_selects_of_agents(id)
+    #report_service = $('#report_service')
+    #id = report_service.val()
+    #set_selects_of_agents(id)
     set_days_event()
 
   if $('.reports.edit').length > 0
