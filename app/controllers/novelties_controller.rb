@@ -4,7 +4,7 @@ class NoveltiesController < ApplicationController
   # GET /novelties
   # GET /novelties.json
   def index
-    @novelties = Novelty.all
+    @novelties = Novelty.where(service_of_dependence: current_user.dependence.service_of_dependences)
   end
 
   # GET /novelties/1
