@@ -6,11 +6,7 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    if current_user.hospital?
-      @reports = Report.where(user: current_user)
-    else
-      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
-    end
+    @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
   end
 
   # GET /reports/1

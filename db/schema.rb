@@ -181,8 +181,19 @@ ActiveRecord::Schema.define(version: 20171212151230) do
     t.integer "year"
     t.integer "month"
     t.integer "service_of_dependence_id"
+    t.integer "agent_id"
+    t.integer "novelty_type_id"
+    t.string "report_type"
+    t.integer "month_ref"
+    t.integer "year_ref"
+    t.string "description"
+    t.integer "hours_to_add"
+    t.integer "hours_to_remove"
+    t.integer "hours_agent_mpg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_novelties_on_agent_id"
+    t.index ["novelty_type_id"], name: "index_novelties_on_novelty_type_id"
     t.index ["service_of_dependence_id"], name: "index_novelties_on_service_of_dependence_id"
   end
 

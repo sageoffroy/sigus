@@ -8,6 +8,7 @@
       <th>Mes</th>
       <th>Hospital</th>
       <th>Servicio</th>
+      <th>Total Hs.</th>
       <th>Usuario</th>
       <th>Opciones</th>
     </tr>
@@ -21,6 +22,7 @@
         <td><%= report.month %></td>
         <td><%= report.service_of_dependence.dependence %></td>
         <td><%= report.service_of_dependence.service %></td>
+        <td><%= report.total_hs.to_i + report.total_hs_umu.to_i%></td>
         <td><%= report.user %></td>
         <td>
           <%= link_to (fa_icon "eye"), report%>
