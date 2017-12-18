@@ -1,5 +1,21 @@
 moment.locale('es')
 
+check_general_data = (year, month, service, complement, complement2)->
+  if (year.val() != "") && (month.val() != "") && (service.val() != "")
+    
+    complement.removeClass 'disabled'
+    if typeof complement2 != "undefined"
+      complement2.removeClass 'disabled'
+    else
+      "No Entra"
+
+
+  else
+    #console.log "falta algo"
+    complement.addClass 'disabled'
+    if typeof complement2 != "undefined"
+      complement2.addClass 'disabled'
+
 check_day_of_month = ->
   
   year = parseInt($('#report_year').val())
@@ -70,22 +86,13 @@ set_free_days = (report_year, report_month) ->
 
             #console.log d
 
-
-check_general_data = (report_year, report_month, report_service, complement)->
-  if (report_year.val() != "") && (report_month.val() != "") && (report_service.val() != "")
-    #console.log "todo en orden"
-    complement.removeClass 'disabled'
-    $('#add_report_details_all').removeClass 'disabled'
-  else
-    #console.log "falta algo"
-    complement.addClass 'disabled'
-    $('#add_report_details_all').addClass 'disabled'
-
 set_ids_to_child = ->
   $('.nested-fields').each (index, value) ->
     $(this).attr('id', 'nested-fields_' + index );
 
+
 set_selects_of_agents = (id)->
+  console.log "set_selects_of_agents"
   selects = $('.agent')
   selects.empty()
   $.ajax
@@ -124,38 +131,65 @@ set_last_select_of_agents = (id)->
       return
 
 
-days_controls = ->
+selects_controls_reports = ->
   console.log "Days Controls"
   add_report_detail = $('#add_report_details')
-  report_year = $('#report_year')
-  report_month = $('#report_month')
-  report_service = $('#report_service')
+  add_report_detail_all = $('#add_report_details_all')
+  year = $('#report_year')
+  month = $('#report_month')
+  service = $('#report_service')
 
-  check_general_data(report_year, report_month, report_service, add_report_detail)
+
+  check_general_data(year, month, service, add_report_detail, add_report_detail_all)
   check_day_of_month()
-  set_weekend(report_year, report_month)
-  set_free_days(report_year, report_month)
+  set_weekend(year, month)
+  set_free_days(year, month)
   
  
-  report_year.on 'select2:select', (e) ->
+  year.on 'select2:select', (e) ->
     #console.log "Cambiando el Año"
-    check_general_data(report_year, report_month, report_service, add_report_detail)
+    check_general_data(year, month, service, add_report_detail, add_report_detail_all)
     check_day_of_month()
-    set_free_days(report_year, report_month)
+    set_free_days(year, month)
 
-  report_month.on 'select2:select', (e) ->
+  month.on 'select2:select', (e) ->
     #console.log "Cambiando el Mes"
-    check_general_data(report_year, report_month, report_service, add_report_detail)
+    check_general_data(year, month, service, add_report_detail, add_report_detail_all)
     check_day_of_month()
-    set_weekend(report_year, report_month)
-    set_free_days(report_year, report_month)
+    set_weekend(year, month)
+    set_free_days(year, month)
 
-  report_service.on 'select2:select', (e) ->
+  service.on 'select2:select', (e) ->
     console.log "Cambiando el Servicio"
-    check_general_data(report_year, report_month, report_service, add_report_detail)
+    check_general_data(year, month, service, add_report_detail, add_report_detail_all)
     check_day_of_month()
     #actualizar valores del select de agentes
-    id = report_service.val()
+    id = service.val()
+    set_selects_of_agents(id)
+
+selects_control_novelties = ->
+  console.log "selects_control_novelties"
+  add_novelty_detail = $('#add_novelty_details')
+  year = $('#novelty_year')
+  month = $('#novelty_month')
+  service = $('#novelty_service_of_dependence_id')
+
+
+  check_general_data(year, month, service, add_novelty_detail)
+  
+ 
+  year.on 'select2:select', (e) ->
+    #console.log "Cambiando el Año"
+    check_general_data(year, month, service, add_novelty_detail)
+    
+  month.on 'select2:select', (e) ->
+    check_general_data(year, month, service, add_novelty_detail)
+
+  service.on 'select2:select', (e) ->
+    check_general_data(year, month, service, add_novelty_detail)    
+    #actualizar valores del select de agentes
+    id = service.val()
+    console.log "id: " + id
     set_selects_of_agents(id)
 
 set_days_event = ->
@@ -220,46 +254,72 @@ set_days_event = ->
     $('#report_total_hs_umu').val add_umu
 
 $(document).on 'cocoon:after-insert', (e) ->
-  console.log "Se inserto COCOON"
   $('.select2').select2({theme: "bootstrap"})
-  add_report_detail = $('#add_report_details')
-  report_year = $('#report_year')
-  report_month = $('#report_month')
-  report_service = $('#report_service')
-  check_general_data(report_year, report_month, report_service, add_report_detail)
-  check_day_of_month()
-  set_weekend(report_year, report_month)
-  set_free_days(report_year, report_month)
-  set_ids_to_child()
-  if e.currentTarget.activeElement.firstChild.data == "Agente del Servicio"
-    id = report_service.val()
+  
+  if ($('.novelties.create').length + $('.novelties.edit').length + $('.novelties.update').length + $('.novelties.new').length) > 0
+    console.log "Se inserto COCOON en novedad"
+    year = $('#novelty_year')
+    month = $('#novelty_month')
+    service = $('#novelty_service_of_dependence_id')
+    id = service.val()
     set_last_select_of_agents(id)
-  set_days_event()
+  else
+    console.log "Se inserto COCOON en reporte"
+    add_report_detail = $('#add_report_details')
+    add_report_detail_all = $('#add_report_details_all')
+    year = $('#report_year')
+    month = $('#report_month')
+    service = $('#report_service')
+  
+    check_general_data(year, month, service, add_report_detail, add_report_detail_all)
+    check_day_of_month()
+    set_weekend(year, month)
+    set_free_days(year, month)
+    set_ids_to_child()
+    if e.currentTarget.activeElement.firstChild.data == "Agente del Servicio"
+      id = service.val()
+      set_last_select_of_agents(id)
+    set_days_event()
   
   
   
 
 $(document).on 'turbolinks:load', ->
   if $('.reports.create').length > 0
-    days_controls()
+    selects_controls_reports()
     #report_service = $('#report_service')
     #id = report_service.val()
     #set_selects_of_agents(id)
     set_days_event()
 
   if $('.reports.edit').length > 0
-    days_controls()
+    selects_controls_reports()
     set_days_event()
 
   if $('.reports.update').length > 0
-    days_controls()
+    selects_controls_reports()
     set_days_event()
 
   if $('.reports.new_active').length > 0
-    days_controls()
+    selects_controls_reports()
 
   if $('.reports.new_pasive').length > 0
-    days_controls()
+    selects_controls_reports()
     
   if $('.reports.new_extra_hours').length > 0
-    days_controls()
+    selects_controls_reports()
+
+  if $('.novelties.create').length > 0
+    selects_control_novelties()
+    set_days_event()
+
+  if $('.novelties.edit').length > 0
+    selects_control_novelties()
+    set_days_event()
+
+  if $('.novelties.update').length > 0
+    selects_control_novelties()
+    set_days_event()
+
+  if $('.novelties.new').length > 0
+    selects_control_novelties()
