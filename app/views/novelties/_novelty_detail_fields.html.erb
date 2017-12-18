@@ -33,12 +33,12 @@
   </div>
   <div class="col-sm-1">
     <div class="field">
-      <%= f.number_field :hours_to_add, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "hs +"%>
+      <%= f.number_field :hours_to_add, :maxlength => "2", :min => "0", :max => "99", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "hs +"%>
     </div>
   </div>
   <div class="col-sm-1">
     <div class="field">
-      <%= f.number_field :hours_to_remove, :maxlength => "2", :min => "0", :max => "48", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "hs -"%>
+      <%= f.number_field :hours_to_remove, :maxlength => "2", :min => "0", :max => "99", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "hs -"%>
     </div>
   </div>
   <div class="col-sm-12">
