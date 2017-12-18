@@ -1,24 +1,39 @@
-<p id="notice"><%= notice %></p>
+<h1>Reporte <%= @report.report_type %></h1>
+<div class="row">
+	<div class="col-sm-12">
+		<p><strong>Periodo: </strong><%= @report.year %> / <%= @report.month %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>Servicio: </strong><%= @report.service_of_dependence.service %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>Usuario: </strong><%= @report.user%></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>ultima Modificación: </strong><%= @report.updated_at.strftime("%d-%m-%y")%></p>
+	</div>
 
-<p>
-  <strong>Year:</strong>
-  <%= @report.year %>
-</p>
+	<div class="col-sm-12">
+		<table class="table">
+			<thead>
+					<tr>
+						<th rowspan="2">Agente</th>
+						<th rowspan="2">¿Del Servicio?</th>
+	  				<th colspan="3">Horas Guarida</th>
+	  			</tr>
+			    <tr>
+			    	<th>Activas</th>
+			    	<th>U.M.U.</th>
+			    	<th>Total</th>
 
-<p>
-  <strong>Month:</strong>
-  <%= @report.month %>
-</p>
+			    </tr>
+ 		 	</thead>
+			
+		</table>
+	</div>
 
-<p>
-  <strong>Service of dependence:</strong>
-  <%= @report.service_of_dependence %>
-</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @report.user %>
-</p>
 
+</div>
 <%= link_to 'Edit', edit_report_path(@report) %> |
 <%= link_to 'Back', reports_path %>

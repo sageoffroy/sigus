@@ -69,6 +69,6 @@ class NoveltyDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def novelty_detail_params
-      params.require(:novelty_detail).permit(:novelty_id, :agent_id, :novelty_type_id, :report_type, :,year_ref, :month_ref, :description, :hours_to_add, :hours_to, :remove, :is_umu, :is_habitual, :associated_concept)
+      params.require(:novelty_detail).permit(:novelty_id, :agent_id, :novelty_type_id, :report_type, :year_ref, :month_ref, :description, :hours_to_add, :hours_to, :remove, :is_umu, :is_habitual, :associated_concept)
     end
 end
