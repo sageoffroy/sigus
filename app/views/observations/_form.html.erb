@@ -1,27 +1,31 @@
-<%= form_with(model: observation, local: true) do |form| %>
+<%= form_for(observation) do |f| %>
   <% if observation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(observation.errors.count, "error") %> prohibited this observation from being saved:</h2>
-
-      <ul>
-      <% observation.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+      <script type="text/javascript">
+        <% observation.errors.full_messages.each do |message| %>
+          toastr['error']('<%= message %>');
+        <% end %>
+      </script>
   <% end %>
 
-  <div class="field">
-    <%= form.label :number %>
-    <%= form.number_field :number, id: :observation_number %>
-  </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :observation_description %>
+<div class="form-group row">
+  <div class="col-sm-2">
+    <h6>Año</h6>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="col-sm-2">
+    <h6>Mes</h6>
   </div>
+  <div class="col-sm-8">
+    <h6>Servicio</h6>
+  </div>
+  <div class="input-group col-sm-2">
+    <%= f.select :year, (2017)..(2019), {prompt: "Año"}, {class: "select2"}%>
+  </div>
+  <div class="input-group col-sm-2">
+    <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
+  </div>
+  <div class="input-group col-sm-8">
+    <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2"} %>
+  </div>
+</div>
 <% end %>

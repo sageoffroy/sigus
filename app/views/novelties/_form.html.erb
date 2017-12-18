@@ -17,7 +17,7 @@
       <h6>Servicio</h6>
     </div>
     <div class="input-group col-sm-2">
-      <%= f.select :year, (2017)..(Time.zone.now.year), {prompt: "Año"}, {class: "select2"}%>
+      <%= f.select :year, (2017)..(2019), {prompt: "Año"}, {class: "select2"}%>
     </div>
     <div class="input-group col-sm-2">
       <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>

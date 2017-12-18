@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212151230) do
+ActiveRecord::Schema.define(version: 20171218123641) do
 
   create_table "addiotionals", force: :cascade do |t|
     t.integer "agent_id"
@@ -181,19 +181,8 @@ ActiveRecord::Schema.define(version: 20171212151230) do
     t.integer "year"
     t.integer "month"
     t.integer "service_of_dependence_id"
-    t.integer "agent_id"
-    t.integer "novelty_type_id"
-    t.string "report_type"
-    t.integer "month_ref"
-    t.integer "year_ref"
-    t.string "description"
-    t.integer "hours_to_add"
-    t.integer "hours_to_remove"
-    t.integer "hours_agent_mpg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_novelties_on_agent_id"
-    t.index ["novelty_type_id"], name: "index_novelties_on_novelty_type_id"
     t.index ["service_of_dependence_id"], name: "index_novelties_on_service_of_dependence_id"
   end
 
@@ -227,6 +216,20 @@ ActiveRecord::Schema.define(version: 20171212151230) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "observation_details", force: :cascade do |t|
+    t.integer "observation_id"
+    t.integer "agent_id"
+    t.integer "observation_description_id"
+    t.date "date_from"
+    t.integer "total_days"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_observation_details_on_agent_id"
+    t.index ["observation_description_id"], name: "index_observation_details_on_observation_description_id"
+    t.index ["observation_id"], name: "index_observation_details_on_observation_id"
   end
 
   create_table "observations", force: :cascade do |t|

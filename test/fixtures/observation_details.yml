@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  observation: one
+  agent: one
+  observation_description: one
+  date_from: 2017-12-18
+  total_days: 1
+  description: MyString
+
+two:
+  observation: two
+  agent: two
+  observation_description: two
+  date_from: 2017-12-18
+  total_days: 1
+  description: MyString

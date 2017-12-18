@@ -1,0 +1,47 @@
+<%= form_with(model: observation_detail, local: true) do |form| %>
+  <% if observation_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(observation_detail.errors.count, "error") %> prohibited this observation_detail from being saved:</h2>
+
+      <ul>
+      <% observation_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :observation_id %>
+    <%= form.text_field :observation_id, id: :observation_detail_observation_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.text_field :agent_id, id: :observation_detail_agent_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :observation_description_id %>
+    <%= form.text_field :observation_description_id, id: :observation_detail_observation_description_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_from %>
+    <%= form.date_select :date_from, id: :observation_detail_date_from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total_days %>
+    <%= form.number_field :total_days, id: :observation_detail_total_days %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :observation_detail_description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
