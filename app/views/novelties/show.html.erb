@@ -1,26 +1,16 @@
 <p>
-  <strong>Agent:</strong>
-  <%= @novelty.agent %>
+  <strong>Año:</strong>
+  <%= @novelty.year %>
 </p>
 
 <p>
-  <strong>Novelty type:</strong>
-  <%= @novelty.novelty_type %>
+  <strong>Mes</strong>
+  <%= @novelty.month %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @novelty.description %>
-</p>
-
-<p>
-  <strong>Hours to add:</strong>
-  <%= @novelty.hours_to_add %>
-</p>
-
-<p>
-  <strong>Hours to remove:</strong>
-  <%= @novelty.hours_to_remove %>
+  <strong>Servicio:</strong>
+  <%= @novelty.service_of_dependence.service %>
 </p>
 
 <%= link_to 'Edit', edit_novelty_path(@novelty) %> |
