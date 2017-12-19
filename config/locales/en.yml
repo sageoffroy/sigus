@@ -30,6 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  
   activerecord:
     models:
       free_day:
@@ -39,12 +40,15 @@ en:
       report: "Reporte"
       novelty:  "Novedad"
       agent_of_service:  "Agente del Servicio"
+      observation:  "Observación"
+       
         
     attributes:
       report:
         month: "Mes"
         year: "Año"
         service_of_dependence: "Servicio del Hospital"
+
   date:
     abbr_day_names:
     - dom
@@ -206,6 +210,10 @@ en:
         create: Asignar agente a Servicio
         submit: Asignar agente a Servicio
         update: Asignar Agente al Servicio
+      observation:
+        create: Crear Observación
+        submit: Guardar Observación
+        update: Actualizar Observación
 
   number:
     currency:

@@ -71,7 +71,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       if @report.save
         if (@report.report_type == "Guardias Activas")
-          calcular_cupo(@report)
+          #calcular_cupo(@report)
         end
         format.html { redirect_to @report, notice: 'Report was successfully created.' }
         format.json { render :show, status: :created, location: @report }
@@ -100,7 +100,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       if @report.update(report_params)
         if (@report.report_type == "Guardias Activas")
-          calcular_cupo(@report)
+          #calcular_cupo(@report)
         end
         format.html { redirect_to @report, notice: 'Report was successfully updated.' }
         format.json { render :show, status: :ok, location: @report }
@@ -326,7 +326,6 @@ class ReportsController < ApplicationController
           end #-- end obsevacion code
         end #-- end no medico residente
       end
-      byebug
     end #-- end each agente
     
     #if consultorio tiene un servicio y no tiene agente 
@@ -335,12 +334,11 @@ class ReportsController < ApplicationController
 
     porcentaje_mes = PercentageMonth.where(mes:@report.month).first
     if !porcentaje_mes.nil?    
-      byebug  
       hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
       gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
       hs_sabado_servicio = hs_sabado_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
     end
-    byebug
+    
 
 
     ##-- Tercera Parte

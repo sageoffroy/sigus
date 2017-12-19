@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
+<h1>Registro de Observaciones</h1>
 
-<h1>Observations</h1>
-
-<table>
+<table class="table datatable">
   <thead>
     <tr>
       <th>Año</th>
@@ -14,18 +12,19 @@
 
   <tbody>
     <% @observations.each do |observation| %>
-      <tr>
-        <td><%= observation.year %></td>
-        <td><%= observation.month %></td>
-        <td><%= observation.service_of_dependence%></td>
-        <td><%= link_to 'Show', observation %>
-            <%= link_to 'Edit', edit_observation_path(observation) %>
-            <%= link_to 'Destroy', observation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <tr>
+      <td><%= observation.year %></td>
+      <td><%= observation.month %></td>
+      <td><%= observation.service_of_dependence%></td>
+      <td><%= link_to 'Show', observation %>
+        <%= link_to 'Edit', edit_observation_path(observation) %>
+        <%= link_to 'Destroy', observation, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Observation', new_observation_path %>
+<%= link_to 'Nueva Observación', new_observation_path, class: "btn btn-primary" %>
