@@ -18,7 +18,7 @@
 
   
   <div class="input-group date datepicker col-sm-3">
-      <%= f.text_field :date_from, placeholder: "Fecha de Alta", class: "form-control" %>
+      <%= f.text_field :date_from, placeholder: "Fecha de Inicio", class: "form-control" %>
       <span class="input-group-addon ">
         <%= fa_icon "list"%>
       </span>
@@ -27,7 +27,7 @@
 
   <div class="col-sm-2">
     <div class="field">
-      <%= f.number_field :total_days, class: "number-field", placeholder: "Total de días" %>
+      <%= f.number_field :total_days, :maxlength => "2", :min => "0", :max => "31", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "Cantidad Días", class: "number-field"%>
     </div>
   </div>
 
@@ -40,4 +40,42 @@
   </div>
   <div class="col-md-12 col-last"></div>
 </div>
+
+
+<script>
+  function maxLengthCheck(object) {
+    
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+    
+  function isNumeric (evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    if (key != 8 && key != 9 && key != 116){
+      key = String.fromCharCode (key);
+      var regex = /[0-9]|\./;
+      if ( !regex.test(key) ) {
+        theEvent.returnValue = false;
+        if(theEvent.preventDefault) theEvent.preventDefault();
+      }else{
+        
+      }
+    } 
+  }
+
   
+  function calcular_total_horas() {
+    console.log("Calculando Horas");
+    total = 0
+    $(".day_of_month").each(
+      function(index, value) {
+        if (!isNaN(eval($(this).val()))){
+          total = total + eval($(this).val());  
+        }
+      }
+    );
+    console.log(total);
+    $("#agent_total_hours").val(total);
+  }
+</script>
