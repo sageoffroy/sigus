@@ -1,0 +1,43 @@
+<div class="nested-fields row">
+  
+    
+  
+  <div class="col-sm-4">
+    <%= link_to_remove_association (fa_icon "window-close", class: "btn-remove"), f %>
+    <div class="field" style ="margin-left: 35px;">
+      <%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>
+    </div>
+  </div>
+
+  
+  <div class="col-sm-3">
+    <div class="field">
+      <%= f.collection_select :observation_description_id, ObservationDescription.all, :id, :to_s, {prompt: "Tipo de Observación"}, {class: "select2"} %>
+    </div>
+  </div>  
+
+  
+  <div class="input-group date datepicker col-sm-3">
+      <%= f.text_field :date_from, placeholder: "Fecha de Alta", class: "form-control" %>
+      <span class="input-group-addon ">
+        <%= fa_icon "list"%>
+      </span>
+  </div>
+  
+
+  <div class="col-sm-2">
+    <div class="field">
+      <%= f.number_field :total_days, class: "number-field", placeholder: "Total de días" %>
+    </div>
+  </div>
+
+  
+
+  <div class="col-sm-12">
+    <div class="field">
+      <%= f.text_area :description, rows: 1, :style=>"width: 100%;font-size: 0.8rem;max-height: 28px;", :placeholder => "Descripción"%>
+    </div>
+  </div>
+  <div class="col-md-12 col-last"></div>
+</div>
+  

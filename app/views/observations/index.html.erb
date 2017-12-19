@@ -5,20 +5,22 @@
 <table>
   <thead>
     <tr>
-      <th>Number</th>
-      <th>Description</th>
-      <th colspan="3"></th>
+      <th>Año</th>
+      <th>Mes</th>
+      <th>Servicio</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @observations.each do |observation| %>
       <tr>
-        <td><%= observation.number %></td>
-        <td><%= observation.description %></td>
-        <td><%= link_to 'Show', observation %></td>
-        <td><%= link_to 'Edit', edit_observation_path(observation) %></td>
-        <td><%= link_to 'Destroy', observation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= observation.year %></td>
+        <td><%= observation.month %></td>
+        <td><%= observation.service_of_dependence%></td>
+        <td><%= link_to 'Show', observation %>
+            <%= link_to 'Edit', edit_observation_path(observation) %>
+            <%= link_to 'Destroy', observation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

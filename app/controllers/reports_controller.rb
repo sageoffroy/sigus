@@ -24,7 +24,6 @@ class ReportsController < ApplicationController
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
-    #@agents = Agent.all
   end
 
   def new_active
@@ -143,9 +142,9 @@ class ReportsController < ApplicationController
     #calcular cantidades de cada día
     first_day = Date.new year, month, 1
     last_day = Date.civil year, month, -1
-#
+
     days_from_month = (first_day..last_day).map{ |date| date.strftime("%a") }
-#
+
     lunes = days_from_month.count("Mon")
     martes = days_from_month.count("Tue")
     miercoles = days_from_month.count("Wed")
@@ -153,17 +152,17 @@ class ReportsController < ApplicationController
     viernes = days_from_month.count("Fri")
     sabados = days_from_month.count("Sat")
     domingos = days_from_month.count("Sun")
-#
+
     #Verificar feriados y convertirlos
-#
+
     free_days = FreeDay.where()
-    ## SQL       Model.where('extract(month from date_column) = ?', desired_month)
-    ## SQLite    Model.where("cast(strftime('%m', date_column) as int) = ?", desired_month)
-#
+    # SQL       Model.where('extract(month from date_column) = ?', desired_month)
+    # SQLite    Model.where("cast(strftime('%m', date_column) as int) = ?", desired_month)
+
     FreeDay.where("cast(strftime('%m', day) as int) = ?", month).each do |fd|
       if !fd.day.sunday?
         if !fd.day.saturday?
-          if fd.local? or fd.provincial?
+          if fd.local?
             sabados+=1
             case fd.day.strftime("%A")
             when 'Monday'
@@ -178,13 +177,29 @@ class ReportsController < ApplicationController
               viernes-=1
             end
           end
+          if fd.provincial? or fd.nacional?
+            domingos+=1
+            case fd.day.strftime("%A")
+            when 'Monday'
+              lunes-=1
+            when 'Tuesday'
+              martes-=1
+            when 'Wednesday'
+              miercoles-=1
+            when 'Thursday'
+              jueves-=1
+            when 'Friday'
+              viernes-=1
+            end
+          end
         else
-          if fd.nacional?
+          if fd.nacional? or fd.provincial?
             domingos+=1
             sabados-=1
           end
         end
       end
+
     end #-- fin each
 
     #obtener dias habiles
@@ -203,6 +218,7 @@ class ReportsController < ApplicationController
       hs_sabado_cobertura = 0
       hs_domingo_cobertura = 0
     end
+
     #---- SEGUNDA PARTE
     # Se obtienen todos los agentes del servicio
     agents_of_service  = AgentOfService.where(service_of_dependence: service_of_dependence)
@@ -221,14 +237,15 @@ class ReportsController < ApplicationController
       
       #Si no tiene Regimen Horario lo inicializo en 30hs
       if agent_of_service.agent.hour_regime.nil?
-        agent_of_service.agent.hour_regime = HourRegime.where(id:3).first
+        agent_of_service.agent.hour_regime = HourRegime.where(id:3).first #id 3 = 30hs S/G
       end
       hour_regime = agent_of_service.agent.hour_regime
       
       #Si no es médico residente
       if !(agent_of_service.agent.agent_type.nil?)
         if !(agent_of_service.agent.agent_type.description == "Médico Residente")
-          observacion = Observation.where(agent:agent_of_service.agent).first
+          #observacion = Observation.where(year:year).first
+          observacion = nil
           
           # Si no tiene observaciones lo marco como 0, sino uso codigo del tipo de observacion
           if observacion.nil?
@@ -253,7 +270,7 @@ class ReportsController < ApplicationController
                   hs_dias_semana = 4 * cant_dias_habiles
                 elsif hour_regime.hours == 36
                   if hour_regime.with_guard
-                    hs_dias_semana = 52
+                    hs_dias_semana = 26
                   else
                     hs_dias_semana = 6 * cant_dias_habiles
                   end
@@ -269,20 +286,26 @@ class ReportsController < ApplicationController
             if code == 6
               hs_dias_semana = hs_dias_semana *0.5
             end
+
             if code == 7
               hs_dias_semana = hs_dias_semana *0.833
             end
-
-            
-
             hs_dias_semana_servicio =  hs_dias_semana_servicio + hs_dias_semana
-
             #Si el agente tiene un regime de 36
             if hour_regime.hours == 36
+              if agent_of_service.function == "Jefe del servicio"
+
+                hs_sabados = sabados * 6 * @report.service_of_dependence.jefatura
+                
+              else
+                hs_sabados = sabados * 6
+              end
+              hs_sabado_servicio = hs_sabado_servicio + hs_sabados
+ 
               if hour_regime.with_guard 
                 gs_dias_semana = 103
                 if agent_of_service.function == "Jefe del servicio"
-                 gs_dias_semana = gs_dias_semana * @report.service_of_dependence.jefatura
+                  gs_dias_semana = gs_dias_semana * @report.service_of_dependence.jefatura
                 end
 
                 if code == 5
@@ -294,109 +317,116 @@ class ReportsController < ApplicationController
                 end
 
                 gs_dias_semana_servicio =  gs_dias_semana_servicio + gs_dias_semana
+
               end
+
+
             end #en si regimen 36
             dotacion_actual = dotacion_actual+1
           end #-- end obsevacion code
         end #-- end no medico residente
       end
+      byebug
     end #-- end each agente
     
-    # if consultorio tiene un servicio y no tiene agente 
+    #if consultorio tiene un servicio y no tiene agente 
       #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
     #end
 
     porcentaje_mes = PercentageMonth.where(mes:@report.month).first
-    if !porcentaje_mes.nil?      
-      hs_dias_semana_servicio = hs_dias_semana_sevicio * service_of_dependence.asistencial * (100 - (service_of_dependence.ausentismo * porcentaje_mes.valor))
-      gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * (100 - service_of_dependence.ausentismo*porcentaje_mes.valor)
-      hs_sabado_servicio = hs_sabado_servicio * service_of_dependence.asistencial * (100 - service_of_dependence.ausentismo*porcentaje_mes.valor)
+    if !porcentaje_mes.nil?    
+      byebug  
+      hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
+      gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
+      hs_sabado_servicio = hs_sabado_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
     end
-
-    #-- Tercera Parte
-
-    # calcular el resto de la cobertura (ej: hs_dias_semana_cobertura) - horas disponibles (ej: hs_dias_semana_servicio)
-    hs_dias_semana_requeridas = hs_dias_semana_cobertura - hs_dias_semana_servicio
-    gs_dias_semana_requeridas = gs_dias_semana_cobertura - gs_dias_semana_servicio
-    hs_sabado_requeridas = (hs_sabado_cobertura - hs_sabado_servicio) * 1.5
-    hs_domingo_requeridas = hs_domingo_cobertura * 2
+    byebug
 
 
-    if service_of_dependence.con_guardia
-      flag = 0
-      if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0) and (hs_sabado_requeridas < 0)
-        flag = 1
-        if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0)
-          gs_dias_semana_requeridas = 0
-        end
-        if (hs_sabado_requeridas < 0)  and (hs_dias_semana_requeridas < 0)
-          hs_sabado_requeridas = 0
-        end
-        if hs_dias_semana_requeridas < 0
-          hs_dias_semana_requeridas = 0
-        end
-        if flag = 1
-          guardia_final = hs_domingo_requeridas
-        else
-          guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
-        end
-      end
-
-    else
-      guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
-    end
-
-
-    #-- Cuarta Parte
-    # Obtener los 6 anteriores reportes del servicio al mes actual
-    reportes = Report.where(service_of_dependence: service_of_dependence).last(6)
-    acum = 0
-    cont = 0
-    reportes.each do |r|
-      if !r.total_hs.nil?
-        total_service = r.total_hs + r.total_hs_umu
-        razon = total_service / dotacion_actual
-        acum = acum + razon
-        cont = cont + 1
-      end
-    end
-    if acum != 0
-      razon_final = acum / cont
-    else
-      razon_final = 0
-    end
-
-    cupo_historico = razon_final * dotacion_actual
-    if !guardia_final.nil?
-      if guardia_final > cupo_historico
-        cupo = cupo_historico
-      else
-        cupo = guardia_final
-      end
-    else
-      cupo = guardia_final
-    end
-
-
-    #-- Quinta Parte
-    # acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
+    ##-- Tercera Parte
+#
+    ## calcular el resto de la cobertura (ej: hs_dias_semana_cobertura) - horas disponibles (ej: hs_dias_semana_servicio)
+    #hs_dias_semana_requeridas = hs_dias_semana_cobertura - hs_dias_semana_servicio
+    #gs_dias_semana_requeridas = gs_dias_semana_cobertura - gs_dias_semana_servicio
+    #hs_sabado_requeridas = (hs_sabado_cobertura - hs_sabado_servicio) * 1.5
+    #hs_domingo_requeridas = hs_domingo_cobertura * 2
+#
+#
+    #if service_of_dependence.con_guardia
+      #flag = 0
+      #if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0) and (hs_sabado_requeridas < 0)
+        #flag = 1
+        #if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0)
+          #gs_dias_semana_requeridas = 0
+        #end
+        #if (hs_sabado_requeridas < 0)  and (hs_dias_semana_requeridas < 0)
+          #hs_sabado_requeridas = 0
+        #end
+        #if hs_dias_semana_requeridas < 0
+          #hs_dias_semana_requeridas = 0
+        #end
+        #if flag = 1
+          #guardia_final = hs_domingo_requeridas
+        #else
+          #guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
+        #end
+      #end
+#
+    #else
+      #guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
+    #end
+#
+#
+    ##-- Cuarta Parte
+    ## Obtener los 6 anteriores reportes del servicio al mes actual
+    #reportes = Report.where(service_of_dependence: service_of_dependence).last(6)
+    #acum = 0
+    #cont = 0
+    #reportes.each do |r|
+      #if !r.total_hs.nil?
+        #total_service = r.total_hs + r.total_hs_umu
+        #razon = total_service / dotacion_actual
+        #acum = acum + razon
+        #cont = cont + 1
+      #end
+    #end
+    #if acum != 0
+      #razon_final = acum / cont
+    #else
+      #razon_final = 0
+    #end
+#
+    #cupo_historico = razon_final * dotacion_actual
+    #if !guardia_final.nil?
+      #if guardia_final > cupo_historico
+        #cupo = cupo_historico
+      #else
+        #cupo = guardia_final
+      #end
+    #else
+      #cupo = guardia_final
+    #end
+#
+#
+    ##-- Quinta Parte
+    ## acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
     #total_hs_liquidadas = @report.total_hs + @report.total_hs_umu
-
-
-    #-- Falta 6ta Parte (Ajuste por Novedades)
-    #obtener novedades de los agentes del servicio (no del reporte) este periodo
-
+#
+#
+    ##-- Falta 6ta Parte (Ajuste por Novedades)
+    ##obtener novedades de los agentes del servicio (no del reporte) este periodo
+#
     #pv = 0
-      
+#      
     #novedades = Novelties.where(month: month, year: year, service_of_dependence: service_of_dependence, report_type: "Guardias Activas", order_by(year_ref, month_ref))
-
+#
     #novedades.each do |novedad|
       #if pv == 0 
         #month_ref_actual = novedad.month_ref
         #year_ref_actual = novedad.year_ref
         #valor = 0
         #pv = 1
-
+#
         #if month_ref_actual != novedad.month_ref
           #arreglo.add((novedad.year_ref_actual.to_s + novedad.month_ref_actual.to_s, valor))
           #valor = 0
@@ -404,7 +434,7 @@ class ReportsController < ApplicationController
           #year_ref_actual = novedad.year_ref
         #end
         #valor = valor + novedad.hour_to_add - novedad.hour_to_remove
-      ##end
+      #end
       #arreglo.each do |a|
         #year = String.split(a[0],0,4)
         #if a[0].size == 6
@@ -412,24 +442,24 @@ class ReportsController < ApplicationController
         #else
           #month = String.split(a[0],5,1)
         #end
-
+#
         #report_ref = Report.where(mont: month, year: year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas")
-
+#
         #diferencia = report_ref.total_hs_free - a[1]
-
+#
         #if diferencia > 0 
           #report_ref.total_hs_free = diferencia
         #else
           #report_ref.total_hs_free = 0
           #total_hs_liquidadas = total_hs_liquidadas - diferencia
         #end
-
+#
         #report_ref.save
-
-      #end
-
-      #-- Septima Parte
-
+#
+      ##end
+#
+      ##-- Septima Parte
+#
       #if cupo >= total_hs_liquidadas
         #@report.total_hs_free = cupo - total_hs_liquidadas
         #@msg = "Se acepta liquidacion"
@@ -439,10 +469,10 @@ class ReportsController < ApplicationController
         #@report.total_hs_exc = exc
         #@msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas" + exc
       #end
-      # acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
-
-
-
+      ## acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
+#
+#
+#
   end # -- Fin Calcular Cupo
 
 

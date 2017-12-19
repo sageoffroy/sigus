@@ -17,7 +17,7 @@
       <h6>Servicio</h6>
     </div>
     <div class="input-group col-sm-2">
-      <%= f.select :year, (2017)..(Time.zone.now.year), {prompt: "Año"}, {class: "select2"}%>
+      <%= f.select :year, (2017)..(2019), {prompt: "Año"}, {class: "select2"}%>
     </div>
     <div class="input-group col-sm-2">
       <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
@@ -25,21 +25,21 @@
     <div class="input-group col-sm-8">
       <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2"} %>
     </div>
-    </div>
-    <h5>Novedades</h5>
+  </div>
+  <h5>Novedades</h5>
 
-    <div class="novelty-box">
-      <%= f.fields_for :novelty_details do |novelty_detail| %>
-        <%= render 'novelty_detail_fields', :f => novelty_detail %>
-      <% end %>
-    </div>
+  <div class="novelty-box">
+    <%= f.fields_for :novelty_details do |novelty_detail| %>
+      <%= render 'novelty_detail_fields', :f => novelty_detail %>
+    <% end %>
+  </div>
 
-    <center>
-      <%= link_to_add_association 'Agregar Novedad', f, :novelty_details, id: 'add_novelty_details', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.novelty-box', association_insertion_method: :append } %>
-    </center>
-    <div class="row">
-      <div class="col-md-12 col-last-solid" style="margin-bottom: 1.5rem; margin-top:0.4rem;border-color: blue;"></div>  
-    </div>
+  <center>
+    <%= link_to_add_association 'Agregar Novedad', f, :novelty_details, id: 'add_novelty_details', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.novelty-box', association_insertion_method: :append } %>
+  </center>
+  <div class="row">
+    <div class="col-md-12 col-last-solid" style="margin-bottom: 1.5rem; margin-top:0.4rem;border-color: blue;"></div>  
+  </div>
   <div class="form-actions">
     <%= link_to 'Atrás', novelties_path, class: 'btn btn-danger' %>
     <%= f.submit class: 'btn btn-primary' %>

@@ -4,7 +4,7 @@ class NoveltiesController < ApplicationController
   # GET /novelties
   # GET /novelties.json
   def index
-    @novelties = Novelty.all
+    @novelties = Novelty.where(service_of_dependence: current_user.dependence.service_of_dependences)
   end
 
   # GET /novelties/1
@@ -81,6 +81,6 @@ class NoveltiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def novelty_params
-      params.require(:novelty).permit(:year, :month, :service_of_dependence_id, novelty_details_attributes: [:id, :url, :_destroy, :agent_id, :novelty_type_id, :hours_type, :year_ref, :month_ref, :hours_to_add, :hours_to_remove, :associated_concept,:description])
+      params.require(:novelty).permit(:year, :month, :service_of_dependence_id, novelty_details_attributes:[:id, :url, :_destroy, :agent_id, :novelty_type_id, :hours_type, :year_ref, :month_ref, :hours_to_add, :hours_to_remove, :associated_concept, :description])
     end
 end

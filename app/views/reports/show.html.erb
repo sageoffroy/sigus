@@ -16,19 +16,28 @@
 	<div class="col-sm-12">
 		<table class="table">
 			<thead>
-					<tr>
-						<th rowspan="2">Agente</th>
-						<th rowspan="2">¿Del Servicio?</th>
-	  				<th colspan="3">Horas Guarida</th>
-	  			</tr>
-			    <tr>
-			    	<th>Activas</th>
-			    	<th>U.M.U.</th>
-			    	<th>Total</th>
-
-			    </tr>
+				<tr>
+					<th rowspan="2">Agente</th>
+					<th rowspan="2">¿Del Servicio?</th>
+  				<th colspan="3">Horas Guarida</th>
+  			</tr>
+		    <tr>
+		    	<th>Activas</th>
+		    	<th>U.M.U.</th>
+		    	<th>Total</th>
+		    </tr>
  		 	</thead>
-			
+			<tbody>
+				<% @report_details.each do |rd| %>
+	      <tr>
+	        <td><%= rd.agent%></td>
+	        <td><%= rd.belong_service%></td>
+	        <td><%= rd.total_hours_gs%></td>
+	        <td><%= rd.total_hours_umu%></td>
+	        <td><%= rd.total_hours%></td>
+	      </tr>
+	    	<% end %>
+			</tbody>
 		</table>
 	</div>
 

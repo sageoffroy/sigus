@@ -1,14 +1,17 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Number:</strong>
-  <%= @observation.number %>
+  <strong>Año:</strong>
+  <%= @observation.year %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @observation.description %>
+  <strong>Mes</strong>
+  <%= @observation.month %>
+</p>
+
+<p>
+  <strong>Servicio:</strong>
+  <%= @observation.service_of_dependence.service %>
 </p>
 
 <%= link_to 'Edit', edit_observation_path(@observation) %> |
-<%= link_to 'Back', observations_path %>
+<%= link_to 'Back', novelties_path %>

@@ -27,7 +27,7 @@ $blue:rgb(33, 41, 90) !default;
 
 body {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: normal;
   line-height: 1.5;
   color: #000;
@@ -352,6 +352,11 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   text-align: center;
 }
 
+table.dataTable tbody th, table.dataTable tbody td {
+  
+}
+
+
 .field-hours-th {
   cursor: pointer;
 }
@@ -431,6 +436,20 @@ table.dataTable tbody th, table.dataTable tbody td {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+
+
+.input-group.date .input-group-addon {
+  max-height: 32px;
+}
+
+.datepicker .form-control{
+  max-height: 32px;
+}
+
+.number-field{
+  min-height: 32px;
+  max-height: 32px;
 }
 
 .select2-container--bootstrap{

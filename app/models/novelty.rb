@@ -1,6 +1,5 @@
 class Novelty < ApplicationRecord
   belongs_to :service_of_dependence
-
   has_many :novelty_details, dependent: :destroy
 
   validates :service_of_dependence, presence: true
