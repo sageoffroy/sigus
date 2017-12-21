@@ -1,0 +1,31 @@
+<h1>Registro de Adicionales</h1>
+
+<table class="table datatable">
+  <thead>
+    <tr>
+      <th>Año</th>
+      <th>Mes</th>
+      <th>Servicio</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @additionals.each do |additional| %>
+    <tr>
+      <td><%= additional.year %></td>
+      <td><%= additional.month %></td>
+      <td><%= additional.service_of_dependence %></td>
+      <td>
+        <%= link_to (fa_icon "eye"), additional%>
+        <%= link_to (fa_icon "pencil-square-o"), edit_additional_path(additional)%>
+        <%= link_to (fa_icon "trash-o"), additional, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }%>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Agregar Adicional', new_additional_path, class: "btn btn-primary" %>

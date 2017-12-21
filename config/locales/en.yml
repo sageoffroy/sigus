@@ -214,6 +214,10 @@ en:
         create: Crear Observación
         submit: Guardar Observación
         update: Actualizar Observación
+      additional:
+        create: Crear Adicional
+        submit: Guardar Adicional
+        update: Actualizar Adicional
 
   number:
     currency:

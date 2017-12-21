@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  resources :additional_details
+  resources :additionals
   resources :observation_details
   resources :novelty_details
-  resources :addiotionals
   resources :historical_guard_agents
   resources :percentage_months
   resources :novelties

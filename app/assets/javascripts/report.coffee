@@ -138,27 +138,21 @@ selects_controls_reports = ->
   year = $('#report_year')
   month = $('#report_month')
   service = $('#report_service')
-
-
   check_general_data(year, month, service, add_report_detail, add_report_detail_all)
   check_day_of_month()
   set_weekend(year, month)
   set_free_days(year, month)
-  
- 
   year.on 'select2:select', (e) ->
     #console.log "Cambiando el Año"
     check_general_data(year, month, service, add_report_detail, add_report_detail_all)
     check_day_of_month()
     set_free_days(year, month)
-
   month.on 'select2:select', (e) ->
     #console.log "Cambiando el Mes"
     check_general_data(year, month, service, add_report_detail, add_report_detail_all)
     check_day_of_month()
     set_weekend(year, month)
     set_free_days(year, month)
-
   service.on 'select2:select', (e) ->
     console.log "Cambiando el Servicio"
     check_general_data(year, month, service, add_report_detail, add_report_detail_all)
@@ -166,25 +160,19 @@ selects_controls_reports = ->
     #actualizar valores del select de agentes
     id = service.val()
     set_selects_of_agents(id)
-
+                   
 selects_control_novelties = ->
   console.log "selects_control_novelties"
   add_novelty_detail = $('#add_novelty_details')
   year = $('#novelty_year')
   month = $('#novelty_month')
   service = $('#novelty_service_of_dependence_id')
-
-
   check_general_data(year, month, service, add_novelty_detail)
-  
- 
   year.on 'select2:select', (e) ->
     #console.log "Cambiando el Año"
     check_general_data(year, month, service, add_novelty_detail)
-    
   month.on 'select2:select', (e) ->
     check_general_data(year, month, service, add_novelty_detail)
-
   service.on 'select2:select', (e) ->
     check_general_data(year, month, service, add_novelty_detail)    
     #actualizar valores del select de agentes
@@ -199,20 +187,32 @@ selects_control_observations = ->
   year = $('#observation_year')
   month = $('#observation_month')
   service = $('#observation_service_of_dependence_id')
-
-
   check_general_data(year, month, service, add_observation_details)
-  
- 
   year.on 'select2:select', (e) ->
     #console.log "Cambiando el Año"
     check_general_data(year, month, service, add_observation_details)
-    
   month.on 'select2:select', (e) ->
     check_general_data(year, month, service, add_observation_details)
-
   service.on 'select2:select', (e) ->
     check_general_data(year, month, service, add_observation_details)    
+    id = service.val()
+    console.log "id: " + id
+    set_selects_of_agents(id)
+
+selects_control_additionals = ->
+  console.log "selects_control_additional"
+  add_additional_details = $('#add_additional_details')
+  year = $('#additional_year')
+  month = $('#additional_month')
+  service = $('#additional_service_of_dependence_id')
+  check_general_data(year, month, service, add_additional_details)
+  year.on 'select2:select', (e) ->
+    #console.log "Cambiando el Año"
+    check_general_data(year, month, service, add_additional_details)
+  month.on 'select2:select', (e) ->
+    check_general_data(year, month, service, add_additional_details)
+  service.on 'select2:select', (e) ->
+    check_general_data(year, month, service, add_additional_details)    
     id = service.val()
     console.log "id: " + id
     set_selects_of_agents(id)
@@ -297,13 +297,19 @@ $(document).on 'cocoon:after-insert', (e) ->
     id = service.val()
     set_last_select_of_agents(id)
   else if ($('.observations.create').length + $('.observations.edit').length + $('.observations.update').length + $('.observations.new').length) > 0
-    console.log "Se inserto COCOON en observacion"
+    console.log "Se inserto COCOON en ad"
     year = $('#observation_year')
     month = $('#observation_month')
     service = $('#observation_service_of_dependence_id')
     id = service.val()
     set_last_select_of_agents(id)
-
+  else if ($('.additionals.create').length + $('.additionals.edit').length + $('.additionals.update').length + $('.additionals.new').length) > 0
+    console.log "Se inserto COCOON en adicionales"
+    year = $('#additional_year')
+    month = $('#additional_month')
+    service = $('#additional_service_of_dependence_id')
+    id = service.val()
+    set_last_select_of_agents(id)
   else    
     console.log "Se inserto COCOON en reporte"
     add_report_detail = $('#add_report_details')
@@ -379,3 +385,18 @@ $(document).on 'turbolinks:load', ->
 
   if $('.observations.new').length > 0
     selects_control_observations()
+
+  if $('.additionals.create').length > 0
+    selects_control_additionals()
+    set_days_event()
+
+  if $('.additionals.edit').length > 0
+    selects_control_additionals()
+    set_days_event()
+
+  if $('.additionals.update').length > 0
+    selects_control_additionals()
+    set_days_event()
+
+  if $('.additionals.new').length > 0
+    selects_control_additionals()

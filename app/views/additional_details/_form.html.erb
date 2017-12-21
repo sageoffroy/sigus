@@ -1,0 +1,42 @@
+<%= form_with(model: additional_detail, local: true) do |form| %>
+  <% if additional_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(additional_detail.errors.count, "error") %> prohibited this additional_detail from being saved:</h2>
+
+      <ul>
+      <% additional_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.text_field :agent_id, id: :additional_detail_agent_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rotative_turn_id %>
+    <%= form.text_field :rotative_turn_id, id: :additional_detail_rotative_turn_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :franco_movil %>
+    <%= form.check_box :franco_movil, id: :additional_detail_franco_movil %>
+  </div>
+
+  <div class="field">
+    <%= form.label :turno_nocturno_fijo %>
+    <%= form.check_box :turno_nocturno_fijo, id: :additional_detail_turno_nocturno_fijo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tarea_en_terreno %>
+    <%= form.check_box :tarea_en_terreno, id: :additional_detail_tarea_en_terreno %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

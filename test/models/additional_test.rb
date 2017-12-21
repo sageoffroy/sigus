@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AddiotionalTest < ActiveSupport::TestCase
+class AdditionalTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @additional.year %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @additional.month %>
+</p>
+
+<p>
+  <strong>Service of dependence:</strong>
+  <%= @additional.service_of_dependence %>
+</p>
+
+<%= link_to 'Edit', edit_additional_path(@additional) %> |
+<%= link_to 'Back', additionals_path %>

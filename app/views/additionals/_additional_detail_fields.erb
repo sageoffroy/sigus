@@ -1,0 +1,50 @@
+<div class="nested-fields row">
+	<div class="col-sm-4">
+      <h6 style="margin-left: 35px;">Agent</h6>
+    </div>
+    <div class="col-sm-2">
+      <h6 style="text-align: center;">Turno Rotativo</h6>
+    </div>
+    <div class="col-sm-2">
+      <h6 style="text-align: center;">Franco Movil</h6>
+    </div>
+    <div class="col-sm-2">
+      <h6 style="text-align: center;">Turno Nocturno Fijo</h6>
+    </div>
+    <div class="col-sm-2">
+      <h6 style="text-align: center;">Tarea en Terreno</h6>
+    </div>
+  <div class="col-sm-4">
+    <%= link_to_remove_association (fa_icon "window-close", class: "btn-remove"), f %>
+    <div class="field" style ="margin-left: 35px;">
+      <%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <% if f.object.rotative_turn.nil? %>
+      <% f.object.build_rotative_turn%>
+    <% end %>
+    <%= f.fields_for :rotative_turn do |rt| %>
+    	<div style="width:35%;float:left;">
+				<%= rt.number_field :days, :maxlength => "2", :min => "0", :max => "31", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", style: "width:90%;height:32px;", placeholder:"Días"%>
+			</div>
+			<div style="width:65%;float:left;text-align:center;">
+				<div style="font-size: 0.70rem;">¿M - T - N?</div>
+				<%= rt.check_box :is_complete, style: "margin: 0px;" %>
+			</div>
+		<% end %>
+  </div>
+  <div class="col-sm-2" style="text-align: center;">
+  	<%= f.check_box :franco_movil, style: "margin-top: 6px;" %>
+  </div>
+  <div class="col-sm-2" style="text-align: center;">
+  	<%= f.check_box :turno_nocturno_fijo, style: "margin-top: 6px;" %>
+  </div>
+  <div class="col-sm-2" style="text-align: center;">
+  	<%= f.check_box :tarea_en_terreno, style: "margin-top: 6px;" %>
+  </div>
+  <div class="col-md-12 col-last"></div>
+
+
+</div>
+  

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Agent:</strong>
+  <%= @additional_detail.agent %>
+</p>
+
+<p>
+  <strong>Rotative turn:</strong>
+  <%= @additional_detail.rotative_turn %>
+</p>
+
+<p>
+  <strong>Franco movil:</strong>
+  <%= @additional_detail.franco_movil %>
+</p>
+
+<p>
+  <strong>Turno nocturno fijo:</strong>
+  <%= @additional_detail.turno_nocturno_fijo %>
+</p>
+
+<p>
+  <strong>Tarea en terreno:</strong>
+  <%= @additional_detail.tarea_en_terreno %>
+</p>
+
+<%= link_to 'Edit', edit_additional_detail_path(@additional_detail) %> |
+<%= link_to 'Back', additional_details_path %>

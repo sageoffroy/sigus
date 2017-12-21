@@ -2,20 +2,14 @@
 
 one:
   agent: one
-  year: 1
-  month: 1
-  description: MyString
-  fm: false
-  tnf: false
-  tt: false
   rotative_turn: one
+  franco_movil: false
+  turno_nocturno_fijo: false
+  tarea_en_terreno: false
 
 two:
   agent: two
-  year: 1
-  month: 1
-  description: MyString
-  fm: false
-  tnf: false
-  tt: false
   rotative_turn: two
+  franco_movil: false
+  turno_nocturno_fijo: false
+  tarea_en_terreno: false

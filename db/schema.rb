@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171218123641) do
+ActiveRecord::Schema.define(version: 20171221124048) do
 
   create_table "addiotionals", force: :cascade do |t|
     t.integer "agent_id"
@@ -25,6 +25,29 @@ ActiveRecord::Schema.define(version: 20171218123641) do
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_addiotionals_on_agent_id"
     t.index ["rotative_turn_id"], name: "index_addiotionals_on_rotative_turn_id"
+  end
+
+  create_table "additional_details", force: :cascade do |t|
+    t.integer "agent_id"
+    t.integer "additional_id"
+    t.integer "rotative_turn_id"
+    t.boolean "franco_movil"
+    t.boolean "turno_nocturno_fijo"
+    t.boolean "tarea_en_terreno"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["additional_id"], name: "index_additional_details_on_additional_id"
+    t.index ["agent_id"], name: "index_additional_details_on_agent_id"
+    t.index ["rotative_turn_id"], name: "index_additional_details_on_rotative_turn_id"
+  end
+
+  create_table "additionals", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
+    t.integer "service_of_dependence_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_of_dependence_id"], name: "index_additionals_on_service_of_dependence_id"
   end
 
   create_table "agent_of_services", force: :cascade do |t|
@@ -181,19 +204,8 @@ ActiveRecord::Schema.define(version: 20171218123641) do
     t.integer "year"
     t.integer "month"
     t.integer "service_of_dependence_id"
-    t.integer "agent_id"
-    t.integer "novelty_type_id"
-    t.string "report_type"
-    t.integer "month_ref"
-    t.integer "year_ref"
-    t.string "description"
-    t.integer "hours_to_add"
-    t.integer "hours_to_remove"
-    t.integer "hours_agent_mpg"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_novelties_on_agent_id"
-    t.index ["novelty_type_id"], name: "index_novelties_on_novelty_type_id"
     t.index ["service_of_dependence_id"], name: "index_novelties_on_service_of_dependence_id"
   end
 

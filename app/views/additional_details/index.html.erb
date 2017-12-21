@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Additional Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Agent</th>
+      <th>Rotative turn</th>
+      <th>Franco movil</th>
+      <th>Turno nocturno fijo</th>
+      <th>Tarea en terreno</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @additional_details.each do |additional_detail| %>
+      <tr>
+        <td><%= additional_detail.agent %></td>
+        <td><%= additional_detail.rotative_turn %></td>
+        <td><%= additional_detail.franco_movil %></td>
+        <td><%= additional_detail.turno_nocturno_fijo %></td>
+        <td><%= additional_detail.tarea_en_terreno %></td>
+        <td><%= link_to 'Show', additional_detail %></td>
+        <td><%= link_to 'Edit', edit_additional_detail_path(additional_detail) %></td>
+        <td><%= link_to 'Destroy', additional_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Additional Detail', new_additional_detail_path %>
