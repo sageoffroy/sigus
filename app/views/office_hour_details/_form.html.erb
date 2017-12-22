@@ -1,0 +1,72 @@
+<%= form_with(model: office_hour_detail, local: true) do |form| %>
+  <% if office_hour_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(office_hour_detail.errors.count, "error") %> prohibited this office_hour_detail from being saved:</h2>
+
+      <ul>
+      <% office_hour_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :office_hour_id %>
+    <%= form.text_field :office_hour_id, id: :office_hour_detail_office_hour_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.text_field :agent_id, id: :office_hour_detail_agent_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :turno_hora %>
+    <%= form.text_field :turno_hora, id: :office_hour_detail_turno_hora %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lunes %>
+    <%= form.number_field :lunes, id: :office_hour_detail_lunes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :martes %>
+    <%= form.number_field :martes, id: :office_hour_detail_martes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :miercoles %>
+    <%= form.number_field :miercoles, id: :office_hour_detail_miercoles %>
+  </div>
+
+  <div class="field">
+    <%= form.label :jueves %>
+    <%= form.number_field :jueves, id: :office_hour_detail_jueves %>
+  </div>
+
+  <div class="field">
+    <%= form.label :viernes %>
+    <%= form.number_field :viernes, id: :office_hour_detail_viernes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sabado %>
+    <%= form.number_field :sabado, id: :office_hour_detail_sabado %>
+  </div>
+
+  <div class="field">
+    <%= form.label :domingo %>
+    <%= form.number_field :domingo, id: :office_hour_detail_domingo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total_hours %>
+    <%= form.number_field :total_hours, id: :office_hour_detail_total_hours %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

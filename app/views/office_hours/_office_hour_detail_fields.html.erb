@@ -1,0 +1,52 @@
+<div class="nested-fields row">
+  
+  <div class="col-sm-4">
+    <%= link_to_remove_association (fa_icon "window-close", class: "btn-remove"), f %>
+    <div class="field" style ="margin-left: 35px;">
+      <%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="field">
+      <%= f.select :turno_hora, ["turno","día"], {prompt: "Turno/Día"}, {class: "select2"}%>
+    </div>
+  </div>
+  <div class="" style="float:left;margin:0 5px;">
+    <div class="field">
+      <%= f.number_field :lunes, :maxlength => "2", :min => "0", :max => "31", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 50px;", :placeholder => "Lun", class: "number-field"%>
+    </div>
+  </div>
+  <div class="" style="float:left;margin:0 5px;">
+    <div class="field">
+      <%= f.number_field :martes, :maxlength => "2", :min => "0", :max => "31", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 50px;", :placeholder => "Mar", class: "number-field"%>
+    </div>
+  </div>
+  <div class="" style="float:left;margin:0 5px;">
+    <div class="field">
+      <%= f.number_field :miercoles, :maxlength => "2", :min => "0", :max => "31", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 50px;", :placeholder => "Mie", class: "number-field"%>
+    </div>
+  </div>
+  <div class="" style="float:left;margin:0 5px;">
+    <div class="field">
+      <%= f.number_field :jueves, :maxlength => "2", :min => "0", :max => "31", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 50px;", :placeholder => "Jue", class: "number-field"%>
+    </div>
+  </div>
+  <div class="" style="float:left;margin:0 5px;">
+    <div class="field">
+      <%= f.number_field :viernes, :maxlength => "2", :min => "0", :max => "31", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 50px;", :placeholder => "Vie", class: "number-field"%>
+    </div>
+  </div>
+   <div class="" style="float:left;margin:0 5px;">
+    <div class="field">
+      <%= f.number_field :sabado, :maxlength => "2", :min => "0", :max => "31", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 50px;", :placeholder => "Sab", class: "number-field"%>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="field">
+      <%= f.number_field :sabado, :maxlength => "2", :min => "0", :max => "31", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "Total Hours", class: "number-field"%>
+    </div>
+  </div>
+
+  <div class="col-md-12 col-last"></div>
+</div>
+  

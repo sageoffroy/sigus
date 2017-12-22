@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :office_hours
+  resources :office_hour_details
   resources :additional_details
   resources :additionals
   resources :observation_details

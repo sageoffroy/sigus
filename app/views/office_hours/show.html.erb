@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @office_hour.year %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @office_hour.month %>
+</p>
+
+<p>
+  <strong>Service of dependence:</strong>
+  <%= @office_hour.service_of_dependence %>
+</p>
+
+<p>
+  <strong>Total hours:</strong>
+  <%= @office_hour.total_hours %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @office_hour.description %>
+</p>
+
+<%= link_to 'Edit', edit_office_hour_path(@office_hour) %> |
+<%= link_to 'Back', office_hours_path %>

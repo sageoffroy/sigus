@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Office hour:</strong>
+  <%= @office_hour_detail.office_hour %>
+</p>
+
+<p>
+  <strong>Agent:</strong>
+  <%= @office_hour_detail.agent %>
+</p>
+
+<p>
+  <strong>Turno hora:</strong>
+  <%= @office_hour_detail.turno_hora %>
+</p>
+
+<p>
+  <strong>Lunes:</strong>
+  <%= @office_hour_detail.lunes %>
+</p>
+
+<p>
+  <strong>Martes:</strong>
+  <%= @office_hour_detail.martes %>
+</p>
+
+<p>
+  <strong>Miercoles:</strong>
+  <%= @office_hour_detail.miercoles %>
+</p>
+
+<p>
+  <strong>Jueves:</strong>
+  <%= @office_hour_detail.jueves %>
+</p>
+
+<p>
+  <strong>Viernes:</strong>
+  <%= @office_hour_detail.viernes %>
+</p>
+
+<p>
+  <strong>Sabado:</strong>
+  <%= @office_hour_detail.sabado %>
+</p>
+
+<p>
+  <strong>Domingo:</strong>
+  <%= @office_hour_detail.domingo %>
+</p>
+
+<p>
+  <strong>Total hours:</strong>
+  <%= @office_hour_detail.total_hours %>
+</p>
+
+<%= link_to 'Edit', edit_office_hour_detail_path(@office_hour_detail) %> |
+<%= link_to 'Back', office_hour_details_path %>

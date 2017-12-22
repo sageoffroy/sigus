@@ -1,0 +1,2 @@
+module OfficeHourDetailsHelper
+end

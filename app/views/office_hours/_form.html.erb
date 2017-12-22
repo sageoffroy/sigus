@@ -1,0 +1,91 @@
+<%= form_for(office_hour) do |f| %>
+  <% if office_hour.errors.any? %>
+      <script type="text/javascript">
+        <% office_hour.errors.full_messages.each do |message| %>
+          toastr['error']('<%= message %>');
+        <% end %>
+      </script>
+  <% end %>
+  <div class="form-group row">
+    <div class="col-sm-2">
+      <h6>Año</h6>
+    </div>
+    <div class="col-sm-2">
+      <h6>Mes</h6>
+    </div>
+    <div class="col-sm-6">
+      <h6>Servicio</h6>
+    </div>
+    <div class="col-sm-2">
+      <h6>Total de Hs.</h6>
+    </div>
+    <div class="input-group col-sm-2">
+      <%= f.select :year, (2017)..(2019), {prompt: "Año"}, {class: "select2"}%>
+    </div>
+    <div class="input-group col-sm-2">
+      <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
+    </div>
+    <div class="input-group col-sm-6">
+      <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2"} %>
+    </div>
+    <div class="col-md-2">
+      <%= f.number_field :total_hours, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hs_umu_form input-transparent"%>
+    </div>
+  </div>
+  <h5>Horas Consultorios</h5>
+
+  <div class="office_hour-box">
+    <%= f.fields_for :office_hour_details do |office_hour_detail| %>
+      <%= render 'office_hour_detail_fields', :f => office_hour_detail %>
+    <% end %>
+  </div>
+
+  <center>
+    <%= link_to_add_association 'Agregar Agentes', f, :office_hour_details, id: 'add_office_hour_details', class: 'btn btn-primary btn-xs btn-sm', data: { association_insertion_node: '.office_hour-box', association_insertion_method: :append } %>
+  </center>
+  <div class="row">
+    <div class="col-md-12 col-last-solid" style="margin-bottom: 1.5rem; margin-top:0.4rem;border-color: blue;"></div>  
+  </div>
+  <div class="form-actions">
+    <%= link_to 'Atrás', office_hours_path, class: 'btn btn-danger' %>
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<script>
+  function maxLengthCheck(object) {
+    
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+    
+  function isNumeric (evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    if (key != 8 && key != 9 && key != 116){
+      key = String.fromCharCode (key);
+      var regex = /[0-9]|\./;
+      if ( !regex.test(key) ) {
+        theEvent.returnValue = false;
+        if(theEvent.preventDefault) theEvent.preventDefault();
+      }else{
+        
+      }
+    } 
+  }
+
+  
+  function calcular_total_horas() {
+    console.log("Calculando Horas");
+    total = 0
+    $(".day_of_month").each(
+      function(index, value) {
+        if (!isNaN(eval($(this).val()))){
+          total = total + eval($(this).val());  
+        }
+      }
+    );
+    console.log(total);
+    $("#agent_total_hours").val(total);
+  }
+</script>

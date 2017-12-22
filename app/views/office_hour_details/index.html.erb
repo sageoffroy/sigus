@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Office Hour Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Office hour</th>
+      <th>Agent</th>
+      <th>Turno hora</th>
+      <th>Lunes</th>
+      <th>Martes</th>
+      <th>Miercoles</th>
+      <th>Jueves</th>
+      <th>Viernes</th>
+      <th>Sabado</th>
+      <th>Domingo</th>
+      <th>Total hours</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @office_hour_details.each do |office_hour_detail| %>
+      <tr>
+        <td><%= office_hour_detail.office_hour %></td>
+        <td><%= office_hour_detail.agent %></td>
+        <td><%= office_hour_detail.turno_hora %></td>
+        <td><%= office_hour_detail.lunes %></td>
+        <td><%= office_hour_detail.martes %></td>
+        <td><%= office_hour_detail.miercoles %></td>
+        <td><%= office_hour_detail.jueves %></td>
+        <td><%= office_hour_detail.viernes %></td>
+        <td><%= office_hour_detail.sabado %></td>
+        <td><%= office_hour_detail.domingo %></td>
+        <td><%= office_hour_detail.total_hours %></td>
+        <td><%= link_to 'Show', office_hour_detail %></td>
+        <td><%= link_to 'Edit', edit_office_hour_detail_path(office_hour_detail) %></td>
+        <td><%= link_to 'Destroy', office_hour_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Office Hour Detail', new_office_hour_detail_path %>

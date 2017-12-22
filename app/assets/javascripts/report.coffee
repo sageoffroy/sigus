@@ -217,6 +217,24 @@ selects_control_additionals = ->
     console.log "id: " + id
     set_selects_of_agents(id)
 
+
+selects_control_office_hours = ->
+  console.log "selects_control_office_hours"
+  add_office_hour_details = $('#add_office_hour_details')
+  year = $('#office_hour_year')
+  month = $('#office_hour_month')
+  service = $('#office_hour_service_of_dependence_id')
+  check_general_data(year, month, service, add_office_hour_details)
+  year.on 'select2:select', (e) ->
+    check_general_data(year, month, service, add_office_hour_details)
+  month.on 'select2:select', (e) ->
+    check_general_data(year, month, service, add_office_hour_details)
+  service.on 'select2:select', (e) ->
+    check_general_data(year, month, service, add_office_hour_details)    
+    id = service.val()
+    console.log "id: " + id
+    set_selects_of_agents(id)
+
 set_days_event = ->
   $('.day-of-month').keyup ->
     total_gs = 0
@@ -400,3 +418,18 @@ $(document).on 'turbolinks:load', ->
 
   if $('.additionals.new').length > 0
     selects_control_additionals()
+
+  if $('.office_hours.create').length > 0
+    selects_control_office_hours()
+    set_days_event()
+
+  if $('.office_hours.edit').length > 0
+    selects_control_office_hours()
+    set_days_event()
+
+  if $('.office_hours.update').length > 0
+    selects_control_office_hours()
+    set_days_event()
+
+  if $('.office_hours.new').length > 0
+    selects_control_office_hours()

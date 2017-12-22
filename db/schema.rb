@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221124048) do
+ActiveRecord::Schema.define(version: 20171222113756) do
 
   create_table "addiotionals", force: :cascade do |t|
     t.integer "agent_id"
@@ -271,6 +271,35 @@ ActiveRecord::Schema.define(version: 20171221124048) do
     t.index ["agent_id"], name: "index_observations_on_agent_id"
     t.index ["observation_description_id"], name: "index_observations_on_observation_description_id"
     t.index ["service_of_dependence_id"], name: "index_observations_on_service_of_dependence_id"
+  end
+
+  create_table "office_hour_details", force: :cascade do |t|
+    t.integer "office_hour_id"
+    t.integer "agent_id"
+    t.string "turno_hora"
+    t.integer "lunes"
+    t.integer "martes"
+    t.integer "miercoles"
+    t.integer "jueves"
+    t.integer "viernes"
+    t.integer "sabado"
+    t.integer "domingo"
+    t.integer "total_hours"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_office_hour_details_on_agent_id"
+    t.index ["office_hour_id"], name: "index_office_hour_details_on_office_hour_id"
+  end
+
+  create_table "office_hours", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
+    t.integer "service_of_dependence_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "total_hours"
+    t.string "description"
+    t.index ["service_of_dependence_id"], name: "index_office_hours_on_service_of_dependence_id"
   end
 
   create_table "percentage_months", force: :cascade do |t|
