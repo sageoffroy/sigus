@@ -16,9 +16,10 @@
       <td><%= observation.year %></td>
       <td><%= observation.month %></td>
       <td><%= observation.service_of_dependence%></td>
-      <td><%= link_to 'Show', observation %>
-        <%= link_to 'Edit', edit_observation_path(observation) %>
-        <%= link_to 'Destroy', observation, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <td>
+        <%= link_to (fa_icon "eye"), observation%>
+        <%= link_to (fa_icon "pencil-square-o"), edit_observation_path(observation)%>
+        <%= link_to (fa_icon "trash-o"), observation, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }%>
       </td>
     </tr>
     <% end %>

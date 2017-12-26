@@ -5,6 +5,8 @@ class OfficeHour < ApplicationRecord
   validates :service_of_dependence, presence: true
   validates :year, presence: true
   validates :month, presence: true
+
+  validates :total_hours, presence: true
   
   validates_associated :office_hour_details
   accepts_nested_attributes_for :office_hour_details, :reject_if => :all_blank, allow_destroy: true

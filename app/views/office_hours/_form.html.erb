@@ -29,7 +29,8 @@
       <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2"} %>
     </div>
     <div class="col-md-2">
-      <%= f.number_field :total_hours, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hs_umu_form input-transparent"%>
+      <%= f.number_field :total_hours, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"min-height:38px;max-width:100%;", :placeholder => "0", class: "number-field"%>
+    
     </div>
   </div>
   <h5>Horas Consultorios</h5>
@@ -55,8 +56,10 @@
 <script>
   function maxLengthCheck(object) {
     
-    if (object.value.length > object.maxLength)
-      object.value = object.value.slice(0, object.maxLength)
+    if (object.value.length > object.maxLength){
+      object.value = object.value.slice(0, object.maxLength);
+    }
+    calcular_total_horas();
   }
     
   function isNumeric (evt) {
@@ -78,7 +81,7 @@
   function calcular_total_horas() {
     console.log("Calculando Horas");
     total = 0
-    $(".day_of_month").each(
+    $(".total_hours_agent").each(
       function(index, value) {
         if (!isNaN(eval($(this).val()))){
           total = total + eval($(this).val());  
@@ -86,6 +89,6 @@
       }
     );
     console.log(total);
-    $("#agent_total_hours").val(total);
+    $("#office_hour_total_hours").val(total);
   }
 </script>

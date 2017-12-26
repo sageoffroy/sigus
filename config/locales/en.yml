@@ -218,6 +218,10 @@ en:
         create: Crear Adicional
         submit: Guardar Adicional
         update: Actualizar Adicional
+      office_hour:
+        create: Crear hs. Consultorio
+        submit: Guardar hs. Consultorio
+        update: Actualizar hs. Consultorio
 
   number:
     currency:

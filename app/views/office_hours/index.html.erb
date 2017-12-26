@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Office Hours</h1>
+<h1>Horas Consultorio</h1>
 
 <table class="datatable">
   <thead>
@@ -22,9 +20,11 @@
         <td><%= office_hour.service_of_dependence %></td>
         <td><%= office_hour.total_hours %></td>
         <td><%= office_hour.description %></td>
-        <td><%= link_to 'Show', office_hour %>
-        <%= link_to 'Edit', edit_office_hour_path(office_hour) %>
-        <%= link_to 'Destroy', office_hour, method: :delete, data: { confirm: 'Esta seguro?' } %></td>
+        <td>
+          <%= link_to (fa_icon "eye"), office_hour%>
+          <%= link_to (fa_icon "pencil-square-o"), edit_office_hour_path(office_hour)%>
+          <%= link_to (fa_icon "trash-o"), office_hour, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }%>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Office Hour', new_office_hour_path %>
+<%= link_to 'Registrar hs. Consultorio', new_office_hour_path, class: 'btn btn-primary btn-xs' %>
