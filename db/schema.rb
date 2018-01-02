@@ -10,22 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171222113756) do
-
-  create_table "addiotionals", force: :cascade do |t|
-    t.integer "agent_id"
-    t.integer "year"
-    t.integer "month"
-    t.string "description"
-    t.boolean "fm"
-    t.boolean "tnf"
-    t.boolean "tt"
-    t.integer "rotative_turn_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_addiotionals_on_agent_id"
-    t.index ["rotative_turn_id"], name: "index_addiotionals_on_rotative_turn_id"
-  end
+ActiveRecord::Schema.define(version: 20180102115737) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"
