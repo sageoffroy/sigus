@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'mensualizado_para_guardia/index'
+
   resources :office_hours
   resources :office_hour_details
   resources :additional_details
@@ -24,7 +26,7 @@ Rails.application.routes.draw do
   resources :report_details
   get 'reports/new_active' => 'reports#new_active'
   get 'reports/new_pasive' => 'reports#new_pasive'
-  get '/reports/new_extra_hours' => 'reports#new_extra_hours'
+  get 'reports/new_extra_hours' => 'reports#new_extra_hours'
   
   resources :reports
 
