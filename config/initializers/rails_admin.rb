@@ -1,4 +1,5 @@
 RailsAdmin.config do |config|
+  config.parent_controller = ApplicationController.to_s
 
   ### Popular gems integration
 
