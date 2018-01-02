@@ -103,4 +103,4 @@ gem "cocoon"
 gem 'seed_dump'
 
 #Rails Admin
-gem 'rails_admin', '~> 1.2'
+#gem 'rails_admin', '~> 1.2'
