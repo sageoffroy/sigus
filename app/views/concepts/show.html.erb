@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @concept.value %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @concept.description %>
+</p>
+
+<%= link_to 'Edit', edit_concept_path(@concept) %> |
+<%= link_to 'Back', concepts_path %>

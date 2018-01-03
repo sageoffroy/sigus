@@ -9,4 +9,7 @@ class Observation < ApplicationRecord
   
   validates_associated :observation_details
   accepts_nested_attributes_for :observation_details, :reject_if => :all_blank, allow_destroy: true
+
+
+  
 end

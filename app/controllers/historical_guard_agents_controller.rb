@@ -69,6 +69,6 @@ class HistoricalGuardAgentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def historical_guard_agent_params
-      params.require(:historical_guard_agent).permit(:agent_id, :month, :year, :concept_1, :hs_total_1, :concept_2, :hs_total_2)
+      params.require(:historical_guard_agent).permit(:agent_id, :month, :year, :hs_total_1, :hs_total_2, concept_1_attributes: [:id, :value, :description], concept_2_attributes: [:id, :value, :description])
     end
 end

@@ -2,7 +2,7 @@
 
 <h1>Historical Guard Agents</h1>
 
-<table>
+<table class="table datatable">
   <thead>
     <tr>
       <th>Agent</th>
@@ -11,7 +11,7 @@
       <th>Concept</th>
       <th>Description</th>
       <th>Hs total</th>
-      <th colspan="3"></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -21,12 +21,11 @@
         <td><%= historical_guard_agent.agent %></td>
         <td><%= historical_guard_agent.month %></td>
         <td><%= historical_guard_agent.year %></td>
-        <td><%= historical_guard_agent.concept %></td>
-        <td><%= historical_guard_agent.description %></td>
-        <td><%= historical_guard_agent.hs_total %></td>
-        <td><%= link_to 'Show', historical_guard_agent %></td>
-        <td><%= link_to 'Edit', edit_historical_guard_agent_path(historical_guard_agent) %></td>
-        <td><%= link_to 'Destroy', historical_guard_agent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= historical_guard_agent.concept_1 %></td>
+        <td><%= historical_guard_agent.hs_total_1 %></td>
+        <td><%= link_to 'Show', historical_guard_agent %>
+        <%= link_to 'Edit', edit_historical_guard_agent_path(historical_guard_agent) %>
+        <%= link_to 'Destroy', historical_guard_agent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

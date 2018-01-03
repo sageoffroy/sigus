@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  resources :concepts
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  get 'mensualizado_para_guardia/index'
+  get 'mensualizado_para_guardia' => 'mensualizado_para_guardia#index'
 
   resources :office_hours
   resources :office_hour_details

@@ -5,6 +5,18 @@
 #
 
 
+
+ 
+#The easiest and quicker way to put rails (or any service in background) assuming it to have Unix/Linux OS
+#
+#$ nohup rails server &
+#
+#This can be used for any service like this
+#
+#$ nohup <service command> &
+
+
+
 services_list = [
 	"Sin Servicio Asignado",
 	"Admisión CMI",
@@ -35,7 +47,7 @@ services_list = [
 	"Diagnóstico por Imágenes",
 	"Electromedicina",
 	"Enfermería - Area Externa",
-	"Enfermería - Area Externa - Inmunizaciones",
+	"Enfermería - Area Externa- Inmunizaciones",
 	"Enfermería - CAPS Playa Unión",
 	"Enfermería - Centro Obstétrico",
 	"Enfermería - Clínica Médica",
@@ -94,7 +106,7 @@ services_list = [
 	"Salud Mental",
 	"Salud Mental - Centro de Día y Empresa Social",
 	"Tocoginecología",
-	"Tocoginecología (C/Ecografía)",
+	"Tocoginecología(C/Ecografía)",
 	"Tomografía",
 	"Transporte",
 	"Traumatología",
@@ -104,7 +116,15 @@ services_list = [
 	"Urología",
 	"UTI",
 	"UTI - UCE",
-	"UTIP"
+	"UTIP",
+	
+	#agregado
+	"Chóferes",
+	"Médicos - CAPS Playa Unión",
+	"Estadística - Admisión", 
+	"Admisión - CAPS Playa Unión",
+	"Estadística - Archivo"
+
 ]
 
 
@@ -244,7 +264,7 @@ service_of_dependence_list = [
 	[143,"Electromedicina",false,0.70,0.90,0.232],
 	[103,"Electromedicina",false,0.70,0.90,0.232],
 	[103,"Enfermería - Area Externa",false,0.60,0.80,0.232],
-	[104,"Enfermería - Area Externa - Inmunizaciones",false,0.60,0.80,0.232],
+	[104,"Enfermería - Area Externa- Inmunizaciones",false,0.60,0.80,0.232],
 	[106,"Enfermería - CAPS Playa Unión",false,0.60,0.80,0.232],
 	[143,"Enfermería - Centro Obstétrico",false,0.60,0.80,0.232],
 	[106,"Enfermería - Clínica Médica",false,0.60,0.80,0.232],
@@ -409,7 +429,7 @@ service_of_dependence_list = [
 	[143,"Tocoginecología",true,0.60,0.80,0.232],
 	[121,"Tocoginecología",true,0.60,0.80,0.232],
 	[104,"Tocoginecología",true,0.60,0.80,0.232],
-	[103,"Tocoginecología (C/Ecografía)",true,0.60,0.80,0.232],
+	[103,"Tocoginecología(C/Ecografía)",true,0.60,0.80,0.232],
 	[121,"Tomografía",false,0.70,0.90,0.232],
 	[143,"Transporte",false,0.50,1.00,0.232],
 	[121,"Transporte",false,0.50,1.00,0.232],
@@ -420,9 +440,6 @@ service_of_dependence_list = [
 	[121,"Traumatología",false,0.60,0.80,0.232],
 	[104,"Traumatología",false,0.60,0.80,0.232],
 	[103,"Traumatología",false,0.60,0.80,0.232],
-	[104,"UAU - Admisión",false,0.70,1.00,0.232],
-	[143,"UAU - Admisión",false,0.70,1.00,0.232],
-	[104,"UAU - Internación",false,0.70,1.00,0.232],
 	[143,"UMU",true,0.60,0.80,0.232],
 	[456,"UMU",true,0.60,0.80,0.232],
 	[121,"UMU",true,0.60,0.80,0.232],
@@ -436,6 +453,18 @@ service_of_dependence_list = [
 	[143,"UTIP",true,0.60,0.80,0.29],
 	[104,"UTIP",true,0.60,0.80,0.29],
 	[103,"UTIP",true,0.60,0.80,0.29],
+	
+	#agregados y modificados
+	[106,"Chóferes",false,0.50,1.00,0.232],
+	[106,"Médicos - CAPS Playa Unión",true,0.60,0.80,0.232],
+	[106,"Estadística - Admisión",false,0,50,1.00,0.232],
+	[106,"Admisión - CAPS Playa Unión",false,0.50,1.00,0.232],
+	[104,"UAU - Admisión",false,0.50,1.00,0.232],
+	[143,"UAU - Admisión",false,0.50,1.00,0.232],
+	[104,"UAU - Internación",false,0.50,1.00,0.232],
+	[106,"Estadística - Archivo",false,0.50,1.00,0.232]
+
+
 ]
 
 service_of_dependence_list.each do |dep_code, service_name, con_guardia, jefatura, asistencial, ausentismo|
@@ -470,7 +499,7 @@ agent_of_service_list = [
 	[31524569,"S/E","Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión"],
 	[24940163,"S/E","Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión"],
 	[16431403,"S/E","Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión"],
-	[34665113,"S/E","Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión"],
+	[34665103,"S/E","Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión"],
 	[18413685,"S/E","Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión"],
 	[17900722,"S/E","Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión"],
 	[31335443,"S/E","Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión"],
@@ -536,7 +565,7 @@ agent_of_service_list = [
 	[20235968,"S/E","Hospital Subzonal Rawson","Enfermería - UMU"],
 	[30578213,"S/E","Hospital Subzonal Rawson","Enfermería - UMU"],
 	[18027189,"Jefe del servicio","Hospital Subzonal Rawson","Enfermería - UMU"],
-	[21315750,"S/E","Hospital Subzonal Rawson","Enfermería - UMU"],
+	[21315700,"S/E","Hospital Subzonal Rawson","Enfermería - UMU"],
 	[33529371,"S/E","Hospital Subzonal Rawson","Enfermería - UMU"],
 	[22782889,"S/E","Hospital Subzonal Rawson","Enfermería - UMU"],
 	[20589591,"S/E","Hospital Subzonal Rawson","Enfermería - UMU"],
@@ -546,7 +575,7 @@ agent_of_service_list = [
 	[32334192,"S/E","Hospital Subzonal Rawson","Estadísticas"],
 	[18824766,"S/E","Hospital Subzonal Rawson","Estadísticas"],
 	[23201787,"S/E","Hospital Subzonal Rawson","Estadísticas"],
-	[13922937,"S/E","Hospital Subzonal Rawson","Estadísticas"],
+	[13992937,"S/E","Hospital Subzonal Rawson","Estadísticas"],
 	[16434911,"S/E","Hospital Subzonal Rawson","Estadísticas"],
 	[23600921,"Jefe del servicio","Hospital Subzonal Rawson","Estadísticas"],
 	[12420882,"S/E","Hospital Subzonal Rawson","Estadísticas"],
@@ -583,7 +612,7 @@ agent_of_service_list = [
 	[35385354,"S/E","Hospital Subzonal Rawson","Radiología"],
 	[26944851,"S/E","Hospital Subzonal Rawson","Radiología"],
 	[22934631,"S/E","Hospital Subzonal Rawson","Radiología"],
-	[32385354,"S/E","Hospital Subzonal Rawson","Radiología"],
+	[35385354,"S/E","Hospital Subzonal Rawson","Radiología"],
 	[27363003,"S/E","Hospital Subzonal Rawson","Radiología"],
 	[24425492,"Ecografista","Hospital Subzonal Rawson","Radiología"],
 	[28345712,"S/E","Hospital Subzonal Rawson","Radiología"],
@@ -692,7 +721,7 @@ agent_of_service_list = [
 	[26870364,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Médica"],
 	[26078143,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Médica"],
 	[28603574,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Médica"],
-	[17784460,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Médica"],
+	[17783460,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Médica"],
 	[22055061,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Médica"],
 	[27991957,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Médica"],
 	[24736084,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Clínica Médica"],
@@ -766,7 +795,7 @@ agent_of_service_list = [
 	[29772279,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Pediatría"],
 	[25280515,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Pediatría"],
 	[27975099,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Pediatría"],
-	[29944643,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Pediatría"],
+	[26944643,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Pediatría"],
 	[33769575,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Pediatría"],
 	[22645704,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Pediatría"],
 	[32259086,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Quirófano"],
@@ -799,9 +828,9 @@ agent_of_service_list = [
 	[18757187,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología"],
 	[30022367,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología"],
 	[28872006,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología"],
-	[18828984,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología"],
+	[18289849,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología"],
 	[20843196,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología"],
-	[32087800,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología"],
+	[32057800,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología"],
 	[23872311,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Tocoginecología"],
 	[32591899,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UCIP"],
 	[35307342,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UCIP"],
@@ -837,7 +866,7 @@ agent_of_service_list = [
 	[12391280,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTI"],
 	[31799262,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTI"],
 	[26596800,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTI"],
-	[27692766,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTI"],
+	[32347222,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTI"],
 	[32604654,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTI"],
 	[32220278,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTI"],
 	[25064378,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTI"],
@@ -870,7 +899,7 @@ agent_of_service_list = [
 	[27814722,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTIP"],
 	[30724180,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTIP"],
 	[18833944,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - UTIP"],
-	[14731702,"S/E","Hospital Regional Comodoro Rivadavia","Farmacia"],
+	[14731712,"S/E","Hospital Regional Comodoro Rivadavia","Farmacia"],
 	[36751571,"S/E","Hospital Regional Comodoro Rivadavia","Farmacia"],
 	[29018375,"S/E","Hospital Regional Comodoro Rivadavia","Farmacia"],
 	[26070630,"S/E","Hospital Regional Comodoro Rivadavia","Farmacia"],
@@ -964,11 +993,11 @@ agent_of_service_list = [
 	[26617200,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
 	[30008065,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
 	[20236456,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
-	[23034355,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
+	[23635402,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
 	[18683951,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
 	[28021412,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
 	[35384173,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
-	[34427375,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
+	[34427365,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
 	[28637334,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
 	[22863261,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
 	[17129469,"S/E","Hospital Regional Comodoro Rivadavia","Limpieza"],
@@ -1049,7 +1078,7 @@ agent_of_service_list = [
 	[31940164,"Jefe del servicio","Hospital Regional Comodoro Rivadavia","Radiodiagnóstico"],
 	[36053227,"S/E","Hospital Regional Comodoro Rivadavia","Radiodiagnóstico"],
 	[26037227,"S/E","Hospital Regional Comodoro Rivadavia","Radiodiagnóstico"],
-	[4359069,"S/E","Hospital Regional Comodoro Rivadavia","Radiodiagnóstico"],
+	[4359068,"S/E","Hospital Regional Comodoro Rivadavia","Radiodiagnóstico"],
 	[34189125,"S/E","Hospital Regional Comodoro Rivadavia","Radiodiagnóstico"],
 	[17000593,"S/E","Hospital Regional Comodoro Rivadavia","Radiodiagnóstico"],
 	[28872201,"S/E","Hospital Regional Comodoro Rivadavia","Radiodiagnóstico"],
@@ -1122,7 +1151,6 @@ agent_of_service_list = [
 	[29774810,"S/E","Hospital Regional Comodoro Rivadavia","UAU - Admisión"],
 	[13564745,"S/E","Hospital Regional Comodoro Rivadavia","UAU - Admisión"],
 	[27175375,"S/E","Hospital Regional Comodoro Rivadavia","UAU - Admisión"],
-	[27175376,"S/E","Hospital Regional Comodoro Rivadavia","UAU - Admisión"],
 	[34773585,"S/E","Hospital Regional Comodoro Rivadavia","UAU - Admisión"],
 	[36181406,"S/E","Hospital Regional Comodoro Rivadavia","UAU - Admisión"],
 	[38299507,"S/E","Hospital Regional Comodoro Rivadavia","UAU - Admisión"],
@@ -1145,7 +1173,7 @@ agent_of_service_list = [
 	[94782131,"S/E","Hospital Regional Comodoro Rivadavia","UMU"],
 	[13276036,"S/E","Hospital Regional Comodoro Rivadavia","UMU"],
 	[32873839,"S/E","Hospital Regional Comodoro Rivadavia","UTIP"],
-	[22579477,"S/E","Hospital Regional Comodoro Rivadavia","UTIP"],
+	[22579447,"S/E","Hospital Regional Comodoro Rivadavia","UTIP"],
 	[23549265,"S/E","Hospital Regional Comodoro Rivadavia","UTIP"],
 	[17446026,"Jefe del servicio","Hospital Regional Comodoro Rivadavia","UTIP"],
 	[18542844,"S/E","Hospital Regional Comodoro Rivadavia","UTIP"],
@@ -1156,7 +1184,7 @@ agent_of_service_list = [
 	[22255590,"S/E","Hospital Zonal Alvear","Clínica Médica"],
 	[18795746,"S/E","Hospital Zonal Alvear","Clínica Médica"],
 	[21661287,"S/E","Hospital Zonal Alvear","Clínica Médica"],
-	[92898207,"S/E","Hospital Zonal Alvear","Clínica Médica"],
+	[92898204,"S/E","Hospital Zonal Alvear","Clínica Médica"],
 	[25065831,"S/E","Hospital Zonal Alvear","Clínica Médica"],
 	[24614390,"S/E","Hospital Zonal Alvear","Clínica Médica"],
 	[23225590,"Jefe del servicio","Hospital Zonal Alvear","Clínica Médica"],
@@ -1256,7 +1284,7 @@ agent_of_service_list = [
 	[27020229,"S/E","Hospital Zonal Alvear","Laboratorio - Bioquímicos"],
 	[10800598,"Jefe del servicio","Hospital Zonal Alvear","Laboratorio - Bioquímicos"],
 	[29848309,"S/E","Hospital Zonal Alvear","Laboratorio - Bioquímicos"],
-	[25186590,"S/E","Hospital Zonal Alvear","Laboratorio - Técnicos"],
+	[25186590,"S/E","Hospital Zonal Alvear","Laboratorio - Bioquímicos"],
 	[28616983,"S/E","Hospital Zonal Alvear","Radiología"],
 	[25011040,"S/E","Hospital Zonal Alvear","Radiología"],
 	[27198191,"S/E","Hospital Zonal Alvear","Radiología"],
@@ -1454,7 +1482,7 @@ agent_of_service_list = [
 	[18561275,"S/E","Hospital Zonal Esquel","Laboratorio - Bioquímicos"],
 	[22568719,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
 	[26978746,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
-	[31148412,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
+	[31143374,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
 	[33323294,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
 	[34488929,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
 	[31233892,"S/E","Hospital Zonal Esquel","Laboratorio - Técnicos"],
@@ -1548,32 +1576,32 @@ agent_of_service_list = [
 	[31625610,"S/E","Hospital Zonal Puerto Madryn","Diagnóstico por Imágenes"],
 	[22891172,"S/E","Hospital Zonal Puerto Madryn","Diagnóstico por Imágenes"],
 	[27623013,"S/E","Hospital Zonal Puerto Madryn","Diagnóstico por Imágenes"],
-	[23134294,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[29229640,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[13556475,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[31487586,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[18066465,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[27750841,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[14543188,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[21973060,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[21712233,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[13781488,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[24163419,"Jefe del servicio","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[13692114,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[16222902,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[23466336,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[22621957,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[18809248,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[16334964,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[13657316,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[16692861,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[20094911,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[29645823,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[22681495,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[13472804,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[17955878,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[14281933,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
-	[23134339,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones"],
+	[23134294,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[29229640,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[13556475,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[31487586,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[18066465,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[27750841,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[14543188,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[21973060,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[21712233,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[13781488,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[24163419,"Jefe del servicio","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[13692114,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[16222902,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[23466336,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[22621957,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[18809248,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[16334904,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[13657316,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[16692861,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[20094911,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[29645823,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[22681495,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[13472804,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[17955878,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[14281933,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
+	[23134339,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones"],
 	[35382969,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Clínica Médica"],
 	[31771773,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Clínica Médica"],
 	[35053581,"S/E","Hospital Zonal Puerto Madryn","Enfermería - Clínica Médica"],
@@ -1729,7 +1757,7 @@ agent_of_service_list = [
 	[27141513,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Bioquímicos"],
 	[22607174,"Jefe del servicio","Hospital Zonal Puerto Madryn","Laboratorio - Bioquímicos"],
 	[27432229,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Bioquímicos"],
-	[12143406,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Bioquímicos"],
+	[12098161,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Bioquímicos"],
 	[26236587,"Jefe del servicio","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
 	[36321290,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
 	[24318311,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
@@ -1740,10 +1768,10 @@ agent_of_service_list = [
 	[30041545,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
 	[30976226,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
 	[20529430,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
-	[38232325,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
+	[38232324,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
 	[30506909,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
 	[28477888,"S/E","Hospital Zonal Puerto Madryn","Neonatología"],
-	[32008296,"S/E","Hospital Zonal Puerto Madryn","Neonatología"],
+	[32008286,"S/E","Hospital Zonal Puerto Madryn","Neonatología"],
 	[21879182,"Jefe del servicio","Hospital Zonal Puerto Madryn","Neonatología"],
 	[21556646,"S/E","Hospital Zonal Puerto Madryn","Neonatología"],
 	[23829763,"S/E","Hospital Zonal Puerto Madryn","Neonatología"],
@@ -1762,7 +1790,7 @@ agent_of_service_list = [
 	[24649909,"S/E","Hospital Zonal Puerto Madryn","Pediatría"],
 	[22407733,"S/E","Hospital Zonal Puerto Madryn","Pediatría"],
 	[24157030,"S/E","Hospital Zonal Puerto Madryn","Pediatría"],
-	[26267796,"S/E","Hospital Zonal Puerto Madryn","Pediatría"],
+	[26262796,"S/E","Hospital Zonal Puerto Madryn","Pediatría"],
 	[35382591,"S/E","Hospital Zonal Puerto Madryn","Pediatría"],
 	[33353982,"S/E","Hospital Zonal Puerto Madryn","Pediatría"],
 	[24271996,"S/E","Hospital Zonal Puerto Madryn","Pediatría"],
@@ -1777,7 +1805,7 @@ agent_of_service_list = [
 	[30676089,"S/E","Hospital Zonal Puerto Madryn","Rehabilitación"],
 	[28345379,"Jefe del servicio","Hospital Zonal Puerto Madryn","Rehabilitación"],
 	[20887769,"S/E","Hospital Zonal Puerto Madryn","Rehabilitación"],
-	[28875385,"S/E","Hospital Zonal Puerto Madryn","Rehabilitación"],
+	[28075385,"S/E","Hospital Zonal Puerto Madryn","Rehabilitación"],
 	[24121645,"S/E","Hospital Zonal Puerto Madryn","Tocoginecología"],
 	[22463360,"S/E","Hospital Zonal Puerto Madryn","Tocoginecología"],
 	[10137935,"S/E","Hospital Zonal Puerto Madryn","Tocoginecología"],
@@ -1898,7 +1926,7 @@ agent_of_service_list = [
 	[5622469,"S/E","Hospital Zonal Trelew","Enfermería - Area Externa"],
 	[14281681,"Jefe del servicio","Hospital Zonal Trelew","Enfermería - Area Externa"],
 	[32447112,"S/E","Hospital Zonal Trelew","Enfermería - Area Externa"],
-	[18065550,"S/E","Hospital Zonal Trelew","Enfermería - Area Externa"],
+	[18065500,"S/E","Hospital Zonal Trelew","Enfermería - Area Externa"],
 	[17614697,"S/E","Hospital Zonal Trelew","Enfermería - Area Externa"],
 	[24811311,"S/E","Hospital Zonal Trelew","Enfermería - Area Externa"],
 	[16067759,"S/E","Hospital Zonal Trelew","Enfermería - Area Externa"],
@@ -2061,7 +2089,7 @@ agent_of_service_list = [
 	[22632753,"S/E","Hospital Zonal Trelew","Enfermería - Traumatología"],
 	[22207969,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
 	[27363067,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
-	[32220248,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
+	[32220240,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
 	[26497038,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
 	[18065597,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
 	[33529334,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
@@ -2071,7 +2099,7 @@ agent_of_service_list = [
 	[34664470,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
 	[28390262,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
 	[32495581,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
-	[32581708,"Jefe del servicio","Hospital Zonal Trelew","Enfermería - UMU"],
+	[32581706,"Jefe del servicio","Hospital Zonal Trelew","Enfermería - UMU"],
 	[24038922,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
 	[20095228,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
 	[23890824,"S/E","Hospital Zonal Trelew","Enfermería - UMU"],
@@ -2168,7 +2196,7 @@ agent_of_service_list = [
 	[20406719,"S/E","Hospital Zonal Trelew","Estadísticas - CMI"],
 	[24133233,"S/E","Hospital Zonal Trelew","Estadísticas - CMI"],
 	[29066641,"S/E","Hospital Zonal Trelew","Estadísticas - CMI"],
-	[31064917,"S/E","Hospital Zonal Trelew","Esterilización"],
+	[31064913,"S/E","Hospital Zonal Trelew","Esterilización"],
 	[17130514,"Jefe del servicio","Hospital Zonal Trelew","Esterilización"],
 	[25710204,"S/E","Hospital Zonal Trelew","Esterilización"],
 	[31755543,"S/E","Hospital Zonal Trelew","Esterilización"],
@@ -2277,10 +2305,10 @@ agent_of_service_list = [
 	[25494636,"S/E","Hospital Zonal Trelew","Pediatría"],
 	[32801384,"S/E","Hospital Zonal Trelew","Pediatría"],
 	[33108615,"S/E","Hospital Zonal Trelew","Pediatría"],
-	[34166136,"S/E","Hospital Zonal Trelew","Pediatría"],
+	[34166134,"S/E","Hospital Zonal Trelew","Pediatría"],
 	[34488816,"S/E","Hospital Zonal Trelew","Pediatría"],
 	[28969910,"S/E","Hospital Zonal Trelew","Pediatría"],
-	[12995920,"S/E","Hospital Zonal Trelew","Pediatría"],
+	[12995922,"S/E","Hospital Zonal Trelew","Pediatría"],
 	[29369708,"S/E","Hospital Zonal Trelew","Pediatría"],
 	[30120849,"S/E","Hospital Zonal Trelew","Pediatría"],
 	[33749308,"S/E","Hospital Zonal Trelew","Pediatría"],
@@ -2323,21 +2351,21 @@ agent_of_service_list = [
 	[26067818,"S/E","Hospital Zonal Trelew","Radiología - Técnicos"],
 	[30596956,"S/E","Hospital Zonal Trelew","Radiología - Técnicos"],
 	[27764077,"S/E","Hospital Zonal Trelew","Radiología - Técnicos"],
-	[13160480,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[28571661,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[22453678,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[26889480,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[27363683,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[18065350,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[18176170,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[13988218,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[24608503,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[30048571,"Jefe del servicio","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
-	[22459260,"S/E","Hospital Zonal Trelew","Tocoginecología (C/Ecografía)"],
+	[13160480,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[28571261,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[22453678,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[26889480,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[27363683,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[18065350,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[18176170,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[13988218,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[24608503,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[30048571,"Jefe del servicio","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
+	[22459260,"S/E","Hospital Zonal Trelew","Tocoginecología(C/Ecografía)"],
 	[24133791,"S/E","Hospital Zonal Trelew","Transporte"],
 	[21165674,"S/E","Hospital Zonal Trelew","Transporte"],
 	[31755528,"S/E","Hospital Zonal Trelew","Transporte"],
-	[29692386,"S/E","Hospital Zonal Trelew","Transporte"],
+	[29692384,"S/E","Hospital Zonal Trelew","Transporte"],
 	[29493818,"S/E","Hospital Zonal Trelew","Transporte"],
 	[17857469,"S/E","Hospital Zonal Trelew","Transporte"],
 	[20121867,"S/E","Hospital Zonal Trelew","Transporte"],
@@ -2345,7 +2373,7 @@ agent_of_service_list = [
 	[14664388,"S/E","Hospital Zonal Trelew","Transporte"],
 	[25697556,"S/E","Hospital Zonal Trelew","Transporte"],
 	[29282429,"S/E","Hospital Zonal Trelew","Transporte"],
-	[28901388,"S/E","Hospital Zonal Trelew","Transporte"],
+	[28901323,"S/E","Hospital Zonal Trelew","Transporte"],
 	[13988376,"S/E","Hospital Zonal Trelew","Transporte"],
 	[14757469,"S/E","Hospital Zonal Trelew","Transporte"],
 	[17857086,"Jefe del servicio","Hospital Zonal Trelew","Transporte"],
@@ -2367,19 +2395,52 @@ agent_of_service_list = [
 	[33527767,"S/E","Hospital Zonal Trelew","UMU"],
 	[22595508,"Jefe del servicio","Hospital Zonal Trelew","UTI"],
 	[28708720,"S/E","Hospital Zonal Trelew","UTI"],
-	[25138205,"S/E","Hospital Zonal Trelew","UTI"],
+	[25138201,"S/E","Hospital Zonal Trelew","UTI"],
 	[21000065,"S/E","Hospital Zonal Trelew","UTI"],
 	[21545709,"S/E","Hospital Zonal Trelew","UTI"],
 	[16841933,"S/E","Hospital Zonal Trelew","UTI"],
 	[23600948,"S/E","Hospital Zonal Trelew","UTI"],
 	[21803625,"S/E","Hospital Zonal Trelew","UTI"],
-	[29930163,"S/E","Hospital Zonal Trelew","UTIP"],
+	[29930162,"S/E","Hospital Zonal Trelew","UTIP"],
 	[25106189,"S/E","Hospital Zonal Trelew","UTIP"],
 	[16616118,"S/E","Hospital Zonal Trelew","UTIP"],
 	[28482246,"S/E","Hospital Zonal Trelew","UTIP"],
 	[25414755,"S/E","Hospital Zonal Trelew","UTIP"],
 	[22655315,"Jefe del servicio","Hospital Zonal Trelew","UTIP"],
-	[22643353,"S/E","Hospital Zonal Trelew","UTIP"]
+	[22643353,"S/E","Hospital Zonal Trelew","UTIP"],
+	
+	#agregados
+
+	[13537147,"S/E","Hospital Regional Comodoro Rivadavia","Area Externa"],
+	[36709364,"S/E","Hospital Regional Comodoro Rivadavia","Area Externa"],
+	[26727519,"S/E","Hospital Zonal Puerto Madryn","Tocoginecología"],
+	[27848064,"S/E","Hospital Zonal Puerto Madryn","Tocoginecología"],
+	[22091089,"S/E","Hospital Zonal Puerto Madryn","Obstetricia"],
+	[23255314,"S/E","Hospital Zonal Puerto Madryn","UMU"],
+	[17262495,"S/E","Hospital Zonal Puerto Madryn","UMU"],
+	[31918240,"S/E","Hospital Zonal Puerto Madryn","UMU"],
+	[25445146,"S/E","Hospital Zonal Puerto Madryn","UMU"],
+	[38232324,"S/E","Hospital Zonal Puerto Madryn","Laboratorio - Técnicos"],
+	[30661556,"S/E","Hospital Zonal Alvear","Laboratorio - Bioquímicos"],
+	[35568751,"S/E","Hospital Zonal Alvear","Laboratorio - Bioquímicos"],
+	[24337358,"S/E","Hospital Regional Comodoro Rivadavia","Area Externa"],
+	[22632192,"S/E","Hospital Regional Comodoro Rivadavia","Kinesiología"],
+	[14075229,"S/E","Hospital Regional Comodoro Rivadavia","Transporte"],
+	[25011806,"S/E","Hospital Regional Comodoro Rivadavia","Transporte"],
+	[35384586,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Jefatura y Supervisión"],
+	[18851125,"S/E","Hospital Regional Comodoro Rivadavia","Enfermería - Jefatura y Supervisión"],
+	[22632048,"S/E","Hospital Regional Comodoro Rivadavia","Kinesiología"],
+	[32629763,"S/E","Hospital Regional Comodoro Rivadavia","UMU"],
+	[30677797,"S/E","Hospital Regional Comodoro Rivadavia","UMU"],
+	[32629763,"S/E","Hospital Regional Comodoro Rivadavia","UMU"],
+	[33565467,"S/E","Hospital Regional Comodoro Rivadavia","UMU"]
+
+
+
+
+	
+
+
 ]
 
 agent_of_service_list.each do |agente_dni, funcion, nombre_hospital, nombre_servicio|
@@ -2414,26 +2475,35 @@ end
 
 
 
+
+
+#Speedy Telefonica Mensaje privado
+
+#08002221222 Opc 2
+
+
+
+
 categoria_list = [
-  	[1,"Programa Mejora"],
-  	[2,"Hs Cátedra"],
-  	[3,""],
-  	[4,""],
-  	[5,""],
-  	[6,""],
-  	[7,""],
-  	[8,""],
-  	[9,""],
-  	[10,""],
-  	[11,""],
-  	[12,""],
-  	[13,""],
-  	[14,""],
-  	[15,""],
-  	[16,""],
-  	[17,""],
-  	[18,""],
-  	[19,"Mensualizados P/G"],
+	[1,"Programa Mejora"],
+	[2,"Hs Cátedra"],
+	[3,""],
+	[4,""],
+	[5,""],
+	[6,""],
+	[7,""],
+	[8,""],
+	[9,""],
+	[10,""],
+	[11,""],
+	[12,""],
+	[13,""],
+	[14,""],
+	[15,""],
+	[16,""],
+	[17,""],
+	[18,""],
+	[19,"Mensualizados P/G"],
 ]
 
 categoria_list.each do |numero, descripcion|
@@ -2570,7 +2640,7 @@ end
 #
 #
 #agent_list.each do |dni, fullname, sex, birthdate|
-	#Agent.find_or_create_by(dni:dni, fullname:fullname, sex:sex, birthdate:birthdate, marital_status:"Soltero",  nationality_id:nil, email:"prueba@salud.com", 
+	#Agent.find_or_create_by(dni:dni, fullname:fullname, sex:sex, birthdate:birthdate, marital_status:"Soltero",nationality_id:nil, email:"prueba@salud.com", 
 #cell_phone:"", position: nil, hour_regime_id:nil, study_id:nil, job_function_id:nil)
 #end
 
@@ -2687,7 +2757,7 @@ coverage_list = [
 	["Hospital Zonal Esquel","Enfermería - UTI",54,0,54,0,54,0,54,0,54,0,48,48],
 	["Hospital Zonal Trelew","Enfermería - Area Externa",216,0,216,0,216,0,216,0,216,0,48,48],
 	["Hospital Subzonal Rawson","Enfermería - CAPS Playa Unión",54,0,54,0,54,0,54,0,54,0,30,30],
-	["Hospital Zonal Puerto Madryn","Enfermería - Area Externa - Inmunizaciones",156,0,156,0,156,0,156,0,156,0,36,18],
+	["Hospital Zonal Puerto Madryn","Enfermería - Area Externa- Inmunizaciones",156,0,156,0,156,0,156,0,156,0,36,18],
 	["Hospital Regional Comodoro Rivadavia","Enfermería - Centro Obstétrico",54,0,54,0,54,0,54,0,54,0,48,48],
 	["Hospital Regional Comodoro Rivadavia","Enfermería - Quirófano",48,0,48,0,48,0,48,0,48,0,24,24],
 	["Hospital Subzonal Rawson","Enfermería - Clínica Médica",66,0,66,0,66,0,66,0,66,0,48,48],
@@ -2778,14 +2848,14 @@ coverage_list = [
 	["Hospital Zonal Puerto Madryn","Pediatría",32,24,32,24,32,24,32,24,32,24,48,48],
 	["Hospital Subzonal Rawson","Radiología",90,0,90,0,90,0,90,0,90,0,24,24],
 	["Hospital Zonal Esquel","Radiología",42,0,42,0,42,0,42,0,42,0,24,24],
-	#["Hospital Regional Comodoro Rivadavia","Radiología",72,0,72,0,72,0,72,0,72,0,24,24],
+	["Hospital Regional Comodoro Rivadavia","Radiodiagnóstico",72,0,72,0,72,0,72,0,72,0,24,24],
 	["Hospital Zonal Trelew","Radiología - Técnicos",92,12,92,12,92,12,92,12,92,12,48,48],
 	["Hospital Zonal Puerto Madryn","Rehabilitación",10,0,10,0,10,0,10,0,10,0,6,6],
 	["Hospital Regional Comodoro Rivadavia","Salud Mental",72,0,72,0,72,0,72,0,72,0,24,24],
 	["Hospital Zonal Alvear","UTI",26,14,18,14,30,14,26,14,22,14,24,24],
 	["Hospital Zonal Esquel","Tocoginecología",33,12,33,12,33,12,33,12,33,12,24,24],
 	["Hospital Subzonal Rawson","Tocoginecología",12,12,12,12,12,12,12,12,12,12,24,24],
-	["Hospital Zonal Trelew","Tocoginecología (C/Ecografía)",60,13,60,13,60,13,60,13,60,13,24,24],
+	["Hospital Zonal Trelew","Tocoginecología(C/Ecografía)",60,13,60,13,60,13,60,13,60,13,24,24],
 	["Hospital Zonal Puerto Madryn","Tocoginecología",12,12,12,12,12,12,12,12,12,12,24,24],
 	["Hospital Regional Comodoro Rivadavia","Tocoginecología",36,36,36,36,36,36,36,36,36,36,72,72],
 	["Hospital Regional Comodoro Rivadavia","Obstetricia",24,24,24,24,24,24,24,24,24,24,48,48],
@@ -2803,7 +2873,16 @@ coverage_list = [
 	["Hospital Zonal Puerto Madryn","UMU",48,48,48,48,48,48,48,48,48,48,48,48],
 	["Hospital Zonal Esquel","UTI",35,12,35,12,35,12,35,12,35,12,24,24],
 	["Hospital Zonal Trelew","UTI",52,24,52,24,52,24,52,24,52,24,48,48],
-	["Hospital Regional Comodoro Rivadavia","UTIP",30,12,30,12,30,12,30,12,30,12,24,24]
+	["Hospital Regional Comodoro Rivadavia","UTIP",30,12,30,12,30,12,30,12,30,12,24,24],
+	
+	#agregado
+	["Hospital Subzonal Rawson","Chóferes",60,0,60,0,60,0,60,0,48,48],
+	["Hospital Subzonal Rawson","Médicos - CAPS Playa Unión",30,12,30,12,30,12,30,12,24,24],
+	["Hospital Subzonal Rawson","Estadística - Admisión",0,0,0,0,0,0,0,0,0,0],
+	["Hospital Subzonal Rawson","Admisión - CAPS Playa Unión",0,0,0,0,0,0,0,0,0,0],
+	["Hospital Subzonal Rawson","Estadística - Archivo",0,0,0,0,0,0,0,0,0,0]
+
+
 ]
 
 coverage_list.each do |dependence_name, service_name,lu_d,lu_n, ma_d, ma_n, mi_d, mi_n, ju_d, ju_n, vi_d, vi_n, sab, dom|
@@ -2814,8 +2893,8 @@ coverage_list.each do |dependence_name, service_name,lu_d,lu_n, ma_d, ma_n, mi_d
 		byebug
 	end
 	Coverage.find_or_create_by(service_of_dependence: s_o_d,hs_lunes_diurnas: lu_d,hs_lunes_nocturnas: lu_n,hs_martes_diurnas: ma_d,hs_martes_nocturnas: ma_n,hs_miercoles_diurnas: mi_d,hs_miercoles_nocturnas: mi_n,hs_jueves_diurnas: ju_d,hs_jueves_nocturnas: ju_n,hs_viernes_diurnas: vi_d,hs_viernes_nocturnas: vi_n,hs_sabado: sab,hs_domingo: dom)
-
 end
+
 
 
 
@@ -2876,17 +2955,19 @@ user.save!
 user.add_role 'hospital'
 
 
-#1159;Guardia Activa Profesional
-#1160	Guardia Activa Profesional Servicio de Ugencias
+#1159 Guardia Activa Profesional 																			-> Agr A
+
+#1160	Guardia Activa Profesional Servicio de Ugencias                 -> Agr A y seleccionado casilla umu
+
 #1279	Guardia Profesional UMU CR
 #1263	Guardia Pasiva Profesional Habitual
 #1264	Guardia Pasiva Profesional No Habitual
 #1161	Guardia Activa Tecnica
-#1162	Guardia Pasiva Tecnica  Habitual
+#1162	Guardia Pasiva TecnicaHabitual
 #1272	Guardia Pasiva Tecnica No Habitual
 #1273	Guardia Activa Auxiliar Tecnica
-#1274	Guarcdia Pasiva Auxiliar Tecnica  Habitual
-#1275	Guarcdia Pasiva Auxiliar Tecnica No Habitual
+#1274	Guardia Pasiva Auxiliar Tecnica Habitual
+#1275	Guardia Pasiva Auxiliar Tecnica No Habitual
 #1276	Guardia Activa Operativa
 #1277	Guardia Pasiva Operativa Habitual
 #1278	Guardia Pasiva Operativa No Habitual
