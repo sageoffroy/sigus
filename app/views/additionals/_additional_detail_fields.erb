@@ -12,7 +12,7 @@
       <h6 style="text-align: center;">Turno Nocturno Fijo</h6>
     </div>
     <div class="col-sm-2">
-      <h6 style="text-align: center;">Tarea en Terreno</h6>
+      <h6 style="text-align: center;color:gray;">Tarea en Terreno</h6>
     </div>
   <div class="col-sm-4">
     <%= link_to_remove_association (fa_icon "window-close", class: "btn-remove"), f %>
@@ -41,7 +41,7 @@
   	<%= f.check_box :turno_nocturno_fijo, style: "margin-top: 6px;" %>
   </div>
   <div class="col-sm-2" style="text-align: center;">
-  	<%= f.check_box :tarea_en_terreno, style: "margin-top: 6px;" %>
+  	<%= f.check_box :tarea_en_terreno, style: "margin-top: 6px;", disabled:""%>
   </div>
   <div class="col-md-12 col-last"></div>
 

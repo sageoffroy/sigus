@@ -115,6 +115,10 @@ h6 span{
   border-right: 2px solid #ececef;
 }
 
+input[type=checkbox][disabled] + label {
+  color: #ccc;
+}
+
 form {
   margin-top: 1rem;
   
