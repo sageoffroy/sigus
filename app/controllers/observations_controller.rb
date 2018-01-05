@@ -10,6 +10,7 @@ class ObservationsController < ApplicationController
   # GET /observations/1
   # GET /observations/1.json
   def show
+    @observation_details = ObservationDetail.where(observation:@observation)
   end
 
   # GET /observations/new
@@ -83,6 +84,6 @@ class ObservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def observation_params
-      params.require(:observation).permit(:year, :month, :service_of_dependence_id, observation_details_attributes: [:id, :url, :_destroy, :agent_id, :observation_description_id, :date_from, :total_days, :description])
+      params.require(:observation).permit(:year, :month, :service_of_dependence_id, observation_details_attributes: [:id, :url, :_destroy, :agent_id, :observation_description_id, :date_from, :total_days, :description, :porporcional])
     end
 end

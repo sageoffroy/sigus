@@ -1,17 +1,47 @@
-<p>
-  <strong>Año:</strong>
-  <%= @novelty.year %>
-</p>
+<h1>Novedad</h1>
+<div class="row">
+	<div class="col-sm-12">
+		<p><strong>Periodo: </strong><%= @novelty.year %> / <%= @novelty.month %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>Servicio: </strong><%= @novelty.service_of_dependence.service %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>ultima Modificación: </strong><%= @novelty.updated_at.strftime("%d-%m-%y")%></p>
+	</div>
 
-<p>
-  <strong>Mes</strong>
-  <%= @novelty.month %>
-</p>
-
-<p>
-  <strong>Servicio:</strong>
-  <%= @novelty.service_of_dependence.service %>
-</p>
-
-<%= link_to 'Edit', edit_novelty_path(@novelty) %> |
-<%= link_to 'Back', novelties_path %>
+	<div class="col-sm-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Agente</th>
+					<th>Tipo</th>
+  				<th>Mes</th>
+  				<th>Año</th>
+  				<th>Horas +</th>
+  				<th>Horas -</th>
+  				<th>Horas M/G</th>
+  				<th>Tipo de Hora</th>
+  				<th>Descripción</th>
+  			</tr>
+ 		 	</thead>
+			<tbody>
+				<% @novelty_details.each do |rd| %>
+	      <tr>
+	        <td><%= rd.agent%></td>
+	        <td><%= rd.novelty_type%></td>
+	        <td><%= rd.month_ref%></td>
+	        <td><%= rd.year_ref%></td>
+	        <td><%= rd.hours_to_add%></td>
+	        <td><%= rd.hours_to_remove%></td>
+	        <td><%= rd.hours_agent_mpg%></td>
+	        <td><%= rd.hours_type%></td>
+	        <td><%= rd.description%></td>
+	      </tr>
+	    	<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<%= link_to 'Editar', edit_novelty_path(@novelty), class:"btn btn-primary" %>
+<%= link_to 'volver', novelties_path, class:"btn btn-danger" %>

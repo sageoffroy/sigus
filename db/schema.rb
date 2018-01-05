@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103120333) do
+ActiveRecord::Schema.define(version: 20180104112253) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20180103120333) do
 
   create_table "concepts", force: :cascade do |t|
     t.integer "value"
-    t.integer "description"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(version: 20180103120333) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "proporcional"
     t.index ["agent_id"], name: "index_observation_details_on_agent_id"
     t.index ["observation_description_id"], name: "index_observation_details_on_observation_description_id"
     t.index ["observation_id"], name: "index_observation_details_on_observation_id"

@@ -1,17 +1,43 @@
-<p>
-  <strong>Año:</strong>
-  <%= @observation.year %>
-</p>
+<h1>Observación</h1>
+<div class="row">
+	<div class="col-sm-12">
+		<p><strong>Periodo: </strong><%= @observation.year %> / <%= @observation.month %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>Servicio: </strong><%= @observation.service_of_dependence.service %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>ultima Modificación: </strong><%= @observation.updated_at.strftime("%d-%m-%y")%></p>
+	</div>
 
-<p>
-  <strong>Mes</strong>
-  <%= @observation.month %>
-</p>
+	<div class="col-sm-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Agente</th>
+					<th>Tipo</th>
+  				<th>Fecha desde</th>
+  				<th>Cant de días</th>
+  				<th>Descripción</th>
+  			</tr>
+ 		 	</thead>
+			<tbody>
+				<% @observation_details.each do |rd| %>
+	      <tr>
+	        <td><%= rd.agent%></td>
+	        <td><%= rd.observation_description%></td>
+	        <td><%= rd.date_from%></td>
+	        <td><%= rd.total_days%></td>
+	        <td><%= rd.description%></td>
+	      </tr>
+	    	<% end %>
+			</tbody>
+		</table>
+	</div>
 
-<p>
-  <strong>Servicio:</strong>
-  <%= @observation.service_of_dependence.service %>
-</p>
 
-<%= link_to 'Edit', edit_observation_path(@observation) %> |
-<%= link_to 'Back', novelties_path %>
+
+</div>
+<%= link_to 'Editar', edit_observation_path(@observation), class:"btn btn-primary" %>
+<%= link_to 'volver', observations_path, class:"btn btn-danger" %>
+

@@ -10,6 +10,7 @@ class NoveltiesController < ApplicationController
   # GET /novelties/1
   # GET /novelties/1.json
   def show
+    @novelty_details = NoveltyDetail.where(novelty:@novelty)
   end
 
   # GET /novelties/new
