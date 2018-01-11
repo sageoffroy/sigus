@@ -18,7 +18,7 @@
 					<th>Tipo</th>
   				<th>Fecha desde</th>
   				<th>Cant de días</th>
-  				<th>Descripción</th>
+  				<th>Proporcional</th>
   			</tr>
  		 	</thead>
 			<tbody>
@@ -28,7 +28,7 @@
 	        <td><%= rd.observation_description%></td>
 	        <td><%= rd.date_from%></td>
 	        <td><%= rd.total_days%></td>
-	        <td><%= rd.description%></td>
+	        <td><%= rd.proporcional%></td>
 	      </tr>
 	    	<% end %>
 			</tbody>
@@ -39,5 +39,5 @@
 
 </div>
 <%= link_to 'Editar', edit_observation_path(@observation), class:"btn btn-primary" %>
-<%= link_to 'volver', observations_path, class:"btn btn-danger" %>
+<%= link_to 'Volver', observations_path, class:"btn btn-danger" %>
 

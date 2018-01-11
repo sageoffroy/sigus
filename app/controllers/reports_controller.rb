@@ -47,6 +47,14 @@ class ReportsController < ApplicationController
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
+  def new_monthly_guard
+    @report = Report.new
+    @report.report_type = "Mensualizado P/G"
+    @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+  end
+
   # GET /reports/1/edit
   def edit
     @report = Report.find(params[:id]) #ver si se puede mejorar
@@ -85,6 +93,9 @@ class ReportsController < ApplicationController
         elsif @report.report_type == "Horas Extras"
           format.html { render '/reports/new_extra_hours' }
           format.json { render json: @report.errors, status: :unprocessable_entity }
+        elsif @report.report_type == "Mensualizado P/G"
+          format.html { render '/reports/new_monthly_guard' }
+          format.json { render json: @report.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -93,7 +104,6 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1
   # PATCH/PUT /reports/1.json
   def update
-    
     respond_to do |format|
       if @report.update(report_params)
         if (@report.report_type == "Guardias Activas")

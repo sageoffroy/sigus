@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'reports/new_active' => 'reports#new_active'
   get 'reports/new_pasive' => 'reports#new_pasive'
   get 'reports/new_extra_hours' => 'reports#new_extra_hours'
+  get 'reports/new_monthly_guard' => 'reports#new_monthly_guard'
   
   resources :reports
 

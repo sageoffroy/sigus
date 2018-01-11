@@ -10,6 +10,7 @@ class AdditionalsController < ApplicationController
   # GET /additionals/1
   # GET /additionals/1.json
   def show
+    @additional_details = AdditionalDetail.where(additional:@additional)
   end
 
   # GET /additionals/new

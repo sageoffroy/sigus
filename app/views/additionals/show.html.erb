@@ -1,19 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+	<div class="col-sm-12">
+		<p><strong>Periodo: </strong><%= @additional.year %> / <%= @additional.month %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>Servicio: </strong><%= @additional.service_of_dependence.service %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>ultima Modificación: </strong><%= @additional.updated_at.strftime("%d-%m-%y")%></p>
+	</div>
 
-<p>
-  <strong>Year:</strong>
-  <%= @additional.year %>
-</p>
-
-<p>
-  <strong>Month:</strong>
-  <%= @additional.month %>
-</p>
-
-<p>
-  <strong>Service of dependence:</strong>
-  <%= @additional.service_of_dependence %>
-</p>
-
-<%= link_to 'Edit', edit_additional_path(@additional) %> |
-<%= link_to 'Back', additionals_path %>
+	<div class="col-sm-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Agente</th>
+					<th>Turno Rotativo</th>
+  				<th>Franco Móvil</th>
+  				<th>Turno Nocturno Fijo</th>
+  				<th>Tarea en Tereno</th>
+  			</tr>
+ 		 	</thead>
+			<tbody>
+				<% @additional_details.each do |ad| %>
+	      <tr>
+	        <td><%= ad.agent%></td>
+	        <td><%= ad.rotative_turn%></td>
+	        <td><%= ad.bool_to_s(ad.franco_movil)%></td>
+	        <td><%= ad.bool_to_s(ad.turno_nocturno_fijo)%></td>
+	        <td><%= ad.bool_to_s(ad.tarea_en_terreno)%></td>
+	      </tr>
+	    	<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<%= link_to 'Editar', edit_additional_path(@additional), class:"btn btn-primary" %>
+<%= link_to 'volver', additionals_path, class:"btn btn-danger" %>
