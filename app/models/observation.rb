@@ -40,10 +40,10 @@
           if cant != 0
             promedio_meses = total/6
             promedio_dias = promedio_meses/30
-            if h_g_a.total_days.nil?
+            if o_d.total_days.nil?
               o_d.proporcional = 0
             else
-              o_d.proporcional = promedio_dias * h_g_a.total_days
+              o_d.proporcional = promedio_dias * o_d.total_days
             end
             o_d.save
           end
