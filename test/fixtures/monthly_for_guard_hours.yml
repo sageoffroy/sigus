@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agent: one
+  hs_semana: 1
+  gs_semana: 1
+  hs_sabado: 1
+  hs_domingo: 1
+  concept_1: one
+  hs_total_1: 1
+  concept_2: one
+  hs_total_2: 1
+
+two:
+  agent: two
+  hs_semana: 1
+  gs_semana: 1
+  hs_sabado: 1
+  hs_domingo: 1
+  concept_1: two
+  hs_total_1: 1
+  concept_2: two
+  hs_total_2: 1

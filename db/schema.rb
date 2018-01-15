@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180104112253) do
+ActiveRecord::Schema.define(version: 20180112143549) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"
@@ -181,6 +181,23 @@ ActiveRecord::Schema.define(version: 20180104112253) do
     t.string "observation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "monthly_for_guard_hours", force: :cascade do |t|
+    t.integer "agent_id"
+    t.integer "hs_semana"
+    t.integer "gs_semana"
+    t.integer "hs_sabado"
+    t.integer "hs_domingo"
+    t.integer "concept_1_id"
+    t.integer "hs_total_1"
+    t.integer "concept_2_id"
+    t.integer "hs_total_2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_monthly_for_guard_hours_on_agent_id"
+    t.index ["concept_1_id"], name: "index_monthly_for_guard_hours_on_concept_1_id"
+    t.index ["concept_2_id"], name: "index_monthly_for_guard_hours_on_concept_2_id"
   end
 
   create_table "nationalities", force: :cascade do |t|

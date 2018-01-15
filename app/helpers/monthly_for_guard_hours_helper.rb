@@ -1,0 +1,2 @@
+module MonthlyForGuardHoursHelper
+end

@@ -1,0 +1,62 @@
+<%= form_with(model: monthly_for_guard_hour, local: true) do |form| %>
+  <% if monthly_for_guard_hour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(monthly_for_guard_hour.errors.count, "error") %> prohibited this monthly_for_guard_hour from being saved:</h2>
+
+      <ul>
+      <% monthly_for_guard_hour.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :agent_id %>
+    <%= form.text_field :agent_id, id: :monthly_for_guard_hour_agent_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_semana %>
+    <%= form.number_field :hs_semana, id: :monthly_for_guard_hour_hs_semana %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gs_semana %>
+    <%= form.number_field :gs_semana, id: :monthly_for_guard_hour_gs_semana %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_sabado %>
+    <%= form.number_field :hs_sabado, id: :monthly_for_guard_hour_hs_sabado %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_domingo %>
+    <%= form.number_field :hs_domingo, id: :monthly_for_guard_hour_hs_domingo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :concept_1_id %>
+    <%= form.text_field :concept_1_id, id: :monthly_for_guard_hour_concept_1_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_total_1 %>
+    <%= form.number_field :hs_total_1, id: :monthly_for_guard_hour_hs_total_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :concept_2_id %>
+    <%= form.text_field :concept_2_id, id: :monthly_for_guard_hour_concept_2_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hs_total_2 %>
+    <%= form.number_field :hs_total_2, id: :monthly_for_guard_hour_hs_total_2 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

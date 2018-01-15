@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :monthly_for_guard_hours
   resources :concepts
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'mensualizado_para_guardia' => 'mensualizado_para_guardia#index'

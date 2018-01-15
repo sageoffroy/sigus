@@ -38,7 +38,9 @@
             end
           end
           if cant != 0
-            o_d.proporcional = total/cant
+            promedio_meses = total/cant
+            promedio_dias = promedio_meses/30
+            o_d.proporcional = promedio_dias * total_days
             o_d.save
           end
         end

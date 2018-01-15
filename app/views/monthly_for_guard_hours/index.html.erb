@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Monthly For Guard Hours</h1>
+
+<table class="datatable">
+  <thead>
+    <tr>
+      <th>Agent</th>
+      <th>Hs semana</th>
+      <th>Gs semana</th>
+      <th>Hs sabado</th>
+      <th>Hs domingo</th>
+      <th>Concept 1</th>
+      <th>Hs total 1</th>
+      <th>Concept 2</th>
+      <th>Hs total 2</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @monthly_for_guard_hours.each do |monthly_for_guard_hour| %>
+      <tr>
+        <td><%= monthly_for_guard_hour.agent %></td>
+        <td><%= monthly_for_guard_hour.hs_semana %></td>
+        <td><%= monthly_for_guard_hour.gs_semana %></td>
+        <td><%= monthly_for_guard_hour.hs_sabado %></td>
+        <td><%= monthly_for_guard_hour.hs_domingo %></td>
+        <td><%= monthly_for_guard_hour.concept_1 %></td>
+        <td><%= monthly_for_guard_hour.hs_total_1 %></td>
+        <td><%= monthly_for_guard_hour.concept_2 %></td>
+        <td><%= monthly_for_guard_hour.hs_total_2 %></td>
+        <td><%= link_to 'Show', monthly_for_guard_hour %><%= link_to 'Edit', edit_monthly_for_guard_hour_path(monthly_for_guard_hour) %><%= link_to 'Destroy', monthly_for_guard_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Monthly For Guard Hour', new_monthly_for_guard_hour_path %>

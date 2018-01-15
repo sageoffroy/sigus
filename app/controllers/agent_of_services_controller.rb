@@ -110,10 +110,6 @@ class AgentOfServicesController < ApplicationController
         agente.fullname = h_agente.nombre_completo  
         # --- Hour Regime
         cg = false
-        if h_agente.hs_c_guardia == "1"
-          byebug
-          cg = true
-        end
         agente.hour_regime = HourRegime.where(hours:h_agente.hs_semanales, with_guard:cg).first
 
         # --- position
