@@ -38,12 +38,16 @@
             end
           end
           if cant != 0
-            promedio_meses = total/6
-            promedio_dias = promedio_meses/30
+            
+            promedio_meses = (total/6).to_f
+            byebug
+            promedio_dias = (promedio_meses/30).to_f
+            byebug
             if o_d.total_days.nil?
               o_d.proporcional = 0
             else
-              o_d.proporcional = promedio_dias * o_d.total_days
+              byebug
+              o_d.proporcional = (promedio_dias * o_d.total_days).to_f
             end
             o_d.save
           end
