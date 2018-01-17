@@ -296,6 +296,23 @@ set_days_event = ->
     
     $('#report_total_hs_umu').val add_umu
 
+
+
+
+$(document).on 'cocoon:after-remove', (e) ->
+  console.log "Removido"
+  add = 0
+  $('.total_hours_gs').each ->
+    add = add + parseInt($(this).val())
+  $('#report_total_hs').val add
+
+  add_umu = 0
+  $('.total_hours_umu').each ->
+    add_umu = add_umu + parseInt($(this).val())
+  
+  $('#report_total_hs_umu').val add_umu
+
+
 $(document).on 'cocoon:after-insert', (e) ->
   $('.select2').select2({theme: "bootstrap"})
 
@@ -307,6 +324,8 @@ $(document).on 'cocoon:after-insert', (e) ->
       todayHighlight: true
     })
   
+
+
   if ($('.novelties.create').length + $('.novelties.edit').length + $('.novelties.update').length + $('.novelties.new').length) > 0
     console.log "Se inserto COCOON en novedad"
     year = $('#novelty_year')
