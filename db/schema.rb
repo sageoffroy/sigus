@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180112143549) do
+ActiveRecord::Schema.define(version: 20180117122236) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"
@@ -260,6 +260,7 @@ ActiveRecord::Schema.define(version: 20180112143549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "proporcional"
+    t.integer "proporcional2"
     t.index ["agent_id"], name: "index_observation_details_on_agent_id"
     t.index ["observation_description_id"], name: "index_observation_details_on_observation_description_id"
     t.index ["observation_id"], name: "index_observation_details_on_observation_id"

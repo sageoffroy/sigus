@@ -84,6 +84,6 @@ class ObservationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def observation_params
-      params.require(:observation).permit(:year, :month, :service_of_dependence_id, observation_details_attributes: [:id, :url, :_destroy, :agent_id, :observation_description_id, :date_from, :total_days, :description, :porporcional])
+      params.require(:observation).permit(:year, :month, :service_of_dependence_id, observation_details_attributes: [:id, :url, :_destroy, :agent_id, :observation_description_id, :date_from, :total_days, :description, :porporcional, :porporcional2])
     end
 end

@@ -28,15 +28,17 @@
 		    </tr>
  		 	</thead>
 			<tbody>
-				<% @report_details.each do |rd| %>
-	      <tr>
-	        <td><%= rd.agent%></td>
-	        <td><%= rd.belong_service%></td>
-	        <td><%= rd.total_hours_gs%></td>
-	        <td><%= rd.total_hours_umu%></td>
-	        <td><%= rd.total_hours%></td>
-	      </tr>
-	    	<% end %>
+				<%if !@report_details.nil?%>
+					<% @report_details.each do |rd| %>
+		      <tr>
+		        <td><%= rd.agent%></td>
+		        <td><%= rd.belong_service%></td>
+		        <td><%= rd.total_hours_gs%></td>
+		        <td><%= rd.total_hours_umu%></td>
+		        <td><%= rd.total_hours%></td>
+		      </tr>
+		    	<% end %>
+		    <% end %>
 			</tbody>
 		</table>
 	</div>
