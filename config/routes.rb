@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :mpg_control_details
+  resources :mpg_controls
   resources :monthly_for_guard_hours
   resources :concepts
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

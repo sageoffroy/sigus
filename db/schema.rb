@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117122236) do
+ActiveRecord::Schema.define(version: 20180119114749) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"
@@ -183,6 +183,15 @@ ActiveRecord::Schema.define(version: 20180117122236) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "monthly_for_guard_controls", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
+    t.integer "service_of_dependence_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_of_dependence_id"], name: "index_monthly_for_guard_controls_on_service_of_dependence_id"
+  end
+
   create_table "monthly_for_guard_hours", force: :cascade do |t|
     t.integer "agent_id"
     t.integer "hs_semana"
@@ -198,6 +207,27 @@ ActiveRecord::Schema.define(version: 20180117122236) do
     t.index ["agent_id"], name: "index_monthly_for_guard_hours_on_agent_id"
     t.index ["concept_1_id"], name: "index_monthly_for_guard_hours_on_concept_1_id"
     t.index ["concept_2_id"], name: "index_monthly_for_guard_hours_on_concept_2_id"
+  end
+
+  create_table "mpg_control_details", force: :cascade do |t|
+    t.integer "mpg_control_id"
+    t.integer "agent_id"
+    t.integer "hs_guard"
+    t.integer "hs_umu"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_mpg_control_details_on_agent_id"
+    t.index ["mpg_control_id"], name: "index_mpg_control_details_on_mpg_control_id"
+  end
+
+  create_table "mpg_controls", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
+    t.integer "service_of_dependence_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_of_dependence_id"], name: "index_mpg_controls_on_service_of_dependence_id"
   end
 
   create_table "nationalities", force: :cascade do |t|

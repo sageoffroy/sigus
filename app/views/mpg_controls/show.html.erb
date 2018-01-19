@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @mpg_control.year %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @mpg_control.month %>
+</p>
+
+<p>
+  <strong>Service of dependence:</strong>
+  <%= @mpg_control.service_of_dependence %>
+</p>
+
+<%= link_to 'Edit', edit_mpg_control_path(@mpg_control) %> |
+<%= link_to 'Back', mpg_controls_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mpg control:</strong>
+  <%= @mpg_control_detail.mpg_control %>
+</p>
+
+<p>
+  <strong>Agent:</strong>
+  <%= @mpg_control_detail.agent %>
+</p>
+
+<p>
+  <strong>Hs guard:</strong>
+  <%= @mpg_control_detail.hs_guard %>
+</p>
+
+<p>
+  <strong>Hs umu:</strong>
+  <%= @mpg_control_detail.hs_umu %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @mpg_control_detail.description %>
+</p>
+
+<%= link_to 'Edit', edit_mpg_control_detail_path(@mpg_control_detail) %> |
+<%= link_to 'Back', mpg_control_details_path %>

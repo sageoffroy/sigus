@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mpg_control: one
+  agent: one
+  hs_guard: 1
+  hs_umu: 1
+  description: MyString
+
+two:
+  mpg_control: two
+  agent: two
+  hs_guard: 1
+  hs_umu: 1
+  description: MyString

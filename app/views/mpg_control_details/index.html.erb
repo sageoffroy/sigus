@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mpg Control Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mpg control</th>
+      <th>Agent</th>
+      <th>Hs guard</th>
+      <th>Hs umu</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mpg_control_details.each do |mpg_control_detail| %>
+      <tr>
+        <td><%= mpg_control_detail.mpg_control %></td>
+        <td><%= mpg_control_detail.agent %></td>
+        <td><%= mpg_control_detail.hs_guard %></td>
+        <td><%= mpg_control_detail.hs_umu %></td>
+        <td><%= mpg_control_detail.description %></td>
+        <td><%= link_to 'Show', mpg_control_detail %></td>
+        <td><%= link_to 'Edit', edit_mpg_control_detail_path(mpg_control_detail) %></td>
+        <td><%= link_to 'Destroy', mpg_control_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mpg Control Detail', new_mpg_control_detail_path %>
