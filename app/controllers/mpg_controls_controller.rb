@@ -21,11 +21,15 @@ class MpgControlsController < ApplicationController
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id), agent_type:agent_type)
 
     @agents.each do |agent|
-
-
-    end
-
-    byebug
+      h_g_a =  MonthlyForGuardHour.where(agent:agent).first
+      if h_g_a.nil?
+        @mpg_control.mpg_control_details.build(agent:agent, hs_guard:0, hs_umu:0)
+      else
+        @mpg_control.mpg_control_details.build(agent:agent, hs_guard:h_g_a.hs_total_1, hs_umu:h_g_a.hs_total_2)
+      end
+      
+    end 
+    
   end
 
   # GET /mpg_controls/1/edit

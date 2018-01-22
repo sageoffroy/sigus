@@ -8,16 +8,14 @@ check_general_data = (year, month, service, complement, complement2)->
       complement2.removeClass 'disabled'
     else
       "No Entra"
-
-
   else
     #console.log "falta algo"
     complement.addClass 'disabled'
     if typeof complement2 != "undefined"
       complement2.addClass 'disabled'
 
+
 check_day_of_month = ->
-  
   year = parseInt($('#report_year').val())
   month = parseInt($('#report_month').val())
 
@@ -138,6 +136,7 @@ selects_controls_reports = ->
   year = $('#report_year')
   month = $('#report_month')
   service = $('#report_service')
+  type = $('report_report_type')
   check_general_data(year, month, service, add_report_detail, add_report_detail_all)
   check_day_of_month()
   set_weekend(year, month)

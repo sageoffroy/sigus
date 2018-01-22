@@ -1,41 +1,8 @@
-<div class="nested-fields row">
-  <div class="col-sm-4">
-    <%= link_to_remove_association (fa_icon "window-close", class: "btn-remove"), f %>
-    <div class="field" style ="margin-left: 35px;">
-      <%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>
-    </div>
-  </div>
-  <div class="col-sm-2">
-    <div class="field">
-      
-    </div>
-  </div>  
+<tr class="detail-field">
+  <td><%= f.text_field :agent, :readonly => true, style: "width:100%;min-height: 38px;" %></td>
+  <td><%= f.number_field :hs_guard, class: "form-control input-lg", placeholder: "0"%></td>
+  <td><%= f.number_field :hs_umu, class: "form-control input-lg", placeholder: "0"%></td>
+</tr>
 
-  <div class="col-sm-2">
-    <div class="field">
-      
-    </div>
-  </div>  
-  <div class="col-sm-1">
-    <div class="field">
-      
-    </div>
-  </div>
-  <div class="col-sm-1">
-    <div class="field">
-      
-    </div>
-  </div>
-  <div class="col-sm-1">
-    <div class="field">
-      
-    </div>
-  </div>
-  <div class="col-sm-1">
-    <div class="field">
-      
-    </div>
-  </div>
-  <div class="col-md-12 col-last"></div>
-</div>
-  
+
+

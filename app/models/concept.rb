@@ -1,5 +1,5 @@
 class Concept < ApplicationRecord
 	def to_s
-		value
+		value.to_s
 	end
 end
