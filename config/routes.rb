@@ -53,6 +53,6 @@ Rails.application.routes.draw do
   post 'change_service/:id' => 'service_of_dependences#change_service'
   post 'charge_agents' => 'agent_of_services#charge_agents'
   post 'set_dependence/:id' => 'welcome#set_dependence'
-  post 'update_agents_of_service/:id' => 'agent_of_services#agents_from_service_of_dependence'
+  post 'update_agents_of_service/:id/:type' => 'agent_of_services#agents_from_service_of_dependence'
   get 'dependence/' => 'dependences#dependence'
 end

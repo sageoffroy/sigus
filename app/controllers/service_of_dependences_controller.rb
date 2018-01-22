@@ -65,6 +65,7 @@ class ServiceOfDependencesController < ApplicationController
   def change_service
     
     id_service = params[:id]
+    
     service = Service.where(id:id_service).first
     dependence = current_user.dependence
     sod = ServiceOfDependence.where(service_id: service.id, dependence_id: dependence.id).first

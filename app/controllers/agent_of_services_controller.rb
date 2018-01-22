@@ -167,9 +167,14 @@ class AgentOfServicesController < ApplicationController
 
   def agents_from_service_of_dependence
     id_sod = params[:id]
+    agent_type = AgentType.where(code:params[:type].to_i).first
     sod = ServiceOfDependence.where(id: id_sod).first
     aos = sod.agent_of_services
-    agents = Agent.where(id: aos.pluck(:agent_id))
+    if agent_type.nil?
+      agents = Agent.where(id: aos.pluck(:agent_id))
+    else
+      agents = Agent.where(id: aos.pluck(:agent_id), agent_type:agent_type)
+    end
     respond_to do |format|
       format.json  { render :json => {:agents => agents}}
     end

@@ -89,13 +89,12 @@ set_ids_to_child = ->
     $(this).attr('id', 'nested-fields_' + index );
 
 
-set_selects_of_agents = (id)->
-  console.log "set_selects_of_agents"
+set_selects_of_agents = (id, mpg = 0)->
   selects = $('.agent')
   selects.empty()
   $.ajax
     type: 'POST'
-    url: '/update_agents_of_service/'+id
+    url: '/update_agents_of_service/'+id+'/'+mpg
     error: (jqXHR, textStatus, errorThrown) ->
       console.log "Error"
       return
@@ -103,18 +102,17 @@ set_selects_of_agents = (id)->
       selects.append $('<option></option>').attr('value', 0).text('Agente del Servicio')
       i = 0
       while i < data.agents.length
-        #selects.append '<option id=' + data.agents[i].id + ' value=' + '('+data.agents[i].dni+')'+' '+data.agents[i].fullname+'</option>'
         selects.append $('<option></option>').attr('value', data.agents[i].id ).text('('+data.agents[i].dni+')'+' '+data.agents[i].fullname)
         i++
       selects.change()
       return
 
-set_last_select_of_agents = (id)->
+set_last_select_of_agents = (id, mpg = 0)->
   selects = $('.agent').last()
   selects.empty()
   $.ajax
     type: 'POST'
-    url: '/update_agents_of_service/'+id
+    url: '/update_agents_of_service/'+id+'/'+mpg
     error: (jqXHR, textStatus, errorThrown) ->
       console.log "Error"
       return
@@ -136,18 +134,18 @@ selects_controls_reports = ->
   year = $('#report_year')
   month = $('#report_month')
   service = $('#report_service')
-  type = $('report_report_type')
+  type = $('#report_report_type')
   check_general_data(year, month, service, add_report_detail, add_report_detail_all)
   check_day_of_month()
   set_weekend(year, month)
   set_free_days(year, month)
   year.on 'select2:select', (e) ->
-    #console.log "Cambiando el Año"
+    console.log "Cambiando el Año"
     check_general_data(year, month, service, add_report_detail, add_report_detail_all)
     check_day_of_month()
     set_free_days(year, month)
   month.on 'select2:select', (e) ->
-    #console.log "Cambiando el Mes"
+    console.log "Cambiando el Mes"
     check_general_data(year, month, service, add_report_detail, add_report_detail_all)
     check_day_of_month()
     set_weekend(year, month)
@@ -158,7 +156,11 @@ selects_controls_reports = ->
     check_day_of_month()
     #actualizar valores del select de agentes
     id = service.val()
-    set_selects_of_agents(id)
+    mpg = 0
+    if type.val() == 'Mensualizado P/G'
+      mpg = 2
+    
+    set_selects_of_agents(id, mpg)
                    
 selects_control_novelties = ->
   console.log "selects_control_novelties"
@@ -353,7 +355,7 @@ $(document).on 'cocoon:after-insert', (e) ->
     year = $('#report_year')
     month = $('#report_month')
     service = $('#report_service')
-  
+    type = $('#report_report_type')
     check_general_data(year, month, service, add_report_detail, add_report_detail_all)
     check_day_of_month()
     set_weekend(year, month)
@@ -361,7 +363,10 @@ $(document).on 'cocoon:after-insert', (e) ->
     set_ids_to_child()
     if e.currentTarget.activeElement.firstChild.data == "Agente del Servicio"
       id = service.val()
-      set_last_select_of_agents(id)
+      mpg = 0
+      if type.val() == 'Mensualizado P/G'
+        mpg = 2
+      set_last_select_of_agents(id, mpg)
     set_days_event()
   
   
@@ -390,6 +395,9 @@ $(document).on 'turbolinks:load', ->
     selects_controls_reports()
     
   if $('.reports.new_extra_hours').length > 0
+    selects_controls_reports()
+
+  if $('.reports.new_monthly_guard').length > 0
     selects_controls_reports()
 
   if $('.novelties.create').length > 0
