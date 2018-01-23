@@ -1,10 +1,10 @@
 <%= form_for(mpg_control) do |f| %>
   <% if mpg_control.errors.any? %>
-      <script type="text/javascript">
-        <% mpg_control.errors.full_messages.each do |message| %>
-          toastr['error']('<%= message %>');
-        <% end %>
-      </script>
+    <script type="text/javascript">
+      <% mpg_control.errors.full_messages.each do |message| %>
+        toastr['error']('<%= message %>');
+      <% end %>
+    </script>
   <% end %>
   <div class="form-group row">
     <div class="col-sm-2">
@@ -35,10 +35,13 @@
       </tr> 
     </thead>
     <tbody class="mpg_control_details">
-        <%= f.fields_for :mpg_control_details do |mpg_control_details| %>
-          <%= render 'mpg_control_detail_fields', :f => mpg_control_details %>
-        <% end %>
-      </div>
+      <%= f.fields_for :mpg_control_details do |mpg_control_detail| %>
+        <%= render 'mpg_control_detail_fields', :f => mpg_control_detail %>
+      <% end %>
     </tbody>
   </table>
+  <div class="form-actions">
+    <%= link_to 'Atrás', mpg_controls_path, class: 'btn btn-danger' %>
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
 <% end %>

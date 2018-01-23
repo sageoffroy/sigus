@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180119114749) do
+ActiveRecord::Schema.define(version: 20180123161453) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"

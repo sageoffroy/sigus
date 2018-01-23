@@ -69,6 +69,6 @@ class MonthlyForGuardHoursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def monthly_for_guard_hour_params
-      params.require(:monthly_for_guard_hour).permit(:agent_id, :hs_semana, :gs_semana, :hs_sabado, :hs_domingo , :hs_total_1, :hs_total_2, :concept_1_id, :concept_2_id)
+      params.require(:monthly_for_guard_hour).permit(:agent_id, :hs_semana, :gs_semana, :hs_sabado, :hs_domingo , :hs_total_1, :hs_total_2, concept_1_attributes: [:id, :value, :description], concept_2_attributes: [:id, :value, :description])
     end
 end

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Year:</strong>
   <%= @mpg_control.year %>
@@ -15,5 +13,5 @@
   <%= @mpg_control.service_of_dependence %>
 </p>
 
-<%= link_to 'Edit', edit_mpg_control_path(@mpg_control) %> |
-<%= link_to 'Back', mpg_controls_path %>
+<%= link_to 'Editar', edit_mpg_control_path(@mpg_control), class:"btn btn-primary" %>
+<%= link_to 'volver', mpg_controls_path, class:"btn btn-danger" %>

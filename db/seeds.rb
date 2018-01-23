@@ -817,9 +817,6 @@ mpg_hours_list = [
 
 mpg_hours_list.each do |agent_dni, concepto_1_value, total_hs_1, concepto_2_value, total_hs_2|
 	agent = Agent.where(dni:agent_dni).first
-	if agent.nil?
-		byebug
-	end
 	concept_1 = Concept.where(value:concepto_1_value).first
 	concept_2 = Concept.where(value:concepto_2_value).first
 	MonthlyForGuardHour.find_or_create_by(agent: agent, hs_semana: nil, gs_semana: nil, hs_domingo: nil, concept_1: concept_1, hs_total_1:total_hs_1, concept_2: concept_2, hs_total_2:total_hs_2)	

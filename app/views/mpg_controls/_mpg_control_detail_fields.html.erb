@@ -1,5 +1,6 @@
 <tr class="detail-field">
-  <td><%= f.text_field :agent, :readonly => true, style: "width:100%;min-height: 38px;" %></td>
+  <%= f.hidden_field :agent_id %>
+  <td><%= f.text_field '',f.object.agent, :readonly => true, style: "width:100%;min-height: 38px;" %></td>
   <td><%= f.number_field :hs_guard, class: "form-control input-lg", placeholder: "0"%></td>
   <td><%= f.number_field :hs_umu, class: "form-control input-lg", placeholder: "0"%></td>
 </tr>

@@ -34,6 +34,9 @@ class MpgControlsController < ApplicationController
 
   # GET /mpg_controls/1/edit
   def edit
+    @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   # POST /mpg_controls
@@ -46,6 +49,9 @@ class MpgControlsController < ApplicationController
         format.html { redirect_to @mpg_control, notice: 'Mpg control was successfully created.' }
         format.json { render :show, status: :created, location: @mpg_control }
       else
+        @services_of_dependence = current_user.dependence.service_of_dependences
+        agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+        @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
         format.html { render :new }
         format.json { render json: @mpg_control.errors, status: :unprocessable_entity }
       end
@@ -60,6 +66,9 @@ class MpgControlsController < ApplicationController
         format.html { redirect_to @mpg_control, notice: 'Mpg control was successfully updated.' }
         format.json { render :show, status: :ok, location: @mpg_control }
       else
+        @services_of_dependence = current_user.dependence.service_of_dependences
+        agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+        @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
         format.html { render :edit }
         format.json { render json: @mpg_control.errors, status: :unprocessable_entity }
       end
@@ -84,6 +93,6 @@ class MpgControlsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mpg_control_params
-      params.require(:mpg_control).permit(:year, :month, :service_of_dependence_id)
+      params.require(:mpg_control).permit(:year, :month, :service_of_dependence_id, mpg_control_details_attributes: [:id, :url, :_destroy, :agent_id, :hs_guard,:hs_umu])
     end
 end
