@@ -4,7 +4,7 @@ class AdditionalsController < ApplicationController
   # GET /additionals
   # GET /additionals.json
   def index
-    @additionals = Additional.all
+    @additionals = Additional.where(service_of_dependence: current_user.dependence.service_of_dependences)
   end
 
   # GET /additionals/1
