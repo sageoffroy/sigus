@@ -10,6 +10,7 @@ class MpgControlsController < ApplicationController
   # GET /mpg_controls/1
   # GET /mpg_controls/1.json
   def show
+    @mpg_control_details = MpgControlDetail.where(mpg_control:@mpg_control)
   end
 
   # GET /mpg_controls/new
@@ -17,15 +18,15 @@ class MpgControlsController < ApplicationController
     @mpg_control = MpgControl.new
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
-    agent_type = AgentType.where(code:2).first
-    @agents = Agent.where(id: agents_of_service.pluck(:agent_id), agent_type:agent_type)
-
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id), agent_type_id:2)
     @agents.each do |agent|
-      h_g_a =  MonthlyForGuardHour.where(agent:agent).first
-      if h_g_a.nil?
+      m_f_g_h =  MonthlyForGuardHour.where(agent:agent).first
+      if m_f_g_h.nil?
         @mpg_control.mpg_control_details.build(agent:agent, hs_guard:0, hs_umu:0)
       else
-        @mpg_control.mpg_control_details.build(agent:agent, hs_guard:h_g_a.hs_total_1, hs_umu:h_g_a.hs_total_2)
+        if !m_f_g_h.with_coverage?
+          @mpg_control.mpg_control_details.build(agent:agent, hs_guard:m_f_g_h.hs_total_1, hs_umu:m_f_g_h.hs_total_2)
+        end
       end
       
     end 
@@ -35,8 +36,7 @@ class MpgControlsController < ApplicationController
   # GET /mpg_controls/1/edit
   def edit
     @services_of_dependence = current_user.dependence.service_of_dependences
-    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
-    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+    
   end
 
   # POST /mpg_controls

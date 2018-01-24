@@ -1,17 +1,35 @@
-<p>
-  <strong>Year:</strong>
-  <%= @mpg_control.year %>
-</p>
+<div class="row">
+	<div class="col-sm-12">
+		<p><strong>Periodo: </strong><%= @mpg_control.year %> / <%= @mpg_control.month %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>Servicio: </strong><%= @mpg_control.service_of_dependence.service %></p>
+	</div>
+	<div class="col-sm-12">
+		<p><strong>Última Modificación: </strong><%= @mpg_control.updated_at.strftime("%d-%m-%y")%></p>
+	</div>
 
-<p>
-  <strong>Month:</strong>
-  <%= @mpg_control.month %>
-</p>
-
-<p>
-  <strong>Service of dependence:</strong>
-  <%= @mpg_control.service_of_dependence %>
-</p>
+	<div class="col-sm-8">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Agente</th>
+					<th>Hs. Guardia</th>
+  				<th>Hs. Umu</th>
+  			</tr>
+ 		 	</thead>
+			<tbody>
+				<% @mpg_control_details.each do |mcd| %>
+	      <tr>
+	        <td><%= mcd.agent%></td>
+	        <td><%= mcd.hs_guard%></td>
+	        <td><%= mcd.hs_umu%></td>
+	      </tr>
+	    	<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
 
 <%= link_to 'Editar', edit_mpg_control_path(@mpg_control), class:"btn btn-primary" %>
 <%= link_to 'volver', mpg_controls_path, class:"btn btn-danger" %>

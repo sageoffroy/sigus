@@ -1,6 +1,5 @@
 <tr class="detail-field">
-  <%= f.hidden_field :agent_id %>
-  <td><%= f.text_field '',f.object.agent, :readonly => true, style: "width:100%;min-height: 38px;" %></td>
+  <td><%= f.collection_select :agent_id, Agent.where(id: f.object.agent.id), :id, :to_s, {prompt: "Agente"}, {class: "select2 select-field all_agent"} %></td>
   <td><%= f.number_field :hs_guard, class: "form-control input-lg", placeholder: "0"%></td>
   <td><%= f.number_field :hs_umu, class: "form-control input-lg", placeholder: "0"%></td>
 </tr>

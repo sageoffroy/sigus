@@ -5,4 +5,14 @@ class MonthlyForGuardHour < ApplicationRecord
   
   accepts_nested_attributes_for :concept_1
   accepts_nested_attributes_for :concept_2
+
+
+  def with_coverage?
+  	if hs_semana.nil? and gs_semana.nil? and hs_sabado.nil? and hs_domingo.nil?
+  		return false
+  	else
+  		return true
+  	end
+  end
+
 end
