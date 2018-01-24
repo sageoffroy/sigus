@@ -2,7 +2,6 @@ class MpgControl < ApplicationRecord
   belongs_to :service_of_dependence
   has_many :mpg_control_details, dependent: :destroy
 
-  validates :service_of_dependence, presence: true
   validates :year, presence: true
   validates :month, presence: true
   

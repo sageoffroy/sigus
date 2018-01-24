@@ -14,7 +14,6 @@
       <h6>Mes</h6>
     </div>
     <div class="col-sm-8">
-      <h6>Servicio</h6>
     </div>
     <div class="input-group col-sm-2">
       <%= f.select :year, (2017)..(2019), {prompt: "Año"}, {class: "select2"}%>
@@ -23,7 +22,7 @@
       <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
     </div>
     <div class="input-group col-sm-8">
-      <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2"} %>
+    
     </div>
   </div>
   <table class="table table-striped table-bordered table-list">

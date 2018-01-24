@@ -54,7 +54,7 @@ class ReportsController < ApplicationController
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
     agent_type = AgentType.where(code:2).first
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id), agent_type:agent_type)
-    
+    byebug
   end
 
   # GET /reports/1/edit
