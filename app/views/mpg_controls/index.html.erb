@@ -28,4 +28,7 @@
 
 <br>
 
+<% if current_user.planification? or current_user.admin?%>      
+  <%= link_to 'Modificar Cobertura', monthly_for_guard_hours_path, class: 'btn btn-primary btn-xs' %>
+<% end %>
 <%= link_to 'Crear Control de Cupo', new_mpg_control_path, class: 'btn btn-primary btn-xs' %>
