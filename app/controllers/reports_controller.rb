@@ -51,10 +51,7 @@ class ReportsController < ApplicationController
     @report = Report.new
     @report.report_type = "Mensualizado P/G"
     @services_of_dependence = current_user.dependence.service_of_dependences
-    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
-    agent_type = AgentType.where(code:2).first
-    @agents = Agent.where(id: agents_of_service.pluck(:agent_id), agent_type:agent_type)
-    byebug
+    @agents = Agent.where(id:Agent.first.id)
   end
 
   # GET /reports/1/edit

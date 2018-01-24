@@ -173,7 +173,17 @@ class AgentOfServicesController < ApplicationController
     if agent_type.nil?
       agents = Agent.where(id: aos.pluck(:agent_id))
     else
-      agents = Agent.where(id: aos.pluck(:agent_id), agent_type:agent_type)
+      agents_mpg = Agent.where(id: aos.pluck(:agent_id), agent_type:agent_type)
+      list = []        
+      agents_mpg.each do |agent|
+        m_f_g_h =  MonthlyForGuardHour.where(agent:agent).first
+        if !m_f_g_h.nil?
+          if m_f_g_h.with_coverage?
+            list << m_f_g_h.agent.id
+          end
+        end
+      end
+      agents = Agent.where(id: list)
     end
     respond_to do |format|
       format.json  { render :json => {:agents => agents}}

@@ -1,7 +1,13 @@
 <tr class="detail-field">
-  <td><%= f.collection_select :agent_id, Agent.where(id: f.object.agent.id), :id, :to_s, {prompt: "Agente"}, {class: "select2 select-field all_agent"} %></td>
-  <td><%= f.number_field :hs_guard, class: "form-control input-lg", placeholder: "0"%></td>
-  <td><%= f.number_field :hs_umu, class: "form-control input-lg", placeholder: "0"%></td>
+  <td>
+  	<%= f.collection_select :agent_id, Agent.where(id: f.object.agent.id), :id, :to_s, {prompt: "Agente"}, {class: "select2 select-field all_agent"} %>
+  </td>
+  <td>
+  	<%= f.number_field :hs_guard, class: "form-control input-lg", placeholder: "0",:min => "0", :max => f.object.hs_guard || 0%>
+  </td>
+  <td>
+  	<%= f.number_field :hs_umu, class: "form-control input-lg", placeholder: "0",:min => "0", :max => f.object.hs_umu || 0 %>
+  </td>
 </tr>
 
 
