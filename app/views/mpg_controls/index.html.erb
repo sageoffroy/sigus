@@ -1,11 +1,10 @@
-<h1>Control de Cupo</h1>
+<h1>Verificar Hs. Asignadas</h1>
 
 <table class="table datatable">
   <thead>
     <tr>
       <th>Year</th>
       <th>Month</th>
-      <th>Service of dependence</th>
       <th></th>
     </tr>
   </thead>
@@ -15,7 +14,6 @@
       <tr>
         <td><%= mpg_control.year %></td>
         <td><%= mpg_control.month %></td>
-        <td><%= mpg_control.service_of_dependence %></td>
         <td>
           <%= link_to (fa_icon "eye"), mpg_control%>
           <%= link_to (fa_icon "pencil-square-o"), edit_mpg_control_path(mpg_control)%>
@@ -31,4 +29,4 @@
 <% if current_user.planification? or current_user.admin?%>      
   <%= link_to 'Modificar Cobertura', monthly_for_guard_hours_path, class: 'btn btn-primary btn-xs' %>
 <% end %>
-<%= link_to 'Crear Control de Cupo', new_mpg_control_path, class: 'btn btn-primary btn-xs' %>
+<%= link_to 'Verificar Horas', new_mpg_control_path, class: 'btn btn-primary btn-xs' %>

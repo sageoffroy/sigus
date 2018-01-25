@@ -1,10 +1,12 @@
 <div class="row justify-content-around">
 	<% if !user_signed_in? %>
 	<div class="col-sm-4">	
-		<div class="outline">
-			<center><h2>Autenticación</h2></center>
+		<div class="panel-menu tile-gray">
+			<center><h2 style="">Autenticación</h2></center>
 			<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
-				<center><img id="profile-img" class="login-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /></center>
+				<center>
+					<%= image_tag "avatar_2x.png", class: "login-img", id: "profile-img" %>
+				</center>
 				<div class="form-group">
             <%= f.text_field :email, :placeholder => "Email", class: "form-control" %> 
         </div>
@@ -18,7 +20,7 @@
 			      <%= f.label 'recordarme' %>
 			    </div>
 			  <% end %>
-			  <%= f.submit 'Entrar', class: "btn btn-primary btn-block btn-login" %>
+			  <%= f.submit 'Entrar', class: "btn btn-menu tile-primary" %>
 			<% end %>
 		</div>
 	</div>
@@ -27,81 +29,85 @@
 		<p>Bienvenido/a al Sistema de guardias para los agentes del Ministerio de Salud de la Provincia del Chubut, para poder acceder a las distintas funciones, debe ingresar su email y contraseña en el cuadro de Login. en caso de necesitar registrarse, contactarse con el área de Personal del Ministerio de Salud</p>
 	</div>
 	<% else %>
-			<div class="col-sm-12">
-				<h2>Panel de Funciones</h2>
-				<div class="row">
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					<div class="panel-info">
+						
+					</div>
+				</div>
 		<% if @user.planification? or @user.admin? or @user.hospital?%>
-				<div class="col-sm-3">
-		    		<a href="/agent_of_services" class="btn btn-menu btn-primary">
+				<div class="col-sm-6 col-md-3">
+		    		<a href="/agent_of_services" class="btn btn-menu tile-clouds">
 		        		<i class="fa fa-stethoscope"></i>
 		          		<span>Servicios</span>
 		        	</a> 
 			    </div>
-				<div class="col-sm-3">
-		    		<a href="/agents" class="btn btn-menu btn-primary">
+				<div class="col-sm-6 col-md-3">
+		    		<a href="/agents" class="btn btn-menu btn-orange">
 		        		<i class="fa fa-user-md"></i>
 		          		<span>Agentes</span>
 		        	</a> 
 			    </div>
 
-		  		<div class="col-sm-3">
-		    		<a href="/reports" class="btn btn-menu btn-primary">
+		  		<div class="col-sm-6 col-md-3">
+		    		<a href="/reports" class="btn btn-menu tile-bluelight">
 			        	<i class="fa fa-ambulance"></i>
 			          	<span>Reportes</span>
 			        </a>
 			    </div>
-			    <div class="col-sm-3">
-		    		<a href="/observations" class="btn btn-menu btn-primary">
+			    <div class="col-sm-6 col-md-3">
+		    		<a href="/observations" class="btn btn-menu btn-teal">
 			        	<i class="fa fa-eye"></i>
 			          	<span>Observaciones</span>
 			        </a>
 			    </div>
-			    <div class="col-sm-3">
-		    		<a href="/novelties" class="btn btn-menu btn-primary">
+			    <div class="col-sm-6 col-md-3">
+		    		<a href="/novelties" class="btn btn-menu btn-purple">
 			        	<i class="fa fa-refresh"></i>
 			          	<span>Novedades</span>
 			        </a>
 			    </div>
-			    <div class="col-sm-3">
-		    		<a href="/additionals" class="btn btn-menu btn-primary">
+			    <div class="col-sm-6 col-md-3">
+		    		<a href="/additionals" class="btn btn-menu btn-green">
 			        	<i class="fa fa-dollar"></i>
 			          	<span>Adicionales</span>
 			        </a>
 			    </div>
-			    <div class="col-sm-3">
-		    		<a href="/office_hours" class="btn btn-menu btn-primary">
+			    <div class="col-sm-6 col-md-3">
+		    		<a href="/office_hours" class="btn btn-menu btn-hotpink">
 			        	<i class="fa fa-hospital-o"></i>
 			          	<span>Hs. Consultorio</span>
 			        </a>
 			    </div>
-			    <div class="col-sm-3">
-		    		<a href="/mpg_controls" class="btn btn-menu btn-primary">
+			    <div class="col-sm-6 col-md-3">
+		    		<a href="/mpg_controls" class="btn btn-menu btn-midnight-blue">
 			        	<i class="fa fa-address-card-o"></i>
-			          	<span>Mensualizados P/Guardia</span>
+			          	<span>Hs. Asignadas</span>
 			        </a>
 			    </div>
 		<% end %>
 		<% if @user.planification? or @user.admin?%>	    
 			    <div class="col-sm-3">
-		    		<a href="/free_days" class="btn btn-menu btn-primary">
+		    		<a href="/free_days" class="btn btn-menu btn-sienna">
 	        		<i class="fa fa-calendar-check-o"></i>
           		<span>Feriados</span>
         		</a> 
 			    </div>
 			    <div class="col-sm-3">
-		    		<a href="/services/new" class="btn btn-menu btn-primary">
+		    		<a href="/services/new" class="btn btn-menu btn-tomato">
 	        		<i class="fa fa-medkit"></i>
           		<span>Crear Servicios</span>
 		        </a>
 			    </div>
 			    <div class="col-sm-3">
-		    		<a href="/services_of_dependence/" class="btn btn-menu btn-primary">
+		    		<a href="/services_of_dependence/" class="btn btn-menu btn-steel-blue">
         			<i class="fa fa-stethoscope"></i>
           		<span>Asignar Servicios</span>
 	        	</a>
 			    </div>
 			    <div class="col-sm-3">
-		    		<a href="/coverages" class="btn btn-menu btn-primary">
+		    		<a href="/coverages" class="btn btn-menu btn-yellow-green">
 	        			<i class="fa fa-th-list"></i>
 		          		<span>Coberturas</span>
 		        	</a>

@@ -18,7 +18,7 @@ class MpgControlsController < ApplicationController
     @mpg_control = MpgControl.new
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
-    @agents = Agent.where(id: agents_of_service.pluck(:agent_id), agent_type_id:2)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id), agent_type_id:2).order('fullname')
     @agents.each do |agent|
       m_f_g_h =  MonthlyForGuardHour.where(agent:agent).first
       if m_f_g_h.nil?
