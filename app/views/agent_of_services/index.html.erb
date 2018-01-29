@@ -1,4 +1,4 @@
-<% if @user.admin? %>
+<% if current_user.admin? %>
   <h2>Servicios del <%= current_user.dependence %></h2>
 <% else %>
   <h2>Servicios del <%= current_user.dependence %></h2>

@@ -9,6 +9,7 @@
       <th>Hospital</th>
       <th>Servicio</th>
       <th>Total Hs.</th>
+      <th>Estado.</th>
       <th>Opciones</th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
         <td><%= report.service_of_dependence.dependence %></td>
         <td><%= report.service_of_dependence.service %></td>
         <td><%= report.total_hs.to_i + report.total_hs_umu.to_i%></td>
+        <td><%= report.estado%></td>
         <td>
           <%= link_to (fa_icon "eye"), report%>
           <%= link_to (fa_icon "pencil-square-o"), edit_report_path(report)%>

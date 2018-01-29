@@ -7,30 +7,28 @@ class AgentOfServicesController < ApplicationController
   # GET /agent_of_services
   # GET /agent_of_services.json
   def index
-    @user = current_user
-    dependence = Dependence.where(code: @user.dependence.code).first
-    if @user.hospital?
+    dependence = Dependence.where(code: current_user.dependence.code).first
+    if current_user.hospital?
       @services_of_dependences = dependence.service_of_dependences
     else
       @services_of_dependences = dependence.service_of_dependences
-
     end
   end
 
   # GET /agent_of_services/1
   # GET /agent_of_services/1.json
   def show
-    @user = current_user
+    current_user = current_user
   end
 
-  # GET /agent_of_services/new
+  # GET /agent_of_services/new 
   def new
     @agent_of_service = AgentOfService.new
-    @user = current_user
-    if @user.has_role? :hospital
-      dependence = @user.dependence
+    if current_user.has_role? :hospital
+      dependence = current_user.dependence
       services_of_dependence = dependence.services
       agents_of_service = AgentOfService.where(service_of_dependence: services_of_dependence)
+      @services = services_of_dependence
       @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
     else
       @agents = Agent.all
@@ -39,14 +37,17 @@ class AgentOfServicesController < ApplicationController
 
   # GET /agent_of_services/1/edit
   def edit
-
+    if current_user.hospital? or current_user.director?
+      @services = ServiceOfDependence.where(dependence:current_user.dependence)
+    else
+      @services = ServiceOfDependence.all
+    end
   end
 
   # POST /agent_of_services
   # POST /agent_of_services.json
   def create
     @agent_of_service = AgentOfService.new(agent_of_service_params)
-    @user = current_user  
     respond_to do |format|
       if @agent_of_service.save
         format.html { redirect_to @agent_of_service, notice: 'Agent of service was successfully created.' }

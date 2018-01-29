@@ -16,9 +16,22 @@
     <div class="col-sm-2">
       <h6>Mes</h6>
     </div>
+
+    <% if current_user.planification? or current_user.admin? or current_user.director? %>
+    
+
+    <div class="col-sm-4">
+      <h6>Servicio</h6>
+    </div>
+    <div class="col-sm-2">
+      <h6>Estado</h6>
+    </div>
+    <% else %>
     <div class="col-sm-6">
       <h6>Servicio</h6>
     </div>
+    <% end %>    
+
     <div class="col-sm-1">
       <h6>Total Gs</h6>
     </div>
@@ -31,9 +44,22 @@
     <div class="input-group col-sm-2">
       <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
     </div>
-    <div class="input-group col-sm-6">
-      <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
-    </div>
+    
+    <% if current_user.planification? or current_user.admin? or current_user.director? %>
+      <div class="input-group col-sm-4">
+        <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
+      </div>
+      <div class="input-group col-sm-2">
+        <%= f.select :estado, options_for_select(["Nuevo", "Rechazado" , "Validado", "Aprob Director Hosp", "Aprob Director A/P", "Aprob Sueldos"]), {prompt: "Estado"}, class: 'select2' %>
+      </div>
+      
+    <% else %>
+      <div class="input-group col-sm-6">
+        <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
+      </div>
+    <% end %>
+
+    
     <div class="col-md-1">
       <%= f.number_field :total_hs, :onkeypress => "event.preventDefault();", :placeholder => "0" , :class => "total_hs_form input-transparent" %>
     </div>

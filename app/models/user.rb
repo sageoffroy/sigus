@@ -8,7 +8,7 @@ class User < ApplicationRecord
   def admin?
   	has_role?(:admin)
 	end
-
+  
   def hospital?
     has_role?(:hospital)
   end
@@ -24,6 +24,10 @@ class User < ApplicationRecord
 	def agent_register?
   	has_role?(:agent_register)
 	end
+
+  def director?
+    has_role?(:director)
+  end
 
   def to_s
     email

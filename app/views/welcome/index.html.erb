@@ -36,26 +36,29 @@
 						
 					</div>
 				</div>
-		<% if @user.planification? or @user.admin? or @user.hospital?%>
-				<div class="col-sm-6 col-md-3">
-		    		<a href="/agent_of_services" class="btn btn-menu tile-clouds">
-		        		<i class="fa fa-stethoscope"></i>
-		          		<span>Servicios</span>
-		        	</a> 
-			    </div>
-				<div class="col-sm-6 col-md-3">
-		    		<a href="/agents" class="btn btn-menu btn-orange">
-		        		<i class="fa fa-user-md"></i>
-		          		<span>Agentes</span>
-		        	</a> 
-			    </div>
 
-		  		<div class="col-sm-6 col-md-3">
-		    		<a href="/reports" class="btn btn-menu tile-bluelight">
-			        	<i class="fa fa-ambulance"></i>
-			          	<span>Reportes</span>
-			        </a>
-			    </div>
+		<% if current_user.planification? or current_user.admin? or current_user.hospital? or current_user.director? %>
+				<div class="col-sm-6 col-md-3">
+	    		<a href="/agent_of_services" class="btn btn-menu tile-clouds">
+	        		<i class="fa fa-stethoscope"></i>
+	          		<span>Servicios</span>
+	        	</a> 
+		    </div>
+		    <div class="col-sm-6 col-md-3">
+	    		<a href="/agents" class="btn btn-menu btn-orange">
+	        		<i class="fa fa-user-md"></i>
+	          		<span>Agentes</span>
+	        	</a> 
+		    </div>
+		    <div class="col-sm-6 col-md-3">
+	    		<a href="/reports" class="btn btn-menu tile-bluelight">
+		        	<i class="fa fa-ambulance"></i>
+		          	<span>Reportes</span>
+		        </a>
+		    </div>
+		<% end %>
+		<% if current_user.planification? or current_user.admin? or current_user.hospital?%>
+					
 			    <div class="col-sm-6 col-md-3">
 		    		<a href="/observations" class="btn btn-menu btn-teal">
 			        	<i class="fa fa-eye"></i>
@@ -83,11 +86,11 @@
 			    <div class="col-sm-6 col-md-3">
 		    		<a href="/mpg_controls" class="btn btn-menu btn-midnight-blue">
 			        	<i class="fa fa-address-card-o"></i>
-			          	<span>Hs. Asignadas</span>
+			          	<span>Mens. P/Guardia</span>
 			        </a>
 			    </div>
 		<% end %>
-		<% if @user.planification? or @user.admin?%>	    
+		<% if current_user.planification? or current_user.admin?%>	    
 			    <div class="col-sm-3">
 		    		<a href="/free_days" class="btn btn-menu btn-sienna">
 	        		<i class="fa fa-calendar-check-o"></i>

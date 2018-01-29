@@ -7,7 +7,7 @@
       <% end %>
     </div>
     <% if current_user.planification? or current_user.admin?%>
-      <%= select_tag "select_dependence", options_from_collection_for_select(Dependence.all, :id, :to_s), class: 'select-style' %>
+      <%= select_tag "select_dependence", options_from_collection_for_select(Dependence.all, :id, :to_s), :class=> 'select-style' %>
     <% end %>
     <div class="menu-right">
       <%= link_to current_user.email, edit_user_registration_path, :class => "menu-link" %>
@@ -60,6 +60,4 @@
     dependence_id = dependence_id -1;
     $('#select_dependence option:eq(' + dependence_id + ')').attr('selected', true);
   });
-
-
 </script>

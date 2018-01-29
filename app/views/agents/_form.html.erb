@@ -1,77 +1,150 @@
-<%= form_with(model: agent, local: true) do |form| %>
-  <% if agent.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(agent.errors.count, "error") %> prohibited this agent from being saved:</h2>
+<%= form_for(agent) do |form| %>
+  <div class="row">
 
-      <ul>
-      <% agent.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="col-sm-7">
+      <h2 style="border-bottom: 1px solid;">Datos Personales</h2>
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label :dni %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.number_field :dni, id: :agent_dni %>
+          <span class="form-sigus-help">Obligatorio. </span>
+        </div>
+      </div>      
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Nombre Completo" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.text_field :fullname, id: :agent_fullname %>
+          <span class="form-sigus-help">Obligatorio. </span>
+        </div>
+      </div>      
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Sexo" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.select :sex, options_for_select(["Masculino", "Femenino" , "Otro"]), {prompt: "Seleccionar Sexo"}, class: 'select2' %>
+          <span class="form-sigus-help"> </span>
+        </div>
+      </div>
+
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Fecha de Nacimiento" %>
+        </div>
+        <div class="form-sigus-input">
+          <div class="input-group date datepicker">
+            <%= form.text_field :birthdate, placeholder: "Ingresar Fecha", class: "form-control" %>
+            <span class="input-group-addon ">
+              <%= fa_icon "list"%>
+            </span>  
+          </div>
+        </div>
+      </div>
+    
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Estado Civil" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.select :marital_status, options_for_select(["Casado/a", "Soltero/a" , "Viudo/a", "Concubinato"]), {prompt: "Seleccionar"}, class: 'select2' %>
+          <span class="form-sigus-help"> </span>
+        </div>
+      </div>
+
+      <h2 style="border-bottom: 1px solid;">Otros Datos</h2>
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Nacionalidad" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.collection_select :nationality_id, Nationality.all, :id, :to_s, {prompt: "Seleccionar"}, {class: "select2 select-field all_agent"} %>
+          <span class="form-sigus-help"> </span>
+        </div>
+      </div>
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "E-m@ail" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.text_field :email, id: :agent_email %>
+          <span class="form-sigus-help"> </span>
+        </div>
+      </div>
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Celular" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.text_field :cell_phone, id: :agent_cell_phone %>
+          <span class="form-sigus-help"> </span>
+        </div>
+      </div> 
+
+
+      <h2 style="border-bottom: 1px solid;">Datos Laborales</h2>
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Tipo de Agente" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.collection_select :agent_type_id, AgentType.all, :id, :to_s, {prompt: "Seleccionar"}, {class: "select2 select-field all_agent"} %>
+          <span class="form-sigus-help"> </span>
+        </div>
+      </div>
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Regimen Horario" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.collection_select :hour_regime_id, HourRegime.all, :id, :to_s, {prompt: "Seleccionar"}, {class: "select2 select-field all_agent"} %>
+          <span class="form-sigus-help"> </span>
+        </div>
+      </div>
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Función Laboral" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.collection_select :job_function_id, JobFunction.all, :id, :to_s, {prompt: "Seleccionar"}, {class: "select2 select-field all_agent"} %>
+          <span class="form-sigus-help"> </span>
+        </div>
+      </div>
+
+      <div class="form-sigus-field">
+        <div class="form-sigus-label">
+          <%= form.label "Cargo de Revista" %>
+        </div>
+        <div class="form-sigus-input">
+          <%= form.collection_select :position_id, Position.all, :id, :to_s, {prompt: "Seleccionar"}, {class: "select2 select-field all_agent"} %>
+          <span class="form-sigus-help"> </span>
+        </div>
+      </div>
+
+
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :dni %>
-    <%= form.number_field :dni, id: :agent_dni %>
-  </div>
 
-  <div class="field">
-    <%= form.label :fullname %>
-    <%= form.text_field :fullname, id: :agent_fullname %>
-  </div>
 
-  <div class="field">
-    <%= form.label :sex %>
-    <%= form.text_field :sex, id: :agent_sex %>
-  </div>
-
-  <div class="field">
-    <%= form.label :birthdate %>
-    <%= form.date_select :birthdate, id: :agent_birthdate %>
-  </div>
-
-  <div class="field">
-    <%= form.label :marital_status %>
-    <%= form.text_field :marital_status, id: :agent_marital_status %>
-  </div>
-
-  <div class="field">
-    <%= form.label :license_pending %>
-    <%= form.number_field :license_pending, id: :agent_license_pending %>
-  </div>
-
-  <div class="field">
-    <%= form.label :nationality_id %>
-    <%= form.text_field :nationality_id, id: :agent_nationality_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email, id: :agent_email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :cell_phone %>
-    <%= form.text_field :cell_phone, id: :agent_cell_phone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id, id: :category_position_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :hour_regime_id %>
-    <%= form.text_field :hour_regime_id, id: :agent_hour_regime_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :study %>
-    <%= form.text_field :study, id: :agent_study %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
+
+  </div>
+
 <% end %>

@@ -9,6 +9,16 @@ class Ability
         can :manage, :all
     end
 
+    if user.director?
+        can :manage, Agent do |a|
+            doa = DependenceOfAgent.where(dependence: Dependence.where(code:user.dependence.code).first())
+            doa.pluck(:law_of_agent_id).include?(a.id)
+        end
+        can :manage, ServiceOfDependence
+        can :manage, Service
+        can :manage, Dependence
+    end
+
     if user.hospital?
         can :manage, Agent do |a|
             doa = DependenceOfAgent.where(dependence: Dependence.where(code:user.dependence.code).first())
