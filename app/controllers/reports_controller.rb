@@ -76,8 +76,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       if @report.save
         if (@report.report_type == "Guardias Activas")
-          #calcular_cupo(@report)
-
+          calcular_cupo(@report)
         else
           @report.estado = "Validado"
         end
@@ -109,10 +108,11 @@ class ReportsController < ApplicationController
   def update
     respond_to do |format|
       if @report.update(report_params)
+        msg = "INIT"
         if (@report.report_type == "Guardias Activas")
-          #calcular_cupo(@report)
+          msg = calcular_cupo(@report)
         end
-        format.html { redirect_to @report, notice: 'Report was successfully updated.' }
+        format.html { redirect_to @report, notice: msg}
         format.json { render :show, status: :ok, location: @report }
       else
         @services_of_dependence = current_user.dependence.service_of_dependences
@@ -136,10 +136,14 @@ class ReportsController < ApplicationController
   end
 
 
+
+
  
 
 
   private
+    
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_report
       @report = Report.find(params[:id])

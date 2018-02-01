@@ -4,8 +4,7 @@
   <thead>
     <tr>
       <th>Tipo</th>
-      <th>Año</th>
-      <th>Mes</th>
+      <th>Año/Mes</th>
       <th>Hospital</th>
       <th>Servicio</th>
       <th>Total Hs.</th>
@@ -18,16 +17,20 @@
     <% @reports.each do |report| %>
       <tr>
         <td><%= report.report_type %></td>
-        <td><%= report.year %></td>
-        <td><%= report.month %></td>
+        <td><%= report.year %> / <%= report.month %></td>
         <td><%= report.service_of_dependence.dependence %></td>
         <td><%= report.service_of_dependence.service %></td>
         <td><%= report.total_hs.to_i + report.total_hs_umu.to_i%></td>
         <td><%= report.estado%></td>
         <td>
+          <% if current_user.director? or  current_user.admin? %>
+            <a href="/reports/check_director/<%= report.id%>"><i class="fa fa-check"></i></a>
+          <% end %>    
           <%= link_to (fa_icon "eye"), report%>
-          <%= link_to (fa_icon "pencil-square-o"), edit_report_path(report)%>
-          <%= link_to (fa_icon "trash-o"), report, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }%>
+          <% if current_user.planification? or current_user.admin? or current_user.hospital?%>
+            <%= link_to (fa_icon "pencil-square-o"), edit_report_path(report)%>
+            <%= link_to (fa_icon "trash-o"), report, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }%>
+          <% end %>    
         </td>
       </tr>
     <% end %>

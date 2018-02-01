@@ -1,5 +1,7 @@
   class Observation < ApplicationRecord
 	belongs_to :service_of_dependence
+
+  belongs_to :observation_description
 	
 	has_many :observation_details, dependent: :destroy
 

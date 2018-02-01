@@ -29,15 +29,42 @@
 		<p>Bienvenido/a al Sistema de guardias para los agentes del Ministerio de Salud de la Provincia del Chubut, para poder acceder a las distintas funciones, debe ingresar su email y contraseña en el cuadro de Login. en caso de necesitar registrarse, contactarse con el área de Personal del Ministerio de Salud</p>
 	</div>
 	<% else %>
-		<div class="col-sm-12">
+		<div  class="col-sm-12">
+			<h2 style="text-align: left;"><%= current_user.dependence%></h2>
 			<div class="row">
-				<div class="col-sm-12 col-md-12">
-					<div class="panel-info">
-						
-					</div>
-				</div>
+				
+		<% if current_user.director? %>
+			<div class="col-sm-3">
+				<div class="card">
+					<div class="content">
+						<div class="row">
+	            <div class="col-sm-5">
+                <div class="icon-big icon-warning text-center">
+                    <i class="fa fa-id-card-o"></i>
+                </div>
+	            </div>
+	            <div class="col-sm-7">
+	                <div class="numbers">
+	                    <p>Reportes Validados</p>
+	                    105GB
+	                </div>
+	            </div>
+	          </div>
+	          <div class="footer">
+	            <hr>
+	            <div class="stats">
+	              Aprobar Reportes
+	              <i class="fa fa-chevron-right"></i>
+	            </div>
+		        </div>
+	        </div>
 
-		<% if current_user.planification? or current_user.admin? or current_user.hospital? or current_user.director? %>
+        </div>
+			</div>
+		<% end %>				
+
+		
+		<% if current_user.planification? or current_user.admin? or current_user.hospital?%>
 				<div class="col-sm-6 col-md-3">
 	    		<a href="/agent_of_services" class="btn btn-menu tile-clouds">
 	        		<i class="fa fa-stethoscope"></i>
@@ -57,7 +84,7 @@
 		        </a>
 		    </div>
 		<% end %>
-		<% if current_user.planification? or current_user.admin? or current_user.hospital?%>
+		<% if current_user.planification? or current_user.admin?%>
 					
 			    <div class="col-sm-6 col-md-3">
 		    		<a href="/observations" class="btn btn-menu btn-teal">

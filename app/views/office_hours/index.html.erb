@@ -7,8 +7,7 @@
       <th>Month</th>
       <th>Service of dependence</th>
       <th>Total hours</th>
-      <th>Description</th>
-      <th></th>
+      <th>Operaciones</th>
     </tr>
   </thead>
 
@@ -19,7 +18,6 @@
         <td><%= office_hour.month %></td>
         <td><%= office_hour.service_of_dependence %></td>
         <td><%= office_hour.total_hours %></td>
-        <td><%= office_hour.description %></td>
         <td>
           <%= link_to (fa_icon "eye"), office_hour%>
           <%= link_to (fa_icon "pencil-square-o"), edit_office_hour_path(office_hour)%>
