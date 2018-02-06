@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123161453) do
+ActiveRecord::Schema.define(version: 20180205143545) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"
@@ -326,6 +326,7 @@ ActiveRecord::Schema.define(version: 20180123161453) do
     t.integer "sabado"
     t.integer "domingo"
     t.integer "total_hours"
+    t.integer "rest_hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_office_hour_details_on_agent_id"

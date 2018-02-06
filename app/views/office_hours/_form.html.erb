@@ -82,7 +82,10 @@
   function calcular_total_horas() {
     console.log("Calculando Horas");
     total = 0
-    $(".total_hours_agent").each(
+    
+    
+
+    $(".rest_hours_agent").each(
       function(index, value) {
         if (!isNaN(eval($(this).val()))){
           total = total + eval($(this).val());  

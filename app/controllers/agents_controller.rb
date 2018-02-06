@@ -32,6 +32,8 @@ class AgentsController < ApplicationController
 
     respond_to do |format|
       if @agent.save
+        service_of_dependence = ServiceOfDependence.where(dependence:current_user.dependence, service:Service.where(name:"Sin Servicio Asignado")).first
+        AgentOfService.create(agent: @agent, service_of_dependence:service_of_dependence)
         format.html { redirect_to @agent, notice: 'Agent was successfully created.' }
         format.json { render :show, status: :created, location: @agent }
       else

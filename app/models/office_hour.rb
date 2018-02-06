@@ -11,4 +11,7 @@ class OfficeHour < ApplicationRecord
   validates_associated :office_hour_details
   accepts_nested_attributes_for :office_hour_details, :reject_if => :all_blank, allow_destroy: true
 
+
+  
+
 end

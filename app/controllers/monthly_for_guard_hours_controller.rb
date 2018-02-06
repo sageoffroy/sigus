@@ -15,10 +15,16 @@ class MonthlyForGuardHoursController < ApplicationController
   # GET /monthly_for_guard_hours/new
   def new
     @monthly_for_guard_hour = MonthlyForGuardHour.new
+    @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   # GET /monthly_for_guard_hours/1/edit
   def edit
+    @services_of_dependence = current_user.dependence.service_of_dependences
+    agents_of_service  = AgentOfService.where(service_of_dependence: @services_of_dependence)
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
 
   # POST /monthly_for_guard_hours

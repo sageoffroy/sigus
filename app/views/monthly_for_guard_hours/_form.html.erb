@@ -10,53 +10,49 @@
       </ul>
     </div>
   <% end %>
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="field">
+        <%= form.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>
+      </div>
 
-  <div class="field">
-    <%= form.label :agent_id %>
-    <%= form.text_field :agent_id, id: :monthly_for_guard_hour_agent_id %>
+      <div class="field">
+        <%= form.number_field :hs_semana, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "hs semana"%>
+      </div>
+
+      <div class="field">
+        <%= form.number_field :gs_semana, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "gs semana"%>
+      </div>
+
+      <div class="field">
+        <%= form.number_field :hs_sabado, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "hs sabado"%>
+      </div>
+
+      <div class="field">
+        <%= form.number_field :hs_domingo, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "hs domingo"%>
+      </div>
+
+      <div class="field">
+        <%= form.collection_select :concept_1_id, Concept.all, :id, :to_s, {prompt: "Tipo de Hs guaridia"}, {class: "select2 select-field agent"} %>
+      </div>
+
+      <div class="field">
+        <%= form.number_field :hs_total_1, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "Hs Guarias"%>
+      </div>
+
+      <div class="field">
+        <%= form.collection_select :concept_1_id, Concept.all, :id, :to_s, {prompt: "Tipo de Hs UMU"}, {class: "select2 select-field agent"} %>
+      </div>
+
+      <div class="field">
+        <%= form.number_field :hs_total_2, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :oninput => "maxLengthCheck(this)", :style=>"width: 100%;", :placeholder => "Hs UMU"%>
+      </div>
+        
+
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :hs_semana %>
-    <%= form.number_field :hs_semana, id: :monthly_for_guard_hour_hs_semana %>
-  </div>
-
-  <div class="field">
-    <%= form.label :gs_semana %>
-    <%= form.number_field :gs_semana, id: :monthly_for_guard_hour_gs_semana %>
-  </div>
-
-  <div class="field">
-    <%= form.label :hs_sabado %>
-    <%= form.number_field :hs_sabado, id: :monthly_for_guard_hour_hs_sabado %>
-  </div>
-
-  <div class="field">
-    <%= form.label :hs_domingo %>
-    <%= form.number_field :hs_domingo, id: :monthly_for_guard_hour_hs_domingo %>
-  </div>
-
-  <div class="field">
-    <%= form.label :concept_1_id %>
-    <%= form.text_field :concept_1_id, id: :monthly_for_guard_hour_concept_1_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :hs_total_1 %>
-    <%= form.number_field :hs_total_1, id: :monthly_for_guard_hour_hs_total_1 %>
-  </div>
-
-  <div class="field">
-    <%= form.label :concept_2_id %>
-    <%= form.text_field :concept_2_id, id: :monthly_for_guard_hour_concept_2_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :hs_total_2 %>
-    <%= form.number_field :hs_total_2, id: :monthly_for_guard_hour_hs_total_2 %>
-  </div>
-
+  
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class:"btn btn-primary" %>
   </div>
 <% end %>
