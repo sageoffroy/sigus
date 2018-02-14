@@ -60,7 +60,7 @@
     if (object.value.length > object.maxLength){
       object.value = object.value.slice(0, object.maxLength);
     }
-    calcular_total_horas();
+    calcular_total_horas_semana(object);
   }
     
   function isNumeric (evt) {
@@ -79,20 +79,69 @@
   }
 
   
-  function calcular_total_horas() {
-    console.log("Calculando Horas");
-    total = 0
+  function calcular_total_horas_semana(object) {
     
+    total_field = 0
+    year = $("#office_hour_year").val();
+    month = $("#office_hour_month").val();
     
+    lunes = $('#'+object.id).closest('.nested-fields').find('.lun').val() * count_days(year, month, 1)
+    martes = $('#'+object.id).closest('.nested-fields').find('.mar').val() * count_days(year, month, 2)
+    miercoles = $('#'+object.id).closest('.nested-fields').find('.mie').val() * count_days(year, month, 3)
+    jueves = $('#'+object.id).closest('.nested-fields').find('.jue').val() * count_days(year, month, 4)
+    viernes = $('#'+object.id).closest('.nested-fields').find('.vie').val() * count_days(year, month, 5)
+    sabado = $('#'+object.id).closest('.nested-fields').find('.sab').val() * count_days(year, month, 6)
 
-    $(".rest_hours_agent").each(
+    total_field = lunes + martes + miercoles + jueves + viernes + sabado;
+
+    $('#'+object.id).closest('.nested-fields').find('.total_week_hours').val(total_field);
+    
+    total = 0;
+
+    $(".nested-fields").each(
+      function(index, value) {
+        week = parseInt($(this).find('.total_week_hours').val());
+        rest = parseInt($(this).find('.rest_hours_agent').val());
+        if (isNaN(rest))
+        {
+          rest = 0;
+        }
+        console.log (week);
+        console.log (rest);
+        total = total + week + rest;
+        console.log (total);
+      }
+    );
+
+    /*$(".rest_hours_agent").each(
       function(index, value) {
         if (!isNaN(eval($(this).val()))){
           total = total + eval($(this).val());  
         }
       }
-    );
-    console.log(total);
-    $("#office_hour_total_hours").val(total);
+    );*/
+
+    $('#office_hour_total_hours').val(total);
   }
+
+
+  function count_days(year, month, number_day) {
+
+    var day, counter, date;
+
+    day = 1;
+    month = month - 1;
+    counter = 0;
+    date = new Date(year, month, day);
+    while (date.getMonth() === month) {
+        if (date.getDay() === number_day) { // Sun=0, Mon=1, Tue=2, etc.
+            counter += 1;
+        }
+        day += 1;
+        date = new Date(year, month, day);
+    }
+    return counter;
+  }
+
+
 </script>
