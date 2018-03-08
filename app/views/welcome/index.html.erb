@@ -38,15 +38,42 @@
 				<div class="card">
 					<div class="content">
 						<div class="row">
-	            <div class="col-sm-5">
-                <div class="icon-big icon-warning text-center">
-                    <i class="fa fa-id-card-o"></i>
+	            <div class="col-sm-4">
+                <div class="icon-big text-center">
+              		<i class="fa fa-id-card-o"></i>
                 </div>
 	            </div>
-	            <div class="col-sm-7">
+	            <div class="col-sm-8">
+	                <div class="numbers">
+	                    <p>Reportes Faltantes</p>
+	                    <p style="font-size: 24px;"><%= @faltantes_count %></p>
+	                </div>
+	            </div>
+	          </div>
+	          <div class="footer">
+	            <hr>
+	            <div class="stats">
+	             
+	            </div>
+		        </div>
+	        </div>
+
+        </div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="card">
+					<div class="content">
+						<div class="row">
+	            <div class="col-sm-4">
+                <div class="icon-big icon-warning text-center">
+              		<i class="fa fa-id-card-o"></i>
+                </div>
+	            </div>
+	            <div class="col-sm-8">
 	                <div class="numbers">
 	                    <p>Reportes Validados</p>
-	                    105GB
+	                    <p style="font-size: 24px;"><%= @validos_count %></p>
 	                </div>
 	            </div>
 	          </div>
@@ -54,7 +81,66 @@
 	            <hr>
 	            <div class="stats">
 	              Aprobar Reportes
-	              <i class="fa fa-chevron-right"></i>
+	              <a href="/reports/estado/Validado">
+	              	<i class="fa fa-chevron-right"></i>
+	              </a>
+	            </div>
+		        </div>
+	        </div>
+
+        </div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="card">
+					<div class="content">
+						<div class="row">
+	            <div class="col-sm-4">
+                <div class="icon-big icon-danger text-center">
+              		<i class="fa fa-id-card-o"></i>
+                </div>
+	            </div>
+	            <div class="col-sm-8">
+	                <div class="numbers">
+	                    <p>Reportes Rechazados</p>
+	                    <p style="font-size: 24px;"><%= @rechazados_count %></p>
+	                </div>
+	            </div>
+	          </div>
+	          <div class="footer">
+	            <hr>
+	            <div class="stats">
+	              
+	            </div>
+		        </div>
+	        </div>
+
+        </div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="card">
+					<div class="content">
+						<div class="row">
+	            <div class="col-sm-4">
+                <div class="icon-big icon-success text-center">
+              		<i class="fa fa-id-card-o"></i>
+                </div>
+	            </div>
+	            <div class="col-sm-8">
+	                <div class="numbers">
+	                    <p>Reportes Aprobados</p>
+	                    <p style="font-size: 24px;"><%=  @aprob_por_director_count %></p>
+	                </div>
+	            </div>
+	          </div>
+	          <div class="footer">
+	            <hr>
+	            <div class="stats">
+	              Aprobar Reportes
+	              <a href="/reports/estado/Aprob-Director-Hosp">
+	              	<i class="fa fa-chevron-right"></i>
+	              </a>
 	            </div>
 		        </div>
 	        </div>
@@ -64,7 +150,7 @@
 		<% end %>				
 
 		
-		<% if current_user.planification? or current_user.admin? or current_user.hospital?%>
+		<% if current_user.planification? or current_user.admin? or current_user.hospital? or current_user.director?%>
 				<div class="col-sm-6 col-md-3">
 	    		<a href="/agent_of_services" class="btn btn-menu tile-clouds">
 	        		<i class="fa fa-stethoscope"></i>

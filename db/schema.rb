@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180205143545) do
+ActiveRecord::Schema.define(version: 20180308145606) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20180205143545) do
     t.datetime "updated_at", null: false
     t.integer "hours_mg_1"
     t.integer "hours_mg_2"
+    t.integer "oficina"
     t.index ["agent_type_id"], name: "index_agents_on_agent_type_id"
     t.index ["hour_regime_id"], name: "index_agents_on_hour_regime_id"
     t.index ["job_function_id"], name: "index_agents_on_job_function_id"
@@ -181,15 +182,6 @@ ActiveRecord::Schema.define(version: 20180205143545) do
     t.string "observation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "monthly_for_guard_controls", force: :cascade do |t|
-    t.integer "year"
-    t.integer "month"
-    t.integer "service_of_dependence_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["service_of_dependence_id"], name: "index_monthly_for_guard_controls_on_service_of_dependence_id"
   end
 
   create_table "monthly_for_guard_hours", force: :cascade do |t|
@@ -326,9 +318,9 @@ ActiveRecord::Schema.define(version: 20180205143545) do
     t.integer "sabado"
     t.integer "domingo"
     t.integer "total_hours"
-    t.integer "rest_hours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rest_hours"
     t.index ["agent_id"], name: "index_office_hour_details_on_agent_id"
     t.index ["office_hour_id"], name: "index_office_hour_details_on_office_hour_id"
   end
@@ -337,10 +329,10 @@ ActiveRecord::Schema.define(version: 20180205143545) do
     t.integer "year"
     t.integer "month"
     t.integer "service_of_dependence_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "total_hours"
     t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["service_of_dependence_id"], name: "index_office_hours_on_service_of_dependence_id"
   end
 

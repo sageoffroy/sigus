@@ -24,11 +24,16 @@
         <td><%= report.estado%></td>
         <td>
           <% if current_user.director? or  current_user.admin? %>
-            <a href="/reports/check_director/<%= report.id%>"><i class="fa fa-check"></i></a>
+            <% if report.estado === "Aprob Director Hosp" %>
+              <a href="/reports/check_director/<%= report.id%>"><i class="fa fa-close"></i></a>
+            <% else %>    
+              <a href="/reports/check_director/<%= report.id%>"><i class="fa fa-check"></i></a>
+            <% end %>      
+            
           <% end %>    
           <%= link_to (fa_icon "eye"), report%>
+          <%= link_to (fa_icon "pencil-square-o"), edit_report_path(report)%>
           <% if current_user.planification? or current_user.admin? or current_user.hospital?%>
-            <%= link_to (fa_icon "pencil-square-o"), edit_report_path(report)%>
             <%= link_to (fa_icon "trash-o"), report, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }%>
           <% end %>    
         </td>

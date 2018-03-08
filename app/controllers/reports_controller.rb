@@ -6,7 +6,14 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
+    if !params[:status].nil?
+      estado = params[:status].gsub!('-',' ')
+    end
+    if estado.nil?
+      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
+    else
+      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado)
+    end
   end
 
   # GET /reports/1
@@ -79,6 +86,7 @@ class ReportsController < ApplicationController
           calcular_cupo(@report)
         else
           @report.estado = "Validado"
+          @report.save
         end
         format.html { redirect_to @report, notice: 'Report was successfully created.' }
         format.json { render :show, status: :created, location: @report }
@@ -136,10 +144,23 @@ class ReportsController < ApplicationController
   end
 
 
-
-
- 
-
+  def check_director
+    if current_user.director? or current_user.admin?
+      id = params[:id]
+      report = Report.where(id:id).first
+      if report.estado === "Aprob Director Hosp"
+        report.estado = "Validado"
+        msg = "Se ha vuelto al estado anterior del reporte."
+      else
+        report.estado = "Aprob Director Hosp"
+        msg = "Se ha Aprobado el reporte."
+      end
+      report.save
+    end
+    respond_to do |format|
+      format.html { redirect_to reports_url, notice: msg }
+    end
+  end
 
   private
     
@@ -262,8 +283,9 @@ class ReportsController < ApplicationController
         if !(agent_of_service.agent.agent_type.nil?)
           if !(agent_of_service.agent.agent_type.description == "Médico Residente")
             o = Observation.where(year:year, month:month, service_of_dependence:service_of_dependence).first  #Ver el mes
-
-            observacion = o.observation_details.where(agent: agent_of_service.agent).first
+            if !o.nil?
+              observacion = o.observation_details.where(agent: agent_of_service.agent).first
+            end
 
             
 
@@ -369,9 +391,9 @@ class ReportsController < ApplicationController
       hs_domingo_requeridas = hs_domingo_cobertura * 2
 
       if service_of_dependence.con_guardia
-        flag = 0
         if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0) and (hs_sabado_requeridas < 0)
-          flag = 1
+          guardia_final = hs_domingo_requeridas
+        else
           if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0)
             gs_dias_semana_requeridas = 0
           end
@@ -381,13 +403,8 @@ class ReportsController < ApplicationController
           if hs_dias_semana_requeridas < 0
             hs_dias_semana_requeridas = 0
           end
-        end
-        byebug
-        if flag = 1
-          guardia_final = hs_domingo_requeridas
-        else
           guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
-        end
+        end      
       else
         guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
       end
@@ -401,6 +418,9 @@ class ReportsController < ApplicationController
       
       reportes.each do |r|
         total_service = r.total_hs.to_i + r.total_hs_umu.to_i
+        if dotacion_actual < 1
+          dotacion_actual = 1
+        end
         razon = total_service / dotacion_actual
         acum = acum + razon
         cont = cont + 1        
@@ -414,12 +434,8 @@ class ReportsController < ApplicationController
 
       cupo_historico = razon_final * dotacion_actual
       byebug
-      if !guardia_final.nil?
-        if guardia_final > cupo_historico
-          cupo = cupo_historico
-        else
-          cupo = guardia_final
-        end
+      if guardia_final > cupo_historico
+        cupo = cupo_historico
       else
         cupo = guardia_final
       end
@@ -436,7 +452,7 @@ class ReportsController < ApplicationController
       novedades = Novelty.where(month: month, year: year, service_of_dependence: service_of_dependence) #, report_type: "Guardias Activas", order_by(year_ref, month_ref))
   
       novedades.each do |novedad|
-        arregl = []
+        arreglo = []
         if pv == 0 
           month_ref_actual = novedad.month_ref
           year_ref_actual = novedad.year_ref
@@ -476,6 +492,8 @@ class ReportsController < ApplicationController
         end
       end  
       #-- Septima Parte
+
+      
      
       #-- Ocatava Parte
       
@@ -486,7 +504,7 @@ class ReportsController < ApplicationController
       else
         exc = total_hs_liquidadas - cupo
         @report.total_hs_exc = exc
-        msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas" + exc
+        msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas" + exc.total_service
       end
       ## acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
       

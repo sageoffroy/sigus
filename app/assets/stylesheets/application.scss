@@ -46,6 +46,8 @@ a {
   text-decoration: none;
 }
 
+a:hover, a:visited { color:white;}
+
 .turbolinks-progress-bar{
   background-color: $green;
 }
@@ -1205,6 +1207,14 @@ table.dataTable tbody tr {
   color: #F3BB45  !important;
 }
 
+.icon-success .fa {
+  color: #28a745 !important;
+}
+
+.icon-danger .fa {
+  color: #dc3545 !important;
+}
+
 .card .numbers {
   font-size: 2em;
   text-align: right;
@@ -1227,7 +1237,8 @@ table.dataTable tbody tr {
   line-height: 30px;
   color: #a9a9a9;
   font-weight: 300;
-  font-family: 'Muli', "Helvetica", Arial, sans-serif;  
+  font-family: 'Muli', "Helvetica", Arial, sans-serif;
+  min-height:30px;
 }
 
 .card .footer .stats .fa{

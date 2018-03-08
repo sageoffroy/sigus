@@ -3,7 +3,12 @@ class WelcomeController < ApplicationController
   skip_before_action :authenticate_user!, :only => [:index]
   
   def index
-  	
+    if !current_user.nil?
+      @faltantes_count = 15
+      @validos_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Validado").count
+      @rechazados_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Rechazado").count
+      @aprob_por_director_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Aprob Director Hosp").count
+    end
   end
 
 

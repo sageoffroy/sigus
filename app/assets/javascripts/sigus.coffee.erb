@@ -57,6 +57,9 @@ $(document).on 'turbolinks:load', ->
   datatable = $('.datatable')
   datatable.DataTable
     'language': 'url': '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
+    'bPaginate': false
+    'info': false
+    'responsive': true
 
   form = $('form')
   form.integrateDatepicker()

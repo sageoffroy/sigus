@@ -32,6 +32,10 @@ Rails.application.routes.draw do
   get 'reports/new_pasive' => 'reports#new_pasive'
   get 'reports/new_extra_hours' => 'reports#new_extra_hours'
   get 'reports/new_monthly_guard' => 'reports#new_monthly_guard'
+  get 'reports/check_director/:id' => 'reports#check_director'
+
+
+  get 'reports/estado/:status' => 'reports#index'  
   
   resources :reports
 
