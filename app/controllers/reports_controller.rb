@@ -115,11 +115,13 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1.json
   def update
     respond_to do |format|
-      @report.estado = "Validado"
       if @report.update(report_params)
         msg = "Reporte Actualizado"
         if (@report.report_type == "Guardias Activas")
           msg = calcular_cupo(@report)
+        else
+          @report.estado = "Validado"
+          @report.save
         end
         format.html { redirect_to @report, notice: msg}
         format.json { render :show, status: :ok, location: @report }
