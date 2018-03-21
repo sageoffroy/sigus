@@ -23,7 +23,7 @@
         <td><%= report.total_hs.to_i + report.total_hs_umu.to_i%></td>
         <td><%= report.estado%></td>
         <td>
-          <%= if report.estado === "Validado"%>
+          <% if report.estado === "Validado"%>
             <% if current_user.director? or  current_user.admin? %>
               <% if report.estado === "Aprob Director Hosp" %>
                 <a href="/reports/check_director/<%= report.id%>"><i class="fa fa-close"></i></a>
