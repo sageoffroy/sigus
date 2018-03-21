@@ -115,9 +115,9 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1.json
   def update
     respond_to do |format|
+      @report.estado = "Validado"
       if @report.update(report_params)
         msg = "Reporte Actualizado"
-        @report.estado = "Validado"
         if (@report.report_type == "Guardias Activas")
           msg = calcular_cupo(@report)
         end
