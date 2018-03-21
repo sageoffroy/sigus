@@ -257,6 +257,7 @@ class ReportsController < ApplicationController
 
 
       # -- SEGUNDA PARTE
+
       # ---- Se obtienen todos los agentes del servicio
       agents_of_service  = AgentOfService.where(service_of_dependence: service_of_dependence)
       
@@ -268,7 +269,7 @@ class ReportsController < ApplicationController
       
       # ---- Se recorre cada agente del servicio y se acumulan variables
       agents_of_service.each do |agent_of_service|
-        
+          
         hs_dias_semana = 0
         gs_dias_semana = 0
         hs_sabados = 0
@@ -298,7 +299,7 @@ class ReportsController < ApplicationController
   
 
             # Si la observacion no es del tipo 1,2,3,4,5
-            if !([0,1,2,3,4,5].include?(code))
+            if !([1,2,3,4,5].include?(code))
               #si el servicio es radiologia o diagnostico por imagenes
               if ["Radiología","Diagnóstico por Imágenes"].include?(service_of_dependence.service.name)
                 hs_dias_semana = 4 * cant_dias_habiles
@@ -365,6 +366,7 @@ class ReportsController < ApplicationController
   
   
               end #end si regimen 36
+              byebug
               dotacion_actual = dotacion_actual+1
             end #-- end observacion code
           end #-- end no medico residente
@@ -374,7 +376,7 @@ class ReportsController < ApplicationController
       #if consultorio tiene un servicio y no tiene agente 
         #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
       #end
-  
+      
       porcentaje_mes = PercentageMonth.where(mes:@report.month).first
       if !porcentaje_mes.nil?    
         hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
@@ -433,7 +435,6 @@ class ReportsController < ApplicationController
       end
 
       cupo_historico = razon_final * dotacion_actual
-      byebug
       if guardia_final > cupo_historico
         cupo = cupo_historico
       else
@@ -503,12 +504,12 @@ class ReportsController < ApplicationController
         @report.estado = "Validado"
       else
         exc = total_hs_liquidadas - cupo
-        @report.total_hs_exc = exc
-        msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas" + exc.total_service
+        @report.total_hs_exc = exc.to_i
+        @report.estado = "Rechazado"
+        msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas " + exc.to_i.to_s
       end
+      @report.save
       ## acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
-      
-      
       return msg
     end
 
