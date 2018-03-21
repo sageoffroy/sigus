@@ -6,7 +6,6 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    byebug
     if !params[:status].nil?
       estado = params[:status].gsub!('-',' ') || params[:status]
     end
