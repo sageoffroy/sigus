@@ -366,7 +366,6 @@ class ReportsController < ApplicationController
   
   
               end #end si regimen 36
-              byebug
               dotacion_actual = dotacion_actual+1
             end #-- end observacion code
           end #-- end no medico residente
