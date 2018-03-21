@@ -116,7 +116,8 @@ class ReportsController < ApplicationController
   def update
     respond_to do |format|
       if @report.update(report_params)
-        msg = "INIT"
+        msg = "Reporte Actualizado"
+        @report.estado = "Validado"
         if (@report.report_type == "Guardias Activas")
           msg = calcular_cupo(@report)
         end
