@@ -6,8 +6,9 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
+    byebug
     if !params[:status].nil?
-      estado = params[:status].gsub!('-',' ')
+      estado = params[:status].gsub!('-',' ') || params[:status]
     end
     if estado.nil?
       @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
