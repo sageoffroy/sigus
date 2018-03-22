@@ -4,6 +4,10 @@ class WelcomeController < ApplicationController
   
   def index
     if !current_user.nil?
+      if current_user.period.nil?
+        current_user.period = "1/2018"
+        current_user.save
+      end
       @month = current_user.period[0,6-current_user.period.size].to_i || 1
       @year = current_user.period[-4,4] || 2018
       @validos_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Validado", month: @month, year:@year).count
