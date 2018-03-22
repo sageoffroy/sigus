@@ -48,7 +48,11 @@
         <td><%= coverage.hs_viernes_nocturnas %></td>
         <td><%= coverage.hs_sabado %></td>
         <td><%= coverage.hs_domingo %></td>
-        <td><%= link_to 'Show', coverage %><%= link_to 'Edit', edit_coverage_path(coverage) %><%= link_to 'Destroy', coverage, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Show', coverage %>
+          <%= link_to 'Edit', edit_coverage_path(coverage) %>
+          <%= link_to 'Destroy', coverage, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

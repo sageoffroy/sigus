@@ -189,12 +189,14 @@
 			          	<span>Adicionales</span>
 			        </a>
 			    </div>
-			    <div class="col-sm-6 col-md-3">
-		    		<a href="/office_hours" class="btn btn-menu btn-hotpink">
-			        	<i class="fa fa-hospital-o"></i>
-			          	<span>Hs. Consultorio</span>
-			        </a>
-			    </div>
+			    <% if current_user.planification? or current_user.admin? %>
+				    <div class="col-sm-6 col-md-3">
+			    		<a href="/office_hours" class="btn btn-menu btn-hotpink">
+				        	<i class="fa fa-hospital-o"></i>
+				          	<span>Hs. Consultorio</span>
+				        </a>
+				    </div>
+			    <% end %>
 			    <div class="col-sm-6 col-md-3">
 		    		<a href="/mpg_controls" class="btn btn-menu btn-midnight-blue">
 			        	<i class="fa fa-address-card-o"></i>
