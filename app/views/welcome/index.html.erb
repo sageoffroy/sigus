@@ -33,7 +33,7 @@
 			<h2 style="text-align: left;"><%= current_user.dependence%></h2>
 			<div class="row">
 				
-
+		<% if current_user.planification? or current_user.admin? or current_user.director?%>
 			<div class="col-sm-3">
 				<div class="card">
 					<div class="content">
@@ -147,7 +147,7 @@
 
         </div>
 			</div>
-		
+		<% end %>
 		
 		<% if current_user.planification? or current_user.admin? or current_user.hospital? or current_user.director?%>
 				<div class="col-sm-6 col-md-3">
