@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get 'reports/check_director/:id' => 'reports#check_director'
 
 
-  get 'reports/estado/:status' => 'reports#index'  
+  get 'reports/estado/:status/:month/:year' => 'reports#index'  
   
   resources :reports
 
@@ -57,6 +57,7 @@ Rails.application.routes.draw do
   post 'change_service/:id' => 'service_of_dependences#change_service'
   post 'charge_agents' => 'agent_of_services#charge_agents'
   post 'set_dependence/:id' => 'welcome#set_dependence'
+  post 'set_period/:month/:year' => 'welcome#set_period'
   post 'update_agents_of_service/:id/:type' => 'agent_of_services#agents_from_service_of_dependence'
   get 'dependence/' => 'dependences#dependence'
 end

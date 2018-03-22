@@ -34,7 +34,15 @@
 			<div class="row">
 				
 		<% if current_user.planification? or current_user.admin? or current_user.director?%>
-			<div class="col-sm-3">
+			<div class="col-sm-12" >
+				<div style="padding: 8px 8px 8px 0;">
+					Periodo: 
+					<%= select_tag "mes", options_for_select(1..12), :class=> 'select-style' %>
+	        <%= select_tag "anio", options_for_select(2016..2018), :class=> 'select-style' %>
+	        <%= submit_tag "Cambiar", id: 'change_periodo', class: 'btn', :style=> 'margin-left:5px;padding: 6px;border-radius: 5px;' %>
+	      </div>
+			</div>
+			<div class="col-sm-6 col-md-3">
 				<div class="card">
 					<div class="content">
 						<div class="row">
@@ -45,15 +53,18 @@
 	            </div>
 	            <div class="col-sm-8">
 	                <div class="numbers">
-	                    <p>Reportes Faltantes</p>
-	                    <p style="font-size: 24px;"><%= @faltantes_count %></p>
+	                    <p>Total Reportes</p>
+	                    <p style="font-size: 24px;"><%= @total_reportes %></p>
 	                </div>
 	            </div>
 	          </div>
 	          <div class="footer">
 	            <hr>
-	            <div class="stats">
-	             
+             	<div class="stats">
+	              Ver Todos los Reportes
+	              <a href="/reports/estado/Todos/<%=@month%>/<%=@year%>">
+	              	<i class="fa fa-chevron-right"></i>
+	              </a>
 	            </div>
 		        </div>
 	        </div>
@@ -61,7 +72,7 @@
         </div>
 			</div>
 
-			<div class="col-sm-3">
+			<div class="col-sm-6 col-md-3">
 				<div class="card">
 					<div class="content">
 						<div class="row">
@@ -81,7 +92,7 @@
 	            <hr>
 	            <div class="stats">
 	              Ver Reportes Validados
-	              <a href="/reports/estado/Aprob-Director-Hosp">
+	              <a href="/reports/estado/Validado/<%=@month%>/<%=@year%>">
 	              	<i class="fa fa-chevron-right"></i>
 	              </a>
 	            </div>
@@ -91,7 +102,7 @@
         </div>
 			</div>
 
-			<div class="col-sm-3">
+			<div class="col-sm-6 col-md-3">
 				<div class="card">
 					<div class="content">
 						<div class="row">
@@ -111,7 +122,7 @@
 	            <hr>
 	            <div class="stats">
 	            	Ver Reportes Rechazados
-	              <a href="/reports/estado/Aprob-Director-Hosp">
+	              <a href="/reports/estado/Rechazado/<%=@month%>/<%=@year%>">
 	              	<i class="fa fa-chevron-right"></i>
 	              </a>
 	            </div>
@@ -121,7 +132,7 @@
         </div>
 			</div>
 
-			<div class="col-sm-3">
+			<div class="col-sm-6 col-md-3">
 				<div class="card">
 					<div class="content">
 						<div class="row">
@@ -141,7 +152,7 @@
 	            <hr>
 	            <div class="stats">
 	              Ver Reportes Aprobados
-	              <a href="/reports/estado/Aprob-Director-Hosp">
+	              <a href="/reports/estado/Aprob-Director-Hosp/<%=@month%>/<%=@year%>">
 	              	<i class="fa fa-chevron-right"></i>
 	              </a>
 	            </div>
@@ -152,7 +163,7 @@
 			</div>
 		<% end %>
 		
-		<% if current_user.planification? or current_user.admin? or current_user.hospital? or current_user.director?%>
+		<% if current_user.planification? or current_user.admin? or current_user.hospital?%>
 				<div class="col-sm-6 col-md-3">
 	    		<a href="/agent_of_services" class="btn btn-menu tile-clouds">
 	        		<i class="fa fa-stethoscope"></i>
@@ -234,3 +245,26 @@
 		<% end %>
 	<% end %>
 </div>
+
+<script type="text/javascript">
+
+  $("#change_periodo").on("click", ajaxCall);
+
+  function ajaxCall(){
+  	console.log("Cambiar periodo a: " + $('#mes').val() + ' / ' + $('#anio').val());
+    $.ajax({
+      url: '/set_period/' + $('#mes').val() + '/' + $('#anio').val(),
+      type: 'POST'
+    }).done(function(data) {
+      console.log("Periodo cargado");
+      location.reload();
+    }).fail(function(xhr, status, error) {
+      console.log("Fallo al actualizar periodo");
+    });
+  }
+
+	$(document).on('turbolinks:load', function() {
+    $('#mes option:eq(' + <%= @month - 1%> + ')').attr('selected', true);
+    $('#anio option:eq(' + <%= @year%> + ')').attr('selected', true);
+  });  
+</script>

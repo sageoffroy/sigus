@@ -4,10 +4,12 @@ class WelcomeController < ApplicationController
   
   def index
     if !current_user.nil?
-      @faltantes_count = 15
-      @validos_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Validado").count
-      @rechazados_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Rechazado").count
-      @aprob_por_director_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Aprob Director Hosp").count
+      @month = current_user.period[0,6-current_user.period.size].to_i || 1
+      @year = current_user.period[-4,4] || 2018
+      @validos_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Validado", month: @month, year:@year).count
+      @rechazados_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Rechazado", month: @month, year:@year).count
+      @aprob_por_director_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Aprob Director Hosp", month: @month, year:@year).count
+      @total_reportes = @validos_count +  @rechazados_count + @aprob_por_director_count
     end
   end
 
@@ -19,6 +21,16 @@ class WelcomeController < ApplicationController
   	current_user.save
     respond_to do |format|
       format.json  { render :json => {:id => id, :name => current_user.dependence}}
+    end
+  end
+
+  def set_period
+    month = params[:month]
+    year = params[:year]
+    current_user.period = month+year
+    current_user.save
+    respond_to do |format|
+      format.json  { render :json => {:id => 1, :name => "Algun Nombre"}}
     end
   end
 end

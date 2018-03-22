@@ -6,13 +6,22 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    if !params[:status].nil?
+    month = params[:month].to_i
+    year = params[:year].to_i
+    status = params[:status]
+
+    if !status.nil?
       estado = params[:status].gsub!('-',' ') || params[:status]
     end
     if estado.nil?
-      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
+      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
     else
-      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado)
+      if estado == "Todos"
+        @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
+      else
+        @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado, month:month, year:year)
+      end
+      
     end
   end
 
@@ -379,7 +388,7 @@ class ReportsController < ApplicationController
         #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
       #end
       
-      porcentaje_mes = PercentageMonth.where(mes:@report.month).first
+      porcentaje_mes = PercentageMon2q<aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaath.where(mes:@report.month).first
       if !porcentaje_mes.nil?    
         hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
         gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)

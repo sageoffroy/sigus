@@ -87,7 +87,13 @@ h3 {
 }
 
 h4 {
-  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  text-rendering: optimizeLegibility;
+  color: $blue;
+  letter-spacing: .12em;
 }
 
 
