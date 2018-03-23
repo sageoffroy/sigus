@@ -264,12 +264,15 @@
   }
 
 	$(document).on('turbolinks:load', function() {
-		if ($('.novelties.create').length < 0){
+		console.log($('.periodo').length);
+		if ($('.periodo').length > 0){
+			console.log(<%= @month %>);
 			<% if current_user.nil? %> 
-				<% @month = 2 %>
+				<% @month = 1 %>
+				<% @year = 2018 %>
 			<% end %> 
-			$('#mes option:eq(' + <%= @month - 1%> + ')').attr('selected', true);
-			$('#anio option:eq(' + <%= @year%> + ')').attr('selected', true);	
+			$('#mes option:eq(' + <%= @month.to_i - 1%> + ')').attr('selected', true);
+			$('#anio option:eq(' + <%= @year.to_i - 2016%> + ')').attr('selected', true);	
 		}
 		
   });  
