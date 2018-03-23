@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
   def index
     if !current_user.nil?
       if current_user.period.nil?
-        current_user.period = "1/2018"
+        current_user.period = "12018"
         current_user.save
       end
       @month = current_user.period[0,6-current_user.period.size].to_i || 1
@@ -29,9 +29,9 @@ class WelcomeController < ApplicationController
   end
 
   def set_period
-    month = params[:month]
-    year = params[:year]
-    current_user.period = month+year
+    @month = params[:month]
+    @year = params[:year]
+    current_user.period = @month+@year
     current_user.save
     respond_to do |format|
       format.json  { render :json => {:id => 1, :name => "Algun Nombre"}}

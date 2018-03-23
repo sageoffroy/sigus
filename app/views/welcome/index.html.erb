@@ -35,7 +35,7 @@
 				
 		<% if current_user.planification? or current_user.admin? or current_user.director?%>
 			<div class="col-sm-12" >
-				<div style="padding: 8px 8px 8px 0;">
+				<div class="periodo" style="padding: 8px 8px 8px 0;">
 					Periodo: 
 					<%= select_tag "mes", options_for_select(1..12), :class=> 'select-style' %>
 	        <%= select_tag "anio", options_for_select(2016..2018), :class=> 'select-style' %>
@@ -264,7 +264,13 @@
   }
 
 	$(document).on('turbolinks:load', function() {
-    $('#mes option:eq(' + <%= @month - 1%> + ')').attr('selected', true);
-    $('#anio option:eq(' + <%= @year%> + ')').attr('selected', true);
+		if ($('.novelties.create').length < 0){
+			<% if current_user.nil? %> 
+				<% @month = 2 %>
+			<% end %> 
+			$('#mes option:eq(' + <%= @month - 1%> + ')').attr('selected', true);
+			$('#anio option:eq(' + <%= @year%> + ')').attr('selected', true);	
+		}
+		
   });  
 </script>
