@@ -8,7 +8,11 @@ class WelcomeController < ApplicationController
         current_user.period = "12018"
         current_user.save
       end
-      @month = current_user.period[0,6-current_user.period.size].to_i || 1
+      month_chars = 2
+      if current_user.period.size == 5
+        month_chars = 1
+      end
+      @month = current_user.period[0,month_chars] || 1
       @year = current_user.period[-4,4] || 2018
       if current_user.sueldos?
         @validos_count = @reports = Report.where(estado: "Validado", month: @month, year:@year).count
@@ -40,12 +44,12 @@ class WelcomeController < ApplicationController
   end
 
   def set_period
-    @month = params[:month]
-    @year = params[:year]
-    current_user.period = @month+@year
+    month = params[:month]
+    year = params[:year]
+    current_user.period = month+year
     current_user.save
     respond_to do |format|
-      format.json  { render :json => {:id => 1, :name => "Algun Nombre"}}
+      format.json  { render :json => {:month => month, :year => year}}
     end
   end
 end
