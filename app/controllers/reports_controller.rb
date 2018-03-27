@@ -9,17 +9,28 @@ class ReportsController < ApplicationController
     month = params[:month].to_i
     year = params[:year].to_i
     status = params[:status]
-
     if !status.nil?
       estado = params[:status].gsub!('-',' ') || params[:status]
     end
     if estado.nil?
-      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
+      if current_user.sueldos?
+        @reports = Report.where(month:month, year:year)
+      else  
+        @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
+      end
     else
       if estado == "Todos"
-        @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
+        if current_user.sueldos?
+          @reports = Report.where(month:month, year:year)
+        else
+          @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
+        end          
       else
-        @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado, month:month, year:year)
+        if current_user.sueldos?
+          @reports = Report.where(estado: estado, month:month, year:year)
+        else
+          @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado, month:month, year:year)
+        end
       end
       
     end
@@ -74,8 +85,7 @@ class ReportsController < ApplicationController
   # GET /reports/1/edit
   def edit
     @report = Report.find(params[:id])
-   
-    @services_of_dependence = current_user.dependence.service_of_dependences
+    @services_of_dependence = @report.service_of_dependence.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @report.service_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
@@ -175,6 +185,19 @@ class ReportsController < ApplicationController
         msg = "Se ha vuelto al estado anterior del reporte."
       else
         report.estado = "Aprob Director Area"
+        msg = "Se ha Aprobado el reporte."
+      end
+      report.save
+    end
+
+    if current_user.sueldos?
+      id = params[:id]
+      report = Report.where(id:id).first
+      if report.estado === "Aprob Sueldos"
+        report.estado = "Rechazado"
+        msg = "Se ha vuelto al estado anterior del reporte."
+      else
+        report.estado = "Aprob Sueldos"
         msg = "Se ha Aprobado el reporte."
       end
       report.save

@@ -56,7 +56,11 @@
   $(document).on('turbolinks:load', function() {
     var dependence_id;
     <% if !current_user.nil?%>
-      dependence_id = '<%= current_user.dependence.id%>';
+      <% if !current_user.dependence.nil?%>
+        dependence_id = '<%= current_user.dependence.id%>';
+      <% else %>
+        dependence_id = 0;
+      <% end %>
     <% else %>
       dependence_id = 0;
     <% end %>

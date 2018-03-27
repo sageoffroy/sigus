@@ -30,7 +30,6 @@
 	</div>
 	<% else %>
 		<div  class="col-sm-12">
-			<h2 style="text-align: left;"><%= current_user.dependence%></h2>
 			<div class="row">
 				
 		<% if current_user.planification? or current_user.admin? or current_user.director? or current_user.directora? or current_user.sueldos?%>
@@ -42,6 +41,7 @@
 	        <%= submit_tag "Cambiar", id: 'change_periodo', class: 'btn', :style=> 'margin-left:5px;padding: 6px;border-radius: 5px;' %>
 	      </div>
 			</div>
+
 			<div class="col-sm-6 col-md-4">
 				<div class="card">
 					<div class="content">
@@ -179,7 +179,7 @@
 	            <hr>
 	            <div class="stats">
 	              Ver Reportes
-	              <a href="/reports/estado/Aprob-Director-Area/<%=@month%>/<%=@year%>">
+	              <a href="/reports/estado/Aprob-Sueldos/<%=@month%>/<%=@year%>">
 	              	<i class="fa fa-chevron-right"></i>
 	              </a>
 	            </div>

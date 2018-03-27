@@ -45,7 +45,7 @@
       <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
     </div>
     
-    <% if current_user.planification? or current_user.admin? or current_user.director? %>
+    <% if current_user.planification? or current_user.admin? or current_user.director? or current_user.sueldos?%>
       <div class="input-group col-sm-4">
         <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2", id: "report_service"} %>
       </div>
