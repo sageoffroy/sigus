@@ -4,10 +4,12 @@
   <thead>
     <tr>
       <th>Código</th>
+      <th>Area</th>
       <th>Nombre</th>
       <th>Complejidad</th>
       <th>Abreviación</th>
       <th>Administración</th>
+      <th>Seleccionable</th>
     </tr>
   </thead>
 
@@ -15,9 +17,11 @@
     <% @dependences.each do |dependence| %>
       <tr>
         <td><%= dependence.code %></td>
+        <td><%= dependence.area_code %></td>
         <td><%= dependence.name %></td>
         <td><%= dependence.complexity %></td>
         <td><%= dependence.abbreviation %></td>
+        <td><%= dependence.selectable %></td>
         <td>
           <%= link_to((fa_icon "eye"), dependence) %>
           <%= link_to((fa_icon "pencil"), edit_dependence_path(dependence)) %>
@@ -31,3 +35,4 @@
 <br>
 
 <%= link_to 'New Dependence', new_dependence_path %>
+

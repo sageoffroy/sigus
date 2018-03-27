@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322153659) do
+ActiveRecord::Schema.define(version: 20180326142951) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"
@@ -144,6 +144,10 @@ ActiveRecord::Schema.define(version: 20180322153659) do
     t.string "abbreviation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "selectable"
+    t.integer "dependence_id"
+    t.integer "area_code"
+    t.index ["dependence_id"], name: "index_dependences_on_dependence_id"
   end
 
   create_table "free_days", force: :cascade do |t|

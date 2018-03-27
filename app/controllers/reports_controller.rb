@@ -73,10 +73,8 @@ class ReportsController < ApplicationController
 
   # GET /reports/1/edit
   def edit
-    @report = Report.find(params[:id]) #ver si se puede mejorar
-    if current_user.dependence.nil?
-      current_user.dependence = Dependence.where(code:106).first
-    end
+    @report = Report.find(params[:id])
+   
     @services_of_dependence = current_user.dependence.service_of_dependences
     agents_of_service  = AgentOfService.where(service_of_dependence: @report.service_of_dependence)
     @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
@@ -157,7 +155,7 @@ class ReportsController < ApplicationController
 
 
   def check_director
-    if current_user.director? or current_user.admin?
+    if current_user.director?
       id = params[:id]
       report = Report.where(id:id).first
       if report.estado === "Aprob Director Hosp"
@@ -169,8 +167,22 @@ class ReportsController < ApplicationController
       end
       report.save
     end
+    if current_user.directora?
+      id = params[:id]
+      report = Report.where(id:id).first
+      if report.estado === "Aprob Director Area"
+        report.estado = "Aprob Director Hosp"
+        msg = "Se ha vuelto al estado anterior del reporte."
+      else
+        report.estado = "Aprob Director Area"
+        msg = "Se ha Aprobado el reporte."
+      end
+      report.save
+    end
+
+
     respond_to do |format|
-      format.html { redirect_to reports_url, notice: msg }
+      format.html { redirect_back(fallback_location: root_path, notice: msg)}
     end
   end
 

@@ -23,18 +23,31 @@
         <td><%= report.total_hs.to_i + report.total_hs_umu.to_i%></td>
         <td><%= report.estado%></td>
         <td>
-          <% if report.estado === "Validado"%>
-            <% if current_user.director? or  current_user.admin? %>
+          <% if current_user.directora? or  current_user.admin? %>
+            <% if request.path.include? "Aprob-Director-Area" or request.path.include? "Aprob-Director-Hosp"%>
+              <% if report.estado === "Aprob Director Area" %>
+                <a href="/reports/check_director/<%= report.id%>"><i class="fa fa-close"></i></a>
+              <% else %>    
+                <a href="/reports/check_director/<%= report.id%>"><i class="fa fa-check"></i></a>
+              <% end %>      
+            <% end %>    
+          <% end %>    
+          <% if current_user.director? or  current_user.admin? %>
+            <% if request.path.include? "Validado" or request.path.include? "Aprob-Director-Hosp"%>
               <% if report.estado === "Aprob Director Hosp" %>
                 <a href="/reports/check_director/<%= report.id%>"><i class="fa fa-close"></i></a>
               <% else %>    
                 <a href="/reports/check_director/<%= report.id%>"><i class="fa fa-check"></i></a>
               <% end %>      
-              
             <% end %>    
           <% end %>    
           <%= link_to (fa_icon "eye"), report%>
+
+          
           <%= link_to (fa_icon "pencil-square-o"), edit_report_path(report)%>
+          
+
+
           <% if current_user.planification? or current_user.admin? or current_user.hospital?%>
             <%= link_to (fa_icon "trash-o"), report, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }%>
           <% end %>    

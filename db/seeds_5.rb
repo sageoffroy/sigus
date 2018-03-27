@@ -821,10 +821,3 @@ mpg_hours_list.each do |agent_dni, concepto_1_value, total_hs_1, concepto_2_valu
 	concept_2 = Concept.where(value:concepto_2_value).first
 	MonthlyForGuardHour.find_or_create_by(agent: agent, hs_semana: nil, gs_semana: nil, hs_domingo: nil, concept_1: concept_1, hs_total_1:total_hs_1, concept_2: concept_2, hs_total_2:total_hs_2)	
 end
-
-user = User.new
-user.email = 'director_rawson@gmail.com'
-user.password = 'directorrw'
-user.dependence = Dependence.where(code:106).first
-user.save!
-user.add_role 'director'

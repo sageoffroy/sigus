@@ -2,7 +2,6 @@
   <% if dependence.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(dependence.errors.count, "error") %> prohibited this dependence from being saved:</h2>
-
       <ul>
       <% dependence.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,28 +9,33 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :code %>
     <%= form.number_field :code, id: :dependence_code %>
   </div>
-
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :dependence_name %>
   </div>
-
   <div class="field">
     <%= form.label :complexity %>
     <%= form.number_field :complexity, id: :dependence_complexity %>
   </div>
-
   <div class="field">
     <%= form.label :abbreviation %>
     <%= form.text_field :abbreviation, id: :dependence_abbreviation %>
   </div>
-
+  <div class="field">
+    <%= form.label :selectable %>
+    <%= form.check_box :selectable %>
+  </div>
+  <div class="field">
+    <%= form.label :area_code %>
+    <%= form.number_field :area_code %>
+  </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= link_to 'Volver', dependences_path, class: "btn btn-danger" %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
+

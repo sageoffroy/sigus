@@ -29,6 +29,10 @@ class User < ApplicationRecord
     has_role?(:director)
   end
 
+  def directora?
+    has_role?(:directora)
+  end
+
   def to_s
     email
   end

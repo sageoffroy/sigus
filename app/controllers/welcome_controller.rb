@@ -13,7 +13,9 @@ class WelcomeController < ApplicationController
       @validos_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Validado", month: @month, year:@year).count
       @rechazados_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Rechazado", month: @month, year:@year).count
       @aprob_por_director_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Aprob Director Hosp", month: @month, year:@year).count
-      @total_reportes = @validos_count +  @rechazados_count + @aprob_por_director_count
+      @aprob_por_director_area_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Aprob Director Area", month: @month, year:@year).count
+      @aprob_por_sueldo_count = @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: "Aprob Sueldo", month: @month, year:@year).count
+      @total_reportes = @validos_count +  @rechazados_count + @aprob_por_director_count + @aprob_por_director_area_count
     end
   end
 

@@ -32,7 +32,7 @@ class DependencesController < ApplicationController
 
     respond_to do |format|
       if @dependence.save
-        format.html { redirect_to @dependence, notice: 'Dependence was successfully created.' }
+        format.html { redirect_to dependences_path, notice: 'Dependence was successfully created.' }
         format.json { render :show, status: :created, location: @dependence }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class DependencesController < ApplicationController
   def update
     respond_to do |format|
       if @dependence.update(dependence_params)
-        format.html { redirect_to @dependence, notice: 'Dependence was successfully updated.' }
+        format.html { redirect_to dependences_path, notice: 'Dependence was successfully updated.' }
         format.json { render :show, status: :ok, location: @dependence }
       else
         format.html { render :edit }
@@ -73,6 +73,6 @@ class DependencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dependence_params
-      params.require(:dependence).permit(:code, :name, :complexity, :abbreviation)
+      params.require(:dependence).permit(:code, :name, :complexity, :abbreviation, :area_code, :selectable)
     end
 end
