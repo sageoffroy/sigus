@@ -33,6 +33,10 @@ class User < ApplicationRecord
     has_role?(:directora)
   end
 
+  def sueldos?
+    has_role?(:sueldos)
+  end
+
   def to_s
     email
   end

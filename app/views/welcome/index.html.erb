@@ -33,7 +33,7 @@
 			<h2 style="text-align: left;"><%= current_user.dependence%></h2>
 			<div class="row">
 				
-		<% if current_user.planification? or current_user.admin? or current_user.director? or current_user.directora?%>
+		<% if current_user.planification? or current_user.admin? or current_user.director? or current_user.directora? or current_user.sueldos?%>
 			<div class="col-sm-12" >
 				<div class="periodo" style="padding: 8px 8px 8px 0;">
 					Periodo: 

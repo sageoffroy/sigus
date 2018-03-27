@@ -400,7 +400,7 @@ class ReportsController < ApplicationController
         #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
       #end
       
-      porcentaje_mes = PercentageMon2q<aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaath.where(mes:@report.month).first
+      porcentaje_mes = PercentageMonth.where(mes:@report.month).first
       if !porcentaje_mes.nil?    
         hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
         gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
