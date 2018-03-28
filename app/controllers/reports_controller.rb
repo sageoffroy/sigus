@@ -7,7 +7,7 @@ class ReportsController < ApplicationController
   # GET /reports.json
   def index
     if current_user.hospital?
-
+      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
     else
 
       month = params[:month].to_i
