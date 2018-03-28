@@ -1,16 +1,14 @@
 <h2>Listado de Agentes del <%= current_user.dependence %></h2>
 
-
-
-
-
 <table class="table datatable">
   <thead>
     <tr>
       <th>Dni</th>
       <th>Fullname</th>
       <th>Tipo</th>
+      <% if current_user.planification? or current_user.admin?%>
       <th></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -20,11 +18,13 @@
         <td><%= agent.dni %></td>
         <td><%= agent.fullname %></td>
         <td><%= agent.agent_type%></td>
+        <% if current_user.planification? or current_user.admin?%>
         <td>
           <%= link_to((fa_icon "eye"), agent) %>
           <%= link_to((fa_icon "pencil"), edit_agent_path(agent)) %>
           <%= link_to((fa_icon "trash-o"), agent, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar?' }) %>
         </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
