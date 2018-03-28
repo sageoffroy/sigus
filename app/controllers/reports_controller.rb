@@ -6,34 +6,37 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    month = params[:month].to_i
-    year = params[:year].to_i
-    status = params[:status]
-    if !status.nil?
-      estado = params[:status].gsub!('-',' ') || params[:status]
-    end
-    if estado.nil?
-      if current_user.sueldos?
-        @reports = Report.where(month:month, year:year)
-      else  
-        @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
-      end
+    if current_user.hospital?
+      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
     else
-      if estado == "Todos"
+      month = params[:month].to_i
+      year = params[:year].to_i
+      status = params[:status]
+      if !status.nil?
+        estado = params[:status].gsub!('-',' ') || params[:status]
+      end
+      if estado.nil?
         if current_user.sueldos?
           @reports = Report.where(month:month, year:year)
-        else
+        else  
           @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
-        end          
-      else
-        if current_user.sueldos?
-          @reports = Report.where(estado: estado, month:month, year:year)
-        else
-          @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado, month:month, year:year)
         end
+      else
+        if estado == "Todos"
+          if current_user.sueldos?
+            @reports = Report.where(month:month, year:year)
+          else
+            @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
+          end          
+        else
+          if current_user.sueldos?
+            @reports = Report.where(estado: estado, month:month, year:year)
+          else
+            @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado, month:month, year:year)
+          end
+        end
+        
       end
-      
-    end
   end
 
   # GET /reports/1

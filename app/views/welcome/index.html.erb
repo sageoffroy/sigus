@@ -38,10 +38,9 @@
 					Periodo: 
 					<%= select_tag "mes", options_for_select(1..12), :class=> 'select-style' %>
 	        <%= select_tag "anio", options_for_select(2016..2018), :class=> 'select-style' %>
-	        <%= submit_tag "Cambiar", id: 'change_periodo', class: 'btn', :style=> 'margin-left:5px;padding: 6px;border-radius: 5px;' %>
+	        <%= submit_tag "Cambiar", id: 'change_periodo', class: 'btn btn-success', :style=> 'margin-left:5px;padding: 6px;border-radius: 5px;' %>
 	        <% if current_user.planification? or current_user.admin? or current_user.sueldos?%>
-	        	<%= link_to "Crear CSV", id: 'create_csv', class: 'btn', :style=> 'margin-right:5px;padding: 6px;border-radius: 5px;float:right;' %>
-
+	        	<%= link_to "Crear CSV", { controller: "welcome", action:"create_csv"}, id: "create_csv", class: "btn btn-success", :style=> 'margin-right:5px;padding: 6px;border-radius: 5px;float:right;'  %>
 	        <% end %>
 	      </div>
 			</div>

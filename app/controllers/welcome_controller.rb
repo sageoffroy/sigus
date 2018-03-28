@@ -54,7 +54,12 @@ class WelcomeController < ApplicationController
   end
 
   def create_csv
-    
+    #recuperar mes año del usuario actual
+    month = current_user.period[0,month_chars] || 1
+    year = current_user.period[-4,4] || 2018
+    #obtener reportes aprobados dentro del perdio del usuario
+    @reports = Report.where(month:month, year:year, estado:["Aprob Director Area", "Aprob Sueldos"])
+
   end
 
 
