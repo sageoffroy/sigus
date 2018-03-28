@@ -39,6 +39,10 @@
 					<%= select_tag "mes", options_for_select(1..12), :class=> 'select-style' %>
 	        <%= select_tag "anio", options_for_select(2016..2018), :class=> 'select-style' %>
 	        <%= submit_tag "Cambiar", id: 'change_periodo', class: 'btn', :style=> 'margin-left:5px;padding: 6px;border-radius: 5px;' %>
+	        <% if current_user.planification? or current_user.admin? or current_user.sueldos?%>
+	        	<%= link_to "Crear CSV", id: 'create_csv', class: 'btn', :style=> 'margin-right:5px;padding: 6px;border-radius: 5px;float:right;' %>
+
+	        <% end %>
 	      </div>
 			</div>
 
@@ -275,9 +279,9 @@
 
 <script type="text/javascript">
 
-  $("#change_periodo").on("click", ajaxCall);
+  $("#change_periodo").on("click", ajaxPeriod);
 
-  function ajaxCall(){
+  function ajaxPeriod(){
   	console.log("Cambiar periodo a: " + $('#mes').val() + ' / ' + $('#anio').val());
     $.ajax({
       url: '/set_period/' + $('#mes').val() + '/' + $('#anio').val(),
@@ -290,7 +294,7 @@
     });
   }
 
-	$(document).on('turbolinks:load', function() {
+  $(document).on('turbolinks:load', function() {
 		console.log($('.periodo').length);
 		if ($('.periodo').length > 0){
 			console.log(<%= @month %>);

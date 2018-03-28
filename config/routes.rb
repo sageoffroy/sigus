@@ -53,6 +53,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'agents_of_dependence/:dependence' => 'agents#agents_of_dependence'
   get 'services_of_dependence/' => 'services#services_of_dependence'
+
+  get 'create_csv/' => 'welcome#create_csv'
+
   post 'get_free_days/:year/:month' => 'free_days#get_free_days'
   post 'change_service/:id' => 'service_of_dependences#change_service'
   post 'charge_agents' => 'agent_of_services#charge_agents'
