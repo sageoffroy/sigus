@@ -43,5 +43,6 @@ bower.json
 # Ignore Byebug command history file.
 .byebug_history
 
-# log cupo
+# archivos propios
 app/views/welcome/log_calcular_cupo.html
+db/nohup.out
