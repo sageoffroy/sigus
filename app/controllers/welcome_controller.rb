@@ -55,16 +55,25 @@ class WelcomeController < ApplicationController
 
   def create_csv
     #recuperar mes año del usuario actual
+    month_chars = 2
+    if current_user.period.size == 5
+      month_chars = 1
+    end
     month = current_user.period[0,month_chars] || 1
     year = current_user.period[-4,4] || 2018
+
     #obtener reportes aprobados dentro del perdio del usuario
     @reports = Report.where(month:month, year:year, estado:["Aprob Director Area", "Aprob Sueldos"])
+
+    #obtener el dato del servicio si es de pasivas habituales o no
+    #se obtiene de cada reporte
+    
 
   end
 
 
   def log_calcular_cupo
-    
+
   end
 
 end

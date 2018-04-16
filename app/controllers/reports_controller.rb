@@ -537,49 +537,50 @@ class ReportsController < ApplicationController
       pv = 0
         
       # ---- Sobre el detalle de las novedad usando el tipo de horas.
-      novedades = Novelty.where(month: month, year: year, service_of_dependence: service_of_dependence) #, report_type: "Guardias Activas", order_by(year_ref, month_ref))
-  
-      novedades.each do |novedad|
-        arreglo = []
-        if pv == 0 
-          month_ref_actual = novedad.month_ref
-          year_ref_actual = novedad.year_ref
-          valor = 0
-          pv = 1
-  
-          if month_ref_actual != novedad.month_ref
-            arreglo.add(novedad.year_ref_actual.to_s + novedad.month_ref_actual.to_s, valor)
+      novedad = Novelty.where(month: month, year: year, service_of_dependence: service_of_dependence).first #, report_type: "Guardias Activas", order_by(year_ref, month_ref))
+      if !novedad.nil?
+        novedad.novelty_details.each do |nd|
+          arreglo = []
+          if pv == 0 
+            month_ref_actual = nd.month_ref
+            year_ref_actual = nd.year_ref
             valor = 0
-            month_ref_actual = novedad.month_ref
-            year_ref_actual = novedad.year_ref
-          end
-          valor = valor + novedad.hour_to_add - novedad.hour_to_remove
-        end
-        arreglo.each do |a|
-          year = String.split(a[0],0,4)
-          if a[0].size == 6
-            month = String.split(a[0],5,2)
-          else
-            month = String.split(a[0],5,1)
-          end
-  
-          report_ref = Report.where(mont: month, year: year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas")
-  
-          diferencia = report_ref.total_hs_free - a[1]
-  
-          if diferencia > 0 
-            report_ref.total_hs_free = diferencia
-          else
-            report_ref.total_hs_free = 0
-            total_hs_liquidadas = total_hs_liquidadas - diferencia
-          end
-  
-          report_ref.save
-          
-          
-        end
-      end  
+            pv = 1
+    
+            if month_ref_actual != nd.month_ref
+              arreglo.add(nd.year_ref_actual.to_s + nd.month_ref_actual.to_s, valor)
+              valor = 0
+              month_ref_actual = nd.month_ref
+              year_ref_actual = nd.year_ref
+            end
 
+            valor = valor + nd.hours_to_add.to_i - nd.hours_to_remove.to_i
+          end
+          arreglo.each do |a|
+            year = String.split(a[0],0,4)
+            if a[0].size == 6
+              month = String.split(a[0],5,2)
+            else
+              month = String.split(a[0],5,1)
+            end
+    
+            report_ref = Report.where(mont: month, year: year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas")
+    
+            diferencia = report_ref.total_hs_free - a[1]
+    
+            if diferencia > 0 
+              report_ref.total_hs_free = diferencia
+            else
+              report_ref.total_hs_free = 0
+              total_hs_liquidadas = total_hs_liquidadas - diferencia
+            end
+    
+            report_ref.save
+            
+            
+          end
+        end  
+      end
       log_calcular_cupo.info("cupo: %s<br>" % [cupo])  
       log_calcular_cupo.info("total_hs_liquidadas: %s<br>" % [total_hs_liquidadas])  
       
