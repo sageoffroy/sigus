@@ -85,6 +85,7 @@ class AgentOfServicesController < ApplicationController
 
 
   def charge_agents
+    
     haberes = import('app/assets/docs/csv/haberes.csv') do
       start_at_row 2
       delimited_by ";"

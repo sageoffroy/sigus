@@ -63,4 +63,8 @@ class WelcomeController < ApplicationController
   end
 
 
+  def log_calcular_cupo
+    
+  end
+
 end

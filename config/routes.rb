@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   post 'charge_agents' => 'agent_of_services#charge_agents'
   post 'set_dependence/:id' => 'welcome#set_dependence'
   post 'set_period/:month/:year' => 'welcome#set_period'
+  get 'log' => 'welcome#log_calcular_cupo'
   post 'update_agents_of_service/:id/:type' => 'agent_of_services#agents_from_service_of_dependence'
   get 'dependence/' => 'dependences#dependence'
 end

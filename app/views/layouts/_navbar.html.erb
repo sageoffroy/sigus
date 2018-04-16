@@ -5,6 +5,9 @@
       <% if current_user.admin?%>
         <%= link_to fa_icon('users'), '#',:id => "charge_agents" , :class => 'menu-link', remote: true %>
       <% end %>
+      <% if current_user.admin? or current_user.planification?%>
+        <%= link_to fa_icon('bug'), '/log', :class => 'menu-link' %>
+      <% end %>
     </div>
     <% if current_user.planification? or current_user.admin?%>
       <%= select_tag "select_dependence", options_from_collection_for_select(Dependence.where(selectable:true), :id, :to_s), :class=> 'select-style' %>

@@ -1,4 +1,6 @@
 require 'date'
+require 'csv-mapper'
+include CsvMapper
 
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy]
@@ -217,14 +219,26 @@ class ReportsController < ApplicationController
   private
     
     def calcular_cupo (report)
+
+      #Limpiar log
+      File.delete('app/views/welcome/log_calcular_cupo.html')
+
+      # -- CREAR LOG
+      log_calcular_cupo = Logger.new('app/views/welcome/log_calcular_cupo.html')
+      log_calcular_cupo.formatter = proc do |severity, datetime, progname, msg|
+        "#{msg}\n"
+      end
+      log_calcular_cupo.info("<br>")  
+      log_calcular_cupo.info("=================== CALCULAR CUPO =======================<br>")  
       # -- INICIAR VARIABLES
       msg = "Inicializado"
       
       # -- RECUPERAR VALORES DEL FORMULARIO
-
+      service_of_dependence = report.service_of_dependence
       year = report.year
       month = report.month
-      service_of_dependence = report.service_of_dependence
+      log_calcular_cupo.info("DEPENDENCIA: %s <span style='margin-left: 50px;''>PERIODO: %s / %s</span><br>" % [service_of_dependence,month, year]) 
+      
       total_hs = report.total_hs
       total_hs_umu = report.total_hs_umu
       total_hs_nov = report.total_hs_nov
@@ -232,6 +246,8 @@ class ReportsController < ApplicationController
       total_hs_free = report.total_hs_free
 
       # -- PRIMERA PARTE
+      log_calcular_cupo.info("<br>PRIMERA PARTE<br>")  
+      #log_calcular_cupo.info("%d: agente Nuevo" % p_agente.nro_doc.to_i)
       # ---- calcular cantidades de cada día
       first_day = Date.new year, month, 1
       last_day = Date.civil year, month, -1
@@ -309,7 +325,7 @@ class ReportsController < ApplicationController
 
 
       # -- SEGUNDA PARTE
-
+      log_calcular_cupo.info("<br>SEGUNDA PARTE<br>")    
       # ---- Se obtienen todos los agentes del servicio
       agents_of_service  = AgentOfService.where(service_of_dependence: service_of_dependence)
       
@@ -434,9 +450,14 @@ class ReportsController < ApplicationController
         gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
         hs_sabado_servicio = hs_sabado_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
       end
-
+      
+      log_calcular_cupo.info("hs_dias_semana_servicio: %s<br>" % [hs_dias_semana_servicio])  
+      log_calcular_cupo.info("gs_dias_semana_servicio: %s<br>" % [gs_dias_semana_servicio])  
+      log_calcular_cupo.info("hs_sabado_servicio: %s<br>" % [hs_sabado_servicio])  
+      log_calcular_cupo.info("dotacion_actual: %s<br>" % [dotacion_actual])  
+      
       # -- Tercera Parte
-
+      log_calcular_cupo.info("<br>TERCERA PARTE<br>")  
       # ---- Calcular el resto de la cobertura (ej: hs_dias_semana_cobertura) - horas disponibles (ej: hs_dias_semana_servicio)
       hs_dias_semana_requeridas = hs_dias_semana_cobertura - hs_dias_semana_servicio
       gs_dias_semana_requeridas = gs_dias_semana_cobertura - gs_dias_semana_servicio
@@ -462,7 +483,14 @@ class ReportsController < ApplicationController
         guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
       end
 
+      log_calcular_cupo.info("hs_dias_semana_requeridas: %s<br>" % [hs_dias_semana_requeridas])  
+      log_calcular_cupo.info("gs_dias_semana_requeridas: %s<br>" % [gs_dias_semana_requeridas])  
+      log_calcular_cupo.info("hs_sabado_requeridas: %s<br>" % [hs_sabado_requeridas])  
+      log_calcular_cupo.info("hs_domingo_requeridas: %s<br>" % [hs_domingo_requeridas])  
+      log_calcular_cupo.info("guardia_final: %s<br>" % [guardia_final])  
+      
       # -- Cuarta Parte
+      log_calcular_cupo.info("<br>CUARTA PARTE<br>")    
       # ---- Obtener los 6 anteriores reportes del servicio al mes actual
       reportes = Report.where(service_of_dependence: service_of_dependence).last(6)
       
@@ -492,12 +520,20 @@ class ReportsController < ApplicationController
         cupo = guardia_final
       end
       
+
+      log_calcular_cupo.info("razon_final: %s<br>" % [razon_final])  
+      log_calcular_cupo.info("acum: %s<br>" % [acum])  
+      log_calcular_cupo.info("cupo_historico: %s<br>" % [cupo_historico])  
+      log_calcular_cupo.info("cupo: %s<br>" % [cupo])  
+      
       #-- Quinta Parte
+      log_calcular_cupo.info("<br>QUINTA PARTE<br>")  
       # acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
       total_hs_liquidadas = @report.total_hs.to_i + @report.total_hs_umu.to_i
   
       
       #-- Sexta Parte
+      log_calcular_cupo.info("<br>SEXTA PARTE<br>")
       pv = 0
         
       # ---- Sobre el detalle de las novedad usando el tipo de horas.
@@ -543,12 +579,16 @@ class ReportsController < ApplicationController
           
         end
       end  
-      #-- Septima Parte
 
+      log_calcular_cupo.info("cupo: %s<br>" % [cupo])  
+      log_calcular_cupo.info("total_hs_liquidadas: %s<br>" % [total_hs_liquidadas])  
+      
+      #-- Septima Parte
+      log_calcular_cupo.info("<br>SEPTIMA PARTE<br>")  
       
      
       #-- Ocatava Parte
-      
+      log_calcular_cupo.info("<br>OCTAVA  PARTE<br>")  
       if cupo >= total_hs_liquidadas
         @report.total_hs_free = cupo - total_hs_liquidadas
         msg = "Se acepta liquidacion"
@@ -558,10 +598,13 @@ class ReportsController < ApplicationController
         @report.total_hs_exc = exc.to_i
         @report.estado = "Rechazado"
         msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas " + exc.to_i.to_s
+        log_calcular_cupo.info("msg: %s<br>" % [msg])  
       end
       @report.save
       ## acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
+      log_calcular_cupo.info("==========================================================<br>")  
       return msg
+      
     end
 
 
