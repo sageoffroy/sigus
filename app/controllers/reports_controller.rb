@@ -328,6 +328,9 @@ class ReportsController < ApplicationController
       log_calcular_cupo.info("hs_sabado_cobertura: %s<br>" % [hs_sabado_cobertura])      
       log_calcular_cupo.info("hs_domingo_cobertura: %s<br>" % [hs_domingo_cobertura])      
       
+
+
+      byebug
       # -- SEGUNDA PARTE
       log_calcular_cupo.info("<br>SEGUNDA PARTE<br>")    
       # ---- Se obtienen todos los agentes del servicio
@@ -353,6 +356,7 @@ class ReportsController < ApplicationController
         hour_regime = agent_of_service.agent.hour_regime
         
         # ---- Si no es médico residente
+        byebug
         if !(agent_of_service.agent.agent_type.nil?)
           if !(agent_of_service.agent.agent_type.description == "Médico Residente")
             o = Observation.where(year:year, month:month, service_of_dependence:service_of_dependence).first  #Ver el mes
@@ -371,6 +375,7 @@ class ReportsController < ApplicationController
   
 
             # Si la observacion no es del tipo 1,2,3,4,5
+            byebug
             if !([1,2,3,4,5].include?(code))
               #si el servicio es radiologia o diagnostico por imagenes
               if ["Radiología","Diagnóstico por Imágenes"].include?(service_of_dependence.service.name)
@@ -408,6 +413,7 @@ class ReportsController < ApplicationController
               end
               hs_dias_semana_servicio =  hs_dias_semana_servicio + hs_dias_semana
               #Si el agente tiene un regime de 36
+              byebug
               if hour_regime.hours == 36
                 if agent_of_service.function == "Jefe del servicio"
   
@@ -417,7 +423,7 @@ class ReportsController < ApplicationController
                   hs_sabados = sabados * 6
                 end
                 hs_sabado_servicio = hs_sabado_servicio + hs_sabados
-   
+                byebug
                 if hour_regime.with_guard 
                   gs_dias_semana = 103
                   if agent_of_service.function == "Jefe del servicio"
@@ -447,7 +453,7 @@ class ReportsController < ApplicationController
       #if consultorio tiene un servicio y no tiene agente 
         #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
       #end
-      
+      byebug
       porcentaje_mes = PercentageMonth.where(mes:@report.month).first
       if !porcentaje_mes.nil?    
         hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
