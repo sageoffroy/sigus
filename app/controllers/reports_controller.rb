@@ -323,7 +323,11 @@ class ReportsController < ApplicationController
         hs_domingo_cobertura = 0
       end
 
-
+      log_calcular_cupo.info("hs_dias_semana_cobertura: %s<br>" % [hs_dias_semana_cobertura])      
+      log_calcular_cupo.info("gs_dias_semana_cobertura: %s<br>" % [gs_dias_semana_cobertura])      
+      log_calcular_cupo.info("hs_sabado_cobertura: %s<br>" % [hs_sabado_cobertura])      
+      log_calcular_cupo.info("hs_domingo_cobertura: %s<br>" % [hs_domingo_cobertura])      
+      
       # -- SEGUNDA PARTE
       log_calcular_cupo.info("<br>SEGUNDA PARTE<br>")    
       # ---- Se obtienen todos los agentes del servicio

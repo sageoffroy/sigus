@@ -67,8 +67,6 @@ class WelcomeController < ApplicationController
 
     #obtener el dato del servicio si es de pasivas habituales o no
     #se obtiene de cada reporte
-    
-
   end
 
 
