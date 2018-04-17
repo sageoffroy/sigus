@@ -112,6 +112,9 @@ class AgentOfServicesController < ApplicationController
         agente.fullname = h_agente.nombre_completo  
         # --- Hour Regime
         cg = false
+        if hs_c_guardia > 0
+          cg = true
+        end
         agente.hour_regime = HourRegime.where(hours:h_agente.hs_semanales, with_guard:cg).first
 
         # --- position
@@ -133,7 +136,7 @@ class AgentOfServicesController < ApplicationController
         agente.exclusive_dedication = !h_agente[titulos_a.index("1165")].nil?
         agente.unhealthy_work = !h_agente[titulos_a.index("1132")].nil?
 
-         # --- Tipo de Agente
+        # --- Tipo de Agente
         # ----- Cat 19 <=               "Mensualizado P/G"
         # ----- Concepto 1256 <=        "Operador de Apoyo"
         # ----- Concepto 1157<375 <=        "Médico Residente"
