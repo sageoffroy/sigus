@@ -317,7 +317,7 @@ class ReportsController < ApplicationController
         hs_sabado_cobertura = cobertura.hs_sabado * sabados
         hs_domingo_cobertura = cobertura.hs_domingo * domingos
       else
-        hs_dias_semana_cobertura = 0
+        hs_dias_semana_cobertura   = 0
         gs_dias_semana_cobertura = 0
         hs_sabado_cobertura = 0
         hs_domingo_cobertura = 0

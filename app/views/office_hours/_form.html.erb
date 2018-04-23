@@ -55,6 +55,7 @@
 <% end %>
 
 <script>
+
   function maxLengthCheck(object) {
     
     if (object.value.length > object.maxLength){
@@ -85,16 +86,17 @@
     year = $("#office_hour_year").val();
     month = $("#office_hour_month").val();
     
-    lunes = $('#'+object.id).closest('.nested-fields').find('.lun').val() * count_days(year, month, 1)
-    martes = $('#'+object.id).closest('.nested-fields').find('.mar').val() * count_days(year, month, 2)
-    miercoles = $('#'+object.id).closest('.nested-fields').find('.mie').val() * count_days(year, month, 3)
-    jueves = $('#'+object.id).closest('.nested-fields').find('.jue').val() * count_days(year, month, 4)
-    viernes = $('#'+object.id).closest('.nested-fields').find('.vie').val() * count_days(year, month, 5)
-    sabado = $('#'+object.id).closest('.nested-fields').find('.sab').val() * count_days(year, month, 6)
+    lunes = $('#'+object.id).closest('.office_hours').find('.lun').val() * count_days(year, month, 1)
+    console.log("LUNES: " + lunes);
+    martes = $('#'+object.id).closest('.office_hours').find('.mar').val() * count_days(year, month, 2)
+    miercoles = $('#'+object.id).closest('.office_hours').find('.mie').val() * count_days(year, month, 3)
+    jueves = $('#'+object.id).closest('.office_hours').find('.jue').val() * count_days(year, month, 4)
+    viernes = $('#'+object.id).closest('.office_hours').find('.vie').val() * count_days(year, month, 5)
+    sabado = $('#'+object.id).closest('.office_hours').find('.sab').val() * count_days(year, month, 6)
 
     total_field = lunes + martes + miercoles + jueves + viernes + sabado;
 
-    $('#'+object.id).closest('.nested-fields').find('.total_week_hours').val(total_field);
+    $('#'+object.id).closest('.office_hours').find('.total_week_hours').val(total_field);
     
     total = 0;
 
@@ -106,20 +108,23 @@
         {
           rest = 0;
         }
-        console.log (week);
-        console.log (rest);
         total = total + week + rest;
-        console.log (total);
+        
       }
     );
 
-    /*$(".rest_hours_agent").each(
-      function(index, value) {
-        if (!isNaN(eval($(this).val()))){
-          total = total + eval($(this).val());  
-        }
-      }
-    );*/
+    tipo_hora = $('#'+object.id).closest('.nested-fields').find('.hour_type').val();
+    
+
+    console.log ("TOTAL: " + total);
+
+    if (tipo_hora === "Turno")
+    {
+      total = Math.ceil(total * 0.25);
+      console.log ("TOTAL TURNO: " + total);
+    }
+
+    
 
     $('#office_hour_total_hours').val(total);
   }
@@ -143,5 +148,14 @@
     return counter;
   }
 
+  $('#office_hour_year').on('select2:select', function (e) {
+    console.log("Cambiando año");
+    calcular_total_horas_semana(this);
+  });
+
+  $('#office_hour_month').on('select2:select', function (e) {
+    console.log("Cambiando mes");
+    calcular_total_horas_semana(this);
+  });
 
 </script>

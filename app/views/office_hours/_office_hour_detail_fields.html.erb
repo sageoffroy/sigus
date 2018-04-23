@@ -8,7 +8,7 @@
   </div>
   <div class="col-sm-2">
     <div class="field">
-      <%= f.select :turno_hora, ["Turno","Hora"], {prompt: "Elegir tipo"}, {class: "select2"}%>
+      <%= f.select :turno_hora, ["Turno","Hora"], {prompt: "Elegir tipo"}, {class: "select2 hour_type"}%>
     </div>
   </div>
   <div class="" style="float:left;margin:0 5px;">
@@ -50,4 +50,13 @@
 
   <div class="col-md-12 col-last"></div>
 </div>
+
+
+<script>
+
+  $('.hour_type').on('select2:select', function (e) {
+    calcular_total_horas_semana(this);
+  });
+
   
+</script>
