@@ -4,7 +4,7 @@ class ObservationsController < ApplicationController
   # GET /observations
   # GET /observations.json
   def index
-    @observations = Observation.all
+    @observations = Observation.where(service_of_dependence: current_user.dependence.service_of_dependences)
   end
 
   # GET /observations/1
