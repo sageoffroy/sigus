@@ -69,8 +69,8 @@ $(document).on 'turbolinks:load', ->
   
 
 
-$(document).on 'turbolinks:before-cache', ->
-  dataTable =  $($.fn.dataTable.tables(true)).DataTable()
-  if (dataTable != null)
-   dataTable.destroy();
-   dataTable = null;
+  $(document).on 'turbolinks:before-cache', ->
+    dataTable =  $($.fn.dataTable.tables(true)).DataTable()
+    if (dataTable != null)
+     dataTable.destroy();
+     dataTable = null;

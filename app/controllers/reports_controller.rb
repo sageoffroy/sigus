@@ -523,7 +523,7 @@ class ReportsController < ApplicationController
         razon_final = 0
       end
 
-      cupo_historico = razon_final * dotacion_actual
+      cupo_historico = razon_final * dotacion_actual * 1,15
       if guardia_final > cupo_historico
         cupo = cupo_historico
       else
