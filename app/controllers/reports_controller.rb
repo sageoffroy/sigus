@@ -8,39 +8,37 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    if current_user.hospital?
+    #if current_user.hospital?
       @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
-    else
-
-      month = params[:month].to_i
-      year = params[:year].to_i
-      status = params[:status]
-      if !status.nil?
-        estado = params[:status].gsub!('-',' ') || params[:status]
-      end
-      if estado.nil?
-        if current_user.sueldos?
-          @reports = Report.where(month:month, year:year)
-        else  
-          @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
-        end
-      else
-        if estado == "Todos"
-          if current_user.sueldos?
-            @reports = Report.where(month:month, year:year)
-          else
-            @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
-          end          
-        else
-          if current_user.sueldos?
-            @reports = Report.where(estado: estado, month:month, year:year)
-          else
-            @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado, month:month, year:year)
-          end
-        end
-        
-      end
-    end
+    #else
+      #month = params[:month].to_i
+      #year = params[:year].to_i
+      #status = params[:status]
+      #if !status.nil?
+        #estado = params[:status].gsub!('-',' ') || params[:status]
+      #end
+      #if estado.nil?
+        #if current_user.sueldos?
+          #@reports = Report.where(month:month, year:year)
+        #else  
+          #@reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
+        #end
+      #else
+        #if estado == "Todos"
+          #if current_user.sueldos?
+            #@reports = Report.where(month:month, year:year)
+          #else
+            #@reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, month:month, year:year)
+          #end          
+        #else
+          #if current_user.sueldos?
+            #@reports = Report.where(estado: estado, month:month, year:year)
+          #else
+            #@reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado, month:month, year:year)
+          #end
+        #end        
+      #end
+    #end
   end
 
   # GET /reports/1
@@ -106,7 +104,7 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.save
-        if (@report.report_type == "Guardias Activas")
+        if (@report.report_type == "Guardias Activas") or (@report.report_type == "Guardias Pasivas")
           calcular_cupo(@report)
         else
           @report.estado = "Validado"
@@ -141,7 +139,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       if @report.update(report_params)
         msg = "Reporte Actualizado"
-        if (@report.report_type == "Guardias Activas")
+        if (@report.report_type == "Guardias Activas") or (@report.report_type == "Guardias Pasivas")
           msg = calcular_cupo(@report)
         else
           @report.estado = "Validado"
@@ -235,6 +233,7 @@ class ReportsController < ApplicationController
       
       # -- RECUPERAR VALORES DEL FORMULARIO
       service_of_dependence = report.service_of_dependence
+      type = report.report_type
       year = report.year
       month = report.month
       log_calcular_cupo.info("DEPENDENCIA: %s <span style='margin-left: 50px;''>PERIODO: %s / %s</span><br>" % [service_of_dependence,month, year]) 
@@ -331,166 +330,179 @@ class ReportsController < ApplicationController
 
 
       
-      # -- SEGUNDA PARTE
-      log_calcular_cupo.info("<br>SEGUNDA PARTE<br>")    
-      # ---- Se obtienen todos los agentes del servicio
-      agents_of_service  = AgentOfService.where(service_of_dependence: service_of_dependence)
-      
-      # ---- Inicializan variable
-      hs_dias_semana_servicio = 0
-      gs_dias_semana_servicio = 0
-      hs_sabado_servicio = 0
-      dotacion_actual = 0
-      
-      # ---- Se recorre cada agente del servicio y se acumulan variables
-      agents_of_service.each do |agent_of_service|
+      # -- SEGUNDA PARTE SOLO ACTIVAS
+      if type == "Guardias Activas"
+        log_calcular_cupo.info("<br>SEGUNDA PARTE<br>")    
+        # ---- Se obtienen todos los agentes del servicio
+        agents_of_service  = AgentOfService.where(service_of_dependence: service_of_dependence)
+        
+        # ---- Inicializan variable
+        hs_dias_semana_servicio = 0
+        gs_dias_semana_servicio = 0
+        hs_sabado_servicio = 0
+        dotacion_actual = 0
+        
+        # ---- Se recorre cada agente del servicio y se acumulan variables
+        agents_of_service.each do |agent_of_service|
+            
+          hs_dias_semana = 0
+          gs_dias_semana = 0
+          hs_sabados = 0
           
-        hs_dias_semana = 0
-        gs_dias_semana = 0
-        hs_sabados = 0
-        
-        # ---- Si no tiene Regimen Horario se inicializa en 30hs
-        if agent_of_service.agent.hour_regime.nil?
-          agent_of_service.agent.hour_regime = HourRegime.where(id:3).first #id 3 = 30hs S/G
-        end
-        hour_regime = agent_of_service.agent.hour_regime
-        
-        # ---- Si no es médico residente
-        
-        if !(agent_of_service.agent.agent_type.nil?)
-          if !(agent_of_service.agent.agent_type.description == "Médico Residente")
-            o = Observation.where(year:year, month:month, service_of_dependence:service_of_dependence).first  #Ver el mes
-            if !o.nil?
-              observacion = o.observation_details.where(agent: agent_of_service.agent).first
-            end
+          # ---- Si no tiene Regimen Horario se inicializa en 30hs
+          if agent_of_service.agent.hour_regime.nil?
+            agent_of_service.agent.hour_regime = HourRegime.where(id:3).first #id 3 = 30hs S/G
+          end
+          hour_regime = agent_of_service.agent.hour_regime
+          
+          # ---- Si no es médico residente
+          
+          if !(agent_of_service.agent.agent_type.nil?)
+            if !(agent_of_service.agent.agent_type.description == "Médico Residente")
+              o = Observation.where(year:year, month:month, service_of_dependence:service_of_dependence).first  #Ver el mes
+              if !o.nil?
+                observacion = o.observation_details.where(agent: agent_of_service.agent).first
+              end
 
-            
+              
 
-            if observacion.nil?
-              # ---- Si no tiene observaciones lo marco como 0
-              code = 0
-            else
-              code = observacion.observation_description.code
-            end
-  
-
-            # Si la observacion no es del tipo 1,2,3,4,5
-            
-            if !([1,2,3,4,5].include?(code))
-              #si el servicio es radiologia o diagnostico por imagenes
-              if ["Radiología","Diagnóstico por Imágenes"].include?(service_of_dependence.service.name)
-                hs_dias_semana = 4 * cant_dias_habiles
+              if observacion.nil?
+                # ---- Si no tiene observaciones lo marco como 0
+                code = 0
               else
-                # Si es un mensualizado para guardia
-                if agent_of_service.agent.agent_type.description == "Mensualizad P/G"
-                  hs_dias_semana = 6 * cant_dias_habiles
+                code = observacion.observation_description.code
+              end
+    
+
+              # Si la observacion no es del tipo 1,2,3,4,5
+              
+              if !([1,2,3,4,5].include?(code))
+                #si el servicio es radiologia o diagnostico por imagenes
+                if ["Radiología","Diagnóstico por Imágenes"].include?(service_of_dependence.service.name)
+                  hs_dias_semana = 4 * cant_dias_habiles
                 else
-                  if hour_regime.hours == 30
+                  # Si es un mensualizado para guardia
+                  if agent_of_service.agent.agent_type.description == "Mensualizad P/G"
                     hs_dias_semana = 6 * cant_dias_habiles
-                  elsif hour_regime.hours == 20
-                    hs_dias_semana = 4 * cant_dias_habiles
-                  elsif hour_regime.hours == 36
-                    if hour_regime.with_guard
-                      hs_dias_semana = 26
-                    else
+                  else
+                    if hour_regime.hours == 30
                       hs_dias_semana = 6 * cant_dias_habiles
+                    elsif hour_regime.hours == 20
+                      hs_dias_semana = 4 * cant_dias_habiles
+                    elsif hour_regime.hours == 36
+                      if hour_regime.with_guard
+                        hs_dias_semana = 26
+                      else
+                        hs_dias_semana = 6 * cant_dias_habiles
+                      end
                     end
                   end
                 end
-              end
-  
-              #Si jefe del servicio
-              if agent_of_service.function == "Jefe del servicio"
-                hs_dias_semana = hs_dias_semana * service_of_dependence.jefatura
-              end
-  
-              if code == 6
-                hs_dias_semana = hs_dias_semana *0.5
-              end
-  
-              if code == 7
-                hs_dias_semana = hs_dias_semana *0.833
-              end
-              hs_dias_semana_servicio =  hs_dias_semana_servicio + hs_dias_semana
-              #Si el agente tiene un regime de 36
-              
-              if hour_regime.hours == 36
+    
+                #Si jefe del servicio
                 if agent_of_service.function == "Jefe del servicio"
-  
-                  hs_sabados = sabados * 6 * @report.service_of_dependence.jefatura
-                  
-                else
-                  hs_sabados = sabados * 6
+                  hs_dias_semana = hs_dias_semana * service_of_dependence.jefatura
                 end
-                hs_sabado_servicio = hs_sabado_servicio + hs_sabados
+    
+                if code == 6
+                  hs_dias_semana = hs_dias_semana *0.5
+                end
+    
+                if code == 7
+                  hs_dias_semana = hs_dias_semana *0.833
+                end
+                hs_dias_semana_servicio =  hs_dias_semana_servicio + hs_dias_semana
+                #Si el agente tiene un regime de 36
                 
-                if hour_regime.with_guard 
-                  gs_dias_semana = 103
+                if hour_regime.hours == 36
                   if agent_of_service.function == "Jefe del servicio"
-                    gs_dias_semana = gs_dias_semana * @report.service_of_dependence.jefatura
+    
+                    hs_sabados = sabados * 6 * @report.service_of_dependence.jefatura
+                    
+                  else
+                    hs_sabados = sabados * 6
                   end
-  
-                  if code == 6
-                    gs_dias_semana = gs_dias_semana *0.5
+                  hs_sabado_servicio = hs_sabado_servicio + hs_sabados
+                  
+                  if hour_regime.with_guard 
+                    gs_dias_semana = 103
+                    if agent_of_service.function == "Jefe del servicio"
+                      gs_dias_semana = gs_dias_semana * @report.service_of_dependence.jefatura
+                    end
+    
+                    if code == 6
+                      gs_dias_semana = gs_dias_semana *0.5
+                    end
+    
+                    if code == 7
+                      gs_dias_semana = gs_dias_semana *0.833
+                    end
+    
+                    gs_dias_semana_servicio =  gs_dias_semana_servicio + gs_dias_semana
+    
                   end
-  
-                  if code == 7
-                    gs_dias_semana = gs_dias_semana *0.833
-                  end
-  
-                  gs_dias_semana_servicio =  gs_dias_semana_servicio + gs_dias_semana
-  
-                end
-  
-  
-              end #end si regimen 36
-              dotacion_actual = dotacion_actual+1
-            end #-- end observacion code
-          end #-- end no medico residente
+    
+    
+                end #end si regimen 36
+                dotacion_actual = dotacion_actual+1
+              end #-- end observacion code
+            end #-- end no medico residente
+          end
+        end #-- end each agente
+        
+        #if consultorio tiene un servicio y no tiene agente 
+          #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
+        #end
+        
+        porcentaje_mes = PercentageMonth.where(mes:@report.month).first
+        if !porcentaje_mes.nil?    
+          hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
+          gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
+          hs_sabado_servicio = hs_sabado_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
         end
-      end #-- end each agente
+        
+        log_calcular_cupo.info("hs_dias_semana_servicio: %s<br>" % [hs_dias_semana_servicio])  
+        log_calcular_cupo.info("gs_dias_semana_servicio: %s<br>" % [gs_dias_semana_servicio])  
+        log_calcular_cupo.info("hs_sabado_servicio: %s<br>" % [hs_sabado_servicio])  
+        log_calcular_cupo.info("dotacion_actual: %s<br>" % [dotacion_actual])  
+      end #end if reporte activo
       
-      #if consultorio tiene un servicio y no tiene agente 
-        #hs_dias_semana_servicio = hs_dias_semana_servicio - consultorio.total_mensual
-      #end
-      
-      porcentaje_mes = PercentageMonth.where(mes:@report.month).first
-      if !porcentaje_mes.nil?    
-        hs_dias_semana_servicio = hs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
-        gs_dias_semana_servicio = gs_dias_semana_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
-        hs_sabado_servicio = hs_sabado_servicio * service_of_dependence.asistencial * ((100 - (service_of_dependence.ausentismo*100 + porcentaje_mes.valor))/100)
-      end
-      
-      log_calcular_cupo.info("hs_dias_semana_servicio: %s<br>" % [hs_dias_semana_servicio])  
-      log_calcular_cupo.info("gs_dias_semana_servicio: %s<br>" % [gs_dias_semana_servicio])  
-      log_calcular_cupo.info("hs_sabado_servicio: %s<br>" % [hs_sabado_servicio])  
-      log_calcular_cupo.info("dotacion_actual: %s<br>" % [dotacion_actual])  
-      
+
+
+
       # -- Tercera Parte
       log_calcular_cupo.info("<br>TERCERA PARTE<br>")  
-      # ---- Calcular el resto de la cobertura (ej: hs_dias_semana_cobertura) - horas disponibles (ej: hs_dias_semana_servicio)
-      hs_dias_semana_requeridas = hs_dias_semana_cobertura - hs_dias_semana_servicio
-      gs_dias_semana_requeridas = gs_dias_semana_cobertura - gs_dias_semana_servicio
-      hs_sabado_requeridas = (hs_sabado_cobertura - hs_sabado_servicio) * 1.5
-      hs_domingo_requeridas = hs_domingo_cobertura * 2
+      
+      if type == "Guardias Activas"
+        hs_dias_semana_requeridas = hs_dias_semana_cobertura - hs_dias_semana_servicio
+        gs_dias_semana_requeridas = gs_dias_semana_cobertura - gs_dias_semana_servicio
+        hs_sabado_requeridas = (hs_sabado_cobertura - hs_sabado_servicio) * 1.5
+        hs_domingo_requeridas = hs_domingo_cobertura * 2
 
-      if service_of_dependence.con_guardia
-        if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0) and (hs_sabado_requeridas < 0)
-          guardia_final = hs_domingo_requeridas
+        if service_of_dependence.con_guardia
+          if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0) and (hs_sabado_requeridas < 0)
+            guardia_final = hs_domingo_requeridas
+          else
+            if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0)
+              gs_dias_semana_requeridas = 0
+            end
+            if (hs_sabado_requeridas < 0)  and (hs_dias_semana_requeridas < 0)
+              hs_sabado_requeridas = 0
+            end
+            if hs_dias_semana_requeridas < 0
+              hs_dias_semana_requeridas = 0
+            end
+            guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
+          end      
         else
-          if (gs_dias_semana_requeridas < 0) and (hs_dias_semana_requeridas < 0)
-            gs_dias_semana_requeridas = 0
-          end
-          if (hs_sabado_requeridas < 0)  and (hs_dias_semana_requeridas < 0)
-            hs_sabado_requeridas = 0
-          end
-          if hs_dias_semana_requeridas < 0
-            hs_dias_semana_requeridas = 0
-          end
           guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
-        end      
+        end
       else
-        guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas
+        hs_dias_semana_requeridas = hs_dias_semana_cobertura
+        gs_dias_semana_requeridas = gs_dias_semana_cobertura
+        hs_sabado_requeridas = hs_sabado_cobertura * 1.5
+        hs_domingo_requeridas = hs_domingo_cobertura * 2
+        guardia_final = hs_dias_semana_requeridas + gs_dias_semana_requeridas + hs_sabado_requeridas + hs_domingo_requeridas = hs_domingo_cobertura
       end
 
       log_calcular_cupo.info("hs_dias_semana_requeridas: %s<br>" % [hs_dias_semana_requeridas])  
@@ -499,6 +511,13 @@ class ReportsController < ApplicationController
       log_calcular_cupo.info("hs_domingo_requeridas: %s<br>" % [hs_domingo_requeridas])  
       log_calcular_cupo.info("guardia_final: %s<br>" % [guardia_final])  
       
+
+
+
+
+
+
+
       # -- Cuarta Parte
       log_calcular_cupo.info("<br>CUARTA PARTE<br>")    
       # ---- Obtener los 6 anteriores reportes del servicio al mes actual
@@ -523,7 +542,8 @@ class ReportsController < ApplicationController
         razon_final = 0
       end
 
-      cupo_historico = razon_final * dotacion_actual * 1,15
+      cupo_historico = razon_final * dotacion_actual * 1.15
+      byebug
       if guardia_final > cupo_historico
         cupo = cupo_historico
       else
@@ -549,47 +569,53 @@ class ReportsController < ApplicationController
       # ---- Sobre el detalle de las novedad usando el tipo de horas.
       novedad = Novelty.where(month: month, year: year, service_of_dependence: service_of_dependence).first #, report_type: "Guardias Activas", order_by(year_ref, month_ref))
       if !novedad.nil?
-        novedad.novelty_details.each do |nd|
-          arreglo = []
-          if pv == 0 
-            month_ref_actual = nd.month_ref
-            year_ref_actual = nd.year_ref
-            valor = 0
-            pv = 1
-    
-            if month_ref_actual != nd.month_ref
-              arreglo.add(nd.year_ref_actual.to_s + nd.month_ref_actual.to_s, valor)
-              valor = 0
+        if type == "Guardias Activas"
+          novedades = novedad.novelty_details.where(hours_type: "activas")
+        else
+          novedades = novedad.novelty_details.where(hours_type: "pasivas")
+        end
+        novedades.each do |nd|
+          if nd.hours_type == "activas"
+            arreglo = []
+            if pv == 0 
               month_ref_actual = nd.month_ref
               year_ref_actual = nd.year_ref
-            end
+              valor = 0
+              pv = 1
+      
+              if month_ref_actual != nd.month_ref
+                arreglo.add(nd.year_ref_actual.to_s + nd.month_ref_actual.to_s, valor)
+                valor = 0
+                month_ref_actual = nd.month_ref
+                year_ref_actual = nd.year_ref
+              end
 
-            valor = valor + nd.hours_to_add.to_i - nd.hours_to_remove.to_i
-          end
-          arreglo.each do |a|
-            year = String.split(a[0],0,4)
-            if a[0].size == 6
-              month = String.split(a[0],5,2)
-            else
-              month = String.split(a[0],5,1)
+              valor = valor + nd.hours_to_add.to_i - nd.hours_to_remove.to_i
             end
-    
-            report_ref = Report.where(mont: month, year: year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas")
-    
-            diferencia = report_ref.total_hs_free - a[1]
-    
-            if diferencia > 0 
-              report_ref.total_hs_free = diferencia
-            else
-              report_ref.total_hs_free = 0
-              total_hs_liquidadas = total_hs_liquidadas - diferencia
+            arreglo.each do |a|
+              year = String.split(a[0],0,4)
+              if a[0].size == 6
+                month = String.split(a[0],5,2)
+              else
+                month = String.split(a[0],5,1)
+              end
+      
+              report_ref = Report.where(mont: month, year: year, service_of_dependence: @report.service_of_dependence, report_type: "Guardias Activas")
+      
+              diferencia = report_ref.total_hs_free - a[1]
+      
+              if diferencia > 0 
+                report_ref.total_hs_free = diferencia
+              else
+                report_ref.total_hs_free = 0
+                total_hs_liquidadas = total_hs_liquidadas - diferencia
+              end
+      
+              report_ref.save
             end
-    
-            report_ref.save
-            
-            
-          end
-        end  
+          end #end if type
+        end #end each 
+
       end
       log_calcular_cupo.info("cupo: %s<br>" % [cupo])  
       log_calcular_cupo.info("total_hs_liquidadas: %s<br>" % [total_hs_liquidadas])  
