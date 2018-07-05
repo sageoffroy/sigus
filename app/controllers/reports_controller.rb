@@ -543,7 +543,6 @@ class ReportsController < ApplicationController
       end
 
       cupo_historico = razon_final * dotacion_actual * 1.15
-      byebug
       if guardia_final > cupo_historico
         cupo = cupo_historico
       else
