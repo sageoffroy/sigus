@@ -331,6 +331,7 @@ class ReportsController < ApplicationController
 
       
       # -- SEGUNDA PARTE SOLO ACTIVAS
+      dotacion_actual = 0
       if type == "Guardias Activas"
         log_calcular_cupo.info("<br>SEGUNDA PARTE<br>")    
         # ---- Se obtienen todos los agentes del servicio
@@ -340,7 +341,6 @@ class ReportsController < ApplicationController
         hs_dias_semana_servicio = 0
         gs_dias_semana_servicio = 0
         hs_sabado_servicio = 0
-        dotacion_actual = 0
         
         # ---- Se recorre cada agente del servicio y se acumulan variables
         agents_of_service.each do |agent_of_service|
@@ -521,7 +521,7 @@ class ReportsController < ApplicationController
       # -- Cuarta Parte
       log_calcular_cupo.info("<br>CUARTA PARTE<br>")    
       # ---- Obtener los 6 anteriores reportes del servicio al mes actual
-      reportes = Report.where(service_of_dependence: service_of_dependence).last(6)
+      reportes = Report.where(service_of_dependence: service_of_dependence, report_type: @report.report_type).last(6)
       
       acum = 0
       cont = 0
