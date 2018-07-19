@@ -7,6 +7,10 @@ class ServiceOfDependence < ApplicationRecord
   	"(" + dependence.code.to_s + ") " + service.name
   end
 
+  def to_s_id
+  	"(" + id.to_s + ") " + service.name
+  end
+
   def service_name
   	service.name
   end

@@ -6,8 +6,11 @@
 <div class="row">
 <% @services_of_dependences.each do |sod| %>
   <div  class="col-sm-4">
-
-    <h5 style="text-align: center;"><%= sod.service %></h5>
+    <% if current_user.admin? %>
+      <h5 style="text-align: center;"><%= sod.to_s_id%></h5>
+    <% else %>
+      <h5 style="text-align: center;"><%= sod.service %></h5>
+    <% end %>
     <h6 style="text-align: center;">Total de Agentes: <%= sod.agent_of_services.length %></h6>
     <table class="table">
       <tbody style="display:block;height: 300px;overflow-y: auto;overflow-x: hidden;">
