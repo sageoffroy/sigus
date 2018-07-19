@@ -7,7 +7,7 @@ class Service < ApplicationRecord
 
 
 	def to_s
-		name
+		"(" + id.to_s + ") " + name
 	end
 
 	

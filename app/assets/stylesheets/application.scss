@@ -46,7 +46,7 @@ a {
   text-decoration: none;
 }
 
-a:hover, a:visited { color:white;}
+a:hover, a:visited { color:#0b0e1e;}
 
 .turbolinks-progress-bar{
   background-color: $green;
@@ -246,7 +246,7 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   min-height: 75px;
   border-radius: 0px;
   opacity: 0.8;
-  color: #ffffff;
+  color: white;
   border: 0px solid white;
 }
 
@@ -254,17 +254,17 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   opacity: 1;
   color: white;
 }
-
-
-.btn-menu:focus {
-  outline: none !important;
-
-}
+.btn-menu:visited { color:white;}
+.btn-menu:focus {outline: none !important;}
 
 .btn-menu:active {
   position: relative;
   top: 1px;
 }
+
+
+
+
 
 .btn-menu .fa {
   color:white;
