@@ -624,22 +624,30 @@ class ReportsController < ApplicationController
       
      
       #-- Ocatava Parte
-      log_calcular_cupo.info("<br>OCTAVA  PARTE<br>")  
-      if cupo >= total_hs_liquidadas
-        @report.total_hs_free = cupo - total_hs_liquidadas
-        msg = "Se acepta liquidacion"
-        @report.estado = "Validado"
-      else
-        exc = total_hs_liquidadas - cupo
-        @report.total_hs_exc = exc.to_i
+      log_calcular_cupo.info("<br>OCTAVA  PARTE<br>")
+
+      if cobertura.nil?
+        msg = "No tiene cobetura"
         @report.estado = "Rechazado"
-        msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas " + exc.to_i.to_s
-        log_calcular_cupo.info("msg: %s<br>" % [msg])  
-      end
+      else
+        if cupo >= total_hs_liquidadas
+          @report.total_hs_free = cupo - total_hs_liquidadas
+          msg = "Se acepta liquidacion"
+          @report.estado = "Validado"
+        else
+          exc = total_hs_liquidadas - cupo
+          @report.total_hs_exc = exc.to_i
+          @report.estado = "Rechazado"
+          msg = "Se RECHAZA la liquidación por excederse en el CUPO. Total de horas excedidas " + exc.to_i.to_s
+          log_calcular_cupo.info("msg: %s<br>" % [msg])  
+        end
+        
+      end        
       @report.save
       ## acumular total de horas del reporte de todos los agentes en total_hs_liquidadas
       log_calcular_cupo.info("==========================================================<br>")  
       return msg
+      
       
     end
 
