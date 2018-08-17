@@ -58,13 +58,16 @@
 
   $(document).on('turbolinks:load', function() {
 
-
-    var select_obj = document.getElementById('select_dependence');
-    for (var i = 0; i < select_obj.options.length; i++) {
-      if (select_obj.options[i].text === '<%=current_user.dependence %>') {
-        select_obj.selectedIndex = i;
-        break;
-      }
-    }
+    <% if !current_user.nil? %>
+      <% if !current_user.dependence.nil? %>
+        var select_obj = document.getElementById('select_dependence');
+        for (var i = 0; i < select_obj.options.length; i++) {
+          if (select_obj.options[i].text === '<%=current_user.dependence %>') {
+            select_obj.selectedIndex = i;
+            break;
+          }
+        }
+      <% end %>
+    <% end %>
   });
 </script>
