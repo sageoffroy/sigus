@@ -17,7 +17,6 @@ class ReportsController < ApplicationController
       @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
     else
       estado = status.gsub!('-',' ') || status
-      byebug
       @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado, month:month, year:year)
     end
 
