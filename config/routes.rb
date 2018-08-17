@@ -45,6 +45,8 @@ Rails.application.routes.draw do
   resources :positions
   resources :dependences
   resources :agent_of_services
+  get 'agents/new_with_service' => 'agent_of_services#new_with_service'
+
   resources :studies
   resources :services
   resources :agents

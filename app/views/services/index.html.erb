@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
+<h2>Listado de Servicios</h2>
 
-<h1>Services</h1>
-
-<table class=" tabla datatable">
+<table class=" tabla datatable display">
   <thead>
     <tr>
       <th>Nombre</th>
@@ -16,7 +14,10 @@
       <tr>
         <td><%= service.name %></td>
         <td><%= service.abbreviation %></td>
-        <td><%= link_to 'Show', service %><%= link_to 'Edit', edit_service_path(service) %><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <td>
+          <%= link_to((fa_icon "eye"), service) %>
+          <%= link_to((fa_icon "pencil"), edit_service_path(service)) %>
+          <%= link_to((fa_icon "trash-o"), service, method: :delete, data: { confirm: '¿Esta seguro que desea eliminar?' }) %>
       </tr>
     <% end %>
   </tbody>

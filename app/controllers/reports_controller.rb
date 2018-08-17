@@ -8,8 +8,22 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    #if current_user.hospital?
+
+    month = params[:month].to_i
+    year = params[:year].to_i
+    status = params[:status]
+
+    if status.nil? or (status == "Todos")
       @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
+    else
+      estado = status.gsub!('-',' ') || status
+      byebug
+      @reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences, estado: estado, month:month, year:year)
+    end
+
+
+    #if current_user.hospital?
+      #@reports = Report.where(service_of_dependence: current_user.dependence.service_of_dependences)
     #else
       #month = params[:month].to_i
       #year = params[:year].to_i

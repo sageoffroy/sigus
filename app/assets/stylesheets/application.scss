@@ -275,6 +275,10 @@ input::-ms-input-placeholder { /* Microsoft Edge */
   color: white;
 }
 
+.btn:visited {
+  color: white;
+}
+
 .btn-primary:hover {
   background-color: #eee;
   color: $blue;

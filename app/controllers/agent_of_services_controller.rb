@@ -23,17 +23,19 @@ class AgentOfServicesController < ApplicationController
 
   # GET /agent_of_services/new 
   def new
-    @agent_of_service = AgentOfService.new
-    if current_user.has_role? :hospital
-      dependence = current_user.dependence
-      services_of_dependence = dependence.services
-      agents_of_service = AgentOfService.where(service_of_dependence: services_of_dependence)
-      @services = services_of_dependence
-      @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
-    else
-      @agents = Agent.all
-    end     
+    @agent_of_service = AgentOfService.new    
+    dependence = current_user.dependence
+    services_of_dependence = dependence.services
+    agents_of_service = AgentOfService.where(service_of_dependence: services_of_dependence)
+    @services = services_of_dependence
+    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
   end
+
+  def new_with_service
+    @agent_of_service = AgentOfService.new        
+  end
+
+
 
   # GET /agent_of_services/1/edit
   def edit

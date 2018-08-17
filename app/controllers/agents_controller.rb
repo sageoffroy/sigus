@@ -4,11 +4,14 @@ class AgentsController < ApplicationController
   # GET /agents
   # GET /agents.json
   def index
-    dependence = current_user.dependence
-    sod = dependence.service_of_dependences
-    agents_of_service = AgentOfService.where(service_of_dependence: sod)
-    @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
-    #@agents = Agent.all
+    #if current_user.hospital? or current_user.director?
+      dependence = current_user.dependence
+      sod = dependence.service_of_dependences
+      agents_of_service = AgentOfService.where(service_of_dependence: sod)
+      @agents = Agent.where(id: agents_of_service.pluck(:agent_id))
+    #else
+    #  @agents = Agent.all
+    #end
   end
 
   # GET /agents/1
@@ -19,6 +22,7 @@ class AgentsController < ApplicationController
   # GET /agents/new
   def new
     @agent = Agent.new
+    @agent_of_service = AgentOfService.new
   end
 
   # GET /agents/1/edit

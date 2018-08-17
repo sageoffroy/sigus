@@ -54,7 +54,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #Usuarios y Permisos
 gem 'toastr-rails'
-gem 'devise'
+gem 'devise', git: 'https://github.com/plataformatec/devise'
 gem 'cancancan'
 gem 'rolify'
 gem 'remotipart', github: 'mshibuya/remotipart'

@@ -4,14 +4,13 @@ check_general_data = (year, month, service, complement, complement2)->
   if (year.val() != "") && (month.val() != "") && (service.val() != "")
     
     complement.removeClass 'disabled'
-    if typeof complement2 != "undefined"
+    if typeof(complement2) != 'undefined'
       complement2.removeClass 'disabled'
     else
       "No Entra"
   else
-    #console.log "falta algo"
     complement.addClass 'disabled'
-    if typeof complement2 != "undefined"
+    if typeof(complement2) != "undefined"
       complement2.addClass 'disabled'
 
 
@@ -19,8 +18,7 @@ check_day_of_month = ->
   year = parseInt($('#report_year').val())
   month = parseInt($('#report_month').val())
 
-  #console.log daysInMonth(month, year)
-
+  
   switch daysInMonth(month, year)
     when 28
       $('.day29-hours').prop 'disabled', true
@@ -120,7 +118,6 @@ set_last_select_of_agents = (id, mpg = 0)->
       selects.append $('<option></option>').attr('value', 0).text('Agente del Servicio')
       i = 0
       while i < data.agents.length
-        #selects.append '<option id=' + data.agents[i].id + ' value=' + '('+data.agents[i].dni+')'+' '+data.agents[i].fullname+'</option>'
         selects.append $('<option></option>').attr('value', data.agents[i].id ).text('('+data.agents[i].dni+')'+' '+data.agents[i].fullname)
         i++
       selects.change()
@@ -159,7 +156,6 @@ selects_controls_reports = ->
     mpg = 0
     if type.val() == 'Mensualizado P/G'
       mpg = 2
-    
     set_selects_of_agents(id, mpg)
                    
 selects_control_novelties = ->
