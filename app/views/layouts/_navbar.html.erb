@@ -57,17 +57,14 @@
   }
 
   $(document).on('turbolinks:load', function() {
-    var dependence_id;
-    <% if !current_user.nil?%>
-      <% if !current_user.dependence.nil?%>
-        dependence_id = '<%= current_user.dependence.id%>';
-      <% else %>
-        dependence_id = 0;
-      <% end %>
-    <% else %>
-      dependence_id = 0;
-    <% end %>
-    dependence_id = dependence_id -1;
-    $('#select_dependence option:eq(' + dependence_id + ')').attr('selected', true);
+
+
+    var select_obj = document.getElementById('select_dependence');
+    for (var i = 0; i < select_obj.options.length; i++) {
+      if (select_obj.options[i].text === '<%=current_user.dependence %>') {
+        select_obj.selectedIndex = i;
+        break;
+      }
+    }
   });
 </script>

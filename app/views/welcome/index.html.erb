@@ -293,9 +293,7 @@
   }
 
   $(document).on('turbolinks:load', function() {
-		console.log($('.periodo').length);
 		if ($('.periodo').length > 0){
-			console.log(<%= @month %>);
 			<% if current_user.nil? %> 
 				<% @month = 1 %>
 				<% @year = 2018 %>
