@@ -41,6 +41,7 @@
               <% end %>      
             <% end %>    
           <% end %>    
+          <%= link_to (fa_icon "eye"), report%>
           <% if current_user.director? or  current_user.admin? %>
             <% if request.path.include? "Validado" or request.path.include? "Aprob-Director-Hosp"%>
               <% if report.estado === "Aprob Director Hosp" %>
@@ -50,12 +51,9 @@
               <% end %>      
             <% end %>    
           <% end %>    
-          <%= link_to (fa_icon "eye"), report%>
-          <%= link_to (fa_icon "pencil-square-o"), edit_report_path(report)%>
           
-
-
           <% if current_user.planification? or current_user.admin? or current_user.hospital?%>
+            <%= link_to (fa_icon "pencil-square-o"), edit_report_path(report)%>
             <%= link_to (fa_icon "trash-o"), report, method: :delete, data: { confirm: '¿Seguro desea eliminar este registro?' }%>
           <% end %>    
         </td>
