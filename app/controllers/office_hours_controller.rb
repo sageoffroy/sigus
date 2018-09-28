@@ -81,6 +81,6 @@ class OfficeHoursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def office_hour_params
-      params.require(:office_hour).permit(:year, :month, :service_of_dependence_id, :total_hours, :description, office_hour_details_attributes: [:id, :url, :_destroy, :agent_id, :turno_hora, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :total_hours])
+      params.require(:office_hour).permit(:year, :month, :service_of_dependence_id, :total_hours_semana, :total_hours_semana, :description, office_hour_details_attributes: [:id, :url, :_destroy, :agent_id, :turno_hora, :lunes, :martes, :miercoles, :jueves, :viernes, :sabado, :domingo, :total_hours])
     end
 end

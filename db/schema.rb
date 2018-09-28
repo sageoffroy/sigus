@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326142951) do
+ActiveRecord::Schema.define(version: 20180831135751) do
 
   create_table "additional_details", force: :cascade do |t|
     t.integer "agent_id"
@@ -156,6 +156,8 @@ ActiveRecord::Schema.define(version: 20180326142951) do
     t.string "scope"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dependence_id"
+    t.index ["dependence_id"], name: "index_free_days_on_dependence_id"
   end
 
   create_table "historical_guard_agents", force: :cascade do |t|
@@ -333,10 +335,11 @@ ActiveRecord::Schema.define(version: 20180326142951) do
     t.integer "year"
     t.integer "month"
     t.integer "service_of_dependence_id"
-    t.integer "total_hours"
+    t.integer "total_hours_semana"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_hours_sabado"
     t.index ["service_of_dependence_id"], name: "index_office_hours_on_service_of_dependence_id"
   end
 

@@ -13,11 +13,14 @@
     <div class="col-sm-2">
       <h6>Mes</h6>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <h6>Servicio</h6>
     </div>
     <div class="col-sm-2">
-      <h6>Total de Hs.</h6>
+      <h6>Hs Semanales</h6>
+    </div>
+    <div class="col-sm-2">
+      <h6>Hs Sabado</h6>
     </div>
     <div class="input-group col-sm-2">
       <%= f.select :year, (2017)..(2019), {prompt: "Año"}, {class: "select2"}%>
@@ -25,11 +28,15 @@
     <div class="input-group col-sm-2">
       <%= f.select :month, (1)..(12), {prompt: "Mes"}, {class: "select2"}%>
     </div>
-    <div class="input-group col-sm-6">
+    <div class="input-group col-sm-4">
       <%= f.collection_select :service_of_dependence_id, @services_of_dependence, :id, :to_s, {prompt: "Servicio"}, {class: "select2"} %>
     </div>
     <div class="col-md-2">
-      <%= f.number_field :total_hours, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :style=>"min-height:38px;max-width:100%;", :placeholder => "0", class: "number-field"%>
+      <%= f.number_field :total_hours_semana, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :style=>"min-height:36px;max-width:100%;padding:5px;", :placeholder => "0", class: "number-field"%>
+    
+    </div>
+    <div class="col-md-2">
+      <%= f.number_field :total_hours_sabado, :maxlength => "3", :min => "0", :max => "999", :onkeypress => "return isNumeric(event)", :style=>"min-height:36px;max-width:100%;padding:5px;", :placeholder => "0", class: "number-field"%>
     
     </div>
 
@@ -51,7 +58,7 @@
   <div class="form-actions">
     <%= link_to 'Atrás', office_hours_path, class: 'btn btn-danger' %>
     <%= f.submit class: 'btn btn-primary' %>
-  </div>
+  </div> 
 <% end %>
 
 <script>
@@ -87,14 +94,13 @@
     month = $("#office_hour_month").val();
     
     lunes = $('#'+object.id).closest('.office_hours').find('.lun').val() * count_days(year, month, 1)
-    console.log("LUNES: " + lunes);
     martes = $('#'+object.id).closest('.office_hours').find('.mar').val() * count_days(year, month, 2)
     miercoles = $('#'+object.id).closest('.office_hours').find('.mie').val() * count_days(year, month, 3)
     jueves = $('#'+object.id).closest('.office_hours').find('.jue').val() * count_days(year, month, 4)
     viernes = $('#'+object.id).closest('.office_hours').find('.vie').val() * count_days(year, month, 5)
-    sabado = $('#'+object.id).closest('.office_hours').find('.sab').val() * count_days(year, month, 6)
+    total_sabado = $('#'+object.id).closest('.office_hours').find('.sab').val() * count_days(year, month, 6)
 
-    total_field = lunes + martes + miercoles + jueves + viernes + sabado;
+    total_semana = lunes + martes + miercoles + jueves + viernes;
 
     $('#'+object.id).closest('.office_hours').find('.total_week_hours').val(total_field);
     

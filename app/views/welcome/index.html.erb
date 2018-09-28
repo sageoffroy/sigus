@@ -294,6 +294,7 @@
 
   $(document).on('turbolinks:load', function() {
 		if ($('.periodo').length > 0){
+
 			<% if current_user.nil? %> 
 				<% @month = 1 %>
 				<% @year = 2018 %>
@@ -301,6 +302,5 @@
 			$('#mes option:eq(' + <%= @month.to_i - 1%> + ')').attr('selected', true);
 			$('#anio option:eq(' + <%= @year.to_i - 2016%> + ')').attr('selected', true);	
 		}
-		
   });  
 </script>

@@ -108,6 +108,7 @@ set_selects_of_agents = (id, mpg = 0)->
 set_last_select_of_agents = (id, mpg = 0)->
   selects = $('.agent').last()
   selects.empty()
+  console.log id
   $.ajax
     type: 'POST'
     url: '/update_agents_of_service/'+id+'/'+mpg
@@ -330,6 +331,7 @@ $(document).on 'cocoon:after-insert', (e) ->
     service = $('#novelty_service_of_dependence_id')
     id = service.val()
     set_last_select_of_agents(id)
+  
   else if ($('.observations.create').length + $('.observations.edit').length + $('.observations.update').length + $('.observations.new').length) > 0
     console.log "Se inserto COCOON en ad"
     year = $('#observation_year')
@@ -337,6 +339,7 @@ $(document).on 'cocoon:after-insert', (e) ->
     service = $('#observation_service_of_dependence_id')
     id = service.val()
     set_last_select_of_agents(id)
+  
   else if ($('.additionals.create').length + $('.additionals.edit').length + $('.additionals.update').length + $('.additionals.new').length) > 0
     console.log "Se inserto COCOON en adicionales"
     year = $('#additional_year')
@@ -344,6 +347,15 @@ $(document).on 'cocoon:after-insert', (e) ->
     service = $('#additional_service_of_dependence_id')
     id = service.val()
     set_last_select_of_agents(id)
+
+  else if ($('.office_hours.create').length + $('.office_hours.edit').length + $('.office_hours.update').length + $('.office_hours.new').length) > 0
+    console.log "Se inserto COCOON en office_hours"
+    year = $('#office_hour_year')
+    month = $('#office_hour_month')
+    service = $('#office_hour_service_of_dependence_id')
+    id = service.val()
+    set_last_select_of_agents(id)
+  
   else    
     console.log "Se inserto COCOON en reporte"
     add_report_detail = $('#add_report_details')

@@ -12,18 +12,21 @@
   <% end %>
 
   <div class="row">
-    <div class="input-group date datepicker col-sm-3">
+    <div class="input-group date datepicker col-sm-2">
       <%= form.text_field :day, placeholder: "Día Feriado", class: "form-control" %>
       <span class="input-group-addon">
         <%= fa_icon "list"%>
       </span>
     </div>
 
-    <div class="input-group col-sm-4">
+    <div class="input-group col-sm-3">
       <%= form.text_field :description, placeholder: "Descripción", class: "form-control" %>
     </div>
-    <div class="input-group col-sm-3">
+    <div class="input-group col-sm-2">
       <%= form.select :scope, ["Local", "Provincial", "Nacional"], {prompt: "Tipo"}, {class: "select2"}%>
+    </div>
+    <div class="input-group col-sm-3">
+      <%= form.collection_select :dependence_id, Dependence.all, :id, :to_s, {prompt: "Seleccionar Dependencia"}, {class: "select2"} %>
     </div>
     
     <div class="input-group col-sm-2">

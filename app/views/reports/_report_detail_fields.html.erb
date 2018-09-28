@@ -8,7 +8,7 @@
 
 			<% if all_agents %>
 				<%= f.hidden_field :belong_service, :value => false %>
-				<%= f.collection_select :agent_id, Agent.all, :id, :to_s, {prompt: "Agente Ajeno al Servicio"}, {class: "select2 select-field all_agent"} %>
+				<%= f.collection_select :agent_id, Agent.order("fullname ASC"), :id, :to_s, {prompt: "Agente Ajeno al Servicio"}, {class: "select2 select-field all_agent"} %>
 			<% else %>
 				<%= f.hidden_field :belong_service, :value => true%>
 				<%= f.collection_select :agent_id, @agents, :id, :to_s, {prompt: "Agente del Servicio"}, {class: "select2 select-field agent"} %>

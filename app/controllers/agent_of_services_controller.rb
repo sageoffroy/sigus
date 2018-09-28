@@ -8,11 +8,8 @@ class AgentOfServicesController < ApplicationController
   # GET /agent_of_services.json
   def index
     dependence = Dependence.where(code: current_user.dependence.code).first
-    if current_user.hospital?
-      @services_of_dependences = dependence.service_of_dependences
-    else
-      @services_of_dependences = dependence.service_of_dependences
-    end
+    @services_of_dependences = dependence.service_of_dependences.joins(:service).order("name ASC")
+    
   end
 
   # GET /agent_of_services/1

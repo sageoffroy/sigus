@@ -275,24 +275,26 @@ class ReportsController < ApplicationController
       domingos = days_from_month.count("Sun")
 
       # ---- Verificar feriados y convertirlos
+
       free_days = FreeDay.where()
       FreeDay.where("cast(strftime('%m', day) as int) = ?", month).each do |fd|
         if !fd.day.sunday?
           if !fd.day.saturday?
-            if fd.local?
-              sabados+=1
-              case fd.day.strftime("%A")
-              when 'Monday'
-                lunes-=1
-              when 'Tuesday'
-                martes-=1
-              when 'Wednesday'
-                miercoles-=1
-              when 'Thursday'
-                jueves-=1
-              when 'Friday'
-                viernes-=1
-              end
+            if fd.local? and (service_of_dependence.dependence == fd.dependence)
+                byebug
+                sabados+=1
+                case fd.day.strftime("%A")
+                when 'Monday'
+                  lunes-=1
+                when 'Tuesday'
+                  martes-=1
+                when 'Wednesday'
+                  miercoles-=1
+                when 'Thursday'
+                  jueves-=1
+                when 'Friday'
+                  viernes-=1
+                end
             end
             if fd.provincial? or fd.nacional?
               domingos+=1

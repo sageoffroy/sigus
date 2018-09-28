@@ -85,7 +85,7 @@ class FreeDaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def free_day_params
-      params.require(:free_day).permit(:day, :description, :scope)
+      params.require(:free_day).permit(:day, :description, :scope, :dependence_id)
     end
 end
 
